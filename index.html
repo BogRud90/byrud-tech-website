@@ -4,7 +4,7 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Byrud Tech — Landtechnik für professionelle Landwirtschaft</title>
-  <meta name="description" content="Byrud Tech — Ihr Partner für Bodenbearbeitungsmaschinen und Landtechnik in Deutschland und Europa." />
+  <meta name="description" content="Byrud Tech — Ihr Partner für Aussaat- und Pflegemaschinen in Deutschland und Europa." />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@400;600;700;800&family=IBM+Plex+Mono:wght@400;500&family=Barlow:wght@300;400;500&display=swap" rel="stylesheet" />
@@ -21,6 +21,7 @@
     body::before { content: ''; position: fixed; inset: 0; background-image: linear-gradient(var(--border) 1px, transparent 1px), linear-gradient(90deg, var(--border) 1px, transparent 1px); background-size: 60px 60px; pointer-events: none; z-index: 0; opacity: 0.5; }
     section { position: relative; z-index: 1; }
 
+    /* NAV */
     nav { position: fixed; top: 0; left: 0; right: 0; z-index: 100; display: flex; align-items: center; justify-content: space-between; padding: 0 3rem; height: 64px; background: rgba(11,11,11,0.88); backdrop-filter: blur(12px); border-bottom: 1px solid var(--border); }
     .logo { font-family: 'Barlow Condensed', sans-serif; font-weight: 800; font-size: 1.3rem; letter-spacing: 0.08em; text-transform: uppercase; color: var(--text); text-decoration: none; }
     .logo span { color: var(--amber); }
@@ -30,6 +31,7 @@
     .nav-cta { font-family: 'IBM Plex Mono', monospace; font-size: 0.72rem; letter-spacing: 0.1em; text-transform: uppercase; color: var(--amber); border: 1px solid var(--border-amber); padding: 0.5rem 1.2rem; text-decoration: none; transition: background 0.2s; }
     .nav-cta:hover { background: var(--amber-glow); }
 
+    /* HERO */
     #hero { min-height: 100vh; display: flex; flex-direction: column; justify-content: center; padding: 8rem 3rem 5rem; overflow: hidden; }
     .hero-label { font-family: 'IBM Plex Mono', monospace; font-size: 0.72rem; letter-spacing: 0.2em; text-transform: uppercase; color: var(--amber); margin-bottom: 1.5rem; display: flex; align-items: center; gap: 0.8rem; }
     .hero-label::before { content: ''; display: inline-block; width: 32px; height: 1px; background: var(--amber); }
@@ -44,52 +46,50 @@
     .btn-secondary::after { content: '→'; }
     .hero-bg-text { position: absolute; right: -0.03em; bottom: -0.12em; font-family: 'Barlow Condensed', sans-serif; font-weight: 800; font-size: 22vw; line-height: 1; color: rgba(255,255,255,0.018); text-transform: uppercase; pointer-events: none; user-select: none; letter-spacing: -0.04em; }
 
-    .stats-bar { border-top: 1px solid var(--border); border-bottom: 1px solid var(--border); background: var(--bg2); display: grid; grid-template-columns: repeat(4, 1fr); position: relative; z-index: 1; }
-    .stat-item { padding: 2.5rem 3rem; border-right: 1px solid var(--border); }
-    .stat-item:last-child { border-right: none; }
-    .stat-number { font-family: 'Barlow Condensed', sans-serif; font-size: 2.8rem; font-weight: 800; color: var(--amber); line-height: 1; margin-bottom: 0.4rem; }
-    .stat-label { font-family: 'IBM Plex Mono', monospace; font-size: 0.68rem; letter-spacing: 0.12em; text-transform: uppercase; color: var(--text-dim); }
-
-    #products { padding: 8rem 3rem; }
+    /* SECTIONS */
     .section-header { display: flex; align-items: flex-end; justify-content: space-between; margin-bottom: 4rem; gap: 2rem; flex-wrap: wrap; }
     .section-tag { font-family: 'IBM Plex Mono', monospace; font-size: 0.68rem; letter-spacing: 0.2em; text-transform: uppercase; color: var(--amber); margin-bottom: 0.75rem; }
     h2 { font-family: 'Barlow Condensed', sans-serif; font-weight: 800; font-size: clamp(2.5rem, 5vw, 4.5rem); line-height: 0.95; text-transform: uppercase; letter-spacing: -0.01em; }
+
+    /* PRODUCTS */
+    #products { padding: 8rem 3rem; }
     .products-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1px; background: var(--border); }
-    .product-card { background: var(--bg); padding: 3rem 2.5rem; transition: background 0.3s; position: relative; overflow: hidden; }
+    .product-card { background: var(--bg); padding: 3rem 2.5rem; transition: background 0.3s; position: relative; overflow: hidden; display: flex; flex-direction: column; cursor: pointer; }
     .product-card::before { content: ''; position: absolute; top: 0; left: 0; right: 0; height: 2px; background: var(--amber); transform: scaleX(0); transform-origin: left; transition: transform 0.3s; }
     .product-card:hover { background: var(--bg3); }
     .product-card:hover::before { transform: scaleX(1); }
     .product-num { font-family: 'IBM Plex Mono', monospace; font-size: 0.65rem; letter-spacing: 0.15em; color: var(--text-dim); margin-bottom: 2rem; }
     .product-icon { width: 44px; height: 44px; border: 1px solid var(--border-amber); display: flex; align-items: center; justify-content: center; margin-bottom: 1.5rem; color: var(--amber); font-size: 1.2rem; }
     h3 { font-family: 'Barlow Condensed', sans-serif; font-weight: 700; font-size: 1.6rem; text-transform: uppercase; letter-spacing: 0.02em; margin-bottom: 1rem; }
-    .product-desc { font-size: 0.92rem; color: var(--text-muted); line-height: 1.75; margin-bottom: 1.5rem; }
-    .product-tags { display: flex; flex-wrap: wrap; gap: 0.4rem; }
+    .product-desc { font-size: 0.92rem; color: var(--text-muted); line-height: 1.75; margin-bottom: 1.5rem; flex: 1; }
+    .product-tags { display: flex; flex-wrap: wrap; gap: 0.4rem; margin-bottom: 1.5rem; }
     .tag { font-family: 'IBM Plex Mono', monospace; font-size: 0.6rem; letter-spacing: 0.08em; text-transform: uppercase; border: 1px solid var(--border); color: var(--text-dim); padding: 0.25rem 0.6rem; }
+    .product-link { font-family: 'IBM Plex Mono', monospace; font-size: 0.68rem; letter-spacing: 0.1em; text-transform: uppercase; color: var(--amber); text-decoration: none; display: flex; align-items: center; gap: 0.4rem; margin-top: auto; transition: gap 0.2s; }
+    .product-card:hover .product-link { gap: 0.8rem; }
 
+    /* USP BAND */
     .usp-band { background: var(--amber); padding: 1.5rem 3rem; display: flex; align-items: center; gap: 3rem; overflow: hidden; position: relative; z-index: 1; flex-wrap: wrap; }
     .usp-item { display: flex; align-items: center; gap: 0.75rem; font-family: 'IBM Plex Mono', monospace; font-size: 0.72rem; font-weight: 500; letter-spacing: 0.1em; text-transform: uppercase; color: #0b0b0b; white-space: nowrap; }
     .usp-dot { width: 6px; height: 6px; background: rgba(11,11,11,0.35); border-radius: 50%; }
 
-    #about { padding: 8rem 3rem; background: var(--bg2); border-top: 1px solid var(--border); border-bottom: 1px solid var(--border); }
-    .about-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 6rem; align-items: center; }
-    .about-text h2 { margin-bottom: 1.5rem; }
-    .about-body { color: var(--text-muted); font-size: 1rem; line-height: 1.85; margin-bottom: 1.5rem; }
-    .about-checklist { list-style: none; margin-bottom: 2.5rem; display: flex; flex-direction: column; gap: 0.75rem; }
-    .about-checklist li { font-family: 'IBM Plex Mono', monospace; font-size: 0.75rem; letter-spacing: 0.08em; color: var(--text-muted); display: flex; align-items: center; gap: 0.75rem; }
-    .about-checklist li::before { content: ''; width: 18px; height: 1px; background: var(--amber); flex-shrink: 0; }
-    .about-visual { position: relative; aspect-ratio: 4/3; background: var(--bg3); border: 1px solid var(--border); display: flex; align-items: center; justify-content: center; overflow: hidden; }
-    .about-visual-inner { font-family: 'Barlow Condensed', sans-serif; font-weight: 800; font-size: 7rem; color: rgba(255,255,255,0.04); text-transform: uppercase; letter-spacing: -0.04em; user-select: none; text-align: center; line-height: 1; }
-    .about-badge { position: absolute; bottom: 2rem; right: 2rem; background: var(--amber); color: #0b0b0b; font-family: 'IBM Plex Mono', monospace; font-size: 0.65rem; font-weight: 500; letter-spacing: 0.12em; text-transform: uppercase; padding: 0.6rem 1rem; }
-    .about-badge2 { position: absolute; top: 2rem; left: 2rem; border: 1px solid var(--border-amber); color: var(--amber); font-family: 'IBM Plex Mono', monospace; font-size: 0.65rem; letter-spacing: 0.12em; text-transform: uppercase; padding: 0.6rem 1rem; }
+    /* RESULTS */
+    #results { padding: 8rem 3rem; position: relative; z-index: 1; }
+    .results-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 5rem; align-items: start; margin-top: 4rem; }
+    .results-list { display: flex; flex-direction: column; gap: 0; }
+    .result-item { display: flex; align-items: flex-start; gap: 1.5rem; padding: 1.25rem 0; border-bottom: 1px solid var(--border); }
+    .result-item:first-child { border-top: 1px solid var(--border); }
+    .result-check { width: 20px; height: 20px; border: 1px solid var(--amber); display: flex; align-items: center; justify-content: center; flex-shrink: 0; margin-top: 2px; color: var(--amber); font-size: 0.75rem; }
+    .result-text { font-size: 0.95rem; color: var(--text-muted); line-height: 1.6; }
+    .result-text strong { color: var(--text); font-weight: 500; }
+    .results-cta { background: var(--bg2); border: 1px solid var(--border); padding: 3rem; display: flex; flex-direction: column; gap: 2rem; }
+    .results-cta-block { display: flex; flex-direction: column; gap: 0.5rem; }
+    .results-cta-num { font-family: 'Barlow Condensed', sans-serif; font-size: 5rem; font-weight: 800; color: var(--amber); line-height: 1; }
+    .results-cta-label { font-family: 'IBM Plex Mono', monospace; font-size: 0.65rem; letter-spacing: 0.12em; text-transform: uppercase; color: var(--text-dim); }
+    .results-cta-divider { height: 1px; background: var(--border); }
+    .results-cta-headline { font-family: 'Barlow Condensed', sans-serif; font-weight: 800; font-size: 1.8rem; text-transform: uppercase; line-height: 1.05; }
+    .results-cta-sub { font-size: 0.9rem; color: var(--text-muted); line-height: 1.7; }
 
-    #markets { padding: 8rem 3rem; }
-    .markets-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 1px; background: var(--border); margin-top: 4rem; }
-    .market-item { background: var(--bg); padding: 2rem 1.5rem; }
-    .market-flag { font-size: 2rem; margin-bottom: 0.75rem; display: block; }
-    .market-name { font-family: 'Barlow Condensed', sans-serif; font-weight: 700; font-size: 1.3rem; text-transform: uppercase; margin-bottom: 0.4rem; }
-    .market-desc { font-family: 'IBM Plex Mono', monospace; font-size: 0.62rem; letter-spacing: 0.08em; text-transform: uppercase; color: var(--text-dim); }
-
-    /* Platform section */
+    /* PLATFORM */
     #platform { padding: 7rem 3rem; background: var(--bg2); border-top: 1px solid var(--border); border-bottom: 1px solid var(--border); position: relative; z-index: 1; }
     .platform-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 6rem; align-items: center; }
     .platform-text h2 { margin-bottom: 1.5rem; }
@@ -104,22 +104,28 @@
     .platform-module-name { font-family: 'Barlow Condensed', sans-serif; font-weight: 700; font-size: 1.1rem; text-transform: uppercase; color: var(--text); }
     .platform-module-desc { font-family: 'IBM Plex Mono', monospace; font-size: 0.62rem; letter-spacing: 0.08em; text-transform: uppercase; color: var(--text-dim); margin-left: auto; }
 
-    /* Results section */
-    #results { padding: 8rem 3rem; position: relative; z-index: 1; }
-    .results-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 5rem; align-items: start; margin-top: 4rem; }
-    .results-list { display: flex; flex-direction: column; gap: 0; }
-    .result-item { display: flex; align-items: flex-start; gap: 1.5rem; padding: 1.25rem 0; border-bottom: 1px solid var(--border); }
-    .result-item:first-child { border-top: 1px solid var(--border); }
-    .result-check { width: 20px; height: 20px; border: 1px solid var(--amber); display: flex; align-items: center; justify-content: center; flex-shrink: 0; margin-top: 2px; color: var(--amber); font-size: 0.75rem; }
-    .result-text { font-size: 0.95rem; color: var(--text-muted); line-height: 1.6; }
-    .result-text strong { color: var(--text); font-weight: 500; }
-    .results-cta { background: var(--bg2); border: 1px solid var(--border); padding: 3rem; display: flex; flex-direction: column; gap: 2rem; }
-    .results-cta-num { font-family: 'Barlow Condensed', sans-serif; font-size: 5rem; font-weight: 800; color: var(--amber); line-height: 1; }
-    .results-cta-label { font-family: 'IBM Plex Mono', monospace; font-size: 0.65rem; letter-spacing: 0.12em; text-transform: uppercase; color: var(--text-dim); margin-top: -1.5rem; }
-    .results-cta-divider { height: 1px; background: var(--border); }
-    .results-cta-headline { font-family: 'Barlow Condensed', sans-serif; font-weight: 800; font-size: 1.8rem; text-transform: uppercase; line-height: 1.05; }
-    .results-cta-sub { font-size: 0.9rem; color: var(--text-muted); line-height: 1.7; }
+    /* ABOUT */
+    #about { padding: 8rem 3rem; background: var(--bg2); border-top: 1px solid var(--border); border-bottom: 1px solid var(--border); }
+    .about-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 6rem; align-items: center; }
+    .about-text h2 { margin-bottom: 1.5rem; }
+    .about-body { color: var(--text-muted); font-size: 1rem; line-height: 1.85; margin-bottom: 1.5rem; }
+    .about-checklist { list-style: none; margin-bottom: 2.5rem; display: flex; flex-direction: column; gap: 0.75rem; }
+    .about-checklist li { font-family: 'IBM Plex Mono', monospace; font-size: 0.75rem; letter-spacing: 0.08em; color: var(--text-muted); display: flex; align-items: center; gap: 0.75rem; }
+    .about-checklist li::before { content: ''; width: 18px; height: 1px; background: var(--amber); flex-shrink: 0; }
+    .about-visual { position: relative; aspect-ratio: 4/3; background: var(--bg3); border: 1px solid var(--border); display: flex; align-items: center; justify-content: center; overflow: hidden; }
+    .about-visual-inner { font-family: 'Barlow Condensed', sans-serif; font-weight: 800; font-size: 7rem; color: rgba(255,255,255,0.04); text-transform: uppercase; letter-spacing: -0.04em; user-select: none; text-align: center; line-height: 1; }
+    .about-badge { position: absolute; bottom: 2rem; right: 2rem; background: var(--amber); color: #0b0b0b; font-family: 'IBM Plex Mono', monospace; font-size: 0.65rem; font-weight: 500; letter-spacing: 0.12em; text-transform: uppercase; padding: 0.6rem 1rem; }
+    .about-badge2 { position: absolute; top: 2rem; left: 2rem; border: 1px solid var(--border-amber); color: var(--amber); font-family: 'IBM Plex Mono', monospace; font-size: 0.65rem; letter-spacing: 0.12em; text-transform: uppercase; padding: 0.6rem 1rem; }
 
+    /* MARKETS */
+    #markets { padding: 8rem 3rem; }
+    .markets-grid { display: grid; gap: 1px; background: var(--border); margin-top: 4rem; }
+    .market-item { background: var(--bg); padding: 2rem 1.5rem; }
+    .market-flag { font-size: 2rem; margin-bottom: 0.75rem; display: block; }
+    .market-name { font-family: 'Barlow Condensed', sans-serif; font-weight: 700; font-size: 1.3rem; text-transform: uppercase; margin-bottom: 0.4rem; }
+    .market-desc { font-family: 'IBM Plex Mono', monospace; font-size: 0.62rem; letter-spacing: 0.08em; text-transform: uppercase; color: var(--text-dim); }
+
+    /* CONTACT */
     #contact { padding: 8rem 3rem; }
     .contact-inner { display: grid; grid-template-columns: 1fr 1fr; gap: 6rem; align-items: start; }
     .contact-info h2 { margin-bottom: 1.5rem; }
@@ -137,11 +143,26 @@
     .form-select option { background: var(--bg2); }
     .form-textarea { min-height: 110px; }
 
+    /* FOOTER */
     footer { border-top: 1px solid var(--border); padding: 2rem 3rem; display: flex; align-items: center; justify-content: space-between; background: var(--bg); position: relative; z-index: 1; }
     .footer-copy { font-family: 'IBM Plex Mono', monospace; font-size: 0.65rem; letter-spacing: 0.1em; color: var(--text-dim); }
     .footer-links { display: flex; gap: 1.5rem; }
     .footer-links a { font-family: 'IBM Plex Mono', monospace; font-size: 0.65rem; letter-spacing: 0.1em; text-transform: uppercase; color: var(--text-dim); text-decoration: none; transition: color 0.2s; }
     .footer-links a:hover { color: var(--amber); }
+
+    /* MODAL */
+    .modal-overlay { display: none; position: fixed; inset: 0; background: rgba(0,0,0,0.85); z-index: 200; align-items: center; justify-content: center; padding: 2rem; }
+    .modal-overlay.open { display: flex; }
+    .modal { background: var(--bg2); border: 1px solid var(--border-amber); max-width: 680px; width: 100%; max-height: 85vh; overflow-y: auto; padding: 3rem; position: relative; }
+    .modal-close { position: absolute; top: 1.5rem; right: 1.5rem; background: none; border: none; color: var(--text-muted); font-size: 1.4rem; cursor: pointer; line-height: 1; }
+    .modal-close:hover { color: var(--amber); }
+    .modal-tag { font-family: 'IBM Plex Mono', monospace; font-size: 0.65rem; letter-spacing: 0.15em; text-transform: uppercase; color: var(--amber); margin-bottom: 1rem; }
+    .modal-title { font-family: 'Barlow Condensed', sans-serif; font-weight: 800; font-size: 2.5rem; text-transform: uppercase; margin-bottom: 1.5rem; }
+    .modal-body { color: var(--text-muted); font-size: 0.95rem; line-height: 1.8; margin-bottom: 1.5rem; }
+    .modal-specs { display: flex; flex-direction: column; gap: 0; margin-bottom: 2rem; }
+    .modal-spec { display: flex; gap: 1rem; padding: 0.75rem 0; border-bottom: 1px solid var(--border); font-size: 0.88rem; }
+    .modal-spec-key { font-family: 'IBM Plex Mono', monospace; font-size: 0.65rem; letter-spacing: 0.08em; text-transform: uppercase; color: var(--text-dim); min-width: 160px; padding-top: 2px; }
+    .modal-spec-val { color: var(--text-muted); }
 
     @keyframes fadeUp { from { opacity: 0; transform: translateY(24px); } to { opacity: 1; transform: translateY(0); } }
     .hero-label   { animation: fadeUp 0.6s 0.0s ease both; }
@@ -153,11 +174,9 @@
       nav { padding: 0 1.5rem; }
       .nav-links { display: none; }
       #hero, #products, #about, #contact, #markets, #platform, #results { padding-left: 1.5rem; padding-right: 1.5rem; }
-      .stats-bar { grid-template-columns: repeat(2, 1fr); }
-      .stat-item:nth-child(2) { border-right: none; }
       .products-grid { grid-template-columns: 1fr; }
       .about-grid, .contact-inner, .platform-grid, .results-grid { grid-template-columns: 1fr; gap: 3rem; }
-      .markets-grid { grid-template-columns: repeat(2, 1fr); }
+      .markets-grid { grid-template-columns: repeat(2, 1fr) !important; }
       .platform-ops { grid-template-columns: repeat(2, 1fr); }
       footer { flex-direction: column; gap: 1rem; text-align: center; }
     }
@@ -168,15 +187,16 @@
   <nav>
     <a href="#" class="logo">Byrud<span>.</span>Tech</a>
     <ul class="nav-links">
-      <li><a href="#platform">Konzept</a></li>
-      <li><a href="#products">Maschinen</a></li>
       <li><a href="#results">Ergebnisse</a></li>
+      <li><a href="#products">Maschinen</a></li>
+      <li><a href="#platform">Konzept</a></li>
       <li><a href="#about">Über uns</a></li>
       <li><a href="#contact">Kontakt</a></li>
     </ul>
     <a href="#contact" class="nav-cta">Angebot anfragen</a>
   </nav>
 
+  <!-- HERO -->
   <section id="hero">
     <div class="hero-label">Byrud Tech — Landtechnik für Europa</div>
     <h1>
@@ -184,7 +204,7 @@
       <em>die zählt.</em>
     </h1>
     <p class="hero-sub">
-      Intelligente Maschinen für moderne Landwirtschaft — entwickelt und gefertigt in Deutschland.
+      Intelligente Maschinen für Aussaat und Pflege — entwickelt und gefertigt in Deutschland.
       Weniger Chemie, weniger Aufwand, mehr Ertrag.
     </p>
     <div class="hero-actions">
@@ -194,149 +214,7 @@
     <div class="hero-bg-text">AGRO</div>
   </section>
 
-  <div class="stats-bar">
-    <div class="stat-item"><div class="stat-number">6</div><div class="stat-label">Länder aktiv</div></div>
-    <div class="stat-item"><div class="stat-number">40+</div><div class="stat-label">Maschinenmodelle</div></div>
-    <div class="stat-item"><div class="stat-number">100%</div><div class="stat-label">Made in Germany</div></div>
-    <div class="stat-item"><div class="stat-number">24h</div><div class="stat-label">Reaktionszeit</div></div>
-  </div>
-
-  <!-- PLATFORM CONCEPT -->
-  <section id="platform">
-    <div class="platform-grid">
-      <div class="platform-text">
-        <div class="section-tag">// Unser Konzept</div>
-        <h2>Eine Rahmen.<br />Endlose<br /><em style="font-style:normal;color:var(--amber);">Möglichkeiten.</em></h2>
-        <p class="platform-body">
-          Byrud Tech hat einen universellen Trägerrahmen entwickelt, auf den verschiedene Anbaugeräte für Aussaat und Pflege montiert werden können. Das Ergebnis: bis zu 4 Feldoperationen in einem einzigen Durchgang — weniger Überfahrten, weniger Kraftstoff, mehr Ertrag.
-        </p>
-        <div class="platform-ops">
-          <div class="platform-op">
-            <div class="platform-op-num">4×</div>
-            <div class="platform-op-label">Operationen pro Durchgang</div>
-          </div>
-          <div class="platform-op">
-            <div class="platform-op-num">−40%</div>
-            <div class="platform-op-label">Weniger Überfahrten</div>
-          </div>
-          <div class="platform-op">
-            <div class="platform-op-num">18</div>
-            <div class="platform-op-label">km/h Arbeitsgeschwindigkeit</div>
-          </div>
-          <div class="platform-op">
-            <div class="platform-op-num">1–2</div>
-            <div class="platform-op-label">Saisons bis ROI</div>
-          </div>
-        </div>
-      </div>
-      <div>
-        <div class="platform-modules">
-          <div class="platform-module">
-            <div class="platform-module-dot"></div>
-            <div class="platform-module-name">Kultivierer GELIO</div>
-            <div class="platform-module-desc">Zwischenreihenbearbeitung</div>
-          </div>
-          <div class="platform-module">
-            <div class="platform-module-dot"></div>
-            <div class="platform-module-name">Lenksystem EXACT</div>
-            <div class="platform-module-desc">Präzisionsführung 1 cm</div>
-          </div>
-          <div class="platform-module">
-            <div class="platform-module-dot"></div>
-            <div class="platform-module-name">Flüssigdüngung LINUS</div>
-            <div class="platform-module-desc">Flüssigdünger & PSM</div>
-          </div>
-          <div class="platform-module">
-            <div class="platform-module-dot"></div>
-            <div class="platform-module-name">Granulatdüngung GINUS</div>
-            <div class="platform-module-desc">Granulat 5–270 kg/ha</div>
-          </div>
-          <div class="platform-module">
-            <div class="platform-module-dot"></div>
-            <div class="platform-module-name">Sämaschine VELES</div>
-            <div class="platform-module-desc">Getreide, Raps, Soja</div>
-          </div>
-          <div class="platform-module">
-            <div class="platform-module-dot"></div>
-            <div class="platform-module-name">Egge TOR / Striegel STERN</div>
-            <div class="platform-module-desc">Saatbett & Unkrautbekämpfung</div>
-          </div>
-          <div class="platform-module">
-            <div class="platform-module-dot"></div>
-            <div class="platform-module-name">Zerhacker TURBO</div>
-            <div class="platform-module-desc">Erntegutzerkleinerung</div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <section id="products">
-    <div class="section-header">
-      <div>
-        <div class="section-tag">// Unser Sortiment</div>
-        <h2>Präzision<br />auf jedem Feld</h2>
-      </div>
-    </div>
-    <div class="products-grid">
-      <div class="product-card">
-        <div class="product-num">01 —</div>
-        <div class="product-icon">⊞</div>
-        <h3>Kultivierer GELIO</h3>
-        <p class="product-desc">Intelligenter Reihenkultivator für präzise Zwischenreihenbearbeitung. Genauigkeit bis 1 cm, Arbeitsgeschwindigkeit bis 18 km/h — bis zu 4 Operationen in einem Durchgang. ROI in 1–2 Saisons.</p>
-        <div class="product-tags"><span class="tag">GELIO-U</span><span class="tag">GELIO-S</span><span class="tag">GELIO-R</span><span class="tag">GELIO-P</span><span class="tag">GELIO-K</span></div>
-      </div>
-      <div class="product-card">
-        <div class="product-num">02 —</div>
-        <div class="product-icon">◎</div>
-        <h3>Lenksystem EXACT</h3>
-        <p class="product-desc">Hochpräzise CMOS-Kamera erkennt Pflanzenreihen automatisch und korrigiert die Position des Kultivators auf den Millimeter genau. Tages- und Nachtbetrieb. Bis zu 180 ha/Tag.</p>
-        <div class="product-tags"><span class="tag">Bis 1 cm Genauigkeit</span><span class="tag">24/7 Betrieb</span><span class="tag">18 km/h</span></div>
-      </div>
-      <div class="product-card">
-        <div class="product-num">03 —</div>
-        <div class="product-icon">◈</div>
-        <h3>Flüssigdüngung LINUS</h3>
-        <p class="product-desc">System zur präzisen Ausbringung von Flüssigdünger (UAN, NFS) und Pflanzenschutzmitteln direkt in die Wachstumszone. Tank 600–3000 l. Steuerung via Computer Cruise 4 / CAN-Bus.</p>
-        <div class="product-tags"><span class="tag">LINUS-600</span><span class="tag">LINUS-2×600</span><span class="tag">LINUS-O</span></div>
-      </div>
-      <div class="product-card">
-        <div class="product-num">04 —</div>
-        <div class="product-icon">▤</div>
-        <h3>Granulat-Düngung GINUS</h3>
-        <p class="product-desc">Integriertes System zur exakten Ausbringung von Granulatdünger direkt in die Wurzelzone. Tank 800–2000 l. Ausbringmenge regelbar von 5 bis 270 kg/ha. Edelstahlverteiler.</p>
-        <div class="product-tags"><span class="tag">5–270 kg/ha</span><span class="tag">Accord-Antrieb</span><span class="tag">Alle GELIO-Modelle</span></div>
-      </div>
-      <div class="product-card">
-        <div class="product-num">05 —</div>
-        <div class="product-icon">△</div>
-        <h3>Sämaschine VELES</h3>
-        <p class="product-desc">Universelle Sämaschine für alle Getreidearten, Raps und Soja auf der Universalrahmen. Zweizeilige Aussaat mit 10 cm Abstand. Gleichzeitige Ausbringung von Startdünger und Inokulum möglich.</p>
-        <div class="product-tags"><span class="tag">VELES-1</span><span class="tag">VELES-2</span><span class="tag">Tank 600–6000 l</span></div>
-      </div>
-      <div class="product-card">
-        <div class="product-num">06 —</div>
-        <div class="product-icon">◇</div>
-        <h3>Eggen & Striegel</h3>
-        <p class="product-desc">Netzenegge TOR (4,5–12 m Arbeitsbreite) für Saatbettvorbereitung und Unkrautbekämpfung. Rotationsstriegel STERN und Erntegutzerhacker TURBO — alle auf der gleichen Universalrahmen.</p>
-        <div class="product-tags"><span class="tag">TOR XS–XL</span><span class="tag">STERN</span><span class="tag">TURBO</span></div>
-      </div>
-    </div>
-  </section>
-
-  <div class="usp-band">
-    <div class="usp-item" style="font-size:0.85rem; font-weight:700; letter-spacing:0.05em;">Werden Sie unser Händler —</div>
-    <div class="usp-dot"></div>
-    <div class="usp-item">Attraktive Händlerkonditionen</div>
-    <div class="usp-dot"></div>
-    <div class="usp-item">Exklusivgebiete verfügbar</div>
-    <div class="usp-dot"></div>
-    <div class="usp-item">Marketingunterstützung inklusive</div>
-    <div class="usp-dot"></div>
-    <a href="#contact" style="font-family:'IBM Plex Mono',monospace; font-size:0.72rem; font-weight:600; letter-spacing:0.1em; text-transform:uppercase; color:#0b0b0b; background:rgba(11,11,11,0.15); border:1px solid rgba(11,11,11,0.3); padding:0.45rem 1.1rem; text-decoration:none; white-space:nowrap;">Jetzt bewerben →</a>
-  </div>
-
-  <!-- RESULTS SECTION -->
+  <!-- RESULTS -->
   <section id="results">
     <div class="section-header">
       <div>
@@ -357,7 +235,7 @@
         <div class="result-item"><div class="result-check">✓</div><div class="result-text"><strong>Rentabilität steigern</strong> — hohe Maschinenleistung bis 180 ha/Tag bei 24/7-Betrieb</div></div>
       </div>
       <div class="results-cta">
-        <div>
+        <div class="results-cta-block">
           <div class="results-cta-num">+€200</div>
           <div class="results-cta-label">Zusätzliche Marge pro Hektar</div>
         </div>
@@ -369,12 +247,133 @@
     </div>
   </section>
 
+  <!-- PRODUCTS -->
+  <section id="products">
+    <div class="section-header">
+      <div>
+        <div class="section-tag">// Unser Sortiment</div>
+        <h2>Maschinen<br />für jedes Feld</h2>
+      </div>
+    </div>
+    <div class="products-grid">
+
+      <div class="product-card" onclick="openModal('rover')">
+        <div class="product-num">01 —</div>
+        <div class="product-icon">⊞</div>
+        <h3>Hackmaschine ROVER</h3>
+        <p class="product-desc">Intelligente Hackmaschine für präzise Zwischenreihenbearbeitung. Genauigkeit bis 1 cm, Arbeitsgeschwindigkeit bis 18 km/h — bis zu 4 Operationen in einem Durchgang.</p>
+        <div class="product-tags"><span class="tag">ROVER-U</span><span class="tag">ROVER-S</span><span class="tag">ROVER-R</span><span class="tag">ROVER-P</span><span class="tag">ROVER-K</span></div>
+        <span class="product-link">Mehr erfahren →</span>
+      </div>
+
+      <div class="product-card" onclick="openModal('lixa')">
+        <div class="product-num">02 —</div>
+        <div class="product-icon">◈</div>
+        <h3>Flüssigdüngung LIXA</h3>
+        <p class="product-desc">System zur präzisen Ausbringung von Flüssigdünger (UAN, NFS) und Pflanzenschutzmitteln direkt in die Wachstumszone. Tank 600–3000 l. Steuerung via Cruise 4 / CAN-Bus.</p>
+        <div class="product-tags"><span class="tag">LIXA-600</span><span class="tag">LIXA-2×600</span><span class="tag">LIXA-O</span></div>
+        <span class="product-link">Mehr erfahren →</span>
+      </div>
+
+      <div class="product-card" onclick="openModal('grano')">
+        <div class="product-num">03 —</div>
+        <div class="product-icon">▤</div>
+        <h3>Granulatdüngung GRANO</h3>
+        <p class="product-desc">Integriertes System zur exakten Ausbringung von Granulatdünger direkt in die Wurzelzone. Tank 800–2000 l. Ausbringmenge regelbar von 5 bis 270 kg/ha.</p>
+        <div class="product-tags"><span class="tag">5–270 kg/ha</span><span class="tag">Accord-Antrieb</span><span class="tag">Alle ROVER-Modelle</span></div>
+        <span class="product-link">Mehr erfahren →</span>
+      </div>
+
+      <div class="product-card" onclick="openModal('veles')">
+        <div class="product-num">04 —</div>
+        <div class="product-icon">△</div>
+        <h3>Sämaschine VELES</h3>
+        <p class="product-desc">Universelle Sämaschine für alle Getreidearten, Raps und Soja auf der Universalrahmen. Zweizeilige Aussaat mit 10 cm Abstand. Gleichzeitige Ausbringung von Startdünger und Inokulum.</p>
+        <div class="product-tags"><span class="tag">VELES-1</span><span class="tag">VELES-2</span><span class="tag">Tank 600–6000 l</span></div>
+        <span class="product-link">Mehr erfahren →</span>
+      </div>
+
+      <div class="product-card" onclick="openModal('tor')">
+        <div class="product-num">05 —</div>
+        <div class="product-icon">◌</div>
+        <h3>Netzenegge TOR</h3>
+        <p class="product-desc">Hochleistungsnetzenegge für Saatbettvorbereitung und mechanische Unkrautbekämpfung. Arbeitsbreite 4,5–12 m. Zähne in 7, 8 oder 12 mm Stärke. 10 Winkelstellungen.</p>
+        <div class="product-tags"><span class="tag">TOR XS</span><span class="tag">TOR S</span><span class="tag">TOR M</span><span class="tag">TOR L</span><span class="tag">TOR XL</span></div>
+        <span class="product-link">Mehr erfahren →</span>
+      </div>
+
+      <div class="product-card" onclick="openModal('stern')">
+        <div class="product-num">06 —</div>
+        <div class="product-icon">✳</div>
+        <h3>Rotationsstriegel STERN</h3>
+        <p class="product-desc">Rotationsstriegel für ganzjährigen Einsatz — Saatbettvorbereitung, Rückverfestigung, Unkrautbekämpfung. Gegossene Sternräder mit 50 kg Federandruck. Einfache Einreihenverstellung.</p>
+        <div class="product-tags"><span class="tag">3-Punkt-Anbau</span><span class="tag">Ganzjährig</span><span class="tag">Düngeroptional</span></div>
+        <span class="product-link">Mehr erfahren →</span>
+      </div>
+
+      <div class="product-card" onclick="openModal('turbo')">
+        <div class="product-num">07 —</div>
+        <div class="product-icon">◎</div>
+        <h3>Zerhacker TURBO</h3>
+        <p class="product-desc">Zerhacker für Erntegut und Pflanzenreste nach der Ernte. Turbo-Scheibe 470 mm, wartungsfreie Naben mit langer Lebensdauer. Optional mit Dünger- und Aussaatbunker kombinierbar.</p>
+        <div class="product-tags"><span class="tag">Turbo-Scheibe 470 mm</span><span class="tag">Dünger-Option</span><span class="tag">Aussaat-Option</span></div>
+        <span class="product-link">Mehr erfahren →</span>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- USP BAND -->
+  <div class="usp-band">
+    <div class="usp-item" style="font-size:0.85rem; font-weight:700; letter-spacing:0.05em;">Werden Sie unser Händler —</div>
+    <div class="usp-dot"></div>
+    <div class="usp-item">Attraktive Händlerkonditionen</div>
+    <div class="usp-dot"></div>
+    <div class="usp-item">Exklusivgebiete verfügbar</div>
+    <div class="usp-dot"></div>
+    <div class="usp-item">Marketingunterstützung inklusive</div>
+    <div class="usp-dot"></div>
+    <a href="#contact" style="font-family:'IBM Plex Mono',monospace; font-size:0.72rem; font-weight:600; letter-spacing:0.1em; text-transform:uppercase; color:#0b0b0b; background:rgba(11,11,11,0.15); border:1px solid rgba(11,11,11,0.3); padding:0.45rem 1.1rem; text-decoration:none; white-space:nowrap;">Jetzt bewerben →</a>
+  </div>
+
+  <!-- PLATFORM CONCEPT -->
+  <section id="platform">
+    <div class="platform-grid">
+      <div class="platform-text">
+        <div class="section-tag">// Unser Konzept</div>
+        <h2>Ein Rahmen.<br />Endlose<br /><em style="font-style:normal;color:var(--amber);">Möglichkeiten.</em></h2>
+        <p class="platform-body">
+          Byrud Tech hat einen universellen Trägerrahmen entwickelt, auf den verschiedene Anbaugeräte für Aussaat und Pflege montiert werden können. Das Ergebnis: bis zu 4 Feldoperationen in einem einzigen Durchgang — weniger Überfahrten, weniger Kraftstoff, mehr Ertrag.
+        </p>
+        <div class="platform-ops">
+          <div class="platform-op"><div class="platform-op-num">4×</div><div class="platform-op-label">Operationen pro Durchgang</div></div>
+          <div class="platform-op"><div class="platform-op-num">−40%</div><div class="platform-op-label">Weniger Überfahrten</div></div>
+          <div class="platform-op"><div class="platform-op-num">18</div><div class="platform-op-label">km/h Arbeitsgeschwindigkeit</div></div>
+          <div class="platform-op"><div class="platform-op-num">1–2</div><div class="platform-op-label">Saisons bis ROI</div></div>
+        </div>
+      </div>
+      <div>
+        <div class="platform-modules">
+          <div class="platform-module"><div class="platform-module-dot"></div><div class="platform-module-name">Hackmaschine ROVER</div><div class="platform-module-desc">Zwischenreihenbearbeitung</div></div>
+          <div class="platform-module"><div class="platform-module-dot"></div><div class="platform-module-name">Option EXACT</div><div class="platform-module-desc">Präzisionsführung 1 cm</div></div>
+          <div class="platform-module"><div class="platform-module-dot"></div><div class="platform-module-name">Flüssigdüngung LIXA</div><div class="platform-module-desc">Flüssigdünger & PSM</div></div>
+          <div class="platform-module"><div class="platform-module-dot"></div><div class="platform-module-name">Granulatdüngung GRANO</div><div class="platform-module-desc">Granulat 5–270 kg/ha</div></div>
+          <div class="platform-module"><div class="platform-module-dot"></div><div class="platform-module-name">Sämaschine VELES</div><div class="platform-module-desc">Getreide, Raps, Soja</div></div>
+          <div class="platform-module"><div class="platform-module-dot"></div><div class="platform-module-name">Netzenegge TOR</div><div class="platform-module-desc">Saatbett & Unkraut</div></div>
+          <div class="platform-module"><div class="platform-module-dot"></div><div class="platform-module-name">Rotationsstriegel STERN</div><div class="platform-module-desc">Pflege & Rückverfestigung</div></div>
+          <div class="platform-module"><div class="platform-module-dot"></div><div class="platform-module-name">Zerhacker TURBO</div><div class="platform-module-desc">Erntegutzerkleinerung</div></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ABOUT -->
   <section id="about">
     <div class="about-grid">
       <div class="about-text">
         <div class="section-tag">// Über Byrud Tech</div>
         <h2>Junger<br />Hersteller.<br /><em style="font-style:normal;color:var(--amber);display:block;">Made in Germany.</em></h2>
-        <p class="about-body">Byrud Tech ist ein moderner Hersteller von Bodenbearbeitungsmaschinen mit Sitz in Deutschland. Wir denken Landtechnik neu — mit frischen Ideen, konsequenter Ingenieursarbeit und einem klaren Fokus auf das, was Landwirte wirklich brauchen.</p>
+        <p class="about-body">Byrud Tech ist ein moderner Hersteller von Aussaat- und Pflegemaschinen mit Sitz in Deutschland. Wir denken Landtechnik neu — mit frischen Ideen, konsequenter Ingenieursarbeit und einem klaren Fokus auf das, was Landwirte wirklich brauchen.</p>
         <p class="about-body">Als junges Unternehmen sind wir flexibel, schnell und nah am Markt. Unsere Maschinen werden in Deutschland entwickelt und nach höchsten Qualitätsstandards gefertigt — für europäische Böden, europäisches Klima, europäische Betriebe.</p>
         <ul class="about-checklist">
           <li>Entwicklung & Fertigung in Deutschland</li>
@@ -392,6 +391,7 @@
     </div>
   </section>
 
+  <!-- MARKETS -->
   <section id="markets">
     <div class="section-header">
       <div>
@@ -409,6 +409,7 @@
     </div>
   </section>
 
+  <!-- CONTACT -->
   <section id="contact">
     <div class="contact-inner">
       <div class="contact-info">
@@ -428,14 +429,13 @@
           <label class="form-label">Ich interessiere mich für</label>
           <select class="form-select">
             <option value="">Bitte wählen…</option>
-            <option>Kultivierer GELIO</option>
-            <option>Lenksystem EXACT</option>
-            <option>Flüssigdüngung LINUS</option>
-            <option>Granulatdüngung GINUS</option>
+            <option>Hackmaschine ROVER</option>
+            <option>Flüssigdüngung LIXA</option>
+            <option>Granulatdüngung GRANO</option>
             <option>Sämaschine VELES</option>
             <option>Netzenegge TOR</option>
             <option>Rotationsstriegel STERN</option>
-            <option>Erntegutzerhacker TURBO</option>
+            <option>Zerhacker TURBO</option>
             <option>Händlerpartnerschaft</option>
             <option>Allgemeine Anfrage</option>
           </select>
@@ -449,10 +449,153 @@
   <footer>
     <span class="footer-copy">© 2025 Byrud Tech. Alle Rechte vorbehalten.</span>
     <div class="footer-links"><a href="#">Impressum</a><a href="#">Datenschutz</a><a href="#">AGB</a></div>
-    <span class="footer-copy">Hamburg · byrud.tech</span>
+    <span class="footer-copy">Hamburg · byrud-tech.com</span>
   </footer>
 
+  <!-- MODALS -->
+  <div class="modal-overlay" id="modal-rover" onclick="closeModal(event)">
+    <div class="modal">
+      <button class="modal-close" onclick="closeModalById('modal-rover')">✕</button>
+      <div class="modal-tag">// Hackmaschine</div>
+      <div class="modal-title">ROVER</div>
+      <p class="modal-body">Intelligente Hackmaschine für präzise Zwischenreihenbearbeitung von Reihenkulturen. Bis zu 4 Operationen in einem Durchgang — Hacken, Düngen, Spritzen, Häufeln. Modular aufgebaut auf der universellen Byrud-Rahmenplattform.</p>
+      <div class="modal-specs">
+        <div class="modal-spec"><div class="modal-spec-key">Genauigkeit</div><div class="modal-spec-val">Bis 1 cm (mit Option EXACT)</div></div>
+        <div class="modal-spec"><div class="modal-spec-key">Arbeitsgeschwindigkeit</div><div class="modal-spec-val">Bis 18 km/h</div></div>
+        <div class="modal-spec"><div class="modal-spec-key">Betrieb</div><div class="modal-spec-val">24/7, Tag und Nacht</div></div>
+        <div class="modal-spec"><div class="modal-spec-key">Modelle</div><div class="modal-spec-val">ROVER-U, ROVER-S, ROVER-R, ROVER-P, ROVER-K</div></div>
+        <div class="modal-spec"><div class="modal-spec-key">Rahmenhöhe</div><div class="modal-spec-val">800 mm — für hohe Kulturen</div></div>
+        <div class="modal-spec"><div class="modal-spec-key">ROI</div><div class="modal-spec-val">1–2 Saisons</div></div>
+      </div>
+      <a href="#contact" class="btn-primary" onclick="closeModalById('modal-rover')">Angebot anfragen →</a>
+    </div>
+  </div>
+
+  <div class="modal-overlay" id="modal-lixa" onclick="closeModal(event)">
+    <div class="modal">
+      <button class="modal-close" onclick="closeModalById('modal-lixa')">✕</button>
+      <div class="modal-tag">// Flüssigdüngung & PSM</div>
+      <div class="modal-title">LIXA</div>
+      <p class="modal-body">System zur präzisen Ausbringung von Flüssigdünger (UAN, NFS) und Pflanzenschutzmitteln direkt in die Wachstumszone — blatt-, zwischen- oder reihenweise. Bis zu 3 flüssige Komponenten gleichzeitig.</p>
+      <div class="modal-specs">
+        <div class="modal-spec"><div class="modal-spec-key">Tankvolumen</div><div class="modal-spec-val">600 / 2×600 / 1800 / 2000 / 3000 l</div></div>
+        <div class="modal-spec"><div class="modal-spec-key">Steuerung</div><div class="modal-spec-val">Computer Cruise 4 / CAN-Bus</div></div>
+        <div class="modal-spec"><div class="modal-spec-key">Antrieb</div><div class="modal-spec-val">Elektrische Pumpe, Traktorhydraulik</div></div>
+        <div class="modal-spec"><div class="modal-spec-key">Ausbringung</div><div class="modal-spec-key">Blatt, Zwischenreihe, Reihe, beidseitig</div></div>
+        <div class="modal-spec"><div class="modal-spec-key">Einsparung SZR</div><div class="modal-spec-val">Bis −40%</div></div>
+      </div>
+      <a href="#contact" class="btn-primary" onclick="closeModalById('modal-lixa')">Angebot anfragen →</a>
+    </div>
+  </div>
+
+  <div class="modal-overlay" id="modal-grano" onclick="closeModal(event)">
+    <div class="modal">
+      <button class="modal-close" onclick="closeModalById('modal-grano')">✕</button>
+      <div class="modal-tag">// Granulatdüngung</div>
+      <div class="modal-title">GRANO</div>
+      <p class="modal-body">Integriertes System zur exakten Ausbringung von Granulatdünger direkt in die Wurzelzone. Kompatibel mit allen ROVER-Modellen. Spart Überfahrten durch gleichzeitige Kombination mit Pflege.</p>
+      <div class="modal-specs">
+        <div class="modal-spec"><div class="modal-spec-key">Tankvolumen</div><div class="modal-spec-val">800 / 1000 / 1250 / 2000 l</div></div>
+        <div class="modal-spec"><div class="modal-spec-key">Ausbringmenge</div><div class="modal-spec-val">5–270 kg/ha</div></div>
+        <div class="modal-spec"><div class="modal-spec-key">Antrieb Dosierer</div><div class="modal-spec-val">Mechanisch (Accord-System)</div></div>
+        <div class="modal-spec"><div class="modal-spec-key">Material</div><div class="modal-spec-val">Edelstahl — resistent gegen Dünger & PSM</div></div>
+        <div class="modal-spec"><div class="modal-spec-key">Ausbringarten</div><div class="modal-spec-val">Oberfläche, Reihe, unter Grubberreife</div></div>
+      </div>
+      <a href="#contact" class="btn-primary" onclick="closeModalById('modal-grano')">Angebot anfragen →</a>
+    </div>
+  </div>
+
+  <div class="modal-overlay" id="modal-veles" onclick="closeModal(event)">
+    <div class="modal">
+      <button class="modal-close" onclick="closeModalById('modal-veles')">✕</button>
+      <div class="modal-tag">// Sämaschine</div>
+      <div class="modal-title">VELES</div>
+      <p class="modal-body">Universelle Sämaschine für alle Getreidearten, Raps und Soja auf der Universalrahmen. Zweizeilige Aussaat mit 10 cm Abstand — mehr Pflanzen pro m², bessere Nährstoffversorgung.</p>
+      <div class="modal-specs">
+        <div class="modal-spec"><div class="modal-spec-key">Modelle</div><div class="modal-spec-val">VELES-1 (einzeilig), VELES-2 (zweizeilig)</div></div>
+        <div class="modal-spec"><div class="modal-spec-key">Kulturen</div><div class="modal-spec-val">Alle Getreidearten, Raps, Soja</div></div>
+        <div class="modal-spec"><div class="modal-spec-key">Tankvolumen</div><div class="modal-spec-val">600–2000 l (Rahmen), 2700–6000 l (Anhänger)</div></div>
+        <div class="modal-spec"><div class="modal-spec-key">Optionen</div><div class="modal-spec-val">LINUS-Flüssigdüngung, GINUS-Granulatdüngung, Inokulum</div></div>
+        <div class="modal-spec"><div class="modal-spec-key">Federdruck Schar</div><div class="modal-spec-val">Bis 140 kg</div></div>
+      </div>
+      <a href="#contact" class="btn-primary" onclick="closeModalById('modal-veles')">Angebot anfragen →</a>
+    </div>
+  </div>
+
+  <div class="modal-overlay" id="modal-tor" onclick="closeModal(event)">
+    <div class="modal">
+      <button class="modal-close" onclick="closeModalById('modal-tor')">✕</button>
+      <div class="modal-tag">// Netzenegge</div>
+      <div class="modal-title">TOR</div>
+      <p class="modal-body">Hochleistungsnetzenegge auf Universalrahmen für Saatbettvorbereitung und mechanische Unkrautbekämpfung. 10 Winkelstellungen der Zähne für jeden Bearbeitungstyp.</p>
+      <div class="modal-specs">
+        <div class="modal-spec"><div class="modal-spec-key">Modelle</div><div class="modal-spec-val">TOR XS / S / M / L / XL</div></div>
+        <div class="modal-spec"><div class="modal-spec-key">Arbeitsbreite</div><div class="modal-spec-val">4,5 / 6,0 / 7,5 / 9,0 / 12,0 m</div></div>
+        <div class="modal-spec"><div class="modal-spec-key">Zahnstärke</div><div class="modal-spec-val">7 mm / 8 mm / 12 mm</div></div>
+        <div class="modal-spec"><div class="modal-spec-key">Anbau</div><div class="modal-spec-val">3-Punkt Kat. 1 / Kat. 2</div></div>
+        <div class="modal-spec"><div class="modal-spec-key">Rahmen</div><div class="modal-spec-val">Starr oder klappbar</div></div>
+      </div>
+      <a href="#contact" class="btn-primary" onclick="closeModalById('modal-tor')">Angebot anfragen →</a>
+    </div>
+  </div>
+
+  <div class="modal-overlay" id="modal-stern" onclick="closeModal(event)">
+    <div class="modal">
+      <button class="modal-close" onclick="closeModalById('modal-stern')">✕</button>
+      <div class="modal-tag">// Rotationsstriegel</div>
+      <div class="modal-title">STERN</div>
+      <p class="modal-body">Rotationsstriegel für ganzjährigen Einsatz — Saatbettvorbereitung vor und nach der Aussaat, Unkrautbekämpfung, Verbesserung der Bodenstruktur und Belüftung. Optional mit Dünger- und Saatbunker.</p>
+      <div class="modal-specs">
+        <div class="modal-spec"><div class="modal-spec-key">Anbau</div><div class="modal-spec-val">3-Punkt-Anbau</div></div>
+        <div class="modal-spec"><div class="modal-spec-key">Federdruck</div><div class="modal-spec-val">50 kg pro Reihe</div></div>
+        <div class="modal-spec"><div class="modal-spec-key">Einstellung</div><div class="modal-spec-val">1 Bolzen pro Reihe</div></div>
+        <div class="modal-spec"><div class="modal-spec-key">Einsatz</div><div class="modal-spec-val">Vor Aussaat, nach Aussaat, Unkrautbekämpfung</div></div>
+        <div class="modal-spec"><div class="modal-spec-key">Option</div><div class="modal-spec-val">Dünger- und Saatgutbunker</div></div>
+      </div>
+      <a href="#contact" class="btn-primary" onclick="closeModalById('modal-stern')">Angebot anfragen →</a>
+    </div>
+  </div>
+
+  <div class="modal-overlay" id="modal-turbo" onclick="closeModal(event)">
+    <div class="modal">
+      <button class="modal-close" onclick="closeModalById('modal-turbo')">✕</button>
+      <div class="modal-tag">// Erntegutzerhacker</div>
+      <div class="modal-title">TURBO</div>
+      <p class="modal-body">Zerhacker für Pflanzenreste und Erntegut nach der Ernte. Turbo-Scheiben zerkleinern Stroh und Stängel gleichmäßig — optimale Einarbeitung, bessere Bodenstruktur. Optional mit Dünger- und Saatbunker ausrüstbar.</p>
+      <div class="modal-specs">
+        <div class="modal-spec"><div class="modal-spec-key">Scheibe</div><div class="modal-spec-val">Turbo-Scheibe Ø 470 mm</div></div>
+        <div class="modal-spec"><div class="modal-spec-key">Naben</div><div class="modal-spec-val">Wartungsfrei, lange Lebensdauer</div></div>
+        <div class="modal-spec"><div class="modal-spec-key">Tiefeneinstellung</div><div class="modal-spec-val">Mechanisch über Stützrad</div></div>
+        <div class="modal-spec"><div class="modal-spec-key">Option</div><div class="modal-spec-val">Dünger- & Aussaatbunker kombinierbar</div></div>
+      </div>
+      <a href="#contact" class="btn-primary" onclick="closeModalById('modal-turbo')">Angebot anfragen →</a>
+    </div>
+  </div>
+
   <script>
+    function openModal(id) {
+      document.getElementById('modal-' + id).classList.add('open');
+      document.body.style.overflow = 'hidden';
+    }
+    function closeModalById(id) {
+      document.getElementById(id).classList.remove('open');
+      document.body.style.overflow = '';
+    }
+    function closeModal(e) {
+      if (e.target.classList.contains('modal-overlay')) {
+        e.target.classList.remove('open');
+        document.body.style.overflow = '';
+      }
+    }
+    document.addEventListener('keydown', e => {
+      if (e.key === 'Escape') {
+        document.querySelectorAll('.modal-overlay.open').forEach(m => {
+          m.classList.remove('open');
+          document.body.style.overflow = '';
+        });
+      }
+    });
+
     const sections = document.querySelectorAll('section[id]');
     const navLinks = document.querySelectorAll('.nav-links a');
     window.addEventListener('scroll', () => {
@@ -460,6 +603,7 @@
       sections.forEach(s => { if (window.scrollY >= s.offsetTop - 120) current = s.id; });
       navLinks.forEach(a => { a.style.color = a.getAttribute('href') === '#' + current ? 'var(--amber)' : ''; });
     });
+
     function handleSubmit(e) {
       e.preventDefault();
       const btn = e.target.querySelector('button');
