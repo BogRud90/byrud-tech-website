@@ -5,6 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Byrud Tech — Landtechnik für professionelle Landwirtschaft</title>
   <meta name="description" content="Byrud Tech — Ihr Partner für Aussaat- und Pflegemaschinen in Deutschland und Europa." />
+  <meta name="format-detection" content="telephone=no" />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@400;600;700;800&family=IBM+Plex+Mono:wght@400;500&family=Barlow:wght@300;400;500&display=swap" rel="stylesheet" />
@@ -28,8 +29,10 @@
     .nav-links { display: flex; gap: 2.5rem; list-style: none; }
     .nav-links a { font-family: 'IBM Plex Mono', monospace; font-size: 0.72rem; letter-spacing: 0.1em; text-transform: uppercase; color: var(--text-muted); text-decoration: none; transition: color 0.2s; }
     .nav-links a:hover { color: var(--amber); }
-    .nav-cta { font-family: 'IBM Plex Mono', monospace; font-size: 0.72rem; letter-spacing: 0.1em; text-transform: uppercase; color: var(--amber); border: 1px solid var(--border-amber); padding: 0.5rem 1.2rem; text-decoration: none; transition: background 0.2s; }
-    .nav-cta:hover { background: var(--amber-glow); }
+    .nav-cta { display: none; }
+    a[href^="tel"], a[href^="mailto"] { color: inherit; text-decoration: none; }
+    * { -webkit-tap-highlight-color: transparent; }
+    p a, .product-desc a, .modal-body a, .modal-spec-val a { color: var(--amber); }
 
     /* HERO */
     #hero { min-height: 100vh; display: flex; flex-direction: column; justify-content: center; padding: 8rem 3rem 5rem; overflow: hidden; }
@@ -198,7 +201,6 @@
 
   <!-- HERO -->
   <section id="hero">
-    <div class="hero-label">Byrud Tech — Landtechnik für Europa</div>
     <h1>
       Präzision,<br />
       <em>die zählt.</em>
@@ -418,7 +420,7 @@
         <p>Interessiert an einem unserer Modelle oder brauchen Sie Ersatzteile? Schreiben Sie uns — wir antworten innerhalb von 24 Stunden.</p>
         <div class="contact-links">
           <a href="mailto:info@byrud.de" class="contact-link"><div><span class="contact-link-label">E-Mail</span>info@byrud.de</div></a>
-          <a href="tel:+4940000000" class="contact-link"><div><span class="contact-link-label">Telefon</span>+49 40 000 000 00</div></a>
+          <a href="tel:+4917574439881" class="contact-link"><div><span class="contact-link-label">Telefon</span>+49 175 744 39 81</div></a>
           <a href="#" class="contact-link"><div><span class="contact-link-label">Standort</span>Hamburg, Deutschland</div></a>
         </div>
       </div>
