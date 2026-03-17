@@ -36,7 +36,7 @@
     p a, .product-desc a, .modal-body a, .modal-spec-val a { color: var(--amber); }
 
     /* HERO */
-    #hero { min-height: 100vh; display: flex; flex-direction: column; justify-content: center; padding: 8rem 3rem 5rem; overflow: hidden; }
+    #hero { min-height: 100vh; display: flex; flex-direction: column; justify-content: center; padding: 7rem 3rem 4rem; overflow: hidden; }
     .hero-label { font-family: 'IBM Plex Mono', monospace; font-size: 0.72rem; letter-spacing: 0.2em; text-transform: uppercase; color: var(--amber); margin-bottom: 1.5rem; display: flex; align-items: center; gap: 0.8rem; }
     .hero-label::before { content: ''; display: inline-block; width: 32px; height: 1px; background: var(--amber); }
     h1 { font-family: 'Barlow Condensed', sans-serif; font-weight: 800; font-size: clamp(4rem, 10vw, 9rem); line-height: 0.92; letter-spacing: -0.01em; text-transform: uppercase; max-width: 1000px; margin-bottom: 2rem; }
@@ -51,12 +51,12 @@
     .hero-bg-text { position: absolute; right: -0.03em; bottom: -0.12em; font-family: 'Barlow Condensed', sans-serif; font-weight: 800; font-size: 22vw; line-height: 1; color: rgba(255,255,255,0.018); text-transform: uppercase; pointer-events: none; user-select: none; letter-spacing: -0.04em; }
 
     /* SECTIONS */
-    .section-header { display: flex; align-items: flex-end; justify-content: space-between; margin-bottom: 4rem; gap: 2rem; flex-wrap: wrap; }
+    .section-header { display: flex; align-items: flex-end; justify-content: space-between; margin-bottom: 2.5rem; gap: 2rem; flex-wrap: wrap; }
     .section-tag { font-family: 'IBM Plex Mono', monospace; font-size: 0.68rem; letter-spacing: 0.2em; text-transform: uppercase; color: var(--amber); margin-bottom: 0.75rem; }
     h2 { font-family: 'Barlow Condensed', sans-serif; font-weight: 800; font-size: clamp(2.5rem, 5vw, 4.5rem); line-height: 0.95; text-transform: uppercase; letter-spacing: -0.01em; }
 
     /* PRODUCTS */
-    #products { padding: 8rem 3rem; }
+    #products { padding: 5rem 3rem; }
     .products-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1px; background: var(--border); border-radius: var(--r); overflow: hidden; }
     .product-card { background: var(--bg); padding: 3rem 2.5rem; transition: background 0.3s; position: relative; overflow: hidden; display: flex; flex-direction: column; cursor: pointer; }
     .product-card::before { content: ''; position: absolute; top: 0; left: 0; right: 0; height: 2px; background: var(--amber); transform: scaleX(0); transform-origin: left; transition: transform 0.3s; }
@@ -77,8 +77,8 @@
     .usp-dot { width: 6px; height: 6px; background: rgba(11,11,11,0.35); border-radius: 50%; }
 
     /* RESULTS */
-    #results { padding: 8rem 3rem; position: relative; z-index: 1; }
-    .results-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 5rem; align-items: start; margin-top: 4rem; }
+    #results { padding: 5rem 3rem; position: relative; z-index: 1; }
+    .results-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 5rem; align-items: start; margin-top: 2.5rem; }
     .results-list { display: flex; flex-direction: column; gap: 0; }
     .result-item { display: flex; align-items: flex-start; gap: 1.5rem; padding: 1.25rem 0; border-bottom: 1px solid var(--border); }
     .result-item:first-child { border-top: 1px solid var(--border); }
@@ -94,7 +94,7 @@
     .results-cta-sub { font-size: 0.9rem; color: var(--text-muted); line-height: 1.7; }
 
     /* PLATFORM */
-    #platform { padding: 7rem 3rem; background: var(--bg2); border-top: 1px solid var(--border); border-bottom: 1px solid var(--border); position: relative; z-index: 1; }
+    #platform { padding: 5rem 3rem; background: var(--bg2); border-top: 1px solid var(--border); border-bottom: 1px solid var(--border); position: relative; z-index: 1; }
     .platform-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 6rem; align-items: center; }
     .platform-text h2 { margin-bottom: 1.5rem; }
     .platform-body { color: var(--text-muted); font-size: 1rem; line-height: 1.85; margin-bottom: 2.5rem; }
@@ -109,7 +109,7 @@
     .platform-module-desc { font-family: 'IBM Plex Mono', monospace; font-size: 0.62rem; letter-spacing: 0.08em; text-transform: uppercase; color: var(--text-dim); margin-left: auto; }
 
     /* ABOUT */
-    #about { padding: 8rem 3rem; background: var(--bg2); border-top: 1px solid var(--border); border-bottom: 1px solid var(--border); }
+    #about { padding: 5rem 3rem; background: var(--bg2); border-top: 1px solid var(--border); border-bottom: 1px solid var(--border); }
     .about-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 6rem; align-items: center; }
     .about-text h2 { margin-bottom: 1.5rem; }
     .about-body { color: var(--text-muted); font-size: 1rem; line-height: 1.85; margin-bottom: 1.5rem; }
@@ -122,15 +122,15 @@
     .about-badge2 { position: absolute; top: 2rem; left: 2rem; border: 1px solid var(--border-amber); color: var(--amber); font-family: 'IBM Plex Mono', monospace; font-size: 0.65rem; letter-spacing: 0.12em; text-transform: uppercase; padding: 0.6rem 1rem; border-radius: var(--r-sm); }
 
     /* MARKETS */
-    #markets { padding: 8rem 3rem; }
-    .markets-grid { display: grid; gap: 1px; background: var(--border); margin-top: 4rem; border-radius: var(--r); overflow: hidden; }
+    #markets { padding: 5rem 3rem; }
+    .markets-grid { display: grid; gap: 1px; background: var(--border); margin-top: 2.5rem; border-radius: var(--r); overflow: hidden; }
     .market-item { background: var(--bg); padding: 2rem 1.5rem; }
     .market-flag { font-size: 2rem; margin-bottom: 0.75rem; display: block; }
     .market-name { font-family: 'Barlow Condensed', sans-serif; font-weight: 700; font-size: 1.3rem; text-transform: uppercase; margin-bottom: 0.4rem; }
     .market-desc { font-family: 'IBM Plex Mono', monospace; font-size: 0.62rem; letter-spacing: 0.08em; text-transform: uppercase; color: var(--text-dim); }
 
     /* CONTACT */
-    #contact { padding: 8rem 3rem; }
+    #contact { padding: 5rem 3rem; }
     .contact-inner { display: grid; grid-template-columns: 1fr 1fr; gap: 6rem; align-items: start; }
     .contact-info h2 { margin-bottom: 1.5rem; }
     .contact-info p { color: var(--text-muted); font-size: 1rem; line-height: 1.8; margin-bottom: 2.5rem; }
