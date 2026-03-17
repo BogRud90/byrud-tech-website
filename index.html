@@ -127,10 +127,22 @@
     .about-checklist { list-style: none; margin-bottom: 2.5rem; display: flex; flex-direction: column; gap: 0.75rem; }
     .about-checklist li { font-family: 'IBM Plex Mono', monospace; font-size: 0.75rem; letter-spacing: 0.08em; color: var(--text-muted); display: flex; align-items: center; gap: 0.75rem; }
     .about-checklist li::before { content: ''; width: 18px; height: 1px; background: var(--amber); flex-shrink: 0; }
-    .about-visual { position: relative; aspect-ratio: 4/3; background: var(--bg3); border: 1px solid var(--border); display: flex; align-items: center; justify-content: center; overflow: hidden; border-radius: var(--r); }
-    .about-visual-inner { font-family: 'Barlow Condensed', sans-serif; font-weight: 800; font-size: 7rem; color: rgba(255,255,255,0.04); text-transform: uppercase; letter-spacing: -0.04em; user-select: none; text-align: center; line-height: 1; }
-    .about-badge { position: absolute; bottom: 2rem; right: 2rem; background: var(--amber); color: #0b0b0b; font-family: 'IBM Plex Mono', monospace; font-size: 0.65rem; font-weight: 500; letter-spacing: 0.12em; text-transform: uppercase; padding: 0.6rem 1rem; border-radius: var(--r-sm); }
-    .about-badge2 { position: absolute; top: 2rem; left: 2rem; border: 1px solid var(--border-amber); color: var(--amber); font-family: 'IBM Plex Mono', monospace; font-size: 0.65rem; letter-spacing: 0.12em; text-transform: uppercase; padding: 0.6rem 1rem; border-radius: var(--r-sm); }
+    .about-visual { position: relative; aspect-ratio: 4/3; background: var(--bg3); border: 1px solid var(--border); overflow: hidden; border-radius: var(--r); }
+    .blueprint-frame { position: absolute; inset: 1.5rem; border: 1px dashed rgba(232,162,32,0.15); pointer-events: none; }
+    .blueprint-corner { position: absolute; width: 10px; height: 10px; border-color: var(--amber); border-style: solid; border-width: 0; }
+    .blueprint-corner--tl { top: 1.5rem; left: 1.5rem; border-top-width: 1px; border-left-width: 1px; }
+    .blueprint-corner--tr { top: 1.5rem; right: 1.5rem; border-top-width: 1px; border-right-width: 1px; }
+    .blueprint-corner--bl { bottom: 1.5rem; left: 1.5rem; border-bottom-width: 1px; border-left-width: 1px; }
+    .blueprint-corner--br { bottom: 1.5rem; right: 1.5rem; border-bottom-width: 1px; border-right-width: 1px; }
+    .blueprint-number { position: absolute; top: 2.5rem; right: 2.5rem; text-align: right; pointer-events: none; }
+    .blueprint-number-label { font-family: 'IBM Plex Mono', monospace; font-size: 0.6rem; letter-spacing: 0.1em; text-transform: uppercase; color: var(--text-dim); display: block; }
+    .blueprint-number-value { font-family: 'IBM Plex Mono', monospace; font-size: 0.7rem; letter-spacing: 0.08em; color: var(--text-muted); display: block; }
+    .blueprint-center { position: absolute; inset: 0; display: flex; flex-direction: column; align-items: center; justify-content: center; text-align: center; pointer-events: none; }
+    .blueprint-center-label { font-family: 'IBM Plex Mono', monospace; font-size: 0.6rem; letter-spacing: 0.2em; text-transform: uppercase; color: rgba(232,162,32,0.5); margin-bottom: 0.75rem; }
+    .blueprint-center-text { font-family: 'Barlow Condensed', sans-serif; font-weight: 800; font-size: clamp(2.5rem, 4vw, 3.5rem); text-transform: uppercase; color: rgba(255,255,255,0.06); letter-spacing: 0.05em; }
+    .blueprint-bar { position: absolute; bottom: 2.5rem; left: 50%; transform: translateX(-50%); display: flex; align-items: center; gap: 1rem; pointer-events: none; white-space: nowrap; }
+    .blueprint-bar-word { font-family: 'IBM Plex Mono', monospace; font-size: 0.6rem; letter-spacing: 0.08em; text-transform: uppercase; color: var(--text-dim); }
+    .blueprint-bar-sep { width: 1px; height: 12px; background: var(--border); }
 
     /* MARKETS */
     #markets { padding: 5rem 3rem; }
@@ -514,9 +526,26 @@
         <a href="#contact" class="btn-primary">Jetzt anfragen</a>
       </div>
       <div class="about-visual">
-        <div class="about-visual-inner">MADE<br/>IN DE</div>
-        <div class="about-badge2">Deutschland</div>
-        <div class="about-badge">Byrud Tech</div>
+        <div class="blueprint-frame"></div>
+        <div class="blueprint-corner blueprint-corner--tl"></div>
+        <div class="blueprint-corner blueprint-corner--tr"></div>
+        <div class="blueprint-corner blueprint-corner--bl"></div>
+        <div class="blueprint-corner blueprint-corner--br"></div>
+        <div class="blueprint-number">
+          <span class="blueprint-number-label">Zeichnung Nr.</span>
+          <span class="blueprint-number-value">BT-2024-001</span>
+        </div>
+        <div class="blueprint-center">
+          <div class="blueprint-center-label">Hergestellt in</div>
+          <div class="blueprint-center-text">Deutschland</div>
+        </div>
+        <div class="blueprint-bar">
+          <span class="blueprint-bar-word">Qualität</span>
+          <div class="blueprint-bar-sep"></div>
+          <span class="blueprint-bar-word">Präzision</span>
+          <div class="blueprint-bar-sep"></div>
+          <span class="blueprint-bar-word">Garantie</span>
+        </div>
       </div>
     </div>
   </section>
