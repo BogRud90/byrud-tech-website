@@ -173,9 +173,26 @@
     .hero-sub     { animation: fadeUp 0.6s 0.2s ease both; }
     .hero-actions { animation: fadeUp 0.6s 0.3s ease both; }
 
+    /* MOBILE MENU */
+    .nav-burger { display: none; flex-direction: column; justify-content: center; gap: 5px; width: 36px; height: 36px; background: none; border: none; cursor: pointer; padding: 4px; z-index: 101; }
+    .nav-burger span { display: block; width: 100%; height: 1.5px; background: var(--text); transition: transform 0.3s, opacity 0.3s; transform-origin: center; }
+    .nav-burger.open span:nth-child(1) { transform: translateY(6.5px) rotate(45deg); }
+    .nav-burger.open span:nth-child(2) { opacity: 0; }
+    .nav-burger.open span:nth-child(3) { transform: translateY(-6.5px) rotate(-45deg); }
+
+    .mobile-drawer { display: none; position: fixed; inset: 0; top: 64px; background: rgba(11,11,11,0.97); backdrop-filter: blur(16px); z-index: 99; flex-direction: column; padding: 3rem 2rem; border-top: 1px solid var(--border); }
+    .mobile-drawer.open { display: flex; }
+    .mobile-drawer ul { list-style: none; display: flex; flex-direction: column; gap: 0; flex: 1; }
+    .mobile-drawer ul li { border-bottom: 1px solid var(--border); }
+    .mobile-drawer ul li a { display: block; font-family: 'Barlow Condensed', sans-serif; font-weight: 700; font-size: 2rem; text-transform: uppercase; color: var(--text); text-decoration: none; padding: 1rem 0; letter-spacing: 0.02em; transition: color 0.2s; }
+    .mobile-drawer ul li a:hover { color: var(--amber); }
+    .mobile-drawer .mobile-cta { margin-top: 2.5rem; }
+    .mobile-drawer .mobile-cta a { display: block; text-align: center; }
+
     @media (max-width: 900px) {
       nav { padding: 0 1.5rem; }
       .nav-links { display: none; }
+      .nav-burger { display: flex; }
       #hero, #products, #about, #contact, #markets, #platform, #results { padding-left: 1.5rem; padding-right: 1.5rem; }
       .products-grid { grid-template-columns: 1fr; }
       .about-grid, .contact-inner, .platform-grid, .results-grid { grid-template-columns: 1fr; gap: 3rem; }
@@ -197,7 +214,23 @@
       <li><a href="#contact">Kontakt</a></li>
     </ul>
     <a href="#contact" class="nav-cta">Angebot anfragen</a>
+    <button class="nav-burger" id="navBurger" aria-label="Menü öffnen" aria-expanded="false">
+      <span></span><span></span><span></span>
+    </button>
   </nav>
+
+  <div class="mobile-drawer" id="mobileDrawer">
+    <ul>
+      <li><a href="#results" class="drawer-link">Ergebnisse</a></li>
+      <li><a href="#products" class="drawer-link">Maschinen</a></li>
+      <li><a href="#platform" class="drawer-link">Konzept</a></li>
+      <li><a href="#about" class="drawer-link">Über uns</a></li>
+      <li><a href="#contact" class="drawer-link">Kontakt</a></li>
+    </ul>
+    <div class="mobile-cta">
+      <a href="#contact" class="btn-primary drawer-link">Angebot anfragen →</a>
+    </div>
+  </div>
 
   <!-- HERO -->
   <section id="hero">
@@ -604,6 +637,23 @@
       let current = '';
       sections.forEach(s => { if (window.scrollY >= s.offsetTop - 120) current = s.id; });
       navLinks.forEach(a => { a.style.color = a.getAttribute('href') === '#' + current ? 'var(--amber)' : ''; });
+    });
+
+    const burger = document.getElementById('navBurger');
+    const drawer = document.getElementById('mobileDrawer');
+    burger.addEventListener('click', () => {
+      const isOpen = drawer.classList.toggle('open');
+      burger.classList.toggle('open', isOpen);
+      burger.setAttribute('aria-expanded', isOpen);
+      document.body.style.overflow = isOpen ? 'hidden' : '';
+    });
+    document.querySelectorAll('.drawer-link').forEach(link => {
+      link.addEventListener('click', () => {
+        drawer.classList.remove('open');
+        burger.classList.remove('open');
+        burger.setAttribute('aria-expanded', 'false');
+        document.body.style.overflow = '';
+      });
     });
 
     function handleSubmit(e) {
