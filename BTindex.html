@@ -1,0 +1,473 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Byrud Tech — Landtechnik für professionelle Landwirtschaft</title>
+  <meta name="description" content="Byrud Tech — Ihr Partner für Bodenbearbeitungsmaschinen und Landtechnik in Deutschland und Europa." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@400;600;700;800&family=IBM+Plex+Mono:wght@400;500&family=Barlow:wght@300;400;500&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    :root {
+      --bg: #0b0b0b; --bg2: #111111; --bg3: #161616;
+      --amber: #e8a220; --amber-dim: #b87e18; --amber-glow: rgba(232,162,32,0.12);
+      --text: #f0ede8; --text-muted: #888880; --text-dim: #555550;
+      --border: rgba(255,255,255,0.07); --border-amber: rgba(232,162,32,0.3);
+    }
+    html { scroll-behavior: smooth; }
+    body { background: var(--bg); color: var(--text); font-family: 'Barlow', sans-serif; font-weight: 300; line-height: 1.6; overflow-x: hidden; }
+    body::before { content: ''; position: fixed; inset: 0; background-image: linear-gradient(var(--border) 1px, transparent 1px), linear-gradient(90deg, var(--border) 1px, transparent 1px); background-size: 60px 60px; pointer-events: none; z-index: 0; opacity: 0.5; }
+    section { position: relative; z-index: 1; }
+
+    nav { position: fixed; top: 0; left: 0; right: 0; z-index: 100; display: flex; align-items: center; justify-content: space-between; padding: 0 3rem; height: 64px; background: rgba(11,11,11,0.88); backdrop-filter: blur(12px); border-bottom: 1px solid var(--border); }
+    .logo { font-family: 'Barlow Condensed', sans-serif; font-weight: 800; font-size: 1.3rem; letter-spacing: 0.08em; text-transform: uppercase; color: var(--text); text-decoration: none; }
+    .logo span { color: var(--amber); }
+    .nav-links { display: flex; gap: 2.5rem; list-style: none; }
+    .nav-links a { font-family: 'IBM Plex Mono', monospace; font-size: 0.72rem; letter-spacing: 0.1em; text-transform: uppercase; color: var(--text-muted); text-decoration: none; transition: color 0.2s; }
+    .nav-links a:hover { color: var(--amber); }
+    .nav-cta { font-family: 'IBM Plex Mono', monospace; font-size: 0.72rem; letter-spacing: 0.1em; text-transform: uppercase; color: var(--amber); border: 1px solid var(--border-amber); padding: 0.5rem 1.2rem; text-decoration: none; transition: background 0.2s; }
+    .nav-cta:hover { background: var(--amber-glow); }
+
+    #hero { min-height: 100vh; display: flex; flex-direction: column; justify-content: center; padding: 8rem 3rem 5rem; overflow: hidden; }
+    .hero-label { font-family: 'IBM Plex Mono', monospace; font-size: 0.72rem; letter-spacing: 0.2em; text-transform: uppercase; color: var(--amber); margin-bottom: 1.5rem; display: flex; align-items: center; gap: 0.8rem; }
+    .hero-label::before { content: ''; display: inline-block; width: 32px; height: 1px; background: var(--amber); }
+    h1 { font-family: 'Barlow Condensed', sans-serif; font-weight: 800; font-size: clamp(4rem, 10vw, 9rem); line-height: 0.92; letter-spacing: -0.01em; text-transform: uppercase; max-width: 1000px; margin-bottom: 2rem; }
+    h1 em { font-style: normal; color: var(--amber); display: block; }
+    .hero-sub { font-size: clamp(1rem, 1.5vw, 1.15rem); color: var(--text-muted); max-width: 500px; line-height: 1.75; margin-bottom: 3rem; }
+    .hero-actions { display: flex; gap: 1rem; align-items: center; flex-wrap: wrap; }
+    .btn-primary { font-family: 'IBM Plex Mono', monospace; font-size: 0.78rem; letter-spacing: 0.1em; text-transform: uppercase; background: var(--amber); color: #0b0b0b; padding: 0.9rem 2rem; text-decoration: none; font-weight: 500; transition: opacity 0.2s; display: inline-block; }
+    .btn-primary:hover { opacity: 0.85; }
+    .btn-secondary { font-family: 'IBM Plex Mono', monospace; font-size: 0.78rem; letter-spacing: 0.1em; text-transform: uppercase; color: var(--text-muted); text-decoration: none; padding: 0.9rem 0; transition: color 0.2s; display: flex; align-items: center; gap: 0.5rem; }
+    .btn-secondary:hover { color: var(--text); }
+    .btn-secondary::after { content: '→'; }
+    .hero-bg-text { position: absolute; right: -0.03em; bottom: -0.12em; font-family: 'Barlow Condensed', sans-serif; font-weight: 800; font-size: 22vw; line-height: 1; color: rgba(255,255,255,0.018); text-transform: uppercase; pointer-events: none; user-select: none; letter-spacing: -0.04em; }
+
+    .stats-bar { border-top: 1px solid var(--border); border-bottom: 1px solid var(--border); background: var(--bg2); display: grid; grid-template-columns: repeat(4, 1fr); position: relative; z-index: 1; }
+    .stat-item { padding: 2.5rem 3rem; border-right: 1px solid var(--border); }
+    .stat-item:last-child { border-right: none; }
+    .stat-number { font-family: 'Barlow Condensed', sans-serif; font-size: 2.8rem; font-weight: 800; color: var(--amber); line-height: 1; margin-bottom: 0.4rem; }
+    .stat-label { font-family: 'IBM Plex Mono', monospace; font-size: 0.68rem; letter-spacing: 0.12em; text-transform: uppercase; color: var(--text-dim); }
+
+    #products { padding: 8rem 3rem; }
+    .section-header { display: flex; align-items: flex-end; justify-content: space-between; margin-bottom: 4rem; gap: 2rem; flex-wrap: wrap; }
+    .section-tag { font-family: 'IBM Plex Mono', monospace; font-size: 0.68rem; letter-spacing: 0.2em; text-transform: uppercase; color: var(--amber); margin-bottom: 0.75rem; }
+    h2 { font-family: 'Barlow Condensed', sans-serif; font-weight: 800; font-size: clamp(2.5rem, 5vw, 4.5rem); line-height: 0.95; text-transform: uppercase; letter-spacing: -0.01em; }
+    .products-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1px; background: var(--border); }
+    .product-card { background: var(--bg); padding: 3rem 2.5rem; transition: background 0.3s; position: relative; overflow: hidden; }
+    .product-card::before { content: ''; position: absolute; top: 0; left: 0; right: 0; height: 2px; background: var(--amber); transform: scaleX(0); transform-origin: left; transition: transform 0.3s; }
+    .product-card:hover { background: var(--bg3); }
+    .product-card:hover::before { transform: scaleX(1); }
+    .product-num { font-family: 'IBM Plex Mono', monospace; font-size: 0.65rem; letter-spacing: 0.15em; color: var(--text-dim); margin-bottom: 2rem; }
+    .product-icon { width: 44px; height: 44px; border: 1px solid var(--border-amber); display: flex; align-items: center; justify-content: center; margin-bottom: 1.5rem; color: var(--amber); font-size: 1.2rem; }
+    h3 { font-family: 'Barlow Condensed', sans-serif; font-weight: 700; font-size: 1.6rem; text-transform: uppercase; letter-spacing: 0.02em; margin-bottom: 1rem; }
+    .product-desc { font-size: 0.92rem; color: var(--text-muted); line-height: 1.75; margin-bottom: 1.5rem; }
+    .product-tags { display: flex; flex-wrap: wrap; gap: 0.4rem; }
+    .tag { font-family: 'IBM Plex Mono', monospace; font-size: 0.6rem; letter-spacing: 0.08em; text-transform: uppercase; border: 1px solid var(--border); color: var(--text-dim); padding: 0.25rem 0.6rem; }
+
+    .usp-band { background: var(--amber); padding: 1.5rem 3rem; display: flex; align-items: center; gap: 3rem; overflow: hidden; position: relative; z-index: 1; flex-wrap: wrap; }
+    .usp-item { display: flex; align-items: center; gap: 0.75rem; font-family: 'IBM Plex Mono', monospace; font-size: 0.72rem; font-weight: 500; letter-spacing: 0.1em; text-transform: uppercase; color: #0b0b0b; white-space: nowrap; }
+    .usp-dot { width: 6px; height: 6px; background: rgba(11,11,11,0.35); border-radius: 50%; }
+
+    #about { padding: 8rem 3rem; background: var(--bg2); border-top: 1px solid var(--border); border-bottom: 1px solid var(--border); }
+    .about-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 6rem; align-items: center; }
+    .about-text h2 { margin-bottom: 1.5rem; }
+    .about-body { color: var(--text-muted); font-size: 1rem; line-height: 1.85; margin-bottom: 1.5rem; }
+    .about-checklist { list-style: none; margin-bottom: 2.5rem; display: flex; flex-direction: column; gap: 0.75rem; }
+    .about-checklist li { font-family: 'IBM Plex Mono', monospace; font-size: 0.75rem; letter-spacing: 0.08em; color: var(--text-muted); display: flex; align-items: center; gap: 0.75rem; }
+    .about-checklist li::before { content: ''; width: 18px; height: 1px; background: var(--amber); flex-shrink: 0; }
+    .about-visual { position: relative; aspect-ratio: 4/3; background: var(--bg3); border: 1px solid var(--border); display: flex; align-items: center; justify-content: center; overflow: hidden; }
+    .about-visual-inner { font-family: 'Barlow Condensed', sans-serif; font-weight: 800; font-size: 7rem; color: rgba(255,255,255,0.04); text-transform: uppercase; letter-spacing: -0.04em; user-select: none; text-align: center; line-height: 1; }
+    .about-badge { position: absolute; bottom: 2rem; right: 2rem; background: var(--amber); color: #0b0b0b; font-family: 'IBM Plex Mono', monospace; font-size: 0.65rem; font-weight: 500; letter-spacing: 0.12em; text-transform: uppercase; padding: 0.6rem 1rem; }
+    .about-badge2 { position: absolute; top: 2rem; left: 2rem; border: 1px solid var(--border-amber); color: var(--amber); font-family: 'IBM Plex Mono', monospace; font-size: 0.65rem; letter-spacing: 0.12em; text-transform: uppercase; padding: 0.6rem 1rem; }
+
+    #markets { padding: 8rem 3rem; }
+    .markets-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 1px; background: var(--border); margin-top: 4rem; }
+    .market-item { background: var(--bg); padding: 2rem 1.5rem; }
+    .market-flag { font-size: 2rem; margin-bottom: 0.75rem; display: block; }
+    .market-name { font-family: 'Barlow Condensed', sans-serif; font-weight: 700; font-size: 1.3rem; text-transform: uppercase; margin-bottom: 0.4rem; }
+    .market-desc { font-family: 'IBM Plex Mono', monospace; font-size: 0.62rem; letter-spacing: 0.08em; text-transform: uppercase; color: var(--text-dim); }
+
+    /* Platform section */
+    #platform { padding: 7rem 3rem; background: var(--bg2); border-top: 1px solid var(--border); border-bottom: 1px solid var(--border); position: relative; z-index: 1; }
+    .platform-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 6rem; align-items: center; }
+    .platform-text h2 { margin-bottom: 1.5rem; }
+    .platform-body { color: var(--text-muted); font-size: 1rem; line-height: 1.85; margin-bottom: 2.5rem; }
+    .platform-ops { display: grid; grid-template-columns: repeat(2, 1fr); gap: 1px; background: var(--border); }
+    .platform-op { background: var(--bg3); padding: 1.5rem; }
+    .platform-op-num { font-family: 'Barlow Condensed', sans-serif; font-size: 2.5rem; font-weight: 800; color: var(--amber); line-height: 1; margin-bottom: 0.4rem; }
+    .platform-op-label { font-family: 'IBM Plex Mono', monospace; font-size: 0.65rem; letter-spacing: 0.1em; text-transform: uppercase; color: var(--text-dim); }
+    .platform-modules { display: flex; flex-direction: column; gap: 0.75rem; }
+    .platform-module { display: flex; align-items: center; gap: 1rem; padding: 1rem 1.25rem; border: 1px solid var(--border); background: var(--bg); }
+    .platform-module-dot { width: 8px; height: 8px; background: var(--amber); flex-shrink: 0; }
+    .platform-module-name { font-family: 'Barlow Condensed', sans-serif; font-weight: 700; font-size: 1.1rem; text-transform: uppercase; color: var(--text); }
+    .platform-module-desc { font-family: 'IBM Plex Mono', monospace; font-size: 0.62rem; letter-spacing: 0.08em; text-transform: uppercase; color: var(--text-dim); margin-left: auto; }
+
+    /* Results section */
+    #results { padding: 8rem 3rem; position: relative; z-index: 1; }
+    .results-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 5rem; align-items: start; margin-top: 4rem; }
+    .results-list { display: flex; flex-direction: column; gap: 0; }
+    .result-item { display: flex; align-items: flex-start; gap: 1.5rem; padding: 1.25rem 0; border-bottom: 1px solid var(--border); }
+    .result-item:first-child { border-top: 1px solid var(--border); }
+    .result-check { width: 20px; height: 20px; border: 1px solid var(--amber); display: flex; align-items: center; justify-content: center; flex-shrink: 0; margin-top: 2px; color: var(--amber); font-size: 0.75rem; }
+    .result-text { font-size: 0.95rem; color: var(--text-muted); line-height: 1.6; }
+    .result-text strong { color: var(--text); font-weight: 500; }
+    .results-cta { background: var(--bg2); border: 1px solid var(--border); padding: 3rem; display: flex; flex-direction: column; gap: 2rem; }
+    .results-cta-num { font-family: 'Barlow Condensed', sans-serif; font-size: 5rem; font-weight: 800; color: var(--amber); line-height: 1; }
+    .results-cta-label { font-family: 'IBM Plex Mono', monospace; font-size: 0.65rem; letter-spacing: 0.12em; text-transform: uppercase; color: var(--text-dim); margin-top: -1.5rem; }
+    .results-cta-divider { height: 1px; background: var(--border); }
+    .results-cta-headline { font-family: 'Barlow Condensed', sans-serif; font-weight: 800; font-size: 1.8rem; text-transform: uppercase; line-height: 1.05; }
+    .results-cta-sub { font-size: 0.9rem; color: var(--text-muted); line-height: 1.7; }
+
+    #contact { padding: 8rem 3rem; }
+    .contact-inner { display: grid; grid-template-columns: 1fr 1fr; gap: 6rem; align-items: start; }
+    .contact-info h2 { margin-bottom: 1.5rem; }
+    .contact-info p { color: var(--text-muted); font-size: 1rem; line-height: 1.8; margin-bottom: 2.5rem; }
+    .contact-links { display: flex; flex-direction: column; gap: 1rem; }
+    .contact-link { display: flex; align-items: center; gap: 1rem; text-decoration: none; color: var(--text-muted); font-size: 0.9rem; transition: color 0.2s; padding-bottom: 1rem; border-bottom: 1px solid var(--border); }
+    .contact-link:hover { color: var(--amber); }
+    .contact-link-label { font-family: 'IBM Plex Mono', monospace; font-size: 0.65rem; letter-spacing: 0.12em; text-transform: uppercase; color: var(--text-dim); display: block; margin-bottom: 0.2rem; }
+    .contact-form { display: flex; flex-direction: column; gap: 1.2rem; }
+    .form-group { display: flex; flex-direction: column; gap: 0.4rem; }
+    .form-label { font-family: 'IBM Plex Mono', monospace; font-size: 0.65rem; letter-spacing: 0.12em; text-transform: uppercase; color: var(--text-dim); }
+    .form-input, .form-textarea, .form-select { background: var(--bg2); border: 1px solid var(--border); color: var(--text); font-family: 'Barlow', sans-serif; font-size: 0.95rem; padding: 0.85rem 1rem; transition: border-color 0.2s; outline: none; resize: none; }
+    .form-input:focus, .form-textarea:focus, .form-select:focus { border-color: var(--border-amber); }
+    .form-select { cursor: pointer; }
+    .form-select option { background: var(--bg2); }
+    .form-textarea { min-height: 110px; }
+
+    footer { border-top: 1px solid var(--border); padding: 2rem 3rem; display: flex; align-items: center; justify-content: space-between; background: var(--bg); position: relative; z-index: 1; }
+    .footer-copy { font-family: 'IBM Plex Mono', monospace; font-size: 0.65rem; letter-spacing: 0.1em; color: var(--text-dim); }
+    .footer-links { display: flex; gap: 1.5rem; }
+    .footer-links a { font-family: 'IBM Plex Mono', monospace; font-size: 0.65rem; letter-spacing: 0.1em; text-transform: uppercase; color: var(--text-dim); text-decoration: none; transition: color 0.2s; }
+    .footer-links a:hover { color: var(--amber); }
+
+    @keyframes fadeUp { from { opacity: 0; transform: translateY(24px); } to { opacity: 1; transform: translateY(0); } }
+    .hero-label   { animation: fadeUp 0.6s 0.0s ease both; }
+    h1            { animation: fadeUp 0.6s 0.1s ease both; }
+    .hero-sub     { animation: fadeUp 0.6s 0.2s ease both; }
+    .hero-actions { animation: fadeUp 0.6s 0.3s ease both; }
+
+    @media (max-width: 900px) {
+      nav { padding: 0 1.5rem; }
+      .nav-links { display: none; }
+      #hero, #products, #about, #contact, #markets, #platform, #results { padding-left: 1.5rem; padding-right: 1.5rem; }
+      .stats-bar { grid-template-columns: repeat(2, 1fr); }
+      .stat-item:nth-child(2) { border-right: none; }
+      .products-grid { grid-template-columns: 1fr; }
+      .about-grid, .contact-inner, .platform-grid, .results-grid { grid-template-columns: 1fr; gap: 3rem; }
+      .markets-grid { grid-template-columns: repeat(2, 1fr); }
+      .platform-ops { grid-template-columns: repeat(2, 1fr); }
+      footer { flex-direction: column; gap: 1rem; text-align: center; }
+    }
+  </style>
+</head>
+<body>
+
+  <nav>
+    <a href="#" class="logo">Byrud<span>.</span>Tech</a>
+    <ul class="nav-links">
+      <li><a href="#platform">Konzept</a></li>
+      <li><a href="#products">Maschinen</a></li>
+      <li><a href="#results">Ergebnisse</a></li>
+      <li><a href="#about">Über uns</a></li>
+      <li><a href="#contact">Kontakt</a></li>
+    </ul>
+    <a href="#contact" class="nav-cta">Angebot anfragen</a>
+  </nav>
+
+  <section id="hero">
+    <div class="hero-label">Byrud Tech — Landtechnik für Europa</div>
+    <h1>
+      Präzision,<br />
+      <em>die zählt.</em>
+    </h1>
+    <p class="hero-sub">
+      Intelligente Maschinen für moderne Landwirtschaft — entwickelt und gefertigt in Deutschland.
+      Weniger Chemie, weniger Aufwand, mehr Ertrag.
+    </p>
+    <div class="hero-actions">
+      <a href="#contact" class="btn-primary">Angebot anfragen</a>
+      <a href="#products" class="btn-secondary">Unsere Maschinen</a>
+    </div>
+    <div class="hero-bg-text">AGRO</div>
+  </section>
+
+  <div class="stats-bar">
+    <div class="stat-item"><div class="stat-number">6</div><div class="stat-label">Länder aktiv</div></div>
+    <div class="stat-item"><div class="stat-number">40+</div><div class="stat-label">Maschinenmodelle</div></div>
+    <div class="stat-item"><div class="stat-number">100%</div><div class="stat-label">Made in Germany</div></div>
+    <div class="stat-item"><div class="stat-number">24h</div><div class="stat-label">Reaktionszeit</div></div>
+  </div>
+
+  <!-- PLATFORM CONCEPT -->
+  <section id="platform">
+    <div class="platform-grid">
+      <div class="platform-text">
+        <div class="section-tag">// Unser Konzept</div>
+        <h2>Eine Rahmen.<br />Endlose<br /><em style="font-style:normal;color:var(--amber);">Möglichkeiten.</em></h2>
+        <p class="platform-body">
+          Byrud Tech hat einen universellen Trägerrahmen entwickelt, auf den verschiedene Anbaugeräte für Aussaat und Pflege montiert werden können. Das Ergebnis: bis zu 4 Feldoperationen in einem einzigen Durchgang — weniger Überfahrten, weniger Kraftstoff, mehr Ertrag.
+        </p>
+        <div class="platform-ops">
+          <div class="platform-op">
+            <div class="platform-op-num">4×</div>
+            <div class="platform-op-label">Operationen pro Durchgang</div>
+          </div>
+          <div class="platform-op">
+            <div class="platform-op-num">−40%</div>
+            <div class="platform-op-label">Weniger Überfahrten</div>
+          </div>
+          <div class="platform-op">
+            <div class="platform-op-num">18</div>
+            <div class="platform-op-label">km/h Arbeitsgeschwindigkeit</div>
+          </div>
+          <div class="platform-op">
+            <div class="platform-op-num">1–2</div>
+            <div class="platform-op-label">Saisons bis ROI</div>
+          </div>
+        </div>
+      </div>
+      <div>
+        <div class="platform-modules">
+          <div class="platform-module">
+            <div class="platform-module-dot"></div>
+            <div class="platform-module-name">Kultivierer GELIO</div>
+            <div class="platform-module-desc">Zwischenreihenbearbeitung</div>
+          </div>
+          <div class="platform-module">
+            <div class="platform-module-dot"></div>
+            <div class="platform-module-name">Lenksystem EXACT</div>
+            <div class="platform-module-desc">Präzisionsführung 1 cm</div>
+          </div>
+          <div class="platform-module">
+            <div class="platform-module-dot"></div>
+            <div class="platform-module-name">Flüssigdüngung LINUS</div>
+            <div class="platform-module-desc">Flüssigdünger & PSM</div>
+          </div>
+          <div class="platform-module">
+            <div class="platform-module-dot"></div>
+            <div class="platform-module-name">Granulatdüngung GINUS</div>
+            <div class="platform-module-desc">Granulat 5–270 kg/ha</div>
+          </div>
+          <div class="platform-module">
+            <div class="platform-module-dot"></div>
+            <div class="platform-module-name">Sämaschine VELES</div>
+            <div class="platform-module-desc">Getreide, Raps, Soja</div>
+          </div>
+          <div class="platform-module">
+            <div class="platform-module-dot"></div>
+            <div class="platform-module-name">Egge TOR / Striegel STERN</div>
+            <div class="platform-module-desc">Saatbett & Unkrautbekämpfung</div>
+          </div>
+          <div class="platform-module">
+            <div class="platform-module-dot"></div>
+            <div class="platform-module-name">Zerhacker TURBO</div>
+            <div class="platform-module-desc">Erntegutzerkleinerung</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="products">
+    <div class="section-header">
+      <div>
+        <div class="section-tag">// Unser Sortiment</div>
+        <h2>Präzision<br />auf jedem Feld</h2>
+      </div>
+    </div>
+    <div class="products-grid">
+      <div class="product-card">
+        <div class="product-num">01 —</div>
+        <div class="product-icon">⊞</div>
+        <h3>Kultivierer GELIO</h3>
+        <p class="product-desc">Intelligenter Reihenkultivator für präzise Zwischenreihenbearbeitung. Genauigkeit bis 1 cm, Arbeitsgeschwindigkeit bis 18 km/h — bis zu 4 Operationen in einem Durchgang. ROI in 1–2 Saisons.</p>
+        <div class="product-tags"><span class="tag">GELIO-U</span><span class="tag">GELIO-S</span><span class="tag">GELIO-R</span><span class="tag">GELIO-P</span><span class="tag">GELIO-K</span></div>
+      </div>
+      <div class="product-card">
+        <div class="product-num">02 —</div>
+        <div class="product-icon">◎</div>
+        <h3>Lenksystem EXACT</h3>
+        <p class="product-desc">Hochpräzise CMOS-Kamera erkennt Pflanzenreihen automatisch und korrigiert die Position des Kultivators auf den Millimeter genau. Tages- und Nachtbetrieb. Bis zu 180 ha/Tag.</p>
+        <div class="product-tags"><span class="tag">Bis 1 cm Genauigkeit</span><span class="tag">24/7 Betrieb</span><span class="tag">18 km/h</span></div>
+      </div>
+      <div class="product-card">
+        <div class="product-num">03 —</div>
+        <div class="product-icon">◈</div>
+        <h3>Flüssigdüngung LINUS</h3>
+        <p class="product-desc">System zur präzisen Ausbringung von Flüssigdünger (UAN, NFS) und Pflanzenschutzmitteln direkt in die Wachstumszone. Tank 600–3000 l. Steuerung via Computer Cruise 4 / CAN-Bus.</p>
+        <div class="product-tags"><span class="tag">LINUS-600</span><span class="tag">LINUS-2×600</span><span class="tag">LINUS-O</span></div>
+      </div>
+      <div class="product-card">
+        <div class="product-num">04 —</div>
+        <div class="product-icon">▤</div>
+        <h3>Granulat-Düngung GINUS</h3>
+        <p class="product-desc">Integriertes System zur exakten Ausbringung von Granulatdünger direkt in die Wurzelzone. Tank 800–2000 l. Ausbringmenge regelbar von 5 bis 270 kg/ha. Edelstahlverteiler.</p>
+        <div class="product-tags"><span class="tag">5–270 kg/ha</span><span class="tag">Accord-Antrieb</span><span class="tag">Alle GELIO-Modelle</span></div>
+      </div>
+      <div class="product-card">
+        <div class="product-num">05 —</div>
+        <div class="product-icon">△</div>
+        <h3>Sämaschine VELES</h3>
+        <p class="product-desc">Universelle Sämaschine für alle Getreidearten, Raps und Soja auf der Universalrahmen. Zweizeilige Aussaat mit 10 cm Abstand. Gleichzeitige Ausbringung von Startdünger und Inokulum möglich.</p>
+        <div class="product-tags"><span class="tag">VELES-1</span><span class="tag">VELES-2</span><span class="tag">Tank 600–6000 l</span></div>
+      </div>
+      <div class="product-card">
+        <div class="product-num">06 —</div>
+        <div class="product-icon">◇</div>
+        <h3>Eggen & Striegel</h3>
+        <p class="product-desc">Netzenegge TOR (4,5–12 m Arbeitsbreite) für Saatbettvorbereitung und Unkrautbekämpfung. Rotationsstriegel STERN und Erntegutzerhacker TURBO — alle auf der gleichen Universalrahmen.</p>
+        <div class="product-tags"><span class="tag">TOR XS–XL</span><span class="tag">STERN</span><span class="tag">TURBO</span></div>
+      </div>
+    </div>
+  </section>
+
+  <div class="usp-band">
+    <div class="usp-item" style="font-size:0.85rem; font-weight:700; letter-spacing:0.05em;">Werden Sie unser Händler —</div>
+    <div class="usp-dot"></div>
+    <div class="usp-item">Attraktive Händlerkonditionen</div>
+    <div class="usp-dot"></div>
+    <div class="usp-item">Exklusivgebiete verfügbar</div>
+    <div class="usp-dot"></div>
+    <div class="usp-item">Marketingunterstützung inklusive</div>
+    <div class="usp-dot"></div>
+    <a href="#contact" style="font-family:'IBM Plex Mono',monospace; font-size:0.72rem; font-weight:600; letter-spacing:0.1em; text-transform:uppercase; color:#0b0b0b; background:rgba(11,11,11,0.15); border:1px solid rgba(11,11,11,0.3); padding:0.45rem 1.1rem; text-decoration:none; white-space:nowrap;">Jetzt bewerben →</a>
+  </div>
+
+  <!-- RESULTS SECTION -->
+  <section id="results">
+    <div class="section-header">
+      <div>
+        <div class="section-tag">// Warum intelligente Feldbearbeitung?</div>
+        <h2>Weniger Chemie.<br />Mehr Profit.</h2>
+      </div>
+    </div>
+    <div class="results-grid">
+      <div class="results-list">
+        <div class="result-item"><div class="result-check">✓</div><div class="result-text"><strong>Genauigkeit bis 1 cm</strong> — präzise Bearbeitung direkt am Reihen ohne Pflanzenschäden</div></div>
+        <div class="result-item"><div class="result-check">✓</div><div class="result-text"><strong>Herbizidkosten −30%</strong> — gezielter Einsatz von Pflanzenschutzmitteln spart erheblich</div></div>
+        <div class="result-item"><div class="result-check">✓</div><div class="result-text"><strong>Arbeitsstunden −40%</strong> — weniger Durchgänge, weniger Maschinenzeit, weniger Personal</div></div>
+        <div class="result-item"><div class="result-check">✓</div><div class="result-text"><strong>Weniger Überfahrten</strong> — bis zu 4 Operationen in einem einzigen Durchgang</div></div>
+        <div class="result-item"><div class="result-check">✓</div><div class="result-text"><strong>Agrotechnische Termine einhalten</strong> — höhere Arbeitsgeschwindigkeit ermöglicht optimales Timing</div></div>
+        <div class="result-item"><div class="result-check">✓</div><div class="result-text"><strong>Gezielte Düngung</strong> — Nährstoffe direkt in die Wurzelzone, keine Verluste</div></div>
+        <div class="result-item"><div class="result-check">✓</div><div class="result-text"><strong>Ertrag +10–30%</strong> — bei gleichzeitiger Senkung der Produktionskosten</div></div>
+        <div class="result-item"><div class="result-check">✓</div><div class="result-text"><strong>Bodenstruktur verbessern</strong> — schonende Bearbeitung erhält die Bodenfruchtbarkeit</div></div>
+        <div class="result-item"><div class="result-check">✓</div><div class="result-text"><strong>Rentabilität steigern</strong> — hohe Maschinenleistung bis 180 ha/Tag bei 24/7-Betrieb</div></div>
+      </div>
+      <div class="results-cta">
+        <div>
+          <div class="results-cta-num">+€200</div>
+          <div class="results-cta-label">Zusätzliche Marge pro Hektar</div>
+        </div>
+        <div class="results-cta-divider"></div>
+        <div class="results-cta-headline">Weniger Chemie — Weniger Kosten — Höherer Ertrag</div>
+        <p class="results-cta-sub">Die intelligente Kombination aus mechanischer Bearbeitung, präziser Führung und gezielter Düngung macht den Unterschied — für jede Betriebsgröße und jede Kultur.</p>
+        <a href="#contact" class="btn-primary" style="width:fit-content;">Jetzt berechnen →</a>
+      </div>
+    </div>
+  </section>
+
+  <section id="about">
+    <div class="about-grid">
+      <div class="about-text">
+        <div class="section-tag">// Über Byrud Tech</div>
+        <h2>Junger<br />Hersteller.<br /><em style="font-style:normal;color:var(--amber);display:block;">Made in Germany.</em></h2>
+        <p class="about-body">Byrud Tech ist ein moderner Hersteller von Bodenbearbeitungsmaschinen mit Sitz in Deutschland. Wir denken Landtechnik neu — mit frischen Ideen, konsequenter Ingenieursarbeit und einem klaren Fokus auf das, was Landwirte wirklich brauchen.</p>
+        <p class="about-body">Als junges Unternehmen sind wir flexibel, schnell und nah am Markt. Unsere Maschinen werden in Deutschland entwickelt und nach höchsten Qualitätsstandards gefertigt — für europäische Böden, europäisches Klima, europäische Betriebe.</p>
+        <ul class="about-checklist">
+          <li>Entwicklung & Fertigung in Deutschland</li>
+          <li>Direktvertrieb und autorisierte Händler europaweit</li>
+          <li>Schnelle Lieferzeiten & kurze Kommunikationswege</li>
+          <li>Vollgarantie und Ersatzteilversorgung ab Lager</li>
+        </ul>
+        <a href="#contact" class="btn-primary">Jetzt anfragen</a>
+      </div>
+      <div class="about-visual">
+        <div class="about-visual-inner">MADE<br/>IN DE</div>
+        <div class="about-badge2">Deutschland</div>
+        <div class="about-badge">Byrud Tech</div>
+      </div>
+    </div>
+  </section>
+
+  <section id="markets">
+    <div class="section-header">
+      <div>
+        <div class="section-tag">// Unsere Märkte</div>
+        <h2>Aktiv in<br />ganz Europa</h2>
+      </div>
+    </div>
+    <div class="markets-grid" style="grid-template-columns: repeat(6,1fr);">
+      <div class="market-item"><span class="market-flag">🇩🇪</span><div class="market-name">Deutschland</div><div class="market-desc">Hauptmarkt · Sitz</div></div>
+      <div class="market-item"><span class="market-flag">🇵🇱</span><div class="market-name">Polen</div><div class="market-desc">Wachsender Markt</div></div>
+      <div class="market-item"><span class="market-flag">🇺🇦</span><div class="market-name">Ukraine</div><div class="market-desc">Agrarholdings</div></div>
+      <div class="market-item"><span class="market-flag">🇷🇴</span><div class="market-name">Rumänien</div><div class="market-desc">Expandierender Sektor</div></div>
+      <div class="market-item"><span class="market-flag">🇫🇷</span><div class="market-name">Frankreich</div><div class="market-desc">Großbetriebe</div></div>
+      <div class="market-item"><span class="market-flag">🇳🇱</span><div class="market-name">Niederlande</div><div class="market-desc">Intensivlandwirtschaft</div></div>
+    </div>
+  </section>
+
+  <section id="contact">
+    <div class="contact-inner">
+      <div class="contact-info">
+        <div class="section-tag">// Kontakt</div>
+        <h2>Maschine<br />anfragen.</h2>
+        <p>Interessiert an einem unserer Modelle oder brauchen Sie Ersatzteile? Schreiben Sie uns — wir antworten innerhalb von 24 Stunden.</p>
+        <div class="contact-links">
+          <a href="mailto:info@byrud.de" class="contact-link"><div><span class="contact-link-label">E-Mail</span>info@byrud.de</div></a>
+          <a href="tel:+4940000000" class="contact-link"><div><span class="contact-link-label">Telefon</span>+49 40 000 000 00</div></a>
+          <a href="#" class="contact-link"><div><span class="contact-link-label">Standort</span>Hamburg, Deutschland</div></a>
+        </div>
+      </div>
+      <form class="contact-form" onsubmit="handleSubmit(event)">
+        <div class="form-group"><label class="form-label">Name / Betrieb</label><input type="text" class="form-input" placeholder="Ihr Name oder Betriebsname" required /></div>
+        <div class="form-group"><label class="form-label">E-Mail</label><input type="email" class="form-input" placeholder="ihre@email.de" required /></div>
+        <div class="form-group">
+          <label class="form-label">Ich interessiere mich für</label>
+          <select class="form-select">
+            <option value="">Bitte wählen…</option>
+            <option>Kultivierer GELIO</option>
+            <option>Lenksystem EXACT</option>
+            <option>Flüssigdüngung LINUS</option>
+            <option>Granulatdüngung GINUS</option>
+            <option>Sämaschine VELES</option>
+            <option>Netzenegge TOR</option>
+            <option>Rotationsstriegel STERN</option>
+            <option>Erntegutzerhacker TURBO</option>
+            <option>Händlerpartnerschaft</option>
+            <option>Allgemeine Anfrage</option>
+          </select>
+        </div>
+        <div class="form-group"><label class="form-label">Nachricht</label><textarea class="form-textarea" placeholder="Beschreiben Sie Ihren Bedarf, Flächengröße, Traktorleistung…" required></textarea></div>
+        <button type="submit" class="btn-primary" style="cursor:pointer;border:none;width:fit-content;">Anfrage absenden →</button>
+      </form>
+    </div>
+  </section>
+
+  <footer>
+    <span class="footer-copy">© 2025 Byrud Tech. Alle Rechte vorbehalten.</span>
+    <div class="footer-links"><a href="#">Impressum</a><a href="#">Datenschutz</a><a href="#">AGB</a></div>
+    <span class="footer-copy">Hamburg · byrud.tech</span>
+  </footer>
+
+  <script>
+    const sections = document.querySelectorAll('section[id]');
+    const navLinks = document.querySelectorAll('.nav-links a');
+    window.addEventListener('scroll', () => {
+      let current = '';
+      sections.forEach(s => { if (window.scrollY >= s.offsetTop - 120) current = s.id; });
+      navLinks.forEach(a => { a.style.color = a.getAttribute('href') === '#' + current ? 'var(--amber)' : ''; });
+    });
+    function handleSubmit(e) {
+      e.preventDefault();
+      const btn = e.target.querySelector('button');
+      btn.textContent = 'Anfrage gesendet ✓';
+      btn.style.background = '#1a6641';
+      btn.style.color = '#fff';
+      e.target.reset();
+    }
+  </script>
+</body>
+</html>
