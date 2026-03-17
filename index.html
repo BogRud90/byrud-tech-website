@@ -20,7 +20,7 @@
     }
     html { scroll-behavior: smooth; }
     body { background: var(--bg); color: var(--text); font-family: 'Barlow', sans-serif; font-weight: 300; line-height: 1.6; overflow-x: hidden; }
-    body::before { content: ''; position: fixed; inset: 0; background-image: linear-gradient(var(--border) 1px, transparent 1px), linear-gradient(90deg, var(--border) 1px, transparent 1px); background-size: 60px 60px; pointer-events: none; z-index: 0; opacity: 0.5; }
+    body::before { content: ''; position: fixed; inset: 0; background-image: linear-gradient(var(--border) 1px, transparent 1px), linear-gradient(90deg, var(--border) 1px, transparent 1px); background-size: 60px 60px; pointer-events: none; z-index: 0; opacity: 0.15; }
     section { position: relative; z-index: 1; }
 
     /* NAV */
@@ -58,7 +58,13 @@
     /* SECTIONS */
     .section-header { display: flex; align-items: flex-end; justify-content: space-between; margin-bottom: 2.5rem; gap: 2rem; flex-wrap: wrap; }
     .section-tag { font-family: 'IBM Plex Mono', monospace; font-size: 0.68rem; letter-spacing: 0.2em; text-transform: uppercase; color: var(--amber); margin-bottom: 0.75rem; }
-    h2 { font-family: 'Barlow Condensed', sans-serif; font-weight: 800; font-size: clamp(2.5rem, 5vw, 4.5rem); line-height: 0.95; text-transform: uppercase; letter-spacing: -0.01em; }
+    h2 { font-family: 'Barlow Condensed', sans-serif; font-weight: 800; font-size: clamp(2rem, 4vw, 3.5rem); line-height: 0.95; text-transform: uppercase; letter-spacing: -0.01em; }
+    #results h2 { font-size: clamp(2.5rem, 5vw, 4.5rem); }
+    #products h2 { font-size: clamp(2rem, 4vw, 3.5rem); }
+    #platform h2 { font-size: clamp(2rem, 4vw, 3.5rem); }
+    #about h2 { font-size: clamp(2rem, 4vw, 3rem); }
+    #markets h2 { font-size: clamp(1.8rem, 3.5vw, 2.8rem); }
+    #contact h2 { font-size: clamp(1.8rem, 3.5vw, 2.8rem); }
 
     /* PRODUCTS */
     #products { padding: 5rem 3rem; }
@@ -67,7 +73,7 @@
     .product-card::before { content: ''; position: absolute; top: 0; left: 0; right: 0; height: 2px; background: var(--amber); transform: scaleX(0); transform-origin: left; transition: transform 0.3s; }
     .product-card:hover { background: var(--bg3); }
     .product-card:hover::before { transform: scaleX(1); }
-    .product-icon { width: 44px; height: 44px; border: 1px solid var(--border-amber); display: flex; align-items: center; justify-content: center; flex-shrink: 0; color: var(--amber); font-size: 1.2rem; border-radius: var(--r-sm); }
+    .product-icon { width: 44px; height: 44px; border: 1px solid var(--border); display: flex; align-items: center; justify-content: center; flex-shrink: 0; color: var(--text-dim); font-size: 1.2rem; border-radius: var(--r-sm); }
     .product-body { flex: 1; min-width: 0; }
     .product-num { font-family: 'IBM Plex Mono', monospace; font-size: 0.65rem; letter-spacing: 0.15em; color: var(--text-dim); margin-bottom: 0.5rem; }
     h3 { font-family: 'Barlow Condensed', sans-serif; font-weight: 700; font-size: 1.6rem; text-transform: uppercase; letter-spacing: 0.02em; margin-bottom: 0.5rem; }
@@ -78,9 +84,9 @@
     .product-card:hover .product-link { gap: 0.8rem; }
 
     /* USP BAND */
-    .usp-band { background: var(--amber); padding: 1.5rem 3rem; display: flex; align-items: center; gap: 3rem; overflow: hidden; position: relative; z-index: 1; flex-wrap: wrap; }
-    .usp-item { display: flex; align-items: center; gap: 0.75rem; font-family: 'IBM Plex Mono', monospace; font-size: 0.72rem; font-weight: 500; letter-spacing: 0.1em; text-transform: uppercase; color: #0b0b0b; white-space: nowrap; }
-    .usp-dot { width: 6px; height: 6px; background: rgba(11,11,11,0.35); border-radius: 50%; }
+    .usp-band { background: var(--bg2); border-top: 1px solid var(--border-amber); border-bottom: 1px solid var(--border-amber); padding: 1.2rem 3rem; display: flex; align-items: center; gap: 3rem; overflow: hidden; position: relative; z-index: 1; flex-wrap: wrap; }
+    .usp-item { display: flex; align-items: center; gap: 0.75rem; font-family: 'IBM Plex Mono', monospace; font-size: 0.72rem; font-weight: 500; letter-spacing: 0.1em; text-transform: uppercase; color: var(--text-muted); white-space: nowrap; }
+    .usp-dot { width: 6px; height: 6px; background: var(--amber); border-radius: 50%; }
 
     /* RESULTS */
     #results { padding: 5rem 3rem; position: relative; z-index: 1; }
@@ -100,7 +106,7 @@
     .result-card-list { display: flex; flex-direction: column; }
     .result-card-item { display: flex; align-items: flex-start; gap: 1rem; padding: 1rem 0; border-bottom: 1px solid var(--border); }
     .result-card-item:first-child { border-top: 1px solid var(--border); }
-    .result-card-check { width: 20px; height: 20px; border: 1px solid var(--amber); display: flex; align-items: center; justify-content: center; flex-shrink: 0; margin-top: 2px; color: var(--amber); font-size: 0.75rem; border-radius: 3px; }
+    .result-card-check { width: 20px; height: 20px; border: 1px solid rgba(255,255,255,0.15); display: flex; align-items: center; justify-content: center; flex-shrink: 0; margin-top: 2px; color: var(--text-muted); font-size: 0.75rem; border-radius: 3px; }
     .result-card-text { font-size: 0.92rem; color: var(--text-muted); line-height: 1.6; }
     .result-card-text strong { color: var(--text); font-weight: 500; display: block; }
 
@@ -218,7 +224,11 @@
     .mobile-drawer .mobile-cta { margin-top: 2.5rem; }
     .mobile-drawer .mobile-cta a { display: block; text-align: center; }
 
+    /* SPACERS */
+    .section-spacer { height: 4rem; }
+
     @media (max-width: 900px) {
+      .section-spacer { height: 2rem; }
       nav { padding: 0 1.5rem; }
       .nav-links { display: none; }
       .nav-burger { display: flex; }
@@ -355,6 +365,8 @@
     </div>
   </section>
 
+  <div class="section-spacer" aria-hidden="true"></div>
+
   <!-- PRODUCTS -->
   <section id="products">
     <div class="section-header">
@@ -447,7 +459,7 @@
 
   <!-- USP BAND -->
   <div class="usp-band">
-    <div class="usp-item" style="font-size:0.85rem; font-weight:700; letter-spacing:0.05em;">Werden Sie unser Händler —</div>
+    <div class="usp-item" style="font-size:0.85rem; font-weight:700; letter-spacing:0.05em; color:var(--amber);">Werden Sie unser Händler —</div>
     <div class="usp-dot"></div>
     <div class="usp-item">Attraktive Händlerkonditionen</div>
     <div class="usp-dot"></div>
@@ -455,8 +467,10 @@
     <div class="usp-dot"></div>
     <div class="usp-item">Marketingunterstützung inklusive</div>
     <div class="usp-dot"></div>
-    <a href="#contact" style="font-family:'IBM Plex Mono',monospace; font-size:0.72rem; font-weight:600; letter-spacing:0.1em; text-transform:uppercase; color:#0b0b0b; background:rgba(11,11,11,0.15); border:1px solid rgba(11,11,11,0.3); padding:0.45rem 1.1rem; text-decoration:none; white-space:nowrap;">Jetzt bewerben →</a>
+    <a href="#contact" style="font-family:'IBM Plex Mono',monospace; font-size:0.72rem; font-weight:600; letter-spacing:0.1em; text-transform:uppercase; color:var(--amber); background:transparent; border:1px solid var(--border-amber); padding:0.45rem 1.1rem; text-decoration:none; white-space:nowrap;">Jetzt bewerben →</a>
   </div>
+
+  <div class="section-spacer" aria-hidden="true"></div>
 
   <!-- PLATFORM CONCEPT -->
   <section id="platform">
@@ -520,6 +534,8 @@
     </div>
   </section>
 
+  <div class="section-spacer" aria-hidden="true"></div>
+
   <!-- ABOUT -->
   <section id="about">
     <div class="about-grid">
@@ -560,6 +576,8 @@
       </div>
     </div>
   </section>
+
+  <div class="section-spacer" aria-hidden="true"></div>
 
   <!-- MARKETS -->
   <section id="markets">
