@@ -16,6 +16,7 @@
       --amber: #e8a220; --amber-dim: #b87e18; --amber-glow: rgba(232,162,32,0.12);
       --text: #f0ede8; --text-muted: #888880; --text-dim: #555550;
       --border: rgba(255,255,255,0.07); --border-amber: rgba(232,162,32,0.3);
+      --r: 6px; --r-sm: 4px;
     }
     html { scroll-behavior: smooth; }
     body { background: var(--bg); color: var(--text); font-family: 'Barlow', sans-serif; font-weight: 300; line-height: 1.6; overflow-x: hidden; }
@@ -42,7 +43,7 @@
     h1 em { font-style: normal; color: var(--amber); display: block; }
     .hero-sub { font-size: clamp(1rem, 1.5vw, 1.15rem); color: var(--text-muted); max-width: 500px; line-height: 1.75; margin-bottom: 3rem; }
     .hero-actions { display: flex; gap: 1rem; align-items: center; flex-wrap: wrap; }
-    .btn-primary { font-family: 'IBM Plex Mono', monospace; font-size: 0.78rem; letter-spacing: 0.1em; text-transform: uppercase; background: var(--amber); color: #0b0b0b; padding: 0.9rem 2rem; text-decoration: none; font-weight: 500; transition: opacity 0.2s; display: inline-block; }
+    .btn-primary { font-family: 'IBM Plex Mono', monospace; font-size: 0.78rem; letter-spacing: 0.1em; text-transform: uppercase; background: var(--amber); color: #0b0b0b; padding: 0.9rem 2rem; text-decoration: none; font-weight: 500; transition: opacity 0.2s; display: inline-block; border-radius: var(--r-sm); }
     .btn-primary:hover { opacity: 0.85; }
     .btn-secondary { font-family: 'IBM Plex Mono', monospace; font-size: 0.78rem; letter-spacing: 0.1em; text-transform: uppercase; color: var(--text-muted); text-decoration: none; padding: 0.9rem 0; transition: color 0.2s; display: flex; align-items: center; gap: 0.5rem; }
     .btn-secondary:hover { color: var(--text); }
@@ -56,17 +57,17 @@
 
     /* PRODUCTS */
     #products { padding: 8rem 3rem; }
-    .products-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1px; background: var(--border); }
+    .products-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1px; background: var(--border); border-radius: var(--r); overflow: hidden; }
     .product-card { background: var(--bg); padding: 3rem 2.5rem; transition: background 0.3s; position: relative; overflow: hidden; display: flex; flex-direction: column; cursor: pointer; }
     .product-card::before { content: ''; position: absolute; top: 0; left: 0; right: 0; height: 2px; background: var(--amber); transform: scaleX(0); transform-origin: left; transition: transform 0.3s; }
     .product-card:hover { background: var(--bg3); }
     .product-card:hover::before { transform: scaleX(1); }
     .product-num { font-family: 'IBM Plex Mono', monospace; font-size: 0.65rem; letter-spacing: 0.15em; color: var(--text-dim); margin-bottom: 2rem; }
-    .product-icon { width: 44px; height: 44px; border: 1px solid var(--border-amber); display: flex; align-items: center; justify-content: center; margin-bottom: 1.5rem; color: var(--amber); font-size: 1.2rem; }
+    .product-icon { width: 44px; height: 44px; border: 1px solid var(--border-amber); display: flex; align-items: center; justify-content: center; margin-bottom: 1.5rem; color: var(--amber); font-size: 1.2rem; border-radius: var(--r-sm); }
     h3 { font-family: 'Barlow Condensed', sans-serif; font-weight: 700; font-size: 1.6rem; text-transform: uppercase; letter-spacing: 0.02em; margin-bottom: 1rem; }
     .product-desc { font-size: 0.92rem; color: var(--text-muted); line-height: 1.75; margin-bottom: 1.5rem; flex: 1; }
     .product-tags { display: flex; flex-wrap: wrap; gap: 0.4rem; margin-bottom: 1.5rem; }
-    .tag { font-family: 'IBM Plex Mono', monospace; font-size: 0.6rem; letter-spacing: 0.08em; text-transform: uppercase; border: 1px solid var(--border); color: var(--text-dim); padding: 0.25rem 0.6rem; }
+    .tag { font-family: 'IBM Plex Mono', monospace; font-size: 0.6rem; letter-spacing: 0.08em; text-transform: uppercase; border: 1px solid var(--border); color: var(--text-dim); padding: 0.25rem 0.6rem; border-radius: 3px; }
     .product-link { font-family: 'IBM Plex Mono', monospace; font-size: 0.68rem; letter-spacing: 0.1em; text-transform: uppercase; color: var(--amber); text-decoration: none; display: flex; align-items: center; gap: 0.4rem; margin-top: auto; transition: gap 0.2s; }
     .product-card:hover .product-link { gap: 0.8rem; }
 
@@ -81,10 +82,10 @@
     .results-list { display: flex; flex-direction: column; gap: 0; }
     .result-item { display: flex; align-items: flex-start; gap: 1.5rem; padding: 1.25rem 0; border-bottom: 1px solid var(--border); }
     .result-item:first-child { border-top: 1px solid var(--border); }
-    .result-check { width: 20px; height: 20px; border: 1px solid var(--amber); display: flex; align-items: center; justify-content: center; flex-shrink: 0; margin-top: 2px; color: var(--amber); font-size: 0.75rem; }
+    .result-check { width: 20px; height: 20px; border: 1px solid var(--amber); display: flex; align-items: center; justify-content: center; flex-shrink: 0; margin-top: 2px; color: var(--amber); font-size: 0.75rem; border-radius: 3px; }
     .result-text { font-size: 0.95rem; color: var(--text-muted); line-height: 1.6; }
     .result-text strong { color: var(--text); font-weight: 500; }
-    .results-cta { background: var(--bg2); border: 1px solid var(--border); padding: 3rem; display: flex; flex-direction: column; gap: 2rem; }
+    .results-cta { background: var(--bg2); border: 1px solid var(--border); padding: 3rem; display: flex; flex-direction: column; gap: 2rem; border-radius: var(--r); }
     .results-cta-block { display: flex; flex-direction: column; gap: 0.5rem; }
     .results-cta-num { font-family: 'Barlow Condensed', sans-serif; font-size: 5rem; font-weight: 800; color: var(--amber); line-height: 1; }
     .results-cta-label { font-family: 'IBM Plex Mono', monospace; font-size: 0.65rem; letter-spacing: 0.12em; text-transform: uppercase; color: var(--text-dim); }
@@ -97,12 +98,12 @@
     .platform-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 6rem; align-items: center; }
     .platform-text h2 { margin-bottom: 1.5rem; }
     .platform-body { color: var(--text-muted); font-size: 1rem; line-height: 1.85; margin-bottom: 2.5rem; }
-    .platform-ops { display: grid; grid-template-columns: repeat(2, 1fr); gap: 1px; background: var(--border); }
+    .platform-ops { display: grid; grid-template-columns: repeat(2, 1fr); gap: 1px; background: var(--border); border-radius: var(--r-sm); overflow: hidden; }
     .platform-op { background: var(--bg3); padding: 1.5rem; }
     .platform-op-num { font-family: 'Barlow Condensed', sans-serif; font-size: 2.5rem; font-weight: 800; color: var(--amber); line-height: 1; margin-bottom: 0.4rem; }
     .platform-op-label { font-family: 'IBM Plex Mono', monospace; font-size: 0.65rem; letter-spacing: 0.1em; text-transform: uppercase; color: var(--text-dim); }
     .platform-modules { display: flex; flex-direction: column; gap: 0.75rem; }
-    .platform-module { display: flex; align-items: center; gap: 1rem; padding: 1rem 1.25rem; border: 1px solid var(--border); background: var(--bg); }
+    .platform-module { display: flex; align-items: center; gap: 1rem; padding: 1rem 1.25rem; border: 1px solid var(--border); background: var(--bg); border-radius: var(--r-sm); }
     .platform-module-dot { width: 8px; height: 8px; background: var(--amber); flex-shrink: 0; }
     .platform-module-name { font-family: 'Barlow Condensed', sans-serif; font-weight: 700; font-size: 1.1rem; text-transform: uppercase; color: var(--text); }
     .platform-module-desc { font-family: 'IBM Plex Mono', monospace; font-size: 0.62rem; letter-spacing: 0.08em; text-transform: uppercase; color: var(--text-dim); margin-left: auto; }
@@ -115,14 +116,14 @@
     .about-checklist { list-style: none; margin-bottom: 2.5rem; display: flex; flex-direction: column; gap: 0.75rem; }
     .about-checklist li { font-family: 'IBM Plex Mono', monospace; font-size: 0.75rem; letter-spacing: 0.08em; color: var(--text-muted); display: flex; align-items: center; gap: 0.75rem; }
     .about-checklist li::before { content: ''; width: 18px; height: 1px; background: var(--amber); flex-shrink: 0; }
-    .about-visual { position: relative; aspect-ratio: 4/3; background: var(--bg3); border: 1px solid var(--border); display: flex; align-items: center; justify-content: center; overflow: hidden; }
+    .about-visual { position: relative; aspect-ratio: 4/3; background: var(--bg3); border: 1px solid var(--border); display: flex; align-items: center; justify-content: center; overflow: hidden; border-radius: var(--r); }
     .about-visual-inner { font-family: 'Barlow Condensed', sans-serif; font-weight: 800; font-size: 7rem; color: rgba(255,255,255,0.04); text-transform: uppercase; letter-spacing: -0.04em; user-select: none; text-align: center; line-height: 1; }
-    .about-badge { position: absolute; bottom: 2rem; right: 2rem; background: var(--amber); color: #0b0b0b; font-family: 'IBM Plex Mono', monospace; font-size: 0.65rem; font-weight: 500; letter-spacing: 0.12em; text-transform: uppercase; padding: 0.6rem 1rem; }
-    .about-badge2 { position: absolute; top: 2rem; left: 2rem; border: 1px solid var(--border-amber); color: var(--amber); font-family: 'IBM Plex Mono', monospace; font-size: 0.65rem; letter-spacing: 0.12em; text-transform: uppercase; padding: 0.6rem 1rem; }
+    .about-badge { position: absolute; bottom: 2rem; right: 2rem; background: var(--amber); color: #0b0b0b; font-family: 'IBM Plex Mono', monospace; font-size: 0.65rem; font-weight: 500; letter-spacing: 0.12em; text-transform: uppercase; padding: 0.6rem 1rem; border-radius: var(--r-sm); }
+    .about-badge2 { position: absolute; top: 2rem; left: 2rem; border: 1px solid var(--border-amber); color: var(--amber); font-family: 'IBM Plex Mono', monospace; font-size: 0.65rem; letter-spacing: 0.12em; text-transform: uppercase; padding: 0.6rem 1rem; border-radius: var(--r-sm); }
 
     /* MARKETS */
     #markets { padding: 8rem 3rem; }
-    .markets-grid { display: grid; gap: 1px; background: var(--border); margin-top: 4rem; }
+    .markets-grid { display: grid; gap: 1px; background: var(--border); margin-top: 4rem; border-radius: var(--r); overflow: hidden; }
     .market-item { background: var(--bg); padding: 2rem 1.5rem; }
     .market-flag { font-size: 2rem; margin-bottom: 0.75rem; display: block; }
     .market-name { font-family: 'Barlow Condensed', sans-serif; font-weight: 700; font-size: 1.3rem; text-transform: uppercase; margin-bottom: 0.4rem; }
@@ -140,7 +141,7 @@
     .contact-form { display: flex; flex-direction: column; gap: 1.2rem; }
     .form-group { display: flex; flex-direction: column; gap: 0.4rem; }
     .form-label { font-family: 'IBM Plex Mono', monospace; font-size: 0.65rem; letter-spacing: 0.12em; text-transform: uppercase; color: var(--text-dim); }
-    .form-input, .form-textarea, .form-select { background: var(--bg2); border: 1px solid var(--border); color: var(--text); font-family: 'Barlow', sans-serif; font-size: 0.95rem; padding: 0.85rem 1rem; transition: border-color 0.2s; outline: none; resize: none; }
+    .form-input, .form-textarea, .form-select { background: var(--bg2); border: 1px solid var(--border); color: var(--text); font-family: 'Barlow', sans-serif; font-size: 0.95rem; padding: 0.85rem 1rem; transition: border-color 0.2s; outline: none; resize: none; border-radius: var(--r-sm); }
     .form-input:focus, .form-textarea:focus, .form-select:focus { border-color: var(--border-amber); }
     .form-select { cursor: pointer; }
     .form-select option { background: var(--bg2); }
@@ -156,7 +157,7 @@
     /* MODAL */
     .modal-overlay { display: none; position: fixed; inset: 0; background: rgba(0,0,0,0.85); z-index: 200; align-items: center; justify-content: center; padding: 2rem; }
     .modal-overlay.open { display: flex; }
-    .modal { background: var(--bg2); border: 1px solid var(--border-amber); max-width: 680px; width: 100%; max-height: 85vh; overflow-y: auto; padding: 3rem; position: relative; }
+    .modal { background: var(--bg2); border: 1px solid var(--border-amber); max-width: 680px; width: 100%; max-height: 85vh; overflow-y: auto; padding: 3rem; position: relative; border-radius: var(--r); }
     .modal-close { position: absolute; top: 1.5rem; right: 1.5rem; background: none; border: none; color: var(--text-muted); font-size: 1.4rem; cursor: pointer; line-height: 1; }
     .modal-close:hover { color: var(--amber); }
     .modal-tag { font-family: 'IBM Plex Mono', monospace; font-size: 0.65rem; letter-spacing: 0.15em; text-transform: uppercase; color: var(--amber); margin-bottom: 1rem; }
