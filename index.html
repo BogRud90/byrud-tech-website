@@ -57,18 +57,19 @@
 
     /* PRODUCTS */
     #products { padding: 5rem 3rem; }
-    .products-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1px; background: var(--border); border-radius: var(--r); overflow: hidden; }
-    .product-card { background: var(--bg); padding: 3rem 2.5rem; transition: background 0.3s; position: relative; overflow: hidden; display: flex; flex-direction: column; cursor: pointer; }
+    .products-list { display: flex; flex-direction: column; gap: 1px; background: var(--border); border-radius: var(--r); overflow: hidden; }
+    .product-card { background: var(--bg); padding: 2rem 2.5rem; display: flex; align-items: center; gap: 2rem; cursor: pointer; position: relative; overflow: hidden; transition: background 0.3s; }
     .product-card::before { content: ''; position: absolute; top: 0; left: 0; right: 0; height: 2px; background: var(--amber); transform: scaleX(0); transform-origin: left; transition: transform 0.3s; }
     .product-card:hover { background: var(--bg3); }
     .product-card:hover::before { transform: scaleX(1); }
-    .product-num { font-family: 'IBM Plex Mono', monospace; font-size: 0.65rem; letter-spacing: 0.15em; color: var(--text-dim); margin-bottom: 2rem; }
-    .product-icon { width: 44px; height: 44px; border: 1px solid var(--border-amber); display: flex; align-items: center; justify-content: center; margin-bottom: 1.5rem; color: var(--amber); font-size: 1.2rem; border-radius: var(--r-sm); }
-    h3 { font-family: 'Barlow Condensed', sans-serif; font-weight: 700; font-size: 1.6rem; text-transform: uppercase; letter-spacing: 0.02em; margin-bottom: 1rem; }
-    .product-desc { font-size: 0.92rem; color: var(--text-muted); line-height: 1.75; margin-bottom: 1.5rem; flex: 1; }
-    .product-tags { display: flex; flex-wrap: wrap; gap: 0.4rem; margin-bottom: 1.5rem; }
+    .product-icon { width: 44px; height: 44px; border: 1px solid var(--border-amber); display: flex; align-items: center; justify-content: center; flex-shrink: 0; color: var(--amber); font-size: 1.2rem; border-radius: var(--r-sm); }
+    .product-body { flex: 1; min-width: 0; }
+    .product-num { font-family: 'IBM Plex Mono', monospace; font-size: 0.65rem; letter-spacing: 0.15em; color: var(--text-dim); margin-bottom: 0.5rem; }
+    h3 { font-family: 'Barlow Condensed', sans-serif; font-weight: 700; font-size: 1.6rem; text-transform: uppercase; letter-spacing: 0.02em; margin-bottom: 0.5rem; }
+    .product-desc { font-size: 0.92rem; color: var(--text-muted); line-height: 1.75; }
+    .product-tags { display: flex; flex-wrap: wrap; gap: 0.4rem; flex-shrink: 0; max-width: 200px; }
     .tag { font-family: 'IBM Plex Mono', monospace; font-size: 0.6rem; letter-spacing: 0.08em; text-transform: uppercase; border: 1px solid var(--border); color: var(--text-dim); padding: 0.25rem 0.6rem; border-radius: 3px; }
-    .product-link { font-family: 'IBM Plex Mono', monospace; font-size: 0.68rem; letter-spacing: 0.1em; text-transform: uppercase; color: var(--amber); text-decoration: none; display: flex; align-items: center; gap: 0.4rem; margin-top: auto; transition: gap 0.2s; }
+    .product-link { font-family: 'IBM Plex Mono', monospace; font-size: 0.68rem; letter-spacing: 0.1em; text-transform: uppercase; color: var(--amber); text-decoration: none; display: flex; align-items: center; gap: 0.4rem; flex-shrink: 0; white-space: nowrap; transition: gap 0.2s; }
     .product-card:hover .product-link { gap: 0.8rem; }
 
     /* USP BAND */
@@ -205,7 +206,8 @@
       .nav-links { display: none; }
       .nav-burger { display: flex; }
       #hero, #products, #about, #contact, #markets, #platform, #results { padding-left: 1.5rem; padding-right: 1.5rem; }
-      .products-grid { grid-template-columns: 1fr; }
+      .product-card { flex-direction: column; align-items: flex-start; }
+      .product-tags { max-width: none; }
       .about-grid, .contact-inner { grid-template-columns: 1fr; gap: 3rem; }
       .platform-header { flex-direction: column; }
       .platform-stats { min-width: 0; width: 100%; }
@@ -338,67 +340,81 @@
         <h2>Maschinen<br />für jedes Feld</h2>
       </div>
     </div>
-    <div class="products-grid">
+    <div class="products-list">
 
       <div class="product-card" onclick="openModal('rover')">
-        <div class="product-num">01 —</div>
         <div class="product-icon">⊞</div>
-        <h3>Hackmaschine ROVER</h3>
-        <p class="product-desc">Intelligente Hackmaschine für präzise Zwischenreihenbearbeitung. Genauigkeit bis 1 cm, Arbeitsgeschwindigkeit bis 18 km/h — bis zu 4 Operationen in einem Durchgang.</p>
+        <div class="product-body">
+          <div class="product-num">01 —</div>
+          <h3>Hackmaschine ROVER</h3>
+          <p class="product-desc">Intelligente Hackmaschine für präzise Zwischenreihenbearbeitung. Genauigkeit bis 1 cm, Arbeitsgeschwindigkeit bis 18 km/h — bis zu 4 Operationen in einem Durchgang.</p>
+        </div>
         <div class="product-tags"><span class="tag">ROVER-U</span><span class="tag">ROVER-S</span><span class="tag">ROVER-R</span><span class="tag">ROVER-P</span><span class="tag">ROVER-K</span></div>
         <span class="product-link">Mehr erfahren →</span>
       </div>
 
       <div class="product-card" onclick="openModal('lixa')">
-        <div class="product-num">02 —</div>
         <div class="product-icon">◈</div>
-        <h3>Flüssigdüngung LIXA</h3>
-        <p class="product-desc">System zur präzisen Ausbringung von Flüssigdünger (UAN, NFS) und Pflanzenschutzmitteln direkt in die Wachstumszone. Tank 600–3000 l. Steuerung via Cruise 4 / CAN-Bus.</p>
+        <div class="product-body">
+          <div class="product-num">02 —</div>
+          <h3>Flüssigdüngung LIXA</h3>
+          <p class="product-desc">System zur präzisen Ausbringung von Flüssigdünger (UAN, NFS) und Pflanzenschutzmitteln direkt in die Wachstumszone. Tank 600–3000 l. Steuerung via Cruise 4 / CAN-Bus.</p>
+        </div>
         <div class="product-tags"><span class="tag">LIXA-600</span><span class="tag">LIXA-2×600</span><span class="tag">LIXA-O</span></div>
         <span class="product-link">Mehr erfahren →</span>
       </div>
 
       <div class="product-card" onclick="openModal('grano')">
-        <div class="product-num">03 —</div>
         <div class="product-icon">▤</div>
-        <h3>Granulatdüngung GRANO</h3>
-        <p class="product-desc">Integriertes System zur exakten Ausbringung von Granulatdünger direkt in die Wurzelzone. Tank 800–2000 l. Ausbringmenge regelbar von 5 bis 270 kg/ha.</p>
+        <div class="product-body">
+          <div class="product-num">03 —</div>
+          <h3>Granulatdüngung GRANO</h3>
+          <p class="product-desc">Integriertes System zur exakten Ausbringung von Granulatdünger direkt in die Wurzelzone. Tank 800–2000 l. Ausbringmenge regelbar von 5 bis 270 kg/ha.</p>
+        </div>
         <div class="product-tags"><span class="tag">5–270 kg/ha</span><span class="tag">Accord-Antrieb</span><span class="tag">Alle ROVER-Modelle</span></div>
         <span class="product-link">Mehr erfahren →</span>
       </div>
 
       <div class="product-card" onclick="openModal('veles')">
-        <div class="product-num">04 —</div>
         <div class="product-icon">△</div>
-        <h3>Sämaschine VELES</h3>
-        <p class="product-desc">Universelle Sämaschine für alle Getreidearten, Raps und Soja auf der Universalrahmen. Zweizeilige Aussaat mit 10 cm Abstand. Gleichzeitige Ausbringung von Startdünger und Inokulum.</p>
+        <div class="product-body">
+          <div class="product-num">04 —</div>
+          <h3>Sämaschine VELES</h3>
+          <p class="product-desc">Universelle Sämaschine für alle Getreidearten, Raps und Soja auf der Universalrahmen. Zweizeilige Aussaat mit 10 cm Abstand. Gleichzeitige Ausbringung von Startdünger und Inokulum.</p>
+        </div>
         <div class="product-tags"><span class="tag">VELES-1</span><span class="tag">VELES-2</span><span class="tag">Tank 600–6000 l</span></div>
         <span class="product-link">Mehr erfahren →</span>
       </div>
 
       <div class="product-card" onclick="openModal('tor')">
-        <div class="product-num">05 —</div>
-        <div class="product-icon">◌</div>
-        <h3>Netzenegge TOR</h3>
-        <p class="product-desc">Hochleistungsnetzenegge für Saatbettvorbereitung und mechanische Unkrautbekämpfung. Arbeitsbreite 4,5–12 m. Zähne in 7, 8 oder 12 mm Stärke. 10 Winkelstellungen.</p>
+        <div class="product-icon">◯</div>
+        <div class="product-body">
+          <div class="product-num">05 —</div>
+          <h3>Netzenegge TOR</h3>
+          <p class="product-desc">Hochleistungsnetzenegge für Saatbettvorbereitung und mechanische Unkrautbekämpfung. Arbeitsbreite 4,5–12 m. Zähne in 7, 8 oder 12 mm Stärke. 10 Winkelstellungen.</p>
+        </div>
         <div class="product-tags"><span class="tag">TOR XS</span><span class="tag">TOR S</span><span class="tag">TOR M</span><span class="tag">TOR L</span><span class="tag">TOR XL</span></div>
         <span class="product-link">Mehr erfahren →</span>
       </div>
 
       <div class="product-card" onclick="openModal('stern')">
-        <div class="product-num">06 —</div>
         <div class="product-icon">✳</div>
-        <h3>Rotationsstriegel STERN</h3>
-        <p class="product-desc">Rotationsstriegel für ganzjährigen Einsatz — Saatbettvorbereitung, Rückverfestigung, Unkrautbekämpfung. Gegossene Sternräder mit 50 kg Federandruck. Einfache Einreihenverstellung.</p>
+        <div class="product-body">
+          <div class="product-num">06 —</div>
+          <h3>Rotationsstriegel STERN</h3>
+          <p class="product-desc">Rotationsstriegel für ganzjährigen Einsatz — Saatbettvorbereitung, Rückverfestigung, Unkrautbekämpfung. Gegossene Sternräder mit 50 kg Federandruck. Einfache Einreihenverstellung.</p>
+        </div>
         <div class="product-tags"><span class="tag">3-Punkt-Anbau</span><span class="tag">Ganzjährig</span><span class="tag">Düngeroptional</span></div>
         <span class="product-link">Mehr erfahren →</span>
       </div>
 
       <div class="product-card" onclick="openModal('turbo')">
-        <div class="product-num">07 —</div>
         <div class="product-icon">◎</div>
-        <h3>Zerhacker TURBO</h3>
-        <p class="product-desc">Zerhacker für Erntegut und Pflanzenreste nach der Ernte. Turbo-Scheibe 470 mm, wartungsfreie Naben mit langer Lebensdauer. Optional mit Dünger- und Aussaatbunker kombinierbar.</p>
+        <div class="product-body">
+          <div class="product-num">07 —</div>
+          <h3>Zerhacker TURBO</h3>
+          <p class="product-desc">Zerhacker für Erntegut und Pflanzenreste nach der Ernte. Turbo-Scheibe 470 mm, wartungsfreie Naben mit langer Lebensdauer. Optional mit Dünger- und Aussaatbunker kombinierbar.</p>
+        </div>
         <div class="product-tags"><span class="tag">Turbo-Scheibe 470 mm</span><span class="tag">Dünger-Option</span><span class="tag">Aussaat-Option</span></div>
         <span class="product-link">Mehr erfahren →</span>
       </div>
