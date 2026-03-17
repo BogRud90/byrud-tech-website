@@ -78,20 +78,23 @@
 
     /* RESULTS */
     #results { padding: 5rem 3rem; position: relative; z-index: 1; }
-    .results-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 5rem; align-items: start; margin-top: 2.5rem; }
-    .results-list { display: flex; flex-direction: column; gap: 0; }
-    .result-item { display: flex; align-items: flex-start; gap: 1.5rem; padding: 1.25rem 0; border-bottom: 1px solid var(--border); }
-    .result-item:first-child { border-top: 1px solid var(--border); }
-    .result-check { width: 20px; height: 20px; border: 1px solid var(--amber); display: flex; align-items: center; justify-content: center; flex-shrink: 0; margin-top: 2px; color: var(--amber); font-size: 0.75rem; border-radius: 3px; }
-    .result-text { font-size: 0.95rem; color: var(--text-muted); line-height: 1.6; }
-    .result-text strong { color: var(--text); font-weight: 500; }
-    .results-cta { background: var(--bg2); border: 1px solid var(--border); padding: 3rem; display: flex; flex-direction: column; gap: 2rem; border-radius: var(--r); }
+    .results-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 1px; background: var(--border); border-radius: var(--r); overflow: hidden; margin-top: 2.5rem; }
+    .results-cta { background: var(--bg2); padding: 2.5rem; display: flex; flex-direction: column; gap: 1.5rem; }
     .results-cta-block { display: flex; flex-direction: column; gap: 0.5rem; }
     .results-cta-num { font-family: 'Barlow Condensed', sans-serif; font-size: 5rem; font-weight: 800; color: var(--amber); line-height: 1; }
     .results-cta-label { font-family: 'IBM Plex Mono', monospace; font-size: 0.65rem; letter-spacing: 0.12em; text-transform: uppercase; color: var(--text-dim); }
     .results-cta-divider { height: 1px; background: var(--border); }
     .results-cta-headline { font-family: 'Barlow Condensed', sans-serif; font-weight: 800; font-size: 1.8rem; text-transform: uppercase; line-height: 1.05; }
     .results-cta-sub { font-size: 0.9rem; color: var(--text-muted); line-height: 1.7; }
+    .result-card { background: var(--bg2); padding: 2.5rem; display: flex; flex-direction: column; }
+    .result-card-num { font-family: 'IBM Plex Mono', monospace; font-size: 0.65rem; letter-spacing: 0.15em; color: var(--text-dim); margin-bottom: 1.25rem; }
+    .result-card-title { font-family: 'Barlow Condensed', sans-serif; font-weight: 700; font-size: 1.4rem; text-transform: uppercase; letter-spacing: 0.02em; color: var(--text); margin-bottom: 1.5rem; }
+    .result-card-list { display: flex; flex-direction: column; }
+    .result-card-item { display: flex; align-items: flex-start; gap: 1rem; padding: 0.85rem 0; border-bottom: 1px solid var(--border); }
+    .result-card-item:first-child { border-top: 1px solid var(--border); }
+    .result-card-check { width: 20px; height: 20px; border: 1px solid var(--amber); display: flex; align-items: center; justify-content: center; flex-shrink: 0; margin-top: 2px; color: var(--amber); font-size: 0.75rem; border-radius: 3px; }
+    .result-card-text { font-size: 0.88rem; color: var(--text-muted); line-height: 1.55; }
+    .result-card-text strong { color: var(--text); font-weight: 500; display: block; }
 
     /* PLATFORM */
     #platform { padding: 5rem 3rem; background: var(--bg2); border-top: 1px solid var(--border); border-bottom: 1px solid var(--border); position: relative; z-index: 1; }
@@ -196,7 +199,8 @@
       .nav-burger { display: flex; }
       #hero, #products, #about, #contact, #markets, #platform, #results { padding-left: 1.5rem; padding-right: 1.5rem; }
       .products-grid { grid-template-columns: 1fr; }
-      .about-grid, .contact-inner, .platform-grid, .results-grid { grid-template-columns: 1fr; gap: 3rem; }
+      .about-grid, .contact-inner, .platform-grid { grid-template-columns: 1fr; gap: 3rem; }
+      .results-grid { grid-template-columns: 1fr; }
       .markets-grid { grid-template-columns: repeat(2, 1fr) !important; }
       .platform-ops { grid-template-columns: repeat(2, 1fr); }
       footer { flex-direction: column; gap: 1rem; text-align: center; }
@@ -259,17 +263,7 @@
       </div>
     </div>
     <div class="results-grid">
-      <div class="results-list">
-        <div class="result-item"><div class="result-check">✓</div><div class="result-text"><strong>Genauigkeit bis 1 cm</strong> — präzise Bearbeitung direkt am Reihen ohne Pflanzenschäden</div></div>
-        <div class="result-item"><div class="result-check">✓</div><div class="result-text"><strong>Herbizidkosten −30%</strong> — gezielter Einsatz von Pflanzenschutzmitteln spart erheblich</div></div>
-        <div class="result-item"><div class="result-check">✓</div><div class="result-text"><strong>Arbeitsstunden −40%</strong> — weniger Durchgänge, weniger Maschinenzeit, weniger Personal</div></div>
-        <div class="result-item"><div class="result-check">✓</div><div class="result-text"><strong>Weniger Überfahrten</strong> — bis zu 4 Operationen in einem einzigen Durchgang</div></div>
-        <div class="result-item"><div class="result-check">✓</div><div class="result-text"><strong>Agrotechnische Termine einhalten</strong> — höhere Arbeitsgeschwindigkeit ermöglicht optimales Timing</div></div>
-        <div class="result-item"><div class="result-check">✓</div><div class="result-text"><strong>Gezielte Düngung</strong> — Nährstoffe direkt in die Wurzelzone, keine Verluste</div></div>
-        <div class="result-item"><div class="result-check">✓</div><div class="result-text"><strong>Ertrag +10–30%</strong> — bei gleichzeitiger Senkung der Produktionskosten</div></div>
-        <div class="result-item"><div class="result-check">✓</div><div class="result-text"><strong>Bodenstruktur verbessern</strong> — schonende Bearbeitung erhält die Bodenfruchtbarkeit</div></div>
-        <div class="result-item"><div class="result-check">✓</div><div class="result-text"><strong>Rentabilität steigern</strong> — hohe Maschinenleistung bis 180 ha/Tag bei 24/7-Betrieb</div></div>
-      </div>
+
       <div class="results-cta">
         <div class="results-cta-block">
           <div class="results-cta-num">+€200</div>
@@ -280,6 +274,40 @@
         <p class="results-cta-sub">Die intelligente Kombination aus mechanischer Bearbeitung, präziser Führung und gezielter Düngung macht den Unterschied — für jede Betriebsgröße und jede Kultur.</p>
         <a href="#contact" class="btn-primary" style="width:fit-content;">Jetzt berechnen →</a>
       </div>
+
+      <div class="result-card">
+        <div class="result-card-num">01 —</div>
+        <div class="result-card-title">Präzision & Technologie</div>
+        <div class="result-card-list">
+          <div class="result-card-item"><div class="result-card-check">✓</div><div class="result-card-text"><strong>Genauigkeit bis 1 cm</strong>präzise Bearbeitung direkt an den Reihen ohne Pflanzenschäden</div></div>
+          <div class="result-card-item"><div class="result-card-check">✓</div><div class="result-card-text"><strong>Gezielte Düngung</strong>Nährstoffe direkt in die Wurzelzone, keine Verluste</div></div>
+          <div class="result-card-item"><div class="result-card-check">✓</div><div class="result-card-text"><strong>Weniger Überfahrten</strong>bis zu 4 Operationen in einem einzigen Durchgang</div></div>
+          <div class="result-card-item"><div class="result-card-check">✓</div><div class="result-card-text"><strong>Größter Bunker in der Klasse</strong>maximale Kapazität, weniger Nachfüllen</div></div>
+          <div class="result-card-item"><div class="result-card-check">✓</div><div class="result-card-text"><strong>Niedrigstes Maschinengewicht in der Klasse</strong>minimale Bodenverdichtung, mehr Effizienz</div></div>
+        </div>
+      </div>
+
+      <div class="result-card">
+        <div class="result-card-num">02 —</div>
+        <div class="result-card-title">Ressourcen sparen</div>
+        <div class="result-card-list">
+          <div class="result-card-item"><div class="result-card-check">✓</div><div class="result-card-text"><strong>Herbizidkosten −30%</strong>gezielter Einsatz von Pflanzenschutzmitteln spart erheblich</div></div>
+          <div class="result-card-item"><div class="result-card-check">✓</div><div class="result-card-text"><strong>Arbeitsstunden −40%</strong>weniger Durchgänge, weniger Maschinenzeit, weniger Personal</div></div>
+          <div class="result-card-item"><div class="result-card-check">✓</div><div class="result-card-text"><strong>Kraftstoffverbrauch −50%</strong>leichtes Gewicht und weniger Überfahrten reduzieren den Dieselverbrauch</div></div>
+        </div>
+      </div>
+
+      <div class="result-card">
+        <div class="result-card-num">03 —</div>
+        <div class="result-card-title">Ergebnis & Rentabilität</div>
+        <div class="result-card-list">
+          <div class="result-card-item"><div class="result-card-check">✓</div><div class="result-card-text"><strong>Ertrag +10–30%</strong>bei gleichzeitiger Senkung der Produktionskosten</div></div>
+          <div class="result-card-item"><div class="result-card-check">✓</div><div class="result-card-text"><strong>Bodenstruktur verbessern</strong>schonende Bearbeitung erhält die Bodenfruchtbarkeit</div></div>
+          <div class="result-card-item"><div class="result-card-check">✓</div><div class="result-card-text"><strong>Rentabilität steigern</strong>hohe Maschinenleistung bis 180 ha/Tag bei 24/7-Betrieb</div></div>
+          <div class="result-card-item"><div class="result-card-check">✓</div><div class="result-card-text"><strong>Agrotechnische Termine einhalten</strong>höhere Arbeitsgeschwindigkeit ermöglicht optimales Timing</div></div>
+        </div>
+      </div>
+
     </div>
   </section>
 
