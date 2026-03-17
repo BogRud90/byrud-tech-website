@@ -78,15 +78,17 @@
 
     /* RESULTS */
     #results { padding: 5rem 3rem; position: relative; z-index: 1; }
-    .results-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 1px; background: var(--border); border-radius: var(--r); overflow: hidden; margin-top: 2.5rem; }
-    .results-cta { background: var(--bg2); padding: 2.5rem; display: flex; flex-direction: column; gap: 1.5rem; }
-    .results-cta-block { display: flex; flex-direction: column; gap: 0.5rem; }
-    .results-cta-num { font-family: 'Barlow Condensed', sans-serif; font-size: 5rem; font-weight: 800; color: var(--amber); line-height: 1; }
-    .results-cta-label { font-family: 'IBM Plex Mono', monospace; font-size: 0.65rem; letter-spacing: 0.12em; text-transform: uppercase; color: var(--text-dim); }
-    .results-cta-divider { height: 1px; background: var(--border); }
-    .results-cta-headline { font-family: 'Barlow Condensed', sans-serif; font-weight: 800; font-size: 1.8rem; text-transform: uppercase; line-height: 1.05; }
+    .results-wrap { display: flex; flex-direction: column; gap: 1px; background: var(--border); border-radius: var(--r); overflow: hidden; margin-top: 2.5rem; }
+    .results-cta { background: var(--bg2); padding: 2.5rem 3rem; display: flex; flex-direction: row; align-items: center; justify-content: space-between; gap: 3rem; }
+    .results-cta-left { flex-shrink: 0; }
+    .results-cta-num { font-family: 'Barlow Condensed', sans-serif; font-size: 4.5rem; font-weight: 800; color: var(--amber); line-height: 1; }
+    .results-cta-label { font-family: 'IBM Plex Mono', monospace; font-size: 0.65rem; letter-spacing: 0.12em; text-transform: uppercase; color: var(--text-dim); margin-top: 0.3rem; }
+    .results-cta-center { flex: 1; }
+    .results-cta-headline { font-family: 'Barlow Condensed', sans-serif; font-weight: 800; font-size: 1.8rem; text-transform: uppercase; line-height: 1.05; margin-bottom: 0.5rem; }
     .results-cta-sub { font-size: 0.9rem; color: var(--text-muted); line-height: 1.7; }
-    .result-card { background: var(--bg2); padding: 2.5rem; display: flex; flex-direction: column; }
+    .results-cta-right { flex-shrink: 0; }
+    .results-cards { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1px; background: var(--border); }
+    .result-card { background: var(--bg); padding: 2.5rem; display: flex; flex-direction: column; }
     .result-card-num { font-family: 'IBM Plex Mono', monospace; font-size: 0.65rem; letter-spacing: 0.15em; color: var(--text-dim); margin-bottom: 1.25rem; }
     .result-card-title { font-family: 'Barlow Condensed', sans-serif; font-weight: 700; font-size: 1.4rem; text-transform: uppercase; letter-spacing: 0.02em; color: var(--text); margin-bottom: 1.5rem; }
     .result-card-list { display: flex; flex-direction: column; }
@@ -200,7 +202,8 @@
       #hero, #products, #about, #contact, #markets, #platform, #results { padding-left: 1.5rem; padding-right: 1.5rem; }
       .products-grid { grid-template-columns: 1fr; }
       .about-grid, .contact-inner, .platform-grid { grid-template-columns: 1fr; gap: 3rem; }
-      .results-grid { grid-template-columns: 1fr; }
+      .results-cta { flex-direction: column; align-items: flex-start; gap: 1.5rem; padding: 2rem; }
+      .results-cards { grid-template-columns: 1fr; }
       .markets-grid { grid-template-columns: repeat(2, 1fr) !important; }
       .platform-ops { grid-template-columns: repeat(2, 1fr); }
       footer { flex-direction: column; gap: 1rem; text-align: center; }
@@ -262,50 +265,57 @@
         <h2>Weniger Chemie.<br />Mehr Profit.</h2>
       </div>
     </div>
-    <div class="results-grid">
+    <div class="results-wrap">
 
       <div class="results-cta">
-        <div class="results-cta-block">
+        <div class="results-cta-left">
           <div class="results-cta-num">+€200</div>
           <div class="results-cta-label">Zusätzliche Marge pro Hektar</div>
         </div>
-        <div class="results-cta-divider"></div>
-        <div class="results-cta-headline">Weniger Chemie — Weniger Kosten — Höherer Ertrag</div>
-        <p class="results-cta-sub">Die intelligente Kombination aus mechanischer Bearbeitung, präziser Führung und gezielter Düngung macht den Unterschied — für jede Betriebsgröße und jede Kultur.</p>
-        <a href="#contact" class="btn-primary" style="width:fit-content;">Jetzt berechnen →</a>
-      </div>
-
-      <div class="result-card">
-        <div class="result-card-num">01 —</div>
-        <div class="result-card-title">Präzision & Technologie</div>
-        <div class="result-card-list">
-          <div class="result-card-item"><div class="result-card-check">✓</div><div class="result-card-text"><strong>Genauigkeit bis 1 cm</strong>präzise Bearbeitung direkt an den Reihen ohne Pflanzenschäden</div></div>
-          <div class="result-card-item"><div class="result-card-check">✓</div><div class="result-card-text"><strong>Gezielte Düngung</strong>Nährstoffe direkt in die Wurzelzone, keine Verluste</div></div>
-          <div class="result-card-item"><div class="result-card-check">✓</div><div class="result-card-text"><strong>Weniger Überfahrten</strong>bis zu 4 Operationen in einem einzigen Durchgang</div></div>
-          <div class="result-card-item"><div class="result-card-check">✓</div><div class="result-card-text"><strong>Größter Bunker in der Klasse</strong>maximale Kapazität, weniger Nachfüllen</div></div>
-          <div class="result-card-item"><div class="result-card-check">✓</div><div class="result-card-text"><strong>Niedrigstes Maschinengewicht in der Klasse</strong>minimale Bodenverdichtung, mehr Effizienz</div></div>
+        <div class="results-cta-center">
+          <div class="results-cta-headline">Weniger Chemie — Weniger Kosten — Höherer Ertrag</div>
+          <p class="results-cta-sub">Die intelligente Kombination aus mechanischer Bearbeitung, präziser Führung und gezielter Düngung macht den Unterschied — für jede Betriebsgröße und jede Kultur.</p>
+        </div>
+        <div class="results-cta-right">
+          <a href="#contact" class="btn-primary">Jetzt berechnen →</a>
         </div>
       </div>
 
-      <div class="result-card">
-        <div class="result-card-num">02 —</div>
-        <div class="result-card-title">Ressourcen sparen</div>
-        <div class="result-card-list">
-          <div class="result-card-item"><div class="result-card-check">✓</div><div class="result-card-text"><strong>Herbizidkosten −30%</strong>gezielter Einsatz von Pflanzenschutzmitteln spart erheblich</div></div>
-          <div class="result-card-item"><div class="result-card-check">✓</div><div class="result-card-text"><strong>Arbeitsstunden −40%</strong>weniger Durchgänge, weniger Maschinenzeit, weniger Personal</div></div>
-          <div class="result-card-item"><div class="result-card-check">✓</div><div class="result-card-text"><strong>Kraftstoffverbrauch −50%</strong>leichtes Gewicht und weniger Überfahrten reduzieren den Dieselverbrauch</div></div>
-        </div>
-      </div>
+      <div class="results-cards">
 
-      <div class="result-card">
-        <div class="result-card-num">03 —</div>
-        <div class="result-card-title">Ergebnis & Rentabilität</div>
-        <div class="result-card-list">
-          <div class="result-card-item"><div class="result-card-check">✓</div><div class="result-card-text"><strong>Ertrag +10–30%</strong>bei gleichzeitiger Senkung der Produktionskosten</div></div>
-          <div class="result-card-item"><div class="result-card-check">✓</div><div class="result-card-text"><strong>Bodenstruktur verbessern</strong>schonende Bearbeitung erhält die Bodenfruchtbarkeit</div></div>
-          <div class="result-card-item"><div class="result-card-check">✓</div><div class="result-card-text"><strong>Rentabilität steigern</strong>hohe Maschinenleistung bis 180 ha/Tag bei 24/7-Betrieb</div></div>
-          <div class="result-card-item"><div class="result-card-check">✓</div><div class="result-card-text"><strong>Agrotechnische Termine einhalten</strong>höhere Arbeitsgeschwindigkeit ermöglicht optimales Timing</div></div>
+        <div class="result-card">
+          <div class="result-card-num">01 —</div>
+          <div class="result-card-title">Präzision & Technologie</div>
+          <div class="result-card-list">
+            <div class="result-card-item"><div class="result-card-check">✓</div><div class="result-card-text"><strong>Genauigkeit bis 1 cm</strong>präzise Bearbeitung direkt an den Reihen ohne Pflanzenschäden</div></div>
+            <div class="result-card-item"><div class="result-card-check">✓</div><div class="result-card-text"><strong>Gezielte Düngung</strong>Nährstoffe direkt in die Wurzelzone, keine Verluste</div></div>
+            <div class="result-card-item"><div class="result-card-check">✓</div><div class="result-card-text"><strong>Weniger Überfahrten</strong>bis zu 4 Operationen in einem einzigen Durchgang</div></div>
+            <div class="result-card-item"><div class="result-card-check">✓</div><div class="result-card-text"><strong>Größter Bunker in der Klasse</strong>maximale Kapazität, weniger Nachfüllen</div></div>
+            <div class="result-card-item"><div class="result-card-check">✓</div><div class="result-card-text"><strong>Niedrigstes Maschinengewicht in der Klasse</strong>minimale Bodenverdichtung, mehr Effizienz</div></div>
+          </div>
         </div>
+
+        <div class="result-card">
+          <div class="result-card-num">02 —</div>
+          <div class="result-card-title">Ressourcen sparen</div>
+          <div class="result-card-list">
+            <div class="result-card-item"><div class="result-card-check">✓</div><div class="result-card-text"><strong>Herbizidkosten −30%</strong>gezielter Einsatz von Pflanzenschutzmitteln spart erheblich</div></div>
+            <div class="result-card-item"><div class="result-card-check">✓</div><div class="result-card-text"><strong>Arbeitsstunden −40%</strong>weniger Durchgänge, weniger Maschinenzeit, weniger Personal</div></div>
+            <div class="result-card-item"><div class="result-card-check">✓</div><div class="result-card-text"><strong>Kraftstoffverbrauch −50%</strong>leichtes Gewicht und weniger Überfahrten reduzieren den Dieselverbrauch</div></div>
+          </div>
+        </div>
+
+        <div class="result-card">
+          <div class="result-card-num">03 —</div>
+          <div class="result-card-title">Ergebnis & Rentabilität</div>
+          <div class="result-card-list">
+            <div class="result-card-item"><div class="result-card-check">✓</div><div class="result-card-text"><strong>Ertrag +10–30%</strong>bei gleichzeitiger Senkung der Produktionskosten</div></div>
+            <div class="result-card-item"><div class="result-card-check">✓</div><div class="result-card-text"><strong>Bodenstruktur verbessern</strong>schonende Bearbeitung erhält die Bodenfruchtbarkeit</div></div>
+            <div class="result-card-item"><div class="result-card-check">✓</div><div class="result-card-text"><strong>Rentabilität steigern</strong>hohe Maschinenleistung bis 180 ha/Tag bei 24/7-Betrieb</div></div>
+            <div class="result-card-item"><div class="result-card-check">✓</div><div class="result-card-text"><strong>Agrotechnische Termine einhalten</strong>höhere Arbeitsgeschwindigkeit ermöglicht optimales Timing</div></div>
+          </div>
+        </div>
+
       </div>
 
     </div>
