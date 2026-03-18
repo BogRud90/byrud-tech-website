@@ -1,0 +1,478 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Hackmaschine ROVER — Byrud Tech</title>
+  <meta name="description" content="ROVER — intelligente Hackmaschine für präzise Zwischenreihenbearbeitung. Genauigkeit bis 1 cm, 18 km/h, bis zu 4 Operationen in einem Durchgang." />
+  <meta name="format-detection" content="telephone=no" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@400;600;700;800&family=IBM+Plex+Mono:wght@400;500&family=Barlow:wght@300;400;500&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    :root {
+      --bg: #0b0b0b; --bg2: #111111; --bg3: #161616;
+      --amber: #e8a220; --amber-dim: #b87e18; --amber-glow: rgba(232,162,32,0.12);
+      --text: #f0ede8; --text-muted: #888880; --text-dim: #555550;
+      --border: rgba(255,255,255,0.07); --border-amber: rgba(232,162,32,0.3);
+      --r: 6px; --r-sm: 4px;
+    }
+    html { scroll-behavior: smooth; }
+    body { background: var(--bg); color: var(--text); font-family: 'Barlow', sans-serif; font-weight: 300; line-height: 1.6; overflow-x: hidden; }
+    body::before { content: ''; position: fixed; inset: 0; background-image: linear-gradient(var(--border) 1px, transparent 1px), linear-gradient(90deg, var(--border) 1px, transparent 1px); background-size: 60px 60px; pointer-events: none; z-index: 0; opacity: 0.15; }
+    section, footer, nav { position: relative; z-index: 1; }
+    * { -webkit-tap-highlight-color: transparent; }
+    a[href^="tel"], a[href^="mailto"] { color: inherit; text-decoration: none; }
+
+    /* NAV */
+    nav { position: fixed; top: 0; left: 0; right: 0; z-index: 100; display: flex; align-items: center; justify-content: space-between; padding: 0 3rem; height: 64px; background: rgba(11,11,11,0.88); backdrop-filter: blur(12px); border-bottom: 1px solid var(--border); }
+    .logo { font-family: 'Barlow Condensed', sans-serif; font-weight: 800; font-size: 1.3rem; letter-spacing: 0.08em; text-transform: uppercase; color: var(--text); text-decoration: none; position: relative; padding: 5px 8px; }
+    .logo-corner { position: absolute; width: 7px; height: 7px; border-color: var(--amber); border-style: solid; border-width: 0; }
+    .logo-corner--tl { top: 0; left: 0; border-top-width: 1px; border-left-width: 1px; }
+    .logo-corner--tr { top: 0; right: 0; border-top-width: 1px; border-right-width: 1px; }
+    .logo-corner--bl { bottom: 0; left: 0; border-bottom-width: 1px; border-left-width: 1px; }
+    .logo-corner--br { bottom: 0; right: 0; border-bottom-width: 1px; border-right-width: 1px; }
+    .logo span { color: var(--amber); }
+    .nav-back { font-family: 'IBM Plex Mono', monospace; font-size: 0.72rem; letter-spacing: 0.1em; text-transform: uppercase; color: var(--text-muted); text-decoration: none; transition: color 0.2s; display: flex; align-items: center; gap: 0.5rem; }
+    .nav-back:hover { color: var(--amber); }
+    .nav-back::before { content: '←'; }
+    .nav-burger { display: none; flex-direction: column; justify-content: center; gap: 5px; width: 36px; height: 36px; background: none; border: none; cursor: pointer; padding: 4px; z-index: 101; }
+    .nav-burger span { display: block; width: 100%; height: 1.5px; background: var(--text); transition: transform 0.3s, opacity 0.3s; transform-origin: center; }
+
+    /* BUTTONS */
+    .btn-primary { font-family: 'IBM Plex Mono', monospace; font-size: 0.78rem; letter-spacing: 0.1em; text-transform: uppercase; background: var(--amber); color: #0b0b0b; padding: 0.9rem 2rem; text-decoration: none; font-weight: 500; transition: opacity 0.2s; display: inline-block; border-radius: var(--r-sm); }
+    .btn-primary:hover { opacity: 0.85; }
+    .section-tag { font-family: 'IBM Plex Mono', monospace; font-size: 0.68rem; letter-spacing: 0.2em; text-transform: uppercase; color: var(--amber); margin-bottom: 0.75rem; }
+
+    /* BLUEPRINT FRAME */
+    .blueprint-frame {
+      position: relative;
+      background: var(--bg3);
+      border: 1px solid var(--border);
+      overflow: hidden;
+    }
+    .blueprint-frame-inner {
+      position: absolute;
+      inset: 1.5rem;
+      border: 1px dashed rgba(232,162,32,0.15);
+      pointer-events: none;
+      z-index: 1;
+    }
+    .blueprint-frame-corner {
+      position: absolute;
+      width: 10px;
+      height: 10px;
+      pointer-events: none;
+      z-index: 2;
+    }
+    .blueprint-frame-corner--tl { top: 1.5rem; left: 1.5rem; border-top: 1px solid var(--amber); border-left: 1px solid var(--amber); }
+    .blueprint-frame-corner--tr { top: 1.5rem; right: 1.5rem; border-top: 1px solid var(--amber); border-right: 1px solid var(--amber); }
+    .blueprint-frame-corner--bl { bottom: 1.5rem; left: 1.5rem; border-bottom: 1px solid var(--amber); border-left: 1px solid var(--amber); }
+    .blueprint-frame-corner--br { bottom: 1.5rem; right: 1.5rem; border-bottom: 1px solid var(--amber); border-right: 1px solid var(--amber); }
+    .blueprint-frame img {
+      width: 100%;
+      height: 100%;
+      object-fit: contain;
+      padding: 2.5rem;
+      position: relative;
+      z-index: 0;
+      display: block;
+    }
+    .blueprint-frame-bar {
+      position: absolute;
+      bottom: 2rem;
+      left: 50%;
+      transform: translateX(-50%);
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+      z-index: 2;
+      white-space: nowrap;
+    }
+    .blueprint-frame-bar span {
+      font-family: 'IBM Plex Mono', monospace;
+      font-size: 0.6rem;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--text-dim);
+    }
+    .blueprint-frame-bar-divider { width: 1px; height: 12px; background: var(--border); }
+
+    /* PRODUCT HERO */
+    .product-hero { padding: 7rem 3rem 5rem; }
+    .product-hero-inner { display: grid; grid-template-columns: 55% 45%; gap: 5rem; align-items: center; max-width: 1400px; margin: 0 auto; }
+    .product-hero-text .section-tag { margin-bottom: 0.5rem; }
+    .product-hero-title { font-family: 'Barlow Condensed', sans-serif; font-weight: 800; font-size: clamp(3rem, 6vw, 5.5rem); line-height: 0.9; letter-spacing: -0.01em; text-transform: uppercase; margin-bottom: 1.25rem; }
+    .product-hero-sub { font-size: 1.05rem; color: var(--text-muted); line-height: 1.75; margin-bottom: 2.5rem; max-width: 420px; }
+    .product-stats { display: grid; grid-template-columns: repeat(4, 1fr); gap: 1px; background: var(--border); margin-bottom: 2.5rem; border-radius: var(--r-sm); overflow: hidden; }
+    .product-stat { background: var(--bg2); padding: 1.25rem 1rem; }
+    .product-stat-num { font-family: 'Barlow Condensed', sans-serif; font-weight: 800; font-size: 1.9rem; color: var(--amber); line-height: 1; margin-bottom: 0.3rem; }
+    .product-stat-label { font-family: 'IBM Plex Mono', monospace; font-size: 0.6rem; letter-spacing: 0.08em; text-transform: uppercase; color: var(--text-dim); }
+
+    /* MODELS SECTION */
+    .product-models { padding: 5rem 3rem; background: var(--bg2); border-top: 1px solid var(--border); border-bottom: 1px solid var(--border); }
+    .product-models-inner { max-width: 1400px; margin: 0 auto; }
+    .product-models-header { margin-bottom: 2.5rem; }
+    .product-models-title { font-family: 'Barlow Condensed', sans-serif; font-weight: 800; font-size: clamp(1.8rem, 3vw, 2.8rem); text-transform: uppercase; letter-spacing: -0.01em; line-height: 0.95; margin-bottom: 1rem; }
+    .product-models-desc { color: var(--text-muted); font-size: 1rem; line-height: 1.8; max-width: 680px; }
+    .models-table { width: 100%; border-collapse: collapse; margin-top: 2rem; border: 1px solid var(--border); border-radius: var(--r); overflow: hidden; }
+    .models-table th { font-family: 'IBM Plex Mono', monospace; font-size: 0.62rem; letter-spacing: 0.12em; text-transform: uppercase; color: var(--text-dim); text-align: left; padding: 1rem 1.25rem; background: var(--bg3); border-bottom: 1px solid var(--border); font-weight: 400; }
+    .models-table td { padding: 1.1rem 1.25rem; font-size: 0.92rem; color: var(--text-muted); border-bottom: 1px solid var(--border); vertical-align: top; }
+    .models-table tr:last-child td { border-bottom: none; }
+    .models-table tr:nth-child(even) td { background: var(--bg2); }
+    .models-table tr:nth-child(odd) td { background: var(--bg); }
+    .model-name-cell { font-family: 'Barlow Condensed', sans-serif; font-weight: 700; font-size: 1.05rem; text-transform: uppercase; color: var(--text); letter-spacing: 0.04em; }
+    .model-badge { display: inline-block; font-family: 'IBM Plex Mono', monospace; font-size: 0.58rem; letter-spacing: 0.08em; text-transform: uppercase; border: 1px solid var(--border-amber); color: var(--amber); padding: 0.2rem 0.5rem; border-radius: 3px; margin-top: 0.3rem; }
+
+    /* GALLERY ZIGZAG */
+    .product-gallery { padding: 5rem 3rem; }
+    .product-gallery-inner { max-width: 1400px; margin: 0 auto; display: flex; flex-direction: column; gap: 6rem; }
+    .gallery-block { display: grid; grid-template-columns: 1fr 1fr; gap: 5rem; align-items: center; }
+    .gallery-block.reverse { direction: rtl; }
+    .gallery-block.reverse > * { direction: ltr; }
+    .gallery-text-tag { font-family: 'IBM Plex Mono', monospace; font-size: 0.65rem; letter-spacing: 0.15em; text-transform: uppercase; color: var(--amber); margin-bottom: 0.75rem; }
+    .gallery-text-title { font-family: 'Barlow Condensed', sans-serif; font-weight: 700; font-size: clamp(1.3rem, 2vw, 1.6rem); text-transform: uppercase; letter-spacing: 0.02em; margin-bottom: 1rem; color: var(--text); }
+    .gallery-text-body { color: var(--text-muted); font-size: 0.95rem; line-height: 1.8; }
+    .gallery-text-list { margin-top: 1.25rem; display: flex; flex-direction: column; gap: 0.5rem; list-style: none; }
+    .gallery-text-list li { font-family: 'IBM Plex Mono', monospace; font-size: 0.72rem; letter-spacing: 0.06em; color: var(--text-muted); display: flex; align-items: center; gap: 0.6rem; }
+    .gallery-text-list li::before { content: ''; width: 16px; height: 1px; background: var(--amber); flex-shrink: 0; }
+
+    /* SPECS SECTION */
+    .product-specs { padding: 5rem 3rem; background: var(--bg2); border-top: 1px solid var(--border); border-bottom: 1px solid var(--border); }
+    .product-specs-inner { max-width: 1400px; margin: 0 auto; }
+    .product-specs-header { margin-bottom: 2.5rem; }
+    .product-specs-title { font-family: 'Barlow Condensed', sans-serif; font-weight: 800; font-size: clamp(1.8rem, 3vw, 2.8rem); text-transform: uppercase; letter-spacing: -0.01em; line-height: 0.95; }
+    .specs-table { width: 100%; border-collapse: collapse; }
+    .specs-row { display: grid; grid-template-columns: 280px 1fr; border-bottom: 1px solid var(--border); }
+    .specs-row:first-child { border-top: 1px solid var(--border); }
+    .specs-key { font-family: 'IBM Plex Mono', monospace; font-size: 0.65rem; letter-spacing: 0.1em; text-transform: uppercase; color: var(--text-dim); padding: 1.1rem 0; }
+    .specs-val { color: var(--text-muted); font-size: 0.95rem; padding: 1.1rem 2rem 1.1rem 0; }
+
+    /* CTA SECTION */
+    .product-cta-section { padding: 4rem 3rem; }
+    .product-cta-inner { max-width: 1400px; margin: 0 auto; }
+    .product-cta-card { background: var(--bg2); border: 1px solid var(--border-amber); border-radius: var(--r); padding: 3rem; display: flex; align-items: center; justify-content: space-between; gap: 3rem; flex-wrap: wrap; }
+    .product-cta-title { font-family: 'Barlow Condensed', sans-serif; font-weight: 800; font-size: clamp(1.4rem, 2.5vw, 2rem); text-transform: uppercase; line-height: 1; margin-bottom: 0.5rem; }
+    .product-cta-sub { color: var(--text-muted); font-size: 0.9rem; }
+
+    /* FOOTER */
+    footer { border-top: 1px solid var(--border); padding: 2rem 3rem; display: flex; align-items: center; justify-content: space-between; background: var(--bg); }
+    .footer-copy { font-family: 'IBM Plex Mono', monospace; font-size: 0.65rem; letter-spacing: 0.1em; color: var(--text-dim); }
+    .footer-links { display: flex; gap: 1.5rem; }
+    .footer-links a { font-family: 'IBM Plex Mono', monospace; font-size: 0.65rem; letter-spacing: 0.1em; text-transform: uppercase; color: var(--text-dim); text-decoration: none; transition: color 0.2s; }
+    .footer-links a:hover { color: var(--amber); }
+
+    /* ANIMATIONS */
+    @keyframes fadeUp { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
+    .product-hero-text .section-tag { animation: fadeUp 0.5s 0.05s ease both; }
+    .product-hero-title               { animation: fadeUp 0.5s 0.15s ease both; }
+    .product-hero-sub                 { animation: fadeUp 0.5s 0.25s ease both; }
+    .product-stats                    { animation: fadeUp 0.5s 0.3s ease both; }
+    .product-hero-text .btn-primary   { animation: fadeUp 0.5s 0.35s ease both; }
+
+    /* MOBILE */
+    @media (max-width: 900px) {
+      nav { padding: 0 1.5rem; }
+      .nav-burger { display: flex; }
+      .product-hero { padding: 5rem 1.5rem 3rem; }
+      .product-hero-inner { grid-template-columns: 1fr; gap: 2.5rem; }
+      .product-hero-photo { order: -1; }
+      .product-hero-sub { max-width: none; }
+      .product-stats { grid-template-columns: repeat(2, 1fr); }
+      .product-models { padding: 3rem 1.5rem; }
+      .product-gallery { padding: 3rem 1.5rem; }
+      .product-gallery-inner { gap: 3.5rem; }
+      .gallery-block { grid-template-columns: 1fr; gap: 2rem; }
+      .gallery-block.reverse { direction: ltr; }
+      .gallery-block .blueprint-frame { order: -1; }
+      .product-specs { padding: 3rem 1.5rem; }
+      .specs-row { grid-template-columns: 1fr; }
+      .specs-key { padding-bottom: 0.2rem; }
+      .specs-val { padding: 0 0 1rem; }
+      .product-cta-section { padding: 3rem 1.5rem; }
+      .product-cta-card { flex-direction: column; align-items: flex-start; gap: 2rem; }
+      footer { flex-direction: column; gap: 1rem; text-align: center; padding: 2rem 1.5rem; }
+      .models-table { font-size: 0.85rem; }
+      .models-table th, .models-table td { padding: 0.75rem; }
+    }
+  </style>
+</head>
+<body>
+
+  <nav>
+    <a href="index.html" class="logo">
+      <div class="logo-corner logo-corner--tl"></div>
+      <div class="logo-corner logo-corner--tr"></div>
+      <div class="logo-corner logo-corner--bl"></div>
+      <div class="logo-corner logo-corner--br"></div>
+      Byrud<span>.</span>Tech
+    </a>
+    <a href="index.html#products" class="nav-back">Zurück zur Übersicht</a>
+    <button class="nav-burger" id="navBurger" aria-label="Menü öffnen" aria-expanded="false">
+      <span></span><span></span><span></span>
+    </button>
+  </nav>
+
+  <!-- HERO -->
+  <section class="product-hero">
+    <div class="product-hero-inner">
+
+      <div class="product-hero-photo">
+        <div class="blueprint-frame" style="aspect-ratio:4/3;">
+          <div class="blueprint-frame-inner"></div>
+          <div class="blueprint-frame-corner blueprint-frame-corner--tl"></div>
+          <div class="blueprint-frame-corner blueprint-frame-corner--tr"></div>
+          <div class="blueprint-frame-corner blueprint-frame-corner--bl"></div>
+          <div class="blueprint-frame-corner blueprint-frame-corner--br"></div>
+          <img src="images/rover-hero.jpg" alt="Hackmaschine ROVER — Byrud Tech" />
+          <div class="blueprint-frame-bar">
+            <span>Qualität</span>
+            <div class="blueprint-frame-bar-divider"></div>
+            <span>Präzision</span>
+            <div class="blueprint-frame-bar-divider"></div>
+            <span>Ertrag</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="product-hero-text">
+        <div class="section-tag">// Hackmaschine</div>
+        <div class="product-hero-title">ROVER</div>
+        <p class="product-hero-sub">Intelligente Hackmaschine für präzise Zwischenreihenbearbeitung von Reihenkulturen. Bis zu 4 Operationen in einem Durchgang — Hacken, Düngen, Spritzen, Häufeln.</p>
+
+        <div class="product-stats">
+          <div class="product-stat">
+            <div class="product-stat-num">1 cm</div>
+            <div class="product-stat-label">Genauigkeit</div>
+          </div>
+          <div class="product-stat">
+            <div class="product-stat-num">18 km/h</div>
+            <div class="product-stat-label">Geschwindigkeit</div>
+          </div>
+          <div class="product-stat">
+            <div class="product-stat-num">4×</div>
+            <div class="product-stat-label">Operationen</div>
+          </div>
+          <div class="product-stat">
+            <div class="product-stat-num">800 mm</div>
+            <div class="product-stat-label">Bodenfreiheit</div>
+          </div>
+        </div>
+
+        <a href="index.html#contact" class="btn-primary">Angebot anfragen →</a>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- MODELS -->
+  <section class="product-models">
+    <div class="product-models-inner">
+      <div class="product-models-header">
+        <div class="section-tag">// Modelle</div>
+        <div class="product-models-title">5 Modelle für<br />jede Aufgabe</div>
+        <p class="product-models-desc">Alle ROVER-Modelle basieren auf der universellen Byrud-Rahmenplattform und sind kompatibel mit den Anbausystemen LIXA, GRANO und VELES. Die Modellwahl richtet sich nach Reihenabstand, Kultur und Betriebsgröße.</p>
+      </div>
+
+      <table class="models-table">
+        <thead>
+          <tr>
+            <th>Modell</th>
+            <th>Reihenabstand</th>
+            <th>Arbeitsbreite</th>
+            <th>Reihen</th>
+            <th>Besonderheit</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><div class="model-name-cell">ROVER-U</div><div class="model-badge">Universal</div></td>
+            <td>Ab 45 cm, variabel</td>
+            <td>3–9 m</td>
+            <td>4–12</td>
+            <td>Universalrahmen, alle Kulturen, maximale Flexibilität</td>
+          </tr>
+          <tr>
+            <td><div class="model-name-cell">ROVER-S</div><div class="model-badge">Standard</div></td>
+            <td>45–75 cm</td>
+            <td>3–6 m</td>
+            <td>4–8</td>
+            <td>Starr, robust, einfach in der Bedienung</td>
+          </tr>
+          <tr>
+            <td><div class="model-name-cell">ROVER-R</div><div class="model-badge">Raps / Getreide</div></td>
+            <td>Ab 12,5 cm</td>
+            <td>3–6 m</td>
+            <td>4–8</td>
+            <td>Optimiert für enge Reihenabstände und Winterkulturen</td>
+          </tr>
+          <tr>
+            <td><div class="model-name-cell">ROVER-P</div><div class="model-badge">Precision</div></td>
+            <td>45–90 cm</td>
+            <td>4,5–9 m</td>
+            <td>6–12</td>
+            <td>Mit EXACT-Kamerasystem, Genauigkeit bis 1 cm</td>
+          </tr>
+          <tr>
+            <td><div class="model-name-cell">ROVER-K</div><div class="model-badge">Großfläche</div></td>
+            <td>45–90 cm</td>
+            <td>6–12 m</td>
+            <td>8–16</td>
+            <td>Für Agrarholdings und Lohnunternehmer, 24/7-Betrieb</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </section>
+
+  <!-- GALLERY -->
+  <section class="product-gallery">
+    <div class="product-gallery-inner">
+
+      <!-- Block 1: Reihenarbeitsgruppen -->
+      <div class="gallery-block">
+        <div class="blueprint-frame" style="aspect-ratio:4/3;">
+          <div class="blueprint-frame-inner"></div>
+          <div class="blueprint-frame-corner blueprint-frame-corner--tl"></div>
+          <div class="blueprint-frame-corner blueprint-frame-corner--tr"></div>
+          <div class="blueprint-frame-corner blueprint-frame-corner--bl"></div>
+          <div class="blueprint-frame-corner blueprint-frame-corner--br"></div>
+          <img src="images/rover-group-01.jpg" alt="ROVER — Reihenarbeitsgruppen und Hackorgane" />
+        </div>
+        <div class="gallery-text">
+          <div class="gallery-text-tag">// Reihenarbeitsgruppen</div>
+          <div class="gallery-text-title">Präzise Hackorgane für jede Kultur</div>
+          <p class="gallery-text-body">Die modularen Arbeitsgruppen des ROVER arbeiten exakt zwischen den Reihen — ohne Pflanzenschäden, ohne Toleranzspielraum. Jede Gruppe ist einzeln einstellbar und lässt sich in Minuten auf einen anderen Reihenabstand umrüsten.</p>
+          <ul class="gallery-text-list">
+            <li>Federdruckgesteuerte Einzelreihen-Parallele</li>
+            <li>Kompatibel mit Gänsefußscharen, Fingerwalzen, Häufelkörpern</li>
+            <li>Umbauzeit unter 20 Minuten</li>
+          </ul>
+        </div>
+      </div>
+
+      <!-- Block 2: EXACT Kamera (reversed) -->
+      <div class="gallery-block reverse">
+        <div class="blueprint-frame" style="aspect-ratio:4/3;">
+          <div class="blueprint-frame-inner"></div>
+          <div class="blueprint-frame-corner blueprint-frame-corner--tl"></div>
+          <div class="blueprint-frame-corner blueprint-frame-corner--tr"></div>
+          <div class="blueprint-frame-corner blueprint-frame-corner--bl"></div>
+          <div class="blueprint-frame-corner blueprint-frame-corner--br"></div>
+          <img src="images/rover-exact.jpg" alt="ROVER EXACT — Kamerasystem für 1 cm Führungsgenauigkeit" />
+        </div>
+        <div class="gallery-text">
+          <div class="gallery-text-tag">// Option EXACT</div>
+          <div class="gallery-text-title">Kameraführung mit 1 cm Genauigkeit</div>
+          <p class="gallery-text-body">Das optische Führungssystem EXACT erkennt die Reihen in Echtzeit und korrigiert die Querverschiebung der Arbeitsgruppen automatisch. Kein GPS notwendig — funktioniert tag und nacht, bei jeder Witterung.</p>
+          <ul class="gallery-text-list">
+            <li>Reaktionszeit unter 10 ms</li>
+            <li>Betrieb bis 18 km/h ohne Genauigkeitsverlust</li>
+            <li>24/7-tauglich — auch bei Nacht und Nebel</li>
+          </ul>
+        </div>
+      </div>
+
+      <!-- Block 3: GRANO Bunkersystem -->
+      <div class="gallery-block">
+        <div class="blueprint-frame" style="aspect-ratio:4/3;">
+          <div class="blueprint-frame-inner"></div>
+          <div class="blueprint-frame-corner blueprint-frame-corner--tl"></div>
+          <div class="blueprint-frame-corner blueprint-frame-corner--tr"></div>
+          <div class="blueprint-frame-corner blueprint-frame-corner--bl"></div>
+          <div class="blueprint-frame-corner blueprint-frame-corner--br"></div>
+          <img src="images/rover-grano.jpg" alt="GRANO — Granulatdüngerbunker auf ROVER" />
+        </div>
+        <div class="gallery-text">
+          <div class="gallery-text-tag">// Option GRANO</div>
+          <div class="gallery-text-title">Granulatdüngung direkt in der Wurzelzone</div>
+          <p class="gallery-text-body">Der integrierte GRANO-Bunker bringt Granulat präzise neben oder unter die Reihe aus — gleichzeitig mit dem Hacken. Tank 800 bis 2000 l, Ausbringmenge von 5 bis 270 kg/ha stufenlos regelbar.</p>
+          <ul class="gallery-text-list">
+            <li>Edelstahlgehäuse — resistent gegen Dünger und Pflanzenschutzmittel</li>
+            <li>Mechanischer Accord-Antrieb, keine Elektronik erforderlich</li>
+            <li>Größter Bunker in der Klasse — weniger Nachfüllen</li>
+          </ul>
+        </div>
+      </div>
+
+      <!-- Block 4: LIXA Flüssigdüngung (reversed) -->
+      <div class="gallery-block reverse">
+        <div class="blueprint-frame" style="aspect-ratio:4/3;">
+          <div class="blueprint-frame-inner"></div>
+          <div class="blueprint-frame-corner blueprint-frame-corner--tl"></div>
+          <div class="blueprint-frame-corner blueprint-frame-corner--tr"></div>
+          <div class="blueprint-frame-corner blueprint-frame-corner--bl"></div>
+          <div class="blueprint-frame-corner blueprint-frame-corner--br"></div>
+          <img src="images/rover-lixa.jpg" alt="LIXA — Flüssigdüngersystem auf ROVER" />
+        </div>
+        <div class="gallery-text">
+          <div class="gallery-text-tag">// Option LIXA</div>
+          <div class="gallery-text-title">Flüssigdüngung und PSM in einem Durchgang</div>
+          <p class="gallery-text-body">Das LIXA-System bringt UAN, NFS oder Pflanzenschutzmittel gleichzeitig mit der mechanischen Bearbeitung aus — blattweise, reihenweise oder beidseitig. Bis zu 3 flüssige Komponenten gleichzeitig.</p>
+          <ul class="gallery-text-list">
+            <li>Tank 600 bis 3000 l</li>
+            <li>Steuerung via Computer Cruise 4 / CAN-Bus</li>
+            <li>Herbizideinsparung bis −40% durch gezielte Ausbringung</li>
+          </ul>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- TECHNICAL SPECS -->
+  <section class="product-specs">
+    <div class="product-specs-inner">
+      <div class="product-specs-header">
+        <div class="section-tag">// Technische Daten</div>
+        <div class="product-specs-title">Technische<br />Spezifikationen</div>
+      </div>
+
+      <div class="specs-row"><div class="specs-key">Genauigkeit</div><div class="specs-val">Bis 1 cm (mit Option EXACT)</div></div>
+      <div class="specs-row"><div class="specs-key">Arbeitsgeschwindigkeit</div><div class="specs-val">Bis 18 km/h</div></div>
+      <div class="specs-row"><div class="specs-key">Betrieb</div><div class="specs-val">24/7, Tag und Nacht</div></div>
+      <div class="specs-row"><div class="specs-key">Modelle</div><div class="specs-val">ROVER-U, ROVER-S, ROVER-R, ROVER-P, ROVER-K</div></div>
+      <div class="specs-row"><div class="specs-key">Rahmenhöhe (Bodenfreiheit)</div><div class="specs-val">800 mm — geeignet für hohe Kulturen (Mais, Sonnenblumen)</div></div>
+      <div class="specs-row"><div class="specs-key">Reihenabstand</div><div class="specs-val">Ab 45 cm, variabel einstellbar</div></div>
+      <div class="specs-row"><div class="specs-key">Anzahl Reihen</div><div class="specs-val">4 bis 16 Reihen (je nach Modell)</div></div>
+      <div class="specs-row"><div class="specs-key">Arbeitsbreite</div><div class="specs-val">3 bis 12 m (je nach Modell)</div></div>
+      <div class="specs-row"><div class="specs-key">Anbau</div><div class="specs-val">3-Punkt-Anbau, Kat. 2 / Kat. 3</div></div>
+      <div class="specs-row"><div class="specs-key">Maschinengewicht</div><div class="specs-val">Leichteste Maschine in der Klasse — minimale Bodenverdichtung</div></div>
+      <div class="specs-row"><div class="specs-key">Kompatible Optionen</div><div class="specs-val">EXACT (Kameraführung), GRANO (Granulat), LIXA (Flüssig), VELES (Aussaat), Häufelkörper</div></div>
+      <div class="specs-row"><div class="specs-key">Operationen pro Durchgang</div><div class="specs-val">Bis zu 4 gleichzeitig: Hacken, Düngen, Spritzen, Häufeln</div></div>
+      <div class="specs-row"><div class="specs-key">Flächenleistung</div><div class="specs-val">Bis 180 ha/Tag (24/7-Betrieb)</div></div>
+      <div class="specs-row"><div class="specs-key">ROI</div><div class="specs-val">1–2 Saisons oder ab 1.000 ha</div></div>
+    </div>
+  </section>
+
+  <!-- CTA -->
+  <section class="product-cta-section">
+    <div class="product-cta-inner">
+      <div class="product-cta-card">
+        <div>
+          <div class="product-cta-title">ROVER für Ihren Betrieb<br />konfigurieren</div>
+          <p class="product-cta-sub">Wir beraten Sie individuell — Modellwahl, Optionen, Lieferzeit und Preis.</p>
+        </div>
+        <a href="index.html#contact" class="btn-primary">Angebot anfragen →</a>
+      </div>
+    </div>
+  </section>
+
+  <footer>
+    <span class="footer-copy">© 2025 Byrud Tech. Alle Rechte vorbehalten.</span>
+    <div class="footer-links"><a href="#">Impressum</a><a href="#">Datenschutz</a><a href="#">AGB</a></div>
+    <span class="footer-copy">Hamburg · byrud-tech.com</span>
+  </footer>
+
+  <script>
+    const burger = document.getElementById('navBurger');
+    if (burger) {
+      burger.addEventListener('click', () => {
+        burger.classList.toggle('open');
+      });
+    }
+  </script>
+
+</body>
+</html>
