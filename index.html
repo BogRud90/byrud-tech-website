@@ -86,11 +86,6 @@
     .product-link { font-family: 'IBM Plex Mono', monospace; font-size: 0.68rem; letter-spacing: 0.1em; text-transform: uppercase; color: var(--amber); text-decoration: none; display: flex; align-items: center; gap: 0.4rem; flex-shrink: 0; white-space: nowrap; transition: gap 0.2s; }
     .product-card:hover .product-link { gap: 0.8rem; }
 
-    /* USP BAND */
-    .usp-band { background: var(--bg2); border-top: 1px solid var(--border-amber); border-bottom: 1px solid var(--border-amber); padding: 1.2rem 3rem; display: flex; align-items: center; gap: 3rem; overflow: hidden; position: relative; z-index: 1; flex-wrap: wrap; }
-    .usp-item { display: flex; align-items: center; gap: 0.75rem; font-family: 'IBM Plex Mono', monospace; font-size: 0.72rem; font-weight: 500; letter-spacing: 0.1em; text-transform: uppercase; color: var(--text-muted); white-space: nowrap; }
-    .usp-dot { width: 6px; height: 6px; background: var(--amber); border-radius: 50%; }
-
     /* RESULTS */
     #results { padding: 5rem 3rem; position: relative; z-index: 1; }
     .results-wrap { display: flex; flex-direction: column; gap: 1px; background: var(--border); border-radius: var(--r); overflow: hidden; margin-top: 2.5rem; }
@@ -160,11 +155,21 @@
 
     /* MARKETS */
     #markets { padding: 5rem 3rem; }
-    .markets-grid { display: grid; gap: 1px; background: var(--border); margin-top: 2.5rem; border-radius: var(--r); overflow: hidden; }
+    .markets-content { display: grid; grid-template-columns: 1fr; gap: 1px; background: var(--border); margin-top: 2.5rem; border-radius: var(--r); overflow: hidden; }
+    .markets-grid { display: grid; grid-template-columns: repeat(6, 1fr); gap: 1px; background: var(--border); }
     .market-item { background: var(--bg); padding: 2rem 1.5rem; }
     .market-flag { font-size: 2rem; margin-bottom: 0.75rem; display: block; }
     .market-name { font-family: 'Barlow Condensed', sans-serif; font-weight: 700; font-size: 1.3rem; text-transform: uppercase; margin-bottom: 0.4rem; }
     .market-desc { font-family: 'IBM Plex Mono', monospace; font-size: 0.62rem; letter-spacing: 0.08em; text-transform: uppercase; color: var(--text-dim); }
+    .haendler-cta { background: var(--bg); border: 1px solid rgba(232,162,32,0.15); padding: 2.5rem 3rem; display: flex; align-items: center; gap: 3rem; flex-wrap: wrap; }
+    .haendler-cta-text { flex: 1; min-width: 250px; }
+    .haendler-cta-title { font-family: 'Barlow Condensed', sans-serif; font-weight: 800; font-size: 1.6rem; text-transform: uppercase; color: var(--amber); margin-bottom: 0.5rem; }
+    .haendler-cta-desc { font-size: 0.9rem; color: var(--text-muted); line-height: 1.7; }
+    .haendler-cta-facts { display: flex; align-items: center; gap: 1.5rem; flex-shrink: 0; }
+    .haendler-fact { text-align: center; }
+    .haendler-fact-label { font-family: 'IBM Plex Mono', monospace; font-size: 0.6rem; letter-spacing: 0.08em; text-transform: uppercase; color: var(--text-dim); margin-bottom: 0.3rem; }
+    .haendler-fact-value { font-family: 'Barlow Condensed', sans-serif; font-weight: 700; font-size: 0.95rem; text-transform: uppercase; color: var(--text); }
+    .haendler-fact-divider { width: 1px; height: 2rem; background: var(--border); }
 
     /* CONTACT */
     #contact { padding: 5rem 3rem; }
@@ -244,14 +249,13 @@
       .platform-tiles-4, .platform-tiles-3 { grid-template-columns: repeat(2, 1fr); }
       .platform-tiles-3 .platform-tile:last-child { grid-column: span 2; }
       #platform { overflow-x: hidden; }
-      .usp-band { flex-direction: column; align-items: flex-start; gap: 1rem; padding: 2rem 1.5rem; }
-      .usp-dot { display: none; }
-      .usp-item { white-space: normal; }
       .results-cta { flex-direction: column; align-items: flex-start; gap: 1.5rem; padding: 2rem; }
       .results-cta-divider { display: none; }
       .results-cta-stats { gap: 1.5rem; flex-wrap: wrap; }
       .results-cards { grid-template-columns: 1fr; }
-      .markets-grid { grid-template-columns: repeat(2, 1fr) !important; }
+      .markets-grid { grid-template-columns: repeat(2, 1fr); }
+      .haendler-cta { flex-direction: column; align-items: flex-start; padding: 2rem 1.5rem; gap: 1.5rem; }
+      .haendler-cta-facts { width: 100%; justify-content: space-between; }
       footer { flex-direction: column; gap: 1rem; text-align: center; }
       .hero-bg-image { width: 100%; opacity: 0.7; }
       .hero-bg-image img { opacity: 0.15; }
@@ -519,18 +523,6 @@
   </section>
 
   <!-- USP BAND -->
-  <div class="usp-band">
-    <div class="usp-item" style="font-size:0.85rem; font-weight:700; letter-spacing:0.05em; color:var(--amber);">Werden Sie unser Händler —</div>
-    <div class="usp-dot"></div>
-    <div class="usp-item">Attraktive Händlerkonditionen</div>
-    <div class="usp-dot"></div>
-    <div class="usp-item">Exklusivgebiete verfügbar</div>
-    <div class="usp-dot"></div>
-    <div class="usp-item">Marketingunterstützung inklusive</div>
-    <div class="usp-dot"></div>
-    <a href="#contact" style="font-family:'IBM Plex Mono',monospace; font-size:0.72rem; font-weight:600; letter-spacing:0.1em; text-transform:uppercase; color:var(--amber); background:transparent; border:1px solid var(--border-amber); padding:0.45rem 1.1rem; text-decoration:none; white-space:nowrap;">Jetzt bewerben →</a>
-  </div>
-
   <div class="section-spacer" aria-hidden="true"></div>
 
   <!-- PLATFORM CONCEPT -->
@@ -648,13 +640,38 @@
         <h2>Aktiv in<br />ganz Europa</h2>
       </div>
     </div>
-    <div class="markets-grid" style="grid-template-columns: repeat(6,1fr);">
-      <div class="market-item"><span class="market-flag">🇩🇪</span><div class="market-name">Deutschland</div><div class="market-desc">Hauptmarkt · Sitz</div></div>
-      <div class="market-item"><span class="market-flag">🇵🇱</span><div class="market-name">Polen</div><div class="market-desc">Wachsender Markt</div></div>
-      <div class="market-item"><span class="market-flag">🇺🇦</span><div class="market-name">Ukraine</div><div class="market-desc">Agrarholdings</div></div>
-      <div class="market-item"><span class="market-flag">🇷🇴</span><div class="market-name">Rumänien</div><div class="market-desc">Expandierender Sektor</div></div>
-      <div class="market-item"><span class="market-flag">🇫🇷</span><div class="market-name">Frankreich</div><div class="market-desc">Großbetriebe</div></div>
-      <div class="market-item"><span class="market-flag">🇳🇱</span><div class="market-name">Niederlande</div><div class="market-desc">Intensivlandwirtschaft</div></div>
+    <div class="markets-content">
+      <div class="markets-grid">
+        <div class="market-item"><span class="market-flag">🇩🇪</span><div class="market-name">Deutschland</div><div class="market-desc">Hauptmarkt · Sitz</div></div>
+        <div class="market-item"><span class="market-flag">🇵🇱</span><div class="market-name">Polen</div><div class="market-desc">Wachsender Markt</div></div>
+        <div class="market-item"><span class="market-flag">🇺🇦</span><div class="market-name">Ukraine</div><div class="market-desc">Agrarholdings</div></div>
+        <div class="market-item"><span class="market-flag">🇷🇴</span><div class="market-name">Rumänien</div><div class="market-desc">Expandierender Sektor</div></div>
+        <div class="market-item"><span class="market-flag">🇫🇷</span><div class="market-name">Frankreich</div><div class="market-desc">Großbetriebe</div></div>
+        <div class="market-item"><span class="market-flag">🇳🇱</span><div class="market-name">Niederlande</div><div class="market-desc">Intensivlandwirtschaft</div></div>
+      </div>
+      <div class="haendler-cta">
+        <div class="haendler-cta-text">
+          <div class="haendler-cta-title">WERDEN SIE UNSER HÄNDLER</div>
+          <p class="haendler-cta-desc">Exklusivgebiete verfügbar. Attraktive Konditionen und volle Marketingunterstützung für Ihre Region.</p>
+        </div>
+        <div class="haendler-cta-facts">
+          <div class="haendler-fact">
+            <div class="haendler-fact-label">Konditionen</div>
+            <div class="haendler-fact-value">Attraktiv</div>
+          </div>
+          <div class="haendler-fact-divider"></div>
+          <div class="haendler-fact">
+            <div class="haendler-fact-label">Gebiete</div>
+            <div class="haendler-fact-value">Exklusiv</div>
+          </div>
+          <div class="haendler-fact-divider"></div>
+          <div class="haendler-fact">
+            <div class="haendler-fact-label">Marketing</div>
+            <div class="haendler-fact-value">Inklusive</div>
+          </div>
+        </div>
+        <a href="#contact" class="btn-primary">Jetzt bewerben →</a>
+      </div>
     </div>
   </section>
 
