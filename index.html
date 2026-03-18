@@ -75,7 +75,8 @@
     .config-card { background: var(--bg); padding: 1.5rem 2.5rem; display: flex; align-items: center; gap: 1.5rem; cursor: pointer; position: relative; overflow: hidden; transition: background 0.3s; text-decoration: none; color: inherit; }
     .config-card:hover { background: var(--bg3); }
     .config-card--base { border: 1px solid var(--border-amber); padding: 2rem 2.5rem; }
-    .config-card--optional { opacity: 0.75; cursor: default; }
+    .config-card--optional { opacity: 0.8; }
+    .config-card--optional:hover { opacity: 1; }
     .config-num { font-family: 'Barlow Condensed', sans-serif; font-weight: 800; font-size: 1.5rem; color: var(--text-dim); flex-shrink: 0; min-width: 2rem; }
     .config-card--base .config-num { font-size: 1.8rem; color: var(--amber); }
     .config-body { flex: 1; min-width: 0; }
@@ -510,23 +511,57 @@
         </div>
       </a>
 
-      <!-- ＋ Weitere — Optional -->
-      <div class="config-card config-card--optional">
-        <div class="config-num">＋</div>
+      <!-- ⑤ VELES — Optional -->
+      <a class="config-card config-card--optional" href="veles.html">
+        <div class="config-num">⑤</div>
         <div class="config-body">
-          <div class="config-name">VELES · TOR · STERN · TURBO</div>
-          <p class="config-desc">Sämaschine, Netzegge, Rotationsstriegel, Erntegutzerhacker — weitere Anbaugeräte für den Universalrahmen je nach Bedarf.</p>
-          <div class="config-optional-links">
-            <a href="veles.html" class="config-optional-link">VELES →</a>
-            <a href="tor.html" class="config-optional-link">TOR →</a>
-            <a href="stern.html" class="config-optional-link">STERN →</a>
-            <a href="turbo.html" class="config-optional-link">TURBO →</a>
-          </div>
+          <div class="config-name">+ VELES — Sämaschine</div>
+          <p class="config-desc">Universelle Sämaschine für Getreide, Raps und Soja. Zweizeilige Aussaat mit 10 cm Abstand. Gleichzeitige Ausbringung von Startdünger und Inokulum.</p>
         </div>
         <div class="config-right">
           <span class="config-label">OPTIONAL</span>
+          <span class="config-link">Mehr erfahren →</span>
         </div>
-      </div>
+      </a>
+
+      <!-- ⑥ TOR — Optional -->
+      <a class="config-card config-card--optional" href="tor.html">
+        <div class="config-num">⑥</div>
+        <div class="config-body">
+          <div class="config-name">+ TOR — Netzegge</div>
+          <p class="config-desc">Hochleistungsnetzegge für Saatbettvorbereitung und mechanische Unkrautbekämpfung. 4,5–12 m Arbeitsbreite. 10 Winkelstellungen.</p>
+        </div>
+        <div class="config-right">
+          <span class="config-label">OPTIONAL</span>
+          <span class="config-link">Mehr erfahren →</span>
+        </div>
+      </a>
+
+      <!-- ⑦ STERN — Optional -->
+      <a class="config-card config-card--optional" href="stern.html">
+        <div class="config-num">⑦</div>
+        <div class="config-body">
+          <div class="config-name">+ STERN — Rotationsstriegel</div>
+          <p class="config-desc">Rotationsstriegel für ganzjährigen Einsatz — Saatbettvorbereitung, Rückverfestigung, Unkrautbekämpfung. 50 kg Federandruck pro Reihe.</p>
+        </div>
+        <div class="config-right">
+          <span class="config-label">OPTIONAL</span>
+          <span class="config-link">Mehr erfahren →</span>
+        </div>
+      </a>
+
+      <!-- ⑧ TURBO — Optional -->
+      <a class="config-card config-card--optional" href="turbo.html">
+        <div class="config-num">⑧</div>
+        <div class="config-body">
+          <div class="config-name">+ TURBO — Erntegutzerhacker</div>
+          <p class="config-desc">Zerhacker für Pflanzenreste nach der Ernte. Turbo-Scheibe 470 mm. Wartungsfreie Naben. Optional mit Dünger- und Aussaatbunker.</p>
+        </div>
+        <div class="config-right">
+          <span class="config-label">OPTIONAL</span>
+          <span class="config-link">Mehr erfahren →</span>
+        </div>
+      </a>
 
       <!-- CTA -->
       <div class="config-cta">
