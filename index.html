@@ -71,20 +71,29 @@
 
     /* PRODUCTS */
     #products { padding: 5rem 3rem; }
-    .products-list { display: flex; flex-direction: column; gap: 1px; background: var(--border); border-radius: var(--r); overflow: hidden; }
-    .product-card { background: var(--bg); padding: 2rem 2.5rem; display: flex; align-items: center; gap: 2rem; cursor: pointer; position: relative; overflow: hidden; transition: background 0.3s; }
-    .product-card::before { content: ''; position: absolute; top: 0; left: 0; right: 0; height: 2px; background: var(--amber); transform: scaleX(0); transform-origin: left; transition: transform 0.3s; }
-    .product-card:hover { background: var(--bg3); }
-    .product-card:hover::before { transform: scaleX(1); }
-    .product-icon { width: 44px; height: 44px; border: 1px solid var(--border); display: flex; align-items: center; justify-content: center; flex-shrink: 0; color: var(--text-dim); font-size: 1.2rem; border-radius: var(--r-sm); }
-    .product-body { flex: 1; min-width: 0; }
-    .product-num { font-family: 'IBM Plex Mono', monospace; font-size: 0.65rem; letter-spacing: 0.15em; color: var(--text-dim); margin-bottom: 0.5rem; }
-    h3 { font-family: 'Barlow Condensed', sans-serif; font-weight: 700; font-size: 1.6rem; text-transform: uppercase; letter-spacing: 0.02em; margin-bottom: 0.5rem; }
-    .product-desc { font-size: 0.92rem; color: var(--text-muted); line-height: 1.75; }
-    .product-tags { display: flex; flex-wrap: wrap; gap: 0.4rem; flex-shrink: 0; max-width: 200px; }
+    .config-stack { display: flex; flex-direction: column; gap: 1px; background: var(--border); border-radius: var(--r); overflow: hidden; margin-top: 4rem; }
+    .config-card { background: var(--bg); padding: 1.5rem 2.5rem; display: flex; align-items: center; gap: 1.5rem; cursor: pointer; position: relative; overflow: hidden; transition: background 0.3s; text-decoration: none; color: inherit; }
+    .config-card:hover { background: var(--bg3); }
+    .config-card--base { border: 1px solid var(--border-amber); padding: 2rem 2.5rem; }
+    .config-card--optional { opacity: 0.75; cursor: default; }
+    .config-num { font-family: 'Barlow Condensed', sans-serif; font-weight: 800; font-size: 1.5rem; color: var(--text-dim); flex-shrink: 0; min-width: 2rem; }
+    .config-card--base .config-num { font-size: 1.8rem; color: var(--amber); }
+    .config-body { flex: 1; min-width: 0; }
+    .config-name { font-family: 'Barlow Condensed', sans-serif; font-weight: 700; font-size: 1.2rem; text-transform: uppercase; letter-spacing: 0.02em; color: var(--text); margin-bottom: 0.4rem; }
+    .config-card--base .config-name { font-size: 1.4rem; }
+    .config-desc { font-size: 0.92rem; color: var(--text-muted); line-height: 1.75; }
+    .config-tags { display: flex; flex-wrap: wrap; gap: 0.4rem; margin-top: 0.75rem; }
     .tag { font-family: 'IBM Plex Mono', monospace; font-size: 0.6rem; letter-spacing: 0.08em; text-transform: uppercase; border: 1px solid var(--border); color: var(--text-dim); padding: 0.25rem 0.6rem; border-radius: 3px; }
-    .product-link { font-family: 'IBM Plex Mono', monospace; font-size: 0.68rem; letter-spacing: 0.1em; text-transform: uppercase; color: var(--amber); text-decoration: none; display: flex; align-items: center; gap: 0.4rem; flex-shrink: 0; white-space: nowrap; transition: gap 0.2s; }
-    .product-card:hover .product-link { gap: 0.8rem; }
+    h3 { font-family: 'Barlow Condensed', sans-serif; font-weight: 700; font-size: 1.6rem; text-transform: uppercase; letter-spacing: 0.02em; margin-bottom: 0.5rem; }
+    .config-right { display: flex; flex-direction: column; align-items: flex-end; gap: 0.75rem; flex-shrink: 0; }
+    .config-label { font-family: 'IBM Plex Mono', monospace; font-size: 0.65rem; letter-spacing: 0.1em; text-transform: uppercase; color: var(--text-dim); }
+    .config-card--base .config-label { color: var(--amber); }
+    .config-link { font-family: 'IBM Plex Mono', monospace; font-size: 0.68rem; letter-spacing: 0.1em; text-transform: uppercase; color: var(--amber); white-space: nowrap; }
+    .config-optional-links { display: flex; gap: 1rem; margin-top: 0.75rem; flex-wrap: wrap; }
+    .config-optional-link { font-family: 'IBM Plex Mono', monospace; font-size: 0.65rem; letter-spacing: 0.1em; text-transform: uppercase; color: var(--amber); text-decoration: none; transition: opacity 0.2s; }
+    .config-optional-link:hover { opacity: 0.7; }
+    .config-cta { background: var(--bg); padding: 1.5rem 2.5rem; display: flex; align-items: center; gap: 1.5rem; }
+    .config-cta-text { font-size: 0.9rem; color: var(--text-muted); }
 
     /* RESULTS */
     #results { padding: 5rem 3rem; position: relative; z-index: 1; }
@@ -241,8 +250,10 @@
       .nav-links { display: none; }
       .nav-burger { display: flex; }
       #hero, #products, #about, #contact, #markets, #platform, #results { padding-left: 1.5rem; padding-right: 1.5rem; }
-      .product-card { flex-direction: column; align-items: flex-start; }
-      .product-tags { max-width: none; }
+      .config-card { flex-direction: column; align-items: flex-start; padding: 1.5rem; gap: 0.75rem; }
+      .config-card--base { padding: 1.5rem; }
+      .config-right { align-items: flex-start; }
+      .config-cta { flex-direction: column; align-items: flex-start; padding: 1.5rem; }
       .about-grid, .contact-inner { grid-template-columns: 1fr; gap: 3rem; }
       .platform-header { flex-direction: column; }
       .platform-stats { min-width: 0; width: 100%; }
@@ -265,11 +276,11 @@
     /* FADE-UP SCROLL ANIMATION */
     .fade-up { opacity: 0; transform: translateY(20px); transition: opacity 0.55s ease, transform 0.55s ease; }
     .fade-up.visible { opacity: 1; transform: none; }
-    .product-card.fade-up { transition: background 0.3s, opacity 0.55s ease, transform 0.55s ease; }
+    .config-card.fade-up { transition: background 0.3s, opacity 0.55s ease, transform 0.55s ease; }
 
-    /* SCANLINE on product-card hover / scroll */
-    .product-card::after { content: ''; position: absolute; left: 0; right: 0; top: 0; height: 2px; background: linear-gradient(90deg, transparent 0%, rgba(232,162,32,0.45) 50%, transparent 100%); opacity: 0; pointer-events: none; z-index: 2; }
-    .product-card:hover::after, .product-card.scan::after { animation: scanline 0.65s ease-out forwards; }
+    /* SCANLINE on config-card hover / scroll */
+    .config-card::after { content: ''; position: absolute; left: 0; right: 0; top: 0; height: 2px; background: linear-gradient(90deg, transparent 0%, rgba(232,162,32,0.45) 50%, transparent 100%); opacity: 0; pointer-events: none; z-index: 2; }
+    .config-card:hover::after, .config-card.scan::after { animation: scanline 0.65s ease-out forwards; }
     @keyframes scanline { 0% { top: 0; opacity: 1; } 100% { top: 100%; opacity: 0; } }
 
     /* NAV active underline */
@@ -287,7 +298,7 @@
     /* REDUCED MOTION */
     @media (prefers-reduced-motion: reduce) {
       .fade-up, .fade-up.visible { opacity: 1; transform: none; transition: none; }
-      .product-card::after, .product-card.scan::after { animation: none !important; display: none; }
+      .config-card::after, .config-card.scan::after { animation: none !important; display: none; }
       .nav-links a::after { transition: none; }
       .hero-label, h1, .hero-sub, .hero-actions { animation: none; opacity: 1; }
     }
@@ -438,88 +449,90 @@
   <section id="products">
     <div class="section-header">
       <div>
-        <div class="section-tag">// Unser Sortiment</div>
-        <h2>Maschinen<br />für jedes Feld</h2>
+        <div class="section-tag">// Ihr System konfigurieren</div>
+        <h2>ROVER als Basis.<br /><em style="font-style:normal;color:var(--amber);">Module nach Bedarf.</em></h2>
+        <p style="font-size:1rem;color:var(--text-muted);max-width:550px;line-height:1.85;margin-top:1.25rem;">Starten Sie mit dem Kultivator ROVER — und erweitern Sie mit genau den Modulen, die Ihr Betrieb braucht.</p>
       </div>
     </div>
-    <div class="products-list">
 
-      <a class="product-card" href="rover.html" style="text-decoration:none;color:inherit;">
-        <div class="product-icon">⊞</div>
-        <div class="product-body">
-          <div class="product-num">01 —</div>
-          <h3>Hackmaschine ROVER</h3>
-          <p class="product-desc">Intelligente Hackmaschine für präzise Zwischenreihenbearbeitung. Genauigkeit bis 1 cm, Arbeitsgeschwindigkeit bis 18 km/h — bis zu 4 Operationen in einem Durchgang.</p>
+    <div class="config-stack">
+
+      <!-- ① ROVER — Basis -->
+      <a class="config-card config-card--base" href="rover.html">
+        <div class="config-num">①</div>
+        <div class="config-body">
+          <div class="config-name">ROVER — Intelligenter Kultivator</div>
+          <p class="config-desc">Mechanische Zwischenreihenbearbeitung für alle Reihenkulturen. Hacken, Pflegen, Lockern — bis zu 4 Operationen in einem Durchgang. 3–12 m Arbeitsbreite.</p>
+          <div class="config-tags"><span class="tag">ROVER-U</span><span class="tag">ROVER-S</span><span class="tag">ROVER-R</span><span class="tag">ROVER-P</span><span class="tag">ROVER-K</span></div>
         </div>
-        <div class="product-tags"><span class="tag">ROVER-U</span><span class="tag">ROVER-S</span><span class="tag">ROVER-R</span><span class="tag">ROVER-P</span><span class="tag">ROVER-K</span></div>
-        <span class="product-link">Mehr erfahren →</span>
+        <div class="config-right">
+          <span class="config-label">BASIS ✓</span>
+          <span class="config-link">Mehr erfahren →</span>
+        </div>
       </a>
 
-      <a class="product-card" href="lixa.html" style="text-decoration:none;color:inherit;">
-        <div class="product-icon">◈</div>
-        <div class="product-body">
-          <div class="product-num">02 —</div>
-          <h3>Flüssigdüngung LIXA</h3>
-          <p class="product-desc">System zur präzisen Ausbringung von Flüssigdünger (UAN, NFS) und Pflanzenschutzmitteln direkt in die Wachstumszone. Tank 600–3000 l. Steuerung via Cruise 4 / CAN-Bus.</p>
+      <!-- ② EXACT — Empfohlen -->
+      <a class="config-card" href="rover.html">
+        <div class="config-num">②</div>
+        <div class="config-body">
+          <div class="config-name">+ EXACT — Kameraführung</div>
+          <p class="config-desc">Präzisionsführung mit 1 cm Genauigkeit. CMOS-Kamera, 9" Display. Tag- und Nachtbetrieb. 24/7 Einsatz.</p>
         </div>
-        <div class="product-tags"><span class="tag">LIXA-600</span><span class="tag">LIXA-2×600</span><span class="tag">LIXA-O</span></div>
-        <span class="product-link">Mehr erfahren →</span>
+        <div class="config-right">
+          <span class="config-label">EMPFOHLEN</span>
+          <span class="config-link">Mehr erfahren →</span>
+        </div>
       </a>
 
-      <a class="product-card" href="grano.html" style="text-decoration:none;color:inherit;">
-        <div class="product-icon">▤</div>
-        <div class="product-body">
-          <div class="product-num">03 —</div>
-          <h3>Granulatdüngung GRANO</h3>
-          <p class="product-desc">Integriertes System zur exakten Ausbringung von Granulatdünger direkt in die Wurzelzone. Tank 800–2000 l. Ausbringmenge regelbar von 5 bis 270 kg/ha.</p>
+      <!-- ③ LIXA — Empfohlen -->
+      <a class="config-card" href="lixa.html">
+        <div class="config-num">③</div>
+        <div class="config-body">
+          <div class="config-name">+ LIXA — Flüssigdüngung &amp; Pflanzenschutz</div>
+          <p class="config-desc">KAS, NPK und PSM direkt in die Wurzelzone. Band Spraying für −60% Herbizideinsparung. Bis 3 Komponenten gleichzeitig. Tank 600–3000 l.</p>
         </div>
-        <div class="product-tags"><span class="tag">5–270 kg/ha</span><span class="tag">Accord-Antrieb</span><span class="tag">Alle ROVER-Modelle</span></div>
-        <span class="product-link">Mehr erfahren →</span>
+        <div class="config-right">
+          <span class="config-label">EMPFOHLEN</span>
+          <span class="config-link">Mehr erfahren →</span>
+        </div>
       </a>
 
-      <a class="product-card" href="veles.html" style="text-decoration:none;color:inherit;">
-        <div class="product-icon">△</div>
-        <div class="product-body">
-          <div class="product-num">04 —</div>
-          <h3>Sämaschine VELES</h3>
-          <p class="product-desc">Universelle Sämaschine für alle Getreidearten, Raps und Soja auf der Universalrahmen. Zweizeilige Aussaat mit 10 cm Abstand. Gleichzeitige Ausbringung von Startdünger und Inokulum.</p>
+      <!-- ④ GRANO — Empfohlen -->
+      <a class="config-card" href="grano.html">
+        <div class="config-num">④</div>
+        <div class="config-body">
+          <div class="config-name">+ GRANO — Granulatdüngung</div>
+          <p class="config-desc">Exakte Ausbringung von Granulatdünger direkt in die Wurzelzone. Accord-Dosiersystem. Edelstahl-Bunker 800–2000 l. 5–270 kg/ha.</p>
         </div>
-        <div class="product-tags"><span class="tag">VELES-1</span><span class="tag">VELES-2</span><span class="tag">Tank 600–6000 l</span></div>
-        <span class="product-link">Mehr erfahren →</span>
+        <div class="config-right">
+          <span class="config-label">EMPFOHLEN</span>
+          <span class="config-link">Mehr erfahren →</span>
+        </div>
       </a>
 
-      <a class="product-card" href="tor.html" style="text-decoration:none;color:inherit;">
-        <div class="product-icon">◯</div>
-        <div class="product-body">
-          <div class="product-num">05 —</div>
-          <h3>Netzenegge TOR</h3>
-          <p class="product-desc">Hochleistungsnetzenegge für Saatbettvorbereitung und mechanische Unkrautbekämpfung. Arbeitsbreite 4,5–12 m. Zähne in 7, 8 oder 12 mm Stärke. 10 Winkelstellungen.</p>
+      <!-- ＋ Weitere — Optional -->
+      <div class="config-card config-card--optional">
+        <div class="config-num">＋</div>
+        <div class="config-body">
+          <div class="config-name">VELES · TOR · STERN · TURBO</div>
+          <p class="config-desc">Sämaschine, Netzegge, Rotationsstriegel, Erntegutzerhacker — weitere Anbaugeräte für den Universalrahmen je nach Bedarf.</p>
+          <div class="config-optional-links">
+            <a href="veles.html" class="config-optional-link">VELES →</a>
+            <a href="tor.html" class="config-optional-link">TOR →</a>
+            <a href="stern.html" class="config-optional-link">STERN →</a>
+            <a href="turbo.html" class="config-optional-link">TURBO →</a>
+          </div>
         </div>
-        <div class="product-tags"><span class="tag">TOR XS</span><span class="tag">TOR S</span><span class="tag">TOR M</span><span class="tag">TOR L</span><span class="tag">TOR XL</span></div>
-        <span class="product-link">Mehr erfahren →</span>
-      </a>
+        <div class="config-right">
+          <span class="config-label">OPTIONAL</span>
+        </div>
+      </div>
 
-      <a class="product-card" href="stern.html" style="text-decoration:none;color:inherit;">
-        <div class="product-icon">✳</div>
-        <div class="product-body">
-          <div class="product-num">06 —</div>
-          <h3>Rotationsstriegel STERN</h3>
-          <p class="product-desc">Rotationsstriegel für ganzjährigen Einsatz — Saatbettvorbereitung, Rückverfestigung, Unkrautbekämpfung. Gegossene Sternräder mit 50 kg Federandruck. Einfache Einreihenverstellung.</p>
-        </div>
-        <div class="product-tags"><span class="tag">3-Punkt-Anbau</span><span class="tag">Ganzjährig</span><span class="tag">Düngeroptional</span></div>
-        <span class="product-link">Mehr erfahren →</span>
-      </a>
-
-      <a class="product-card" href="turbo.html" style="text-decoration:none;color:inherit;">
-        <div class="product-icon">◎</div>
-        <div class="product-body">
-          <div class="product-num">07 —</div>
-          <h3>Zerhacker TURBO</h3>
-          <p class="product-desc">Zerhacker für Erntegut und Pflanzenreste nach der Ernte. Turbo-Scheibe 470 mm, wartungsfreie Naben mit langer Lebensdauer. Optional mit Dünger- und Aussaatbunker kombinierbar.</p>
-        </div>
-        <div class="product-tags"><span class="tag">Turbo-Scheibe 470 mm</span><span class="tag">Dünger-Option</span><span class="tag">Aussaat-Option</span></div>
-        <span class="product-link">Mehr erfahren →</span>
-      </a>
+      <!-- CTA -->
+      <div class="config-cta">
+        <a href="#contact" class="btn-primary">System anfragen →</a>
+        <p class="config-cta-text">Wir beraten Sie zur optimalen Konfiguration für Ihren Betrieb.</p>
+      </div>
 
     </div>
   </section>
@@ -931,7 +944,7 @@
     /* FADE-UP — auto-add classes to groups */
     [
       ['.result-card-item', 70],
-      ['.product-card', 80],
+      ['.config-card', 100],
       ['.platform-tile', 80],
       ['.about-checklist li', 80],
       ['.market-item', 60],
@@ -962,7 +975,7 @@
         }
       });
     }, { threshold: 0.5 });
-    document.querySelectorAll('.product-card').forEach(el => scanObserver.observe(el));
+    document.querySelectorAll('.config-card').forEach(el => scanObserver.observe(el));
   </script>
 </body>
 </html>
