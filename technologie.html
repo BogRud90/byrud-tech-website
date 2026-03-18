@@ -1,0 +1,571 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Technologie — Kombinierte Bodenbearbeitung — Byrud Tech</title>
+  <meta name="description" content="Byrud Tech — Kombinierte Bodenbearbeitung: Kultivierung, Flüssigdüngung und Herbizid in einem Durchgang. Mehr Ertrag, weniger Kosten." />
+  <meta name="format-detection" content="telephone=no" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@400;600;700;800&family=IBM+Plex+Mono:wght@400;500&family=Barlow:wght@300;400;500&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    :root {
+      --bg: #0b0b0b; --bg2: #111111; --bg3: #161616;
+      --amber: #e8a220; --amber-dim: #b87e18; --amber-glow: rgba(232,162,32,0.12);
+      --text: #f0ede8; --text-muted: #888880; --text-dim: #555550;
+      --border: rgba(255,255,255,0.07); --border-amber: rgba(232,162,32,0.3);
+      --r: 6px; --r-sm: 4px;
+    }
+    html { scroll-behavior: smooth; }
+    body { background: var(--bg); color: var(--text); font-family: 'Barlow', sans-serif; font-weight: 300; line-height: 1.6; overflow-x: hidden; }
+    body::before { content: ''; position: fixed; inset: 0; background-image: linear-gradient(var(--border) 1px, transparent 1px), linear-gradient(90deg, var(--border) 1px, transparent 1px); background-size: 60px 60px; pointer-events: none; z-index: 0; opacity: 0.15; }
+    section, footer, nav { position: relative; z-index: 1; }
+    * { -webkit-tap-highlight-color: transparent; }
+    a[href^="tel"], a[href^="mailto"] { color: inherit; text-decoration: none; }
+
+    /* NAV */
+    nav { position: fixed; top: 0; left: 0; right: 0; z-index: 100; display: flex; align-items: center; justify-content: space-between; padding: 0 3rem; height: 64px; background: rgba(11,11,11,0.88); backdrop-filter: blur(12px); border-bottom: 1px solid var(--border); }
+    .logo { font-family: 'Barlow Condensed', sans-serif; font-weight: 800; font-size: 1.3rem; letter-spacing: 0.08em; text-transform: uppercase; color: var(--text); text-decoration: none; position: relative; padding: 5px 8px; }
+    .logo-corner { position: absolute; width: 7px; height: 7px; border-color: var(--amber); border-style: solid; border-width: 0; }
+    .logo-corner--tl { top: 0; left: 0; border-top-width: 1px; border-left-width: 1px; }
+    .logo-corner--tr { top: 0; right: 0; border-top-width: 1px; border-right-width: 1px; }
+    .logo-corner--bl { bottom: 0; left: 0; border-bottom-width: 1px; border-left-width: 1px; }
+    .logo-corner--br { bottom: 0; right: 0; border-bottom-width: 1px; border-right-width: 1px; }
+    .logo span { color: var(--amber); }
+    .nav-back { font-family: 'IBM Plex Mono', monospace; font-size: 0.72rem; letter-spacing: 0.1em; text-transform: uppercase; color: var(--text-muted); text-decoration: none; transition: color 0.2s; display: flex; align-items: center; gap: 0.5rem; }
+    .nav-back:hover { color: var(--amber); }
+    .nav-back::before { content: '←'; }
+    .nav-burger { display: none; flex-direction: column; justify-content: center; gap: 5px; width: 36px; height: 36px; background: none; border: none; cursor: pointer; padding: 4px; z-index: 101; }
+    .nav-burger span { display: block; width: 100%; height: 1.5px; background: var(--text); }
+
+    /* BUTTONS */
+    .btn-primary { font-family: 'IBM Plex Mono', monospace; font-size: 0.78rem; letter-spacing: 0.1em; text-transform: uppercase; background: var(--amber); color: #0b0b0b; padding: 0.9rem 2rem; text-decoration: none; font-weight: 500; transition: opacity 0.2s; display: inline-block; border-radius: var(--r-sm); }
+    .btn-primary:hover { opacity: 0.85; }
+
+    /* COMMON */
+    .section-tag { font-family: 'IBM Plex Mono', monospace; font-size: 0.68rem; letter-spacing: 0.2em; text-transform: uppercase; color: var(--amber); margin-bottom: 0.75rem; }
+    .section-inner { max-width: 1400px; margin: 0 auto; }
+    h2 { font-family: 'Barlow Condensed', sans-serif; font-weight: 800; font-size: clamp(2rem, 4vw, 3.2rem); line-height: 0.95; text-transform: uppercase; letter-spacing: -0.01em; margin-bottom: 2.5rem; }
+
+    /* ─── HERO ─── */
+    #tech-hero { padding: 9rem 3rem 5rem; min-height: 80vh; display: flex; align-items: center; }
+    .tech-hero-inner { max-width: 1400px; margin: 0 auto; width: 100%; }
+    #tech-hero h1 { font-family: 'Barlow Condensed', sans-serif; font-weight: 800; font-size: clamp(4rem, 9vw, 8.5rem); line-height: 0.9; letter-spacing: -0.02em; text-transform: uppercase; margin-bottom: 2rem; }
+    #tech-hero h1 em { font-style: normal; color: var(--amber); display: block; }
+    .tech-hero-sub { font-size: clamp(1rem, 1.5vw, 1.15rem); color: var(--text-muted); max-width: 550px; line-height: 1.75; margin-bottom: 2.5rem; }
+    .tech-hero-stats { display: grid; grid-template-columns: repeat(4, 1fr); gap: 1px; background: var(--border); margin-bottom: 2.5rem; border-radius: var(--r-sm); overflow: hidden; }
+    .tech-stat { background: var(--bg3); padding: 1.5rem; }
+    .tech-stat-num { font-family: 'Barlow Condensed', sans-serif; font-weight: 800; font-size: 2.5rem; color: var(--amber); line-height: 1; margin-bottom: 0.3rem; }
+    .tech-stat-label { font-family: 'IBM Plex Mono', monospace; font-size: 0.65rem; letter-spacing: 0.08em; text-transform: uppercase; color: var(--text-dim); }
+
+    /* Hero entry animation */
+    @keyframes fadeUp { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
+    .tech-hero-inner .section-tag { animation: fadeUp 0.5s 0.05s ease both; }
+    #tech-hero h1                  { animation: fadeUp 0.5s 0.15s ease both; }
+    .tech-hero-sub                 { animation: fadeUp 0.5s 0.25s ease both; }
+    .tech-hero-stats               { animation: fadeUp 0.5s 0.30s ease both; }
+    .tech-hero-inner .btn-primary  { animation: fadeUp 0.5s 0.35s ease both; }
+
+    /* ─── 4 OPERATIONEN ─── */
+    #tech-ops { padding: 5rem 3rem; background: var(--bg2); border-top: 1px solid var(--border); border-bottom: 1px solid var(--border); }
+    .tech-ops-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 1px; background: var(--border); border-radius: var(--r); overflow: hidden; }
+    .tech-op-card { background: var(--bg); padding: 2.5rem; }
+    .tech-op-num { font-family: 'Barlow Condensed', sans-serif; font-weight: 800; font-size: 2rem; color: var(--amber); line-height: 1; margin-bottom: 1rem; }
+    .tech-op-title { font-family: 'Barlow Condensed', sans-serif; font-weight: 700; font-size: 1.2rem; text-transform: uppercase; letter-spacing: 0.02em; color: var(--text); margin-bottom: 1rem; }
+    .tech-op-body { font-size: 0.92rem; color: var(--text-muted); line-height: 1.75; }
+    .tech-op-accent { margin-top: 1.5rem; padding-top: 1rem; border-top: 1px solid var(--border); font-family: 'IBM Plex Mono', monospace; font-size: 0.72rem; letter-spacing: 0.04em; color: var(--text-dim); line-height: 1.6; }
+
+    /* ─── WIRTSCHAFTLICHKEIT ─── */
+    #tech-econ { padding: 5rem 3rem; }
+    .tech-econ-table { width: 100%; border-collapse: collapse; margin-bottom: 2.5rem; border: 1px solid var(--border); border-radius: var(--r); overflow: hidden; }
+    .tech-econ-table th { font-family: 'IBM Plex Mono', monospace; font-size: 0.65rem; letter-spacing: 0.12em; text-transform: uppercase; color: var(--text-dim); text-align: left; padding: 1rem 1.25rem; background: var(--bg3); border-bottom: 1px solid var(--border); font-weight: 400; }
+    .tech-econ-table td { padding: 1rem 1.25rem; font-size: 0.95rem; color: var(--text-muted); border-bottom: 1px solid var(--border); }
+    .tech-econ-table tr:last-child td { border-bottom: none; }
+    .tech-econ-table .col-gewinn { color: var(--amber); font-weight: 700; }
+    .econ-stats { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1px; background: var(--border); border-radius: var(--r-sm); overflow: hidden; margin-bottom: 2rem; }
+    .econ-stat { background: var(--bg3); padding: 1.5rem; }
+    .econ-stat-num { font-family: 'Barlow Condensed', sans-serif; font-weight: 800; font-size: 2rem; color: var(--amber); line-height: 1; margin-bottom: 0.3rem; }
+    .econ-stat-label { font-family: 'IBM Plex Mono', monospace; font-size: 0.6rem; letter-spacing: 0.08em; text-transform: uppercase; color: var(--text-dim); }
+    .tech-costs { border: 1px solid var(--border); border-radius: var(--r); overflow: hidden; }
+    .tech-cost-row { display: flex; justify-content: space-between; align-items: center; gap: 1rem; padding: 0.9rem 1.25rem; border-bottom: 1px solid var(--border); font-family: 'IBM Plex Mono', monospace; font-size: 0.68rem; letter-spacing: 0.04em; color: var(--text-dim); }
+    .tech-cost-row:last-child { border-bottom: none; }
+    .tech-cost-row.total { color: var(--text-muted); }
+    .tech-cost-row.total .cost-val { color: var(--amber); font-weight: 500; }
+    .cost-val { flex-shrink: 0; }
+
+    /* ─── KULTUREN ─── */
+    #tech-cultures { padding: 5rem 3rem; background: var(--bg2); border-top: 1px solid var(--border); border-bottom: 1px solid var(--border); }
+    .cultures-list { display: flex; flex-direction: column; gap: 1px; background: var(--border); border-radius: var(--r); overflow: hidden; }
+    .culture-row { background: var(--bg); padding: 2rem 2.5rem; display: flex; align-items: center; gap: 2.5rem; }
+    .culture-row--highlight { border-left: 3px solid var(--amber); }
+    .culture-left { display: flex; align-items: center; gap: 1.25rem; min-width: 200px; flex-shrink: 0; }
+    .culture-emoji { font-size: 2.5rem; line-height: 1; }
+    .culture-name { font-family: 'Barlow Condensed', sans-serif; font-weight: 700; font-size: 1.4rem; text-transform: uppercase; letter-spacing: 0.02em; }
+    .culture-center { flex: 1; }
+    .culture-desc { font-size: 0.88rem; color: var(--text-muted); line-height: 1.7; }
+    .culture-specs { display: flex; flex-wrap: wrap; gap: 1rem; margin-top: 0.75rem; }
+    .culture-spec { font-family: 'IBM Plex Mono', monospace; font-size: 0.62rem; letter-spacing: 0.06em; text-transform: uppercase; color: var(--text-dim); display: flex; align-items: center; gap: 0.4rem; }
+    .culture-spec::before { content: ''; width: 12px; height: 1px; background: var(--text-dim); flex-shrink: 0; }
+    .culture-right { flex-shrink: 0; text-align: right; }
+    .culture-profit { font-family: 'Barlow Condensed', sans-serif; font-weight: 800; font-size: 1.6rem; color: var(--amber); line-height: 1; white-space: nowrap; }
+    .culture-profit-label { font-family: 'IBM Plex Mono', monospace; font-size: 0.6rem; letter-spacing: 0.08em; text-transform: uppercase; color: var(--text-dim); margin-top: 0.3rem; }
+
+    /* ─── VORAUSSETZUNGEN ─── */
+    #tech-prereq { padding: 5rem 3rem; }
+    .prereq-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1px; background: var(--border); border-radius: var(--r); overflow: hidden; }
+    .prereq-card { background: var(--bg); padding: 2.5rem; }
+    .prereq-card-tag { font-family: 'IBM Plex Mono', monospace; font-size: 0.62rem; letter-spacing: 0.15em; text-transform: uppercase; color: var(--text-dim); margin-bottom: 0.6rem; display: flex; align-items: center; gap: 0.5rem; }
+    .prereq-card-tag::before { content: ''; width: 16px; height: 1px; background: var(--amber); flex-shrink: 0; }
+    .prereq-card-title { font-family: 'Barlow Condensed', sans-serif; font-weight: 700; font-size: 1.3rem; text-transform: uppercase; color: var(--text); margin-bottom: 1.25rem; }
+    .prereq-list { list-style: none; display: flex; flex-direction: column; gap: 0.65rem; }
+    .prereq-list li { font-size: 0.88rem; color: var(--text-muted); line-height: 1.6; display: flex; align-items: flex-start; gap: 0.6rem; }
+    .prereq-list li::before { content: ''; width: 16px; height: 1px; background: var(--amber); flex-shrink: 0; margin-top: 0.65rem; }
+
+    /* ─── BYRUD LÖSUNG ─── */
+    #tech-products { padding: 5rem 3rem; background: var(--bg2); border-top: 1px solid var(--border); border-bottom: 1px solid var(--border); }
+    .tech-products-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1px; background: var(--border); border-radius: var(--r); overflow: hidden; }
+    .tech-product-card { background: var(--bg); padding: 2rem 2.5rem; border-left: 2px solid var(--amber); text-decoration: none; color: inherit; display: flex; flex-direction: column; gap: 0.4rem; position: relative; overflow: hidden; transition: background 0.3s; }
+    .tech-product-card:hover { background: var(--bg3); }
+    .tech-product-card::after { content: ''; position: absolute; left: 0; right: 0; top: 0; height: 2px; background: linear-gradient(90deg, transparent 0%, rgba(232,162,32,0.45) 50%, transparent 100%); opacity: 0; pointer-events: none; z-index: 2; }
+    .tech-product-card:hover::after, .tech-product-card.scan::after { animation: scanline 0.65s ease-out forwards; }
+    @keyframes scanline { 0% { top: 0; opacity: 1; } 100% { top: 100%; opacity: 0; } }
+    .tech-product-name { font-family: 'Barlow Condensed', sans-serif; font-weight: 800; font-size: 1.6rem; text-transform: uppercase; color: var(--text); line-height: 1; }
+    .tech-product-func { font-family: 'IBM Plex Mono', monospace; font-size: 0.65rem; letter-spacing: 0.08em; text-transform: uppercase; color: var(--text-dim); }
+    .tech-product-arrow { margin-top: auto; padding-top: 1rem; font-family: 'IBM Plex Mono', monospace; font-size: 0.65rem; letter-spacing: 0.1em; text-transform: uppercase; color: var(--amber); display: flex; align-items: center; gap: 0.4rem; transition: gap 0.2s; }
+    .tech-product-card:hover .tech-product-arrow { gap: 0.8rem; }
+
+    /* ─── CTA ─── */
+    .tech-cta-section { padding: 4rem 3rem; }
+    .tech-cta-card { background: var(--bg2); border: 1px solid var(--border-amber); border-radius: var(--r); padding: 3rem; display: flex; align-items: center; justify-content: space-between; gap: 3rem; flex-wrap: wrap; }
+    .tech-cta-title { font-family: 'Barlow Condensed', sans-serif; font-weight: 800; font-size: clamp(1.4rem, 2.5vw, 2rem); text-transform: uppercase; line-height: 1; margin-bottom: 0.5rem; }
+    .tech-cta-sub { color: var(--text-muted); font-size: 0.9rem; max-width: 480px; line-height: 1.7; }
+
+    /* ─── FOOTER ─── */
+    footer { border-top: 1px solid var(--border); padding: 2rem 3rem; display: flex; align-items: center; justify-content: space-between; background: var(--bg); }
+    .footer-copy { font-family: 'IBM Plex Mono', monospace; font-size: 0.65rem; letter-spacing: 0.1em; color: var(--text-dim); }
+    .footer-links { display: flex; gap: 1.5rem; }
+    .footer-links a { font-family: 'IBM Plex Mono', monospace; font-size: 0.65rem; letter-spacing: 0.1em; text-transform: uppercase; color: var(--text-dim); text-decoration: none; transition: color 0.2s; }
+    .footer-links a:hover { color: var(--amber); }
+
+    /* ─── ANIMATIONS ─── */
+    .fade-up { opacity: 0; transform: translateY(20px); transition: opacity 0.55s ease, transform 0.55s ease; }
+    .fade-up.visible { opacity: 1; transform: none; }
+
+    /* ─── REDUCED MOTION ─── */
+    @media (prefers-reduced-motion: reduce) {
+      .fade-up, .fade-up.visible { opacity: 1; transform: none; transition: none; }
+      .tech-product-card::after, .tech-product-card.scan::after { animation: none !important; display: none; }
+      .tech-hero-inner .section-tag, #tech-hero h1, .tech-hero-sub, .tech-hero-stats, .tech-hero-inner .btn-primary { animation: none; opacity: 1; }
+    }
+
+    /* ─── MOBILE ─── */
+    @media (max-width: 900px) {
+      nav { padding: 0 1.5rem; }
+      .nav-burger { display: flex; }
+      #tech-hero { padding: 7rem 1.5rem 4rem; min-height: auto; }
+      .tech-hero-stats { grid-template-columns: repeat(2, 1fr); }
+      #tech-ops, #tech-econ, #tech-cultures, #tech-prereq, #tech-products, .tech-cta-section { padding: 3rem 1.5rem; }
+      .tech-ops-grid { grid-template-columns: 1fr; }
+      .econ-stats { grid-template-columns: 1fr; }
+      .culture-row { flex-direction: column; align-items: flex-start; gap: 1rem; }
+      .culture-left { min-width: 0; }
+      .culture-right { text-align: left; }
+      .prereq-grid { grid-template-columns: 1fr; }
+      .tech-products-grid { grid-template-columns: 1fr; }
+      .tech-cta-card { flex-direction: column; align-items: flex-start; }
+      footer { flex-direction: column; gap: 1rem; text-align: center; padding: 2rem 1.5rem; }
+    }
+  </style>
+</head>
+<body>
+
+  <nav>
+    <a href="index.html" class="logo">
+      <div class="logo-corner logo-corner--tl"></div>
+      <div class="logo-corner logo-corner--tr"></div>
+      <div class="logo-corner logo-corner--bl"></div>
+      <div class="logo-corner logo-corner--br"></div>
+      Byrud<span>.</span>Tech
+    </a>
+    <a href="index.html" class="nav-back">Zurück zur Übersicht</a>
+    <button class="nav-burger" id="navBurger" aria-label="Menü öffnen">
+      <span></span><span></span><span></span>
+    </button>
+  </nav>
+
+  <!-- ══ HERO ══ -->
+  <section id="tech-hero">
+    <div class="tech-hero-inner">
+      <div class="section-tag">// Technologie</div>
+      <h1>1 Durchgang.<br><em>Maximaler Ertrag.</em></h1>
+      <p class="tech-hero-sub">Kultivierung + Flüssigdüngung + Herbizid — drei Operationen in einer Überfahrt. Weniger Kosten, weniger Chemie, mehr Ertrag.</p>
+      <div class="tech-hero-stats">
+        <div class="tech-stat">
+          <div class="tech-stat-num counter" data-target="50" data-prefix="−" data-suffix="%">−50%</div>
+          <div class="tech-stat-label">Weniger Überfahrten</div>
+        </div>
+        <div class="tech-stat">
+          <div class="tech-stat-num counter" data-target="60" data-prefix="−" data-suffix="%">−60%</div>
+          <div class="tech-stat-label">Weniger Herbizid</div>
+        </div>
+        <div class="tech-stat">
+          <div class="tech-stat-num">+1,8 t/ha</div>
+          <div class="tech-stat-label">Max. Ertragsplus</div>
+        </div>
+        <div class="tech-stat">
+          <div class="tech-stat-num counter" data-target="210" data-prefix="+" data-suffix=" €/ha">+210 €/ha</div>
+          <div class="tech-stat-label">Max. Reingewinn</div>
+        </div>
+      </div>
+      <a href="index.html#contact" class="btn-primary">Angebot anfragen →</a>
+    </div>
+  </section>
+
+  <!-- ══ 4 OPERATIONEN ══ -->
+  <section id="tech-ops">
+    <div class="section-inner">
+      <div class="section-tag">// Was passiert in einem Durchgang</div>
+      <h2>4 Operationen. 1 Überfahrt.</h2>
+      <div class="tech-ops-grid">
+        <div class="tech-op-card">
+          <div class="tech-op-num">01</div>
+          <div class="tech-op-title">Feuchtigkeitsverschluss</div>
+          <p class="tech-op-body">Kultivierung zerstört Kapillaren und bildet eine lockere Mulchschicht. Ergebnis: Verdunstung sinkt um 20–40%.</p>
+          <div class="tech-op-accent">+10–30 mm zusätzlich gespeicherte Feuchtigkeit<br>(100–300 m³/ha)</div>
+        </div>
+        <div class="tech-op-card">
+          <div class="tech-op-num">02</div>
+          <div class="tech-op-title">Belüftung</div>
+          <p class="tech-op-body">Mechanische Lockerung bringt Sauerstoff in die Wurzelzone. Aktiviert Mikrobiologie und stimuliert das Wurzelwachstum.</p>
+          <div class="tech-op-accent">Bessere Bodenstruktur<br>Stärkere Pflanzen</div>
+        </div>
+        <div class="tech-op-card">
+          <div class="tech-op-num">03</div>
+          <div class="tech-op-title">Unkrautbekämpfung</div>
+          <p class="tech-op-body">Mechanisch zwischen den Reihen + gezielter Herbizideinsatz per Band Spraying — nur dort, wo es nötig ist.</p>
+          <div class="tech-op-accent">−30–60% weniger Pflanzenschutzmittel<br>Gleiche Wirkung</div>
+        </div>
+        <div class="tech-op-card">
+          <div class="tech-op-num">04</div>
+          <div class="tech-op-title">Düngung</div>
+          <p class="tech-op-body">KAS / NPK direkt in die Wurzelzone. +15–30% höhere Düngereffizienz durch lokale Platzierung.</p>
+          <div class="tech-op-accent">Bis zu 3 flüssige Komponenten gleichzeitig<br>Kein Streuverlust</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ══ WIRTSCHAFTLICHKEIT ══ -->
+  <section id="tech-econ">
+    <div class="section-inner">
+      <div class="section-tag">// Wirtschaftlichkeit</div>
+      <h2>Die Zahlen sprechen für sich</h2>
+      <table class="tech-econ-table">
+        <thead>
+          <tr>
+            <th>Szenario</th>
+            <th>Einnahmen</th>
+            <th>Kosten</th>
+            <th>Reingewinn</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>Konservativ</td>
+            <td>200 €/ha</td>
+            <td>120 €/ha</td>
+            <td class="col-gewinn">+80 €/ha</td>
+          </tr>
+          <tr>
+            <td>Standard</td>
+            <td>300 €/ha</td>
+            <td>130 €/ha</td>
+            <td class="col-gewinn">+170 €/ha</td>
+          </tr>
+          <tr>
+            <td>Intensiv</td>
+            <td>360 €/ha</td>
+            <td>150 €/ha</td>
+            <td class="col-gewinn">+210 €/ha</td>
+          </tr>
+        </tbody>
+      </table>
+      <div class="econ-stats">
+        <div class="econ-stat">
+          <div class="econ-stat-num">2×–4×</div>
+          <div class="econ-stat-label">ROI</div>
+        </div>
+        <div class="econ-stat">
+          <div class="econ-stat-num">75–160</div>
+          <div class="econ-stat-label">€/ha Gesamtkosten</div>
+        </div>
+        <div class="econ-stat">
+          <div class="econ-stat-num">200–360</div>
+          <div class="econ-stat-label">€/ha Einnahmen</div>
+        </div>
+      </div>
+      <div class="tech-costs">
+        <div class="tech-cost-row">
+          <span>Ein Durchgang Technik</span>
+          <span class="cost-val">25–45 €/ha</span>
+        </div>
+        <div class="tech-cost-row">
+          <span>Flüssigdünger</span>
+          <span class="cost-val">30–80 €/ha</span>
+        </div>
+        <div class="tech-cost-row">
+          <span>Herbizid (Band Spraying)</span>
+          <span class="cost-val">20–50 €/ha</span>
+        </div>
+        <div class="tech-cost-row total">
+          <span>Gesamt</span>
+          <span class="cost-val">75–160 €/ha</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ══ KULTUREN ══ -->
+  <section id="tech-cultures">
+    <div class="section-inner">
+      <div class="section-tag">// Kulturen</div>
+      <h2>Wo diese Technologie am besten wirkt</h2>
+      <div class="cultures-list">
+
+        <div class="culture-row culture-row--highlight">
+          <div class="culture-left">
+            <span class="culture-emoji">🌽</span>
+            <div class="culture-name">Mais</div>
+          </div>
+          <div class="culture-center">
+            <div class="culture-desc">Maximaler Effekt. Ertragsplus +1,0–1,8 t/ha (kombiniert). Feuchtigkeit +10–25 mm gespeichert. ROI: 2×–6×.</div>
+            <div class="culture-specs">
+              <span class="culture-spec">Tiefe: 3–8 cm</span>
+              <span class="culture-spec">Geschwindigkeit: 6–10 km/h</span>
+            </div>
+          </div>
+          <div class="culture-right">
+            <div class="culture-profit">+80–210 €/ha</div>
+            <div class="culture-profit-label">Reingewinn</div>
+          </div>
+        </div>
+
+        <div class="culture-row">
+          <div class="culture-left">
+            <span class="culture-emoji">🌻</span>
+            <div class="culture-name">Sonnenblume</div>
+          </div>
+          <div class="culture-center">
+            <div class="culture-desc">Ertragsplus +0,3–1,0 t/ha. Feuchtigkeit +10–30 mm (100–300 m³/ha). Starker Effekt bei Trockenheit.</div>
+            <div class="culture-specs">
+              <span class="culture-spec">Tiefe: 4–8 cm</span>
+              <span class="culture-spec">Geschwindigkeit: 8–10 km/h</span>
+            </div>
+          </div>
+          <div class="culture-right">
+            <div class="culture-profit">+130–180 €/ha</div>
+            <div class="culture-profit-label">Reingewinn</div>
+          </div>
+        </div>
+
+        <div class="culture-row">
+          <div class="culture-left">
+            <span class="culture-emoji">🌱</span>
+            <div class="culture-name">Soja</div>
+          </div>
+          <div class="culture-center">
+            <div class="culture-desc">Ertragsplus +0,2–0,8 t/ha. Feuchtigkeit +10–25 mm. Kritisch: Belüftung + Knöllchenbakterien.</div>
+            <div class="culture-specs">
+              <span class="culture-spec">Tiefe: 3–6 cm</span>
+              <span class="culture-spec">Geschwindigkeit: 6–9 km/h</span>
+            </div>
+          </div>
+          <div class="culture-right">
+            <div class="culture-profit">+120–180 €/ha</div>
+            <div class="culture-profit-label">Reingewinn</div>
+          </div>
+        </div>
+
+        <div class="culture-row">
+          <div class="culture-left">
+            <span class="culture-emoji">🌿</span>
+            <div class="culture-name">Raps</div>
+          </div>
+          <div class="culture-center">
+            <div class="culture-desc">Eingeschränkt. Ertragsplus +0,2–0,7 t/ha. Feuchtigkeit +8–20 mm. Frühe Phasen. Mikronährstoffe (Bor!) wichtig.</div>
+            <div class="culture-specs">
+              <span class="culture-spec">Tiefe: 3–6 cm</span>
+              <span class="culture-spec">Geschwindigkeit: 6–8 km/h</span>
+            </div>
+          </div>
+          <div class="culture-right">
+            <div class="culture-profit">+80–120 €/ha</div>
+            <div class="culture-profit-label">Reingewinn</div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ══ VORAUSSETZUNGEN ══ -->
+  <section id="tech-prereq">
+    <div class="section-inner">
+      <div class="section-tag">// Voraussetzungen</div>
+      <h2>So erreichen Sie maximale Ergebnisse</h2>
+      <div class="prereq-grid">
+        <div class="prereq-card">
+          <div class="prereq-card-tag">Technik</div>
+          <div class="prereq-card-title">Ausrüstung</div>
+          <ul class="prereq-list">
+            <li>Kultivator mit Applikationssystem (flüssig / Granulat)</li>
+            <li>Präzisionsführung: RTK oder Kamera EXACT</li>
+            <li>Herbizid-Düsen: exakt im Zwischenreihenbereich</li>
+          </ul>
+        </div>
+        <div class="prereq-card">
+          <div class="prereq-card-tag">Agronomie</div>
+          <div class="prereq-card-title">Agrotechnik</div>
+          <ul class="prereq-list">
+            <li>Arbeitstiefe: 3–8 cm</li>
+            <li>Dünger: 5–10 cm Abstand zur Pflanze</li>
+            <li>Kein Dünger in trockenen Boden ohne Feuchtigkeit</li>
+          </ul>
+        </div>
+        <div class="prereq-card">
+          <div class="prereq-card-tag">Timing</div>
+          <div class="prereq-card-title">Zeitpunkt</div>
+          <ul class="prereq-list">
+            <li>Ideal: nach Niederschlag / vor Regen</li>
+            <li>Vor Reihenschluss</li>
+            <li>Blattdüngung: in der aktiven Wachstumsphase</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ══ BYRUD LÖSUNG ══ -->
+  <section id="tech-products">
+    <div class="section-inner">
+      <div class="section-tag">// Byrud Lösung</div>
+      <h2>Unsere Technik für diese Technologie</h2>
+      <div class="tech-products-grid">
+        <a class="tech-product-card" href="rover.html">
+          <div class="tech-product-name">ROVER</div>
+          <div class="tech-product-func">Kultivierung &amp; Pflege</div>
+          <span class="tech-product-arrow">Mehr erfahren →</span>
+        </a>
+        <a class="tech-product-card" href="rover.html">
+          <div class="tech-product-name">EXACT</div>
+          <div class="tech-product-func">Präzisionsführung 1 cm</div>
+          <span class="tech-product-arrow">Mehr erfahren →</span>
+        </a>
+        <a class="tech-product-card" href="lixa.html">
+          <div class="tech-product-name">LIXA</div>
+          <div class="tech-product-func">Flüssigdüngung KAS / NPK</div>
+          <span class="tech-product-arrow">Mehr erfahren →</span>
+        </a>
+        <a class="tech-product-card" href="lixa.html">
+          <div class="tech-product-name">LIXA-O</div>
+          <div class="tech-product-func">Band Spraying — −60% PSM</div>
+          <span class="tech-product-arrow">Mehr erfahren →</span>
+        </a>
+        <a class="tech-product-card" href="grano.html">
+          <div class="tech-product-name">GRANO</div>
+          <div class="tech-product-func">Granulatdüngung</div>
+          <span class="tech-product-arrow">Mehr erfahren →</span>
+        </a>
+        <a class="tech-product-card" href="veles.html">
+          <div class="tech-product-name">VELES</div>
+          <div class="tech-product-func">Gleichzeitige Aussaat</div>
+          <span class="tech-product-arrow">Mehr erfahren →</span>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ══ CTA ══ -->
+  <section class="tech-cta-section">
+    <div class="section-inner">
+      <div class="tech-cta-card">
+        <div>
+          <div class="tech-cta-title">BERECHNEN SIE IHREN VORTEIL</div>
+          <p class="tech-cta-sub">Lassen Sie sich individuell beraten — wir kalkulieren den Mehrwert für Ihren Betrieb.</p>
+        </div>
+        <a href="index.html#contact" class="btn-primary">Angebot anfragen →</a>
+      </div>
+    </div>
+  </section>
+
+  <footer>
+    <span class="footer-copy">© 2025 Byrud Tech. Alle Rechte vorbehalten.</span>
+    <div class="footer-links"><a href="#">Impressum</a><a href="#">Datenschutz</a><a href="#">AGB</a></div>
+    <span class="footer-copy">Hamburg · byrud-tech.com</span>
+  </footer>
+
+  <script>
+    /* COUNTER ANIMATION */
+    function animateCounter(el) {
+      const target = +el.dataset.target;
+      const prefix = el.dataset.prefix || '';
+      const suffix = el.dataset.suffix || '';
+      const delay = +(el.dataset.delay || 0);
+      const duration = 1200;
+      function ease(t) { return 1 - Math.pow(1 - t, 3); }
+      const startTime = performance.now() + delay;
+      function tick(now) {
+        const t = Math.min(Math.max((now - startTime) / duration, 0), 1);
+        el.textContent = prefix + Math.round(ease(t) * target) + suffix;
+        if (t < 1) requestAnimationFrame(tick);
+      }
+      requestAnimationFrame(tick);
+    }
+    const counterObserver = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          animateCounter(entry.target);
+          counterObserver.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.5 });
+    document.querySelectorAll('.counter').forEach(el => counterObserver.observe(el));
+
+    /* FADE-UP — auto-add to groups */
+    [
+      ['.tech-op-card', 80],
+      ['.culture-row', 80],
+      ['.prereq-card', 100],
+      ['.tech-product-card', 80],
+    ].forEach(([sel, stagger]) => {
+      document.querySelectorAll(sel).forEach((el, i) => {
+        el.classList.add('fade-up');
+        el.style.transitionDelay = (i * stagger) + 'ms';
+      });
+    });
+
+    const fadeObserver = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('visible');
+          fadeObserver.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.12 });
+    document.querySelectorAll('.fade-up').forEach(el => fadeObserver.observe(el));
+
+    /* MOBILE SCANLINE on product cards */
+    const scanObserver = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting && window.matchMedia('(max-width: 900px)').matches) {
+          entry.target.classList.add('scan');
+          entry.target.addEventListener('animationend', () => entry.target.classList.remove('scan'), { once: true });
+        }
+      });
+    }, { threshold: 0.5 });
+    document.querySelectorAll('.tech-product-card').forEach(el => scanObserver.observe(el));
+  </script>
+</body>
+</html>
