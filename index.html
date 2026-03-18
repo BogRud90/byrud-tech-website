@@ -33,7 +33,7 @@
     .logo-corner--br { bottom: 0; right: 0; border-bottom-width: 1px; border-right-width: 1px; }
     .logo span { color: var(--amber); }
     .nav-links { display: flex; gap: 2.5rem; list-style: none; }
-    .nav-links a { font-family: 'IBM Plex Mono', monospace; font-size: 0.72rem; letter-spacing: 0.1em; text-transform: uppercase; color: var(--text-muted); text-decoration: none; transition: color 0.2s; }
+    .nav-links a { font-family: 'IBM Plex Mono', monospace; font-size: 0.72rem; letter-spacing: 0.1em; text-transform: uppercase; color: var(--text-muted); text-decoration: none; transition: color 0.2s; position: relative; }
     .nav-links a:hover { color: var(--amber); }
     .nav-cta { display: none; }
     a[href^="tel"], a[href^="mailto"] { color: inherit; text-decoration: none; }
@@ -248,12 +248,44 @@
       .usp-dot { display: none; }
       .usp-item { white-space: normal; }
       .results-cta { flex-direction: column; align-items: flex-start; gap: 1.5rem; padding: 2rem; }
+      .results-cta-divider { display: none; }
+      .results-cta-stats { gap: 1.5rem; flex-wrap: wrap; }
       .results-cards { grid-template-columns: 1fr; }
       .markets-grid { grid-template-columns: repeat(2, 1fr) !important; }
       footer { flex-direction: column; gap: 1rem; text-align: center; }
       .hero-bg-image { width: 100%; opacity: 0.7; }
       .hero-bg-image img { opacity: 0.15; }
       .hero-bg-image-fade { background: linear-gradient(90deg, #0b0b0b 0%, transparent 50%); }
+    }
+
+    /* FADE-UP SCROLL ANIMATION */
+    .fade-up { opacity: 0; transform: translateY(20px); transition: opacity 0.55s ease, transform 0.55s ease; }
+    .fade-up.visible { opacity: 1; transform: none; }
+    .product-card.fade-up { transition: background 0.3s, opacity 0.55s ease, transform 0.55s ease; }
+
+    /* SCANLINE on product-card hover / scroll */
+    .product-card::after { content: ''; position: absolute; left: 0; right: 0; top: 0; height: 2px; background: linear-gradient(90deg, transparent 0%, rgba(232,162,32,0.45) 50%, transparent 100%); opacity: 0; pointer-events: none; z-index: 2; }
+    .product-card:hover::after, .product-card.scan::after { animation: scanline 0.65s ease-out forwards; }
+    @keyframes scanline { 0% { top: 0; opacity: 1; } 100% { top: 100%; opacity: 0; } }
+
+    /* NAV active underline */
+    .nav-links a::after { content: ''; position: absolute; bottom: -4px; left: 0; right: 0; height: 1px; background: var(--amber); transform: scaleX(0); transform-origin: left; transition: transform 0.25s ease; }
+    .nav-links a.active { color: var(--amber); }
+    .nav-links a.active::after, .nav-links a:hover::after { transform: scaleX(1); }
+
+    /* CTA MINI-STATS */
+    .results-cta { align-items: flex-start; }
+    .results-cta-divider { width: 1px; background: var(--border); align-self: stretch; flex-shrink: 0; }
+    .results-cta-stats { display: flex; gap: 2rem; flex-shrink: 0; }
+    .results-cta-stat-num { font-family: 'Barlow Condensed', sans-serif; font-size: 2.5rem; font-weight: 800; color: var(--amber); line-height: 1; }
+    .results-cta-stat-label { font-family: 'IBM Plex Mono', monospace; font-size: 0.6rem; letter-spacing: 0.1em; text-transform: uppercase; color: var(--text-dim); margin-top: 0.25rem; max-width: 80px; line-height: 1.4; }
+
+    /* REDUCED MOTION */
+    @media (prefers-reduced-motion: reduce) {
+      .fade-up, .fade-up.visible { opacity: 1; transform: none; transition: none; }
+      .product-card::after, .product-card.scan::after { animation: none !important; display: none; }
+      .nav-links a::after { transition: none; }
+      .hero-label, h1, .hero-sub, .hero-actions { animation: none; opacity: 1; }
     }
   </style>
 </head>
@@ -325,8 +357,23 @@
 
       <div class="results-cta">
         <div class="results-cta-left">
-          <div class="results-cta-num">+€200</div>
+          <div class="results-cta-num counter" data-target="200" data-prefix="+€">+€200</div>
           <div class="results-cta-label">Zusätzliche Marge pro Hektar</div>
+        </div>
+        <div class="results-cta-divider"></div>
+        <div class="results-cta-stats">
+          <div class="results-cta-stat">
+            <div class="results-cta-stat-num counter" data-target="30" data-prefix="−" data-suffix="%" data-delay="200">−30%</div>
+            <div class="results-cta-stat-label">Herbizid­kosten</div>
+          </div>
+          <div class="results-cta-stat">
+            <div class="results-cta-stat-num counter" data-target="40" data-prefix="−" data-suffix="%" data-delay="400">−40%</div>
+            <div class="results-cta-stat-label">Arbeits­stunden</div>
+          </div>
+          <div class="results-cta-stat">
+            <div class="results-cta-stat-num counter" data-target="50" data-prefix="−" data-suffix="%" data-delay="600">−50%</div>
+            <div class="results-cta-stat-label">Kraftstoff­verbrauch</div>
+          </div>
         </div>
         <div class="results-cta-center">
           <div class="results-cta-title">ROI: 1–2 Saisons oder ab 1.000 ha</div>
@@ -497,10 +544,10 @@
           <p class="platform-header-body">Byrud Tech hat einen universellen Trägerrahmen entwickelt, auf den verschiedene Anbaugeräte für Aussaat und Pflege montiert werden können. Das Ergebnis: bis zu 4 Feldoperationen in einem einzigen Durchgang — weniger Überfahrten, weniger Kraftstoff, mehr Ertrag.</p>
         </div>
         <div class="platform-stats">
-          <div class="platform-stat"><div class="platform-stat-num">4×</div><div class="platform-stat-label">Operationen pro Durchgang</div></div>
-          <div class="platform-stat"><div class="platform-stat-num">−40%</div><div class="platform-stat-label">Weniger Überfahrten</div></div>
-          <div class="platform-stat"><div class="platform-stat-num">18</div><div class="platform-stat-label">km/h Arbeitsgeschwindigkeit</div></div>
-          <div class="platform-stat"><div class="platform-stat-num">1–2</div><div class="platform-stat-label">Saisons bis ROI</div></div>
+          <div class="platform-stat"><div class="platform-stat-num counter" data-target="4" data-suffix="×">4×</div><div class="platform-stat-label">Operationen pro Durchgang</div></div>
+          <div class="platform-stat"><div class="platform-stat-num counter" data-target="40" data-prefix="−" data-suffix="%">−40%</div><div class="platform-stat-label">Weniger Überfahrten</div></div>
+          <div class="platform-stat"><div class="platform-stat-num counter" data-target="18">18</div><div class="platform-stat-label">km/h Arbeitsgeschwindigkeit</div></div>
+          <div class="platform-stat fade-up"><div class="platform-stat-num">1–2</div><div class="platform-stat-label">Saisons bis ROI</div></div>
         </div>
       </div>
 
@@ -775,6 +822,7 @@
   </div>
 
   <script>
+    /* MODAL */
     function openModal(id) {
       document.getElementById('modal-' + id).classList.add('open');
       document.body.style.overflow = 'hidden';
@@ -798,14 +846,16 @@
       }
     });
 
+    /* NAV SCROLL — class-based active highlight */
     const sections = document.querySelectorAll('section[id]');
     const navLinks = document.querySelectorAll('.nav-links a');
     window.addEventListener('scroll', () => {
       let current = '';
       sections.forEach(s => { if (window.scrollY >= s.offsetTop - 120) current = s.id; });
-      navLinks.forEach(a => { a.style.color = a.getAttribute('href') === '#' + current ? 'var(--amber)' : ''; });
-    });
+      navLinks.forEach(a => a.classList.toggle('active', a.getAttribute('href') === '#' + current));
+    }, { passive: true });
 
+    /* BURGER / DRAWER */
     const burger = document.getElementById('navBurger');
     const drawer = document.getElementById('mobileDrawer');
     burger.addEventListener('click', () => {
@@ -823,6 +873,7 @@
       });
     });
 
+    /* FORM */
     function handleSubmit(e) {
       e.preventDefault();
       const btn = e.target.querySelector('button');
@@ -831,6 +882,68 @@
       btn.style.color = '#fff';
       e.target.reset();
     }
+
+    /* COUNTER ANIMATION */
+    function animateCounter(el) {
+      const target = +el.dataset.target;
+      const prefix = el.dataset.prefix || '';
+      const suffix = el.dataset.suffix || '';
+      const delay = +(el.dataset.delay || 0);
+      const duration = 1200;
+      function ease(t) { return 1 - Math.pow(1 - t, 3); }
+      const startTime = performance.now() + delay;
+      function tick(now) {
+        const t = Math.min(Math.max((now - startTime) / duration, 0), 1);
+        el.textContent = prefix + Math.round(ease(t) * target) + suffix;
+        if (t < 1) requestAnimationFrame(tick);
+      }
+      requestAnimationFrame(tick);
+    }
+    const counterObserver = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          animateCounter(entry.target);
+          counterObserver.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.5 });
+    document.querySelectorAll('.counter').forEach(el => counterObserver.observe(el));
+
+    /* FADE-UP — auto-add classes to groups */
+    [
+      ['.result-card-item', 70],
+      ['.product-card', 80],
+      ['.platform-tile', 80],
+      ['.about-checklist li', 80],
+      ['.market-item', 60],
+    ].forEach(([sel, stagger]) => {
+      document.querySelectorAll(sel).forEach((el, i) => {
+        el.classList.add('fade-up');
+        el.style.transitionDelay = (i * stagger) + 'ms';
+      });
+    });
+    document.querySelectorAll('.section-header').forEach(el => el.classList.add('fade-up'));
+
+    const fadeObserver = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('visible');
+          fadeObserver.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.12 });
+    document.querySelectorAll('.fade-up').forEach(el => fadeObserver.observe(el));
+
+    /* MOBILE SCANLINE — scroll-triggered on touch devices */
+    const scanObserver = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting && window.matchMedia('(max-width: 900px)').matches) {
+          entry.target.classList.add('scan');
+          entry.target.addEventListener('animationend', () => entry.target.classList.remove('scan'), { once: true });
+        }
+      });
+    }, { threshold: 0.5 });
+    document.querySelectorAll('.product-card').forEach(el => scanObserver.observe(el));
   </script>
 </body>
 </html>
