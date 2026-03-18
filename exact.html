@@ -1,0 +1,488 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>EXACT Kameraführung — Byrud Tech</title>
+  <meta name="description" content="EXACT — Präzisionsführung für den ROVER Kultivator. CMOS-Kamera mit 1 cm Genauigkeit bei Tag und Nacht." />
+  <meta name="format-detection" content="telephone=no" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@400;600;700;800&family=IBM+Plex+Mono:wght@400;500&family=Barlow:wght@300;400;500&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    :root {
+      --bg: #0b0b0b; --bg2: #111111; --bg3: #161616;
+      --amber: #e8a220; --amber-dim: #b87e18; --amber-glow: rgba(232,162,32,0.12);
+      --text: #f0ede8; --text-muted: #888880; --text-dim: #555550;
+      --border: rgba(255,255,255,0.07); --border-amber: rgba(232,162,32,0.3);
+      --r: 6px; --r-sm: 4px;
+    }
+    html { scroll-behavior: smooth; }
+    body { background: var(--bg); color: var(--text); font-family: 'Barlow', sans-serif; font-weight: 300; line-height: 1.6; overflow-x: hidden; }
+    body::before { content: ''; position: fixed; inset: 0; background-image: linear-gradient(var(--border) 1px, transparent 1px), linear-gradient(90deg, var(--border) 1px, transparent 1px); background-size: 60px 60px; pointer-events: none; z-index: 0; opacity: 0.15; }
+    section, footer, nav { position: relative; z-index: 1; }
+    * { -webkit-tap-highlight-color: transparent; }
+    a[href^="tel"], a[href^="mailto"] { color: inherit; text-decoration: none; }
+
+    /* NAV */
+    nav { position: fixed; top: 0; left: 0; right: 0; z-index: 100; display: flex; align-items: center; justify-content: space-between; padding: 0 3rem; height: 64px; background: rgba(11,11,11,0.88); backdrop-filter: blur(12px); border-bottom: 1px solid var(--border); }
+    .logo { font-family: 'Barlow Condensed', sans-serif; font-weight: 800; font-size: 1.3rem; letter-spacing: 0.08em; text-transform: uppercase; color: var(--text); text-decoration: none; position: relative; padding: 5px 8px; }
+    .logo-corner { position: absolute; width: 7px; height: 7px; border-color: var(--amber); border-style: solid; border-width: 0; }
+    .logo-corner--tl { top: 0; left: 0; border-top-width: 1px; border-left-width: 1px; }
+    .logo-corner--tr { top: 0; right: 0; border-top-width: 1px; border-right-width: 1px; }
+    .logo-corner--bl { bottom: 0; left: 0; border-bottom-width: 1px; border-left-width: 1px; }
+    .logo-corner--br { bottom: 0; right: 0; border-bottom-width: 1px; border-right-width: 1px; }
+    .logo span { color: var(--amber); }
+    .nav-back { font-family: 'IBM Plex Mono', monospace; font-size: 0.72rem; letter-spacing: 0.1em; text-transform: uppercase; color: var(--text-muted); text-decoration: none; transition: color 0.2s; display: flex; align-items: center; gap: 0.5rem; }
+    .nav-back:hover { color: var(--amber); }
+    .nav-back::before { content: '←'; }
+
+    /* BUTTONS */
+    .btn-primary { font-family: 'IBM Plex Mono', monospace; font-size: 0.78rem; letter-spacing: 0.1em; text-transform: uppercase; background: var(--amber); color: #0b0b0b; padding: 0.9rem 2rem; text-decoration: none; font-weight: 500; transition: opacity 0.2s; display: inline-block; border-radius: var(--r-sm); }
+    .btn-primary:hover { opacity: 0.85; }
+    .btn-back-link { font-family: 'IBM Plex Mono', monospace; font-size: 0.72rem; letter-spacing: 0.1em; text-transform: uppercase; color: var(--text-muted); text-decoration: none; transition: color 0.2s; }
+    .btn-back-link:hover { color: var(--amber); }
+    .section-tag { font-family: 'IBM Plex Mono', monospace; font-size: 0.68rem; letter-spacing: 0.2em; text-transform: uppercase; color: var(--amber); margin-bottom: 0.75rem; }
+
+    /* BLUEPRINT FRAME */
+    .blueprint-frame { position: relative; background: var(--bg3); border: 1px solid var(--border); overflow: hidden; }
+    .blueprint-frame-inner { position: absolute; inset: 1.5rem; border: 1px dashed rgba(232,162,32,0.15); pointer-events: none; z-index: 1; }
+    .blueprint-frame-corner { position: absolute; width: 10px; height: 10px; pointer-events: none; z-index: 2; }
+    .blueprint-frame-corner--tl { top: 1.5rem; left: 1.5rem; border-top: 1px solid var(--amber); border-left: 1px solid var(--amber); }
+    .blueprint-frame-corner--tr { top: 1.5rem; right: 1.5rem; border-top: 1px solid var(--amber); border-right: 1px solid var(--amber); }
+    .blueprint-frame-corner--bl { bottom: 1.5rem; left: 1.5rem; border-bottom: 1px solid var(--amber); border-left: 1px solid var(--amber); }
+    .blueprint-frame-corner--br { bottom: 1.5rem; right: 1.5rem; border-bottom: 1px solid var(--amber); border-right: 1px solid var(--amber); }
+    .blueprint-frame img { width: 100%; height: 100%; object-fit: contain; padding: 2.5rem; position: relative; z-index: 0; display: block; }
+    .blueprint-frame-bar { position: absolute; bottom: 2rem; left: 50%; transform: translateX(-50%); display: flex; align-items: center; gap: 1rem; z-index: 2; white-space: nowrap; }
+    .blueprint-frame-bar span { font-family: 'IBM Plex Mono', monospace; font-size: 0.6rem; letter-spacing: 0.08em; text-transform: uppercase; color: var(--text-dim); }
+    .blueprint-frame-bar-divider { width: 1px; height: 12px; background: var(--border); }
+
+    /* HERO */
+    .product-hero { padding: 7rem 3rem 5rem; }
+    .product-hero-inner { display: grid; grid-template-columns: 55% 45%; gap: 5rem; align-items: center; max-width: 1400px; margin: 0 auto; }
+    .product-hero-text .section-tag { margin-bottom: 0.5rem; }
+    .product-hero-title { font-family: 'Barlow Condensed', sans-serif; font-weight: 800; font-size: clamp(3rem, 6vw, 5.5rem); line-height: 0.9; letter-spacing: -0.01em; text-transform: uppercase; margin-bottom: 1.25rem; }
+    .product-hero-sub { font-size: 1.05rem; color: var(--text-muted); line-height: 1.75; margin-bottom: 2.5rem; max-width: 420px; }
+    .product-stats { display: grid; grid-template-columns: repeat(4, 1fr); gap: 1px; background: var(--border); margin-bottom: 2.5rem; border-radius: var(--r-sm); overflow: hidden; }
+    .product-stat { background: var(--bg2); padding: 1.25rem 1rem; }
+    .product-stat-num { font-family: 'Barlow Condensed', sans-serif; font-weight: 800; font-size: 1.9rem; color: var(--amber); line-height: 1; margin-bottom: 0.3rem; }
+    .product-stat-label { font-family: 'IBM Plex Mono', monospace; font-size: 0.6rem; letter-spacing: 0.08em; text-transform: uppercase; color: var(--text-dim); }
+
+    /* ADVANTAGES (3-col) */
+    .exact-advantages { padding: 5rem 3rem; background: var(--bg2); border-top: 1px solid var(--border); border-bottom: 1px solid var(--border); }
+    .exact-advantages-inner { max-width: 1400px; margin: 0 auto; }
+    .exact-advantages-header { margin-bottom: 3rem; }
+    .exact-advantages-title { font-family: 'Barlow Condensed', sans-serif; font-weight: 800; font-size: clamp(1.8rem, 3vw, 2.8rem); text-transform: uppercase; line-height: 0.95; }
+    .exact-adv-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1px; background: var(--border); border-radius: var(--r); overflow: hidden; }
+    .exact-adv-card { background: var(--bg); padding: 2.5rem 2rem; }
+    .exact-adv-num { font-family: 'Barlow Condensed', sans-serif; font-weight: 800; font-size: 1rem; color: var(--amber); letter-spacing: 0.1em; margin-bottom: 1.25rem; }
+    .exact-adv-title { font-family: 'Barlow Condensed', sans-serif; font-weight: 700; font-size: 1.2rem; text-transform: uppercase; letter-spacing: 0.04em; color: var(--text); margin-bottom: 0.75rem; }
+    .exact-adv-desc { font-size: 0.92rem; color: var(--text-muted); line-height: 1.75; }
+
+    /* SCENARIOS */
+    .exact-scenarios { padding: 5rem 3rem; }
+    .exact-scenarios-inner { max-width: 1400px; margin: 0 auto; }
+    .exact-scenarios-header { margin-bottom: 2.5rem; }
+    .exact-scenarios-title { font-family: 'Barlow Condensed', sans-serif; font-weight: 800; font-size: clamp(1.8rem, 3vw, 2.8rem); text-transform: uppercase; line-height: 0.95; }
+    .exact-scenario-list { display: flex; flex-direction: column; gap: 1px; background: var(--border); border-radius: var(--r); overflow: hidden; }
+    .exact-scenario { background: var(--bg); padding: 1.75rem 2.5rem; display: flex; align-items: center; gap: 2.5rem; position: relative; overflow: hidden; transition: background 0.3s; }
+    .exact-scenario:hover { background: var(--bg3); }
+    .exact-scenario::after { content: ''; position: absolute; left: 0; right: 0; top: 0; height: 2px; background: linear-gradient(90deg, transparent 0%, rgba(232,162,32,0.45) 50%, transparent 100%); opacity: 0; pointer-events: none; }
+    .exact-scenario:hover::after, .exact-scenario.scan::after { animation: scanline 0.65s ease-out forwards; }
+    @keyframes scanline { 0% { top: 0; opacity: 1; } 100% { top: 100%; opacity: 0; } }
+    .exact-scenario-accent { font-family: 'Barlow Condensed', sans-serif; font-weight: 800; font-size: 1.6rem; color: var(--amber); flex-shrink: 0; min-width: 160px; line-height: 1; }
+    .exact-scenario-body { flex: 1; }
+    .exact-scenario-title { font-family: 'Barlow Condensed', sans-serif; font-weight: 700; font-size: 1.05rem; text-transform: uppercase; letter-spacing: 0.04em; color: var(--text); margin-bottom: 0.4rem; }
+    .exact-scenario-desc { font-size: 0.92rem; color: var(--text-muted); line-height: 1.7; }
+
+    /* ECON COMPARISON */
+    .exact-econ { padding: 5rem 3rem; background: var(--bg2); border-top: 1px solid var(--border); border-bottom: 1px solid var(--border); }
+    .exact-econ-inner { max-width: 1400px; margin: 0 auto; }
+    .exact-econ-header { margin-bottom: 2.5rem; }
+    .exact-econ-title { font-family: 'Barlow Condensed', sans-serif; font-weight: 800; font-size: clamp(1.8rem, 3vw, 2.8rem); text-transform: uppercase; line-height: 0.95; }
+    .exact-econ-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1px; background: var(--border); border-radius: var(--r); overflow: hidden; margin-bottom: 1.5rem; }
+    .exact-econ-col { padding: 2.5rem; }
+    .exact-econ-col--without { background: var(--bg3); }
+    .exact-econ-col--with { background: var(--bg); border: 1px solid var(--border-amber); }
+    .exact-econ-col-title { font-family: 'Barlow Condensed', sans-serif; font-weight: 700; font-size: 1.1rem; text-transform: uppercase; letter-spacing: 0.04em; margin-bottom: 1.5rem; }
+    .exact-econ-col--without .exact-econ-col-title { color: var(--text-muted); }
+    .exact-econ-col--with .exact-econ-col-title { color: var(--amber); }
+    .exact-econ-row { display: flex; justify-content: space-between; align-items: baseline; gap: 1rem; padding: 0.85rem 0; border-bottom: 1px solid var(--border); }
+    .exact-econ-row:last-child { border-bottom: none; }
+    .exact-econ-key { font-family: 'IBM Plex Mono', monospace; font-size: 0.65rem; letter-spacing: 0.08em; text-transform: uppercase; color: var(--text-dim); }
+    .exact-econ-val { color: var(--text-muted); font-size: 0.92rem; text-align: right; }
+    .exact-econ-col--with .exact-econ-val { color: var(--text); }
+    .exact-econ-note { font-size: 0.95rem; color: var(--text-muted); line-height: 1.75; padding-top: 1.25rem; border-top: 1px solid var(--border); }
+    .exact-econ-note strong { color: var(--amber); font-weight: 500; }
+
+    /* COMPAT */
+    .exact-compat { padding: 5rem 3rem; }
+    .exact-compat-inner { max-width: 1400px; margin: 0 auto; }
+    .exact-compat-header { margin-bottom: 2rem; }
+    .exact-compat-title { font-family: 'Barlow Condensed', sans-serif; font-weight: 800; font-size: clamp(1.8rem, 3vw, 2.8rem); text-transform: uppercase; line-height: 0.95; margin-bottom: 1rem; }
+    .exact-compat-desc { color: var(--text-muted); font-size: 1rem; line-height: 1.8; max-width: 680px; }
+    .exact-compat-tiles { display: grid; grid-template-columns: repeat(5, 1fr); gap: 1px; background: var(--border); border-radius: var(--r); overflow: hidden; margin-top: 2rem; }
+    .exact-compat-tile { background: var(--bg2); padding: 1.5rem 1rem; display: flex; flex-direction: column; align-items: center; gap: 0.4rem; text-align: center; }
+    .exact-compat-tile-name { font-family: 'Barlow Condensed', sans-serif; font-weight: 700; font-size: 1rem; text-transform: uppercase; letter-spacing: 0.04em; color: var(--text); }
+    .exact-compat-tile-check { font-family: 'IBM Plex Mono', monospace; font-size: 0.65rem; letter-spacing: 0.08em; text-transform: uppercase; color: var(--amber); }
+
+    /* SPECS */
+    .product-specs { padding: 5rem 3rem; background: var(--bg2); border-top: 1px solid var(--border); border-bottom: 1px solid var(--border); }
+    .product-specs-inner { max-width: 1400px; margin: 0 auto; }
+    .product-specs-header { margin-bottom: 2.5rem; }
+    .product-specs-title { font-family: 'Barlow Condensed', sans-serif; font-weight: 800; font-size: clamp(1.8rem, 3vw, 2.8rem); text-transform: uppercase; letter-spacing: -0.01em; line-height: 0.95; }
+    .specs-row { display: grid; grid-template-columns: 280px 1fr; border-bottom: 1px solid var(--border); }
+    .specs-row:first-child { border-top: 1px solid var(--border); }
+    .specs-key { font-family: 'IBM Plex Mono', monospace; font-size: 0.65rem; letter-spacing: 0.1em; text-transform: uppercase; color: var(--text-dim); padding: 1.1rem 0; }
+    .specs-val { color: var(--text-muted); font-size: 0.95rem; padding: 1.1rem 2rem 1.1rem 0; }
+
+    /* CTA */
+    .product-cta-section { padding: 4rem 3rem; }
+    .product-cta-inner { max-width: 1400px; margin: 0 auto; }
+    .product-cta-card { background: var(--bg2); border: 1px solid var(--border-amber); border-radius: var(--r); padding: 3rem; display: flex; align-items: center; justify-content: space-between; gap: 3rem; flex-wrap: wrap; }
+    .product-cta-title { font-family: 'Barlow Condensed', sans-serif; font-weight: 800; font-size: clamp(1.4rem, 2.5vw, 2rem); text-transform: uppercase; line-height: 1; margin-bottom: 0.5rem; }
+    .product-cta-sub { color: var(--text-muted); font-size: 0.9rem; }
+    .product-cta-actions { display: flex; align-items: center; gap: 1.5rem; flex-wrap: wrap; flex-shrink: 0; }
+
+    /* FOOTER */
+    footer { border-top: 1px solid var(--border); padding: 2rem 3rem; display: flex; align-items: center; justify-content: space-between; background: var(--bg); }
+    .footer-copy { font-family: 'IBM Plex Mono', monospace; font-size: 0.65rem; letter-spacing: 0.1em; color: var(--text-dim); }
+    .footer-links { display: flex; gap: 1.5rem; }
+    .footer-links a { font-family: 'IBM Plex Mono', monospace; font-size: 0.65rem; letter-spacing: 0.1em; text-transform: uppercase; color: var(--text-dim); text-decoration: none; transition: color 0.2s; }
+    .footer-links a:hover { color: var(--amber); }
+
+    /* HERO ENTRY ANIMATIONS */
+    @keyframes fadeUp { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
+    .product-hero-text .section-tag { animation: fadeUp 0.5s 0.05s ease both; }
+    .product-hero-title               { animation: fadeUp 0.5s 0.15s ease both; }
+    .product-hero-sub                 { animation: fadeUp 0.5s 0.25s ease both; }
+    .product-stats                    { animation: fadeUp 0.5s 0.30s ease both; }
+    .product-hero-text .btn-primary   { animation: fadeUp 0.5s 0.35s ease both; }
+
+    /* FADE-UP SCROLL */
+    .fade-up { opacity: 0; transform: translateY(20px); transition: opacity 0.55s ease, transform 0.55s ease; }
+    .fade-up.visible { opacity: 1; transform: none; }
+
+    /* MOBILE */
+    @media (max-width: 900px) {
+      nav { padding: 0 1.5rem; }
+      .product-hero { padding: 5rem 1.5rem 3rem; }
+      .product-hero-inner { grid-template-columns: 1fr; gap: 2.5rem; }
+      .product-hero-photo { order: -1; }
+      .product-hero-sub { max-width: none; }
+      .product-stats { grid-template-columns: repeat(2, 1fr); }
+      .exact-advantages { padding: 3rem 1.5rem; }
+      .exact-adv-grid { grid-template-columns: 1fr; }
+      .exact-scenarios { padding: 3rem 1.5rem; }
+      .exact-scenario { flex-direction: column; align-items: flex-start; gap: 0.5rem; padding: 1.5rem; }
+      .exact-scenario-accent { min-width: 0; font-size: 1.3rem; }
+      .exact-econ { padding: 3rem 1.5rem; }
+      .exact-econ-grid { grid-template-columns: 1fr; }
+      .exact-compat { padding: 3rem 1.5rem; }
+      .exact-compat-tiles { grid-template-columns: repeat(3, 1fr); }
+      .product-specs { padding: 3rem 1.5rem; }
+      .specs-row { grid-template-columns: 1fr; }
+      .specs-key { padding-bottom: 0.2rem; }
+      .specs-val { padding: 0 0 1rem; }
+      .product-cta-section { padding: 3rem 1.5rem; }
+      .product-cta-card { flex-direction: column; align-items: flex-start; gap: 2rem; }
+      .product-cta-actions { flex-direction: column; align-items: flex-start; }
+      footer { flex-direction: column; gap: 1rem; text-align: center; padding: 2rem 1.5rem; }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      .fade-up, .fade-up.visible { opacity: 1; transform: none; transition: none; }
+      .exact-scenario::after, .exact-scenario.scan::after { animation: none !important; }
+      .product-hero-text .section-tag, .product-hero-title, .product-hero-sub,
+      .product-stats, .product-hero-text .btn-primary { animation: none; opacity: 1; }
+    }
+  </style>
+</head>
+<body>
+
+  <nav>
+    <a href="index.html" class="logo">
+      <div class="logo-corner logo-corner--tl"></div>
+      <div class="logo-corner logo-corner--tr"></div>
+      <div class="logo-corner logo-corner--bl"></div>
+      <div class="logo-corner logo-corner--br"></div>
+      Byrud<span>.</span>Tech
+    </a>
+    <a href="index.html#products" class="nav-back">Zurück zur Übersicht</a>
+  </nav>
+
+  <!-- HERO -->
+  <section class="product-hero">
+    <div class="product-hero-inner">
+
+      <div class="product-hero-photo">
+        <div class="blueprint-frame" style="aspect-ratio:4/3;">
+          <div class="blueprint-frame-inner"></div>
+          <div class="blueprint-frame-corner blueprint-frame-corner--tl"></div>
+          <div class="blueprint-frame-corner blueprint-frame-corner--tr"></div>
+          <div class="blueprint-frame-corner blueprint-frame-corner--bl"></div>
+          <div class="blueprint-frame-corner blueprint-frame-corner--br"></div>
+          <img src="images/exact-hero.jpg" alt="EXACT — Kameraführungssystem für ROVER Kultivator" />
+          <div class="blueprint-frame-bar">
+            <span>Kamera</span>
+            <div class="blueprint-frame-bar-divider"></div>
+            <span>Präzision</span>
+            <div class="blueprint-frame-bar-divider"></div>
+            <span>24/7</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="product-hero-text">
+        <div class="section-tag">// Kameraführung</div>
+        <div class="product-hero-title">EXACT</div>
+        <p class="product-hero-sub">Präzisionsführung für den ROVER Kultivator. CMOS-Kamera mit 1 cm Genauigkeit — bei Tag und Nacht. Die Augen Ihrer Maschine.</p>
+
+        <div class="product-stats">
+          <div class="product-stat">
+            <div class="product-stat-num counter" data-target="1" data-suffix=" cm">1 cm</div>
+            <div class="product-stat-label">Genauigkeit</div>
+          </div>
+          <div class="product-stat">
+            <div class="product-stat-num">24/7</div>
+            <div class="product-stat-label">Tag &amp; Nacht</div>
+          </div>
+          <div class="product-stat">
+            <div class="product-stat-num counter" data-target="9" data-suffix="&quot;">9"</div>
+            <div class="product-stat-label">Farbdisplay</div>
+          </div>
+          <div class="product-stat">
+            <div class="product-stat-num counter" data-target="18" data-suffix=" km/h">18 km/h</div>
+            <div class="product-stat-label">Arbeitsgeschwindigkeit</div>
+          </div>
+        </div>
+
+        <a href="index.html#contact" class="btn-primary">Angebot anfragen →</a>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- WARUM EXACT -->
+  <section class="exact-advantages">
+    <div class="exact-advantages-inner">
+      <div class="exact-advantages-header fade-up">
+        <div class="section-tag">// Vorteile</div>
+        <div class="exact-advantages-title">Präzision, die den<br />Unterschied macht</div>
+      </div>
+      <div class="exact-adv-grid">
+        <div class="exact-adv-card fade-up">
+          <div class="exact-adv-num">01</div>
+          <div class="exact-adv-title">1 cm Genauigkeit</div>
+          <p class="exact-adv-desc">Die CMOS-Kamera erkennt die Pflanzenreihen in Echtzeit und steuert die Hackgruppen mit bis zu 1 cm Präzision. Kein Verschnitt, keine Pflanzenschäden.</p>
+        </div>
+        <div class="exact-adv-card fade-up">
+          <div class="exact-adv-num">02</div>
+          <div class="exact-adv-title">24/7 Einsatz</div>
+          <p class="exact-adv-desc">Arbeiten Sie rund um die Uhr — die Kamera funktioniert bei Tageslicht und in völliger Dunkelheit. Nutzen Sie jede Stunde im engen Zeitfenster.</p>
+        </div>
+        <div class="exact-adv-card fade-up">
+          <div class="exact-adv-num">03</div>
+          <div class="exact-adv-title">9" Farbdisplay</div>
+          <p class="exact-adv-desc">Übersichtliche Darstellung auf dem 9-Zoll-Farbbildschirm direkt in der Traktorkabine. Intuitive Bedienung, schnelle Einstellung, sofort einsatzbereit.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- EINSATZSZENARIEN -->
+  <section class="exact-scenarios">
+    <div class="exact-scenarios-inner">
+      <div class="exact-scenarios-header fade-up">
+        <div class="section-tag">// Einsatzszenarien</div>
+        <div class="exact-scenarios-title">Wann sich EXACT<br />besonders lohnt</div>
+      </div>
+      <div class="exact-scenario-list">
+
+        <div class="exact-scenario fade-up">
+          <div class="exact-scenario-accent">Bis 18 km/h</div>
+          <div class="exact-scenario-body">
+            <div class="exact-scenario-title">Hohe Geschwindigkeit</div>
+            <p class="exact-scenario-desc">Bei Arbeitsgeschwindigkeiten über 10 km/h ist manuelle Steuerung nicht mehr möglich. EXACT hält die Spur — automatisch und exakt.</p>
+          </div>
+        </div>
+
+        <div class="exact-scenario fade-up">
+          <div class="exact-scenario-accent">24/7</div>
+          <div class="exact-scenario-body">
+            <div class="exact-scenario-title">Nachtarbeit</div>
+            <p class="exact-scenario-desc">Im Hochsommer zählt jede Stunde. Mit EXACT arbeiten Sie auch nachts weiter — ohne Qualitätsverlust, ohne zusätzliches Personal.</p>
+          </div>
+        </div>
+
+        <div class="exact-scenario fade-up">
+          <div class="exact-scenario-accent">Ab 15 cm</div>
+          <div class="exact-scenario-body">
+            <div class="exact-scenario-title">Enge Reihenabstände</div>
+            <p class="exact-scenario-desc">Je enger die Reihen, desto wichtiger die Präzision. EXACT schützt Ihre Pflanzen auch bei 15 cm Reihenabstand.</p>
+          </div>
+        </div>
+
+        <div class="exact-scenario fade-up">
+          <div class="exact-scenario-accent">Konstant präzise</div>
+          <div class="exact-scenario-body">
+            <div class="exact-scenario-title">Große Flächen</div>
+            <p class="exact-scenario-desc">Auf großen Flächen summieren sich kleine Abweichungen. EXACT eliminiert Fahrfehler und sichert gleichmäßige Bearbeitung über die gesamte Fläche.</p>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- WIRTSCHAFTLICHKEIT -->
+  <section class="exact-econ">
+    <div class="exact-econ-inner">
+      <div class="exact-econ-header fade-up">
+        <div class="section-tag">// Wirtschaftlichkeit</div>
+        <div class="exact-econ-title">Was kostet ein Zentimeter?</div>
+      </div>
+      <div class="exact-econ-grid fade-up">
+        <div class="exact-econ-col exact-econ-col--without">
+          <div class="exact-econ-col-title">Ohne EXACT</div>
+          <div class="exact-econ-row"><span class="exact-econ-key">Genauigkeit</span><span class="exact-econ-val">3–5 cm (manuell)</span></div>
+          <div class="exact-econ-row"><span class="exact-econ-key">Pflanzenschäden</span><span class="exact-econ-val">bis 5–8%</span></div>
+          <div class="exact-econ-row"><span class="exact-econ-key">Max. Geschwindigkeit</span><span class="exact-econ-val">8–10 km/h</span></div>
+          <div class="exact-econ-row"><span class="exact-econ-key">Nachtarbeit</span><span class="exact-econ-val">nicht möglich</span></div>
+          <div class="exact-econ-row"><span class="exact-econ-key">Ernteverlust</span><span class="exact-econ-val">50–150 €/ha</span></div>
+        </div>
+        <div class="exact-econ-col exact-econ-col--with">
+          <div class="exact-econ-col-title">Mit EXACT</div>
+          <div class="exact-econ-row"><span class="exact-econ-key">Genauigkeit</span><span class="exact-econ-val">1 cm</span></div>
+          <div class="exact-econ-row"><span class="exact-econ-key">Pflanzenschäden</span><span class="exact-econ-val">&lt; 1%</span></div>
+          <div class="exact-econ-row"><span class="exact-econ-key">Max. Geschwindigkeit</span><span class="exact-econ-val">bis 18 km/h</span></div>
+          <div class="exact-econ-row"><span class="exact-econ-key">Nachtarbeit</span><span class="exact-econ-val">24/7</span></div>
+          <div class="exact-econ-row"><span class="exact-econ-key">Vermiedener Verlust</span><span class="exact-econ-val">50–150 €/ha gespart</span></div>
+        </div>
+      </div>
+      <p class="exact-econ-note">Bei 500 ha und 100 €/ha Differenz ergibt sich ein <strong>Vorteil von 50.000 € pro Saison.</strong></p>
+    </div>
+  </section>
+
+  <!-- KOMPATIBILITÄT -->
+  <section class="exact-compat">
+    <div class="exact-compat-inner">
+      <div class="exact-compat-header fade-up">
+        <div class="section-tag">// Kompatibilität</div>
+        <div class="exact-compat-title">Passt auf jeden ROVER</div>
+        <p class="exact-compat-desc">EXACT ist kompatibel mit allen ROVER-Modellen: ROVER-U, ROVER-S, ROVER-R, ROVER-P und ROVER-K. Die Nachrüstung ist jederzeit möglich — einfache Montage, sofort einsatzbereit.</p>
+      </div>
+      <div class="exact-compat-tiles fade-up">
+        <div class="exact-compat-tile">
+          <div class="exact-compat-tile-name">ROVER-U</div>
+          <div class="exact-compat-tile-check">✓ Kompatibel</div>
+        </div>
+        <div class="exact-compat-tile">
+          <div class="exact-compat-tile-name">ROVER-S</div>
+          <div class="exact-compat-tile-check">✓ Kompatibel</div>
+        </div>
+        <div class="exact-compat-tile">
+          <div class="exact-compat-tile-name">ROVER-R</div>
+          <div class="exact-compat-tile-check">✓ Kompatibel</div>
+        </div>
+        <div class="exact-compat-tile">
+          <div class="exact-compat-tile-name">ROVER-P</div>
+          <div class="exact-compat-tile-check">✓ Kompatibel</div>
+        </div>
+        <div class="exact-compat-tile">
+          <div class="exact-compat-tile-name">ROVER-K</div>
+          <div class="exact-compat-tile-check">✓ Kompatibel</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- TECHNISCHE DATEN -->
+  <section class="product-specs">
+    <div class="product-specs-inner">
+      <div class="product-specs-header fade-up">
+        <div class="section-tag">// Technische Daten</div>
+        <div class="product-specs-title">Technische<br />Spezifikationen</div>
+      </div>
+      <div class="specs-row fade-up"><div class="specs-key">Kameratyp</div><div class="specs-val">CMOS</div></div>
+      <div class="specs-row fade-up"><div class="specs-key">Display</div><div class="specs-val">9" Farb-LCD</div></div>
+      <div class="specs-row fade-up"><div class="specs-key">Genauigkeit</div><div class="specs-val">Bis 1 cm</div></div>
+      <div class="specs-row fade-up"><div class="specs-key">Nachtbetrieb</div><div class="specs-val">Ja — integrierte Beleuchtung</div></div>
+      <div class="specs-row fade-up"><div class="specs-key">Max. Geschwindigkeit</div><div class="specs-val">18 km/h</div></div>
+      <div class="specs-row fade-up"><div class="specs-key">Montage</div><div class="specs-val">Auf ROVER-Rahmen, nachrüstbar</div></div>
+      <div class="specs-row fade-up"><div class="specs-key">Kompatibilität</div><div class="specs-val">Alle ROVER-Modelle (U / S / R / P / K)</div></div>
+    </div>
+  </section>
+
+  <!-- CTA -->
+  <section class="product-cta-section">
+    <div class="product-cta-inner">
+      <div class="product-cta-card fade-up">
+        <div>
+          <div class="product-cta-title">EXACT FÜR IHREN ROVER<br />KONFIGURIEREN</div>
+          <p class="product-cta-sub">Lassen Sie sich beraten — wir finden die optimale Lösung für Ihren Betrieb.</p>
+        </div>
+        <div class="product-cta-actions">
+          <a href="index.html#contact" class="btn-primary">Angebot anfragen →</a>
+          <a href="rover.html" class="btn-back-link">← Zurück zum ROVER</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <footer>
+    <span class="footer-copy">© 2025 Byrud Tech. Alle Rechte vorbehalten.</span>
+    <div class="footer-links"><a href="#">Impressum</a><a href="#">Datenschutz</a><a href="#">AGB</a></div>
+    <span class="footer-copy">Hamburg · byrud-tech.com</span>
+  </footer>
+
+  <script>
+    /* COUNTER ANIMATION */
+    function animateCounter(el) {
+      const target = +el.dataset.target;
+      const prefix = el.dataset.prefix || '';
+      const suffix = el.dataset.suffix || '';
+      const duration = 1000;
+      function ease(t) { return 1 - Math.pow(1 - t, 3); }
+      const startTime = performance.now();
+      function tick(now) {
+        const t = Math.min((now - startTime) / duration, 1);
+        el.textContent = prefix + Math.round(ease(t) * target) + suffix;
+        if (t < 1) requestAnimationFrame(tick);
+      }
+      requestAnimationFrame(tick);
+    }
+    const counterObserver = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) { animateCounter(entry.target); counterObserver.unobserve(entry.target); }
+      });
+    }, { threshold: 0.5 });
+    document.querySelectorAll('.counter').forEach(el => counterObserver.observe(el));
+
+    /* FADE-UP SCROLL */
+    document.querySelectorAll('.exact-adv-card').forEach((el, i) => { el.style.transitionDelay = (i * 100) + 'ms'; });
+    document.querySelectorAll('.exact-scenario').forEach((el, i) => { el.style.transitionDelay = (i * 80) + 'ms'; });
+    document.querySelectorAll('.specs-row').forEach((el, i) => { el.style.transitionDelay = (i * 50) + 'ms'; });
+
+    const fadeObserver = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) { entry.target.classList.add('visible'); fadeObserver.unobserve(entry.target); }
+      });
+    }, { threshold: 0.12 });
+    document.querySelectorAll('.fade-up').forEach(el => fadeObserver.observe(el));
+
+    /* MOBILE SCANLINE on scenarios */
+    const scanObserver = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting && window.matchMedia('(max-width: 900px)').matches) {
+          entry.target.classList.add('scan');
+          entry.target.addEventListener('animationend', () => entry.target.classList.remove('scan'), { once: true });
+        }
+      });
+    }, { threshold: 0.5 });
+    document.querySelectorAll('.exact-scenario').forEach(el => scanObserver.observe(el));
+  </script>
+
+</body>
+</html>
