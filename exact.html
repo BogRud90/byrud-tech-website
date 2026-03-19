@@ -46,17 +46,8 @@
     .section-tag { font-family: 'IBM Plex Mono', monospace; font-size: 0.68rem; letter-spacing: 0.2em; text-transform: uppercase; color: var(--amber); margin-bottom: 0.75rem; }
 
     /* BLUEPRINT FRAME */
-    .blueprint-frame { position: relative; background: var(--bg3); border: 1px solid var(--border); overflow: hidden; }
-    .blueprint-frame-inner { position: absolute; inset: 1.5rem; border: 1px dashed rgba(232,162,32,0.15); pointer-events: none; z-index: 1; }
-    .blueprint-frame-corner { position: absolute; width: 10px; height: 10px; pointer-events: none; z-index: 2; }
-    .blueprint-frame-corner--tl { top: 1.5rem; left: 1.5rem; border-top: 1px solid var(--amber); border-left: 1px solid var(--amber); }
-    .blueprint-frame-corner--tr { top: 1.5rem; right: 1.5rem; border-top: 1px solid var(--amber); border-right: 1px solid var(--amber); }
-    .blueprint-frame-corner--bl { bottom: 1.5rem; left: 1.5rem; border-bottom: 1px solid var(--amber); border-left: 1px solid var(--amber); }
-    .blueprint-frame-corner--br { bottom: 1.5rem; right: 1.5rem; border-bottom: 1px solid var(--amber); border-right: 1px solid var(--amber); }
-    .blueprint-frame img { width: 100%; height: 100%; object-fit: contain; padding: 2.5rem; position: relative; z-index: 0; display: block; }
-    .blueprint-frame-bar { position: absolute; bottom: 2rem; left: 50%; transform: translateX(-50%); display: flex; align-items: center; gap: 1rem; z-index: 2; white-space: nowrap; }
-    .blueprint-frame-bar span { font-family: 'IBM Plex Mono', monospace; font-size: 0.6rem; letter-spacing: 0.08em; text-transform: uppercase; color: var(--text-dim); }
-    .blueprint-frame-bar-divider { width: 1px; height: 12px; background: var(--border); }
+    .blueprint-frame { position: relative; background: var(--bg3); border: none; border-left: 2px solid rgba(232,162,32,0.3); overflow: hidden; }
+    .blueprint-frame img { width: 100%; height: 100%; object-fit: contain; padding: 1.5rem; }
 
     /* HERO */
     .product-hero { padding: 7rem 3rem 5rem; }
@@ -225,20 +216,8 @@
     <div class="product-hero-inner">
 
       <div class="product-hero-photo">
-        <div class="blueprint-frame" style="aspect-ratio:4/3;">
-          <div class="blueprint-frame-inner"></div>
-          <div class="blueprint-frame-corner blueprint-frame-corner--tl"></div>
-          <div class="blueprint-frame-corner blueprint-frame-corner--tr"></div>
-          <div class="blueprint-frame-corner blueprint-frame-corner--bl"></div>
-          <div class="blueprint-frame-corner blueprint-frame-corner--br"></div>
+        <div class="blueprint-frame">
           <img src="images/exact-hero.jpg" alt="EXACT — Kameraführungssystem für die ROVER Hackmaschine" />
-          <div class="blueprint-frame-bar">
-            <span>Kamera</span>
-            <div class="blueprint-frame-bar-divider"></div>
-            <span>Präzision</span>
-            <div class="blueprint-frame-bar-divider"></div>
-            <span>24/7</span>
-          </div>
         </div>
       </div>
 

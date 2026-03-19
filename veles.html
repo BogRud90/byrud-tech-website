@@ -32,17 +32,8 @@
     .btn-primary { font-family: 'IBM Plex Mono', monospace; font-size: 0.78rem; letter-spacing: 0.1em; text-transform: uppercase; background: var(--amber); color: #0b0b0b; padding: 0.9rem 2rem; text-decoration: none; font-weight: 500; transition: opacity 0.2s; display: inline-block; border-radius: var(--r-sm); }
     .btn-primary:hover { opacity: 0.85; }
     .section-tag { font-family: 'IBM Plex Mono', monospace; font-size: 0.68rem; letter-spacing: 0.2em; text-transform: uppercase; color: var(--amber); margin-bottom: 0.75rem; }
-    .blueprint-frame { position: relative; background: var(--bg3); border: 1px solid var(--border); overflow: hidden; }
-    .blueprint-frame-inner { position: absolute; inset: 1.5rem; border: 1px dashed rgba(232,162,32,0.15); pointer-events: none; z-index: 1; }
-    .blueprint-frame-corner { position: absolute; width: 10px; height: 10px; pointer-events: none; z-index: 2; }
-    .blueprint-frame-corner--tl { top: 1.5rem; left: 1.5rem; border-top: 1px solid var(--amber); border-left: 1px solid var(--amber); }
-    .blueprint-frame-corner--tr { top: 1.5rem; right: 1.5rem; border-top: 1px solid var(--amber); border-right: 1px solid var(--amber); }
-    .blueprint-frame-corner--bl { bottom: 1.5rem; left: 1.5rem; border-bottom: 1px solid var(--amber); border-left: 1px solid var(--amber); }
-    .blueprint-frame-corner--br { bottom: 1.5rem; right: 1.5rem; border-bottom: 1px solid var(--amber); border-right: 1px solid var(--amber); }
-    .blueprint-frame img { width: 100%; height: 100%; object-fit: contain; padding: 2.5rem; position: relative; z-index: 0; display: block; }
-    .blueprint-frame-bar { position: absolute; bottom: 2rem; left: 50%; transform: translateX(-50%); display: flex; align-items: center; gap: 1rem; z-index: 2; white-space: nowrap; }
-    .blueprint-frame-bar span { font-family: 'IBM Plex Mono', monospace; font-size: 0.6rem; letter-spacing: 0.08em; text-transform: uppercase; color: var(--text-dim); }
-    .blueprint-frame-bar-divider { width: 1px; height: 12px; background: var(--border); }
+    .blueprint-frame { position: relative; background: var(--bg3); border: none; border-left: 2px solid rgba(232,162,32,0.3); overflow: hidden; }
+    .blueprint-frame img { width: 100%; height: 100%; object-fit: contain; padding: 1.5rem; }
     .product-hero { padding: 7rem 3rem 5rem; }
     .product-hero-inner { display: grid; grid-template-columns: 55% 45%; gap: 5rem; align-items: center; max-width: 1400px; margin: 0 auto; }
     .product-hero-text .section-tag { margin-bottom: 0.5rem; }
@@ -147,12 +138,8 @@
   <section class="product-hero">
     <div class="product-hero-inner">
       <div class="product-hero-photo">
-        <div class="blueprint-frame" style="aspect-ratio:4/3;">
-          <div class="blueprint-frame-inner"></div>
-          <div class="blueprint-frame-corner blueprint-frame-corner--tl"></div><div class="blueprint-frame-corner blueprint-frame-corner--tr"></div>
-          <div class="blueprint-frame-corner blueprint-frame-corner--bl"></div><div class="blueprint-frame-corner blueprint-frame-corner--br"></div>
+        <div class="blueprint-frame">
           <img src="images/veles-hero.jpg" alt="Sämaschine VELES — Byrud Tech" />
-          <div class="blueprint-frame-bar"><span>Qualität</span><div class="blueprint-frame-bar-divider"></div><span>Präzision</span><div class="blueprint-frame-bar-divider"></div><span>Ertrag</span></div>
         </div>
       </div>
       <div class="product-hero-text">
@@ -192,10 +179,7 @@
   <section class="product-gallery">
     <div class="product-gallery-inner">
       <div class="gallery-block">
-        <div class="blueprint-frame" style="aspect-ratio:4/3;">
-          <div class="blueprint-frame-inner"></div>
-          <div class="blueprint-frame-corner blueprint-frame-corner--tl"></div><div class="blueprint-frame-corner blueprint-frame-corner--tr"></div>
-          <div class="blueprint-frame-corner blueprint-frame-corner--bl"></div><div class="blueprint-frame-corner blueprint-frame-corner--br"></div>
+        <div class="blueprint-frame">
           <img src="images/veles-schar.jpg" alt="VELES — Doppelreihen-Schar" />
         </div>
         <div class="gallery-text">
@@ -211,10 +195,7 @@
       </div>
 
       <div class="gallery-block reverse">
-        <div class="blueprint-frame" style="aspect-ratio:4/3;">
-          <div class="blueprint-frame-inner"></div>
-          <div class="blueprint-frame-corner blueprint-frame-corner--tl"></div><div class="blueprint-frame-corner blueprint-frame-corner--tr"></div>
-          <div class="blueprint-frame-corner blueprint-frame-corner--bl"></div><div class="blueprint-frame-corner blueprint-frame-corner--br"></div>
+        <div class="blueprint-frame">
           <img src="images/veles-tank.jpg" alt="VELES — Tanksystem" />
         </div>
         <div class="gallery-text">
@@ -230,10 +211,7 @@
       </div>
 
       <div class="gallery-block">
-        <div class="blueprint-frame" style="aspect-ratio:4/3;">
-          <div class="blueprint-frame-inner"></div>
-          <div class="blueprint-frame-corner blueprint-frame-corner--tl"></div><div class="blueprint-frame-corner blueprint-frame-corner--tr"></div>
-          <div class="blueprint-frame-corner blueprint-frame-corner--bl"></div><div class="blueprint-frame-corner blueprint-frame-corner--br"></div>
+        <div class="blueprint-frame">
           <img src="images/veles-inokulum.jpg" alt="VELES — Inokulum-Option" />
         </div>
         <div class="gallery-text">

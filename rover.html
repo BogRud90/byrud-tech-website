@@ -46,58 +46,8 @@
     .section-tag { font-family: 'IBM Plex Mono', monospace; font-size: 0.68rem; letter-spacing: 0.2em; text-transform: uppercase; color: var(--amber); margin-bottom: 0.75rem; }
 
     /* BLUEPRINT FRAME */
-    .blueprint-frame {
-      position: relative;
-      background: var(--bg3);
-      border: 1px solid var(--border);
-      overflow: hidden;
-    }
-    .blueprint-frame-inner {
-      position: absolute;
-      inset: 1.5rem;
-      border: 1px dashed rgba(232,162,32,0.15);
-      pointer-events: none;
-      z-index: 1;
-    }
-    .blueprint-frame-corner {
-      position: absolute;
-      width: 10px;
-      height: 10px;
-      pointer-events: none;
-      z-index: 2;
-    }
-    .blueprint-frame-corner--tl { top: 1.5rem; left: 1.5rem; border-top: 1px solid var(--amber); border-left: 1px solid var(--amber); }
-    .blueprint-frame-corner--tr { top: 1.5rem; right: 1.5rem; border-top: 1px solid var(--amber); border-right: 1px solid var(--amber); }
-    .blueprint-frame-corner--bl { bottom: 1.5rem; left: 1.5rem; border-bottom: 1px solid var(--amber); border-left: 1px solid var(--amber); }
-    .blueprint-frame-corner--br { bottom: 1.5rem; right: 1.5rem; border-bottom: 1px solid var(--amber); border-right: 1px solid var(--amber); }
-    .blueprint-frame img {
-      width: 100%;
-      height: 100%;
-      object-fit: contain;
-      padding: 2.5rem;
-      position: relative;
-      z-index: 0;
-      display: block;
-    }
-    .blueprint-frame-bar {
-      position: absolute;
-      bottom: 2rem;
-      left: 50%;
-      transform: translateX(-50%);
-      display: flex;
-      align-items: center;
-      gap: 1rem;
-      z-index: 2;
-      white-space: nowrap;
-    }
-    .blueprint-frame-bar span {
-      font-family: 'IBM Plex Mono', monospace;
-      font-size: 0.6rem;
-      letter-spacing: 0.08em;
-      text-transform: uppercase;
-      color: var(--text-dim);
-    }
-    .blueprint-frame-bar-divider { width: 1px; height: 12px; background: var(--border); }
+    .blueprint-frame { position: relative; background: var(--bg3); border: none; border-left: 2px solid rgba(232,162,32,0.3); overflow: hidden; }
+    .blueprint-frame img { width: 100%; height: 100%; object-fit: contain; padding: 1.5rem; }
 
     /* PRODUCT HERO */
     .product-hero { padding: 7rem 3rem 5rem; }
@@ -146,10 +96,7 @@
     .product-link { font-family: 'IBM Plex Mono', monospace; font-size: 0.72rem; letter-spacing: 0.1em; text-transform: uppercase; color: var(--amber); text-decoration: none; display: inline-block; margin-top: 1.25rem; transition: opacity 0.2s; }
     .product-link:hover { opacity: 0.75; }
     .section-note { font-family: 'IBM Plex Mono', monospace; font-size: 0.75rem; letter-spacing: 0.06em; color: var(--text-dim); margin-top: 2rem; padding-top: 1.5rem; border-top: 1px solid var(--border); }
-    .blueprint-frame::after { content: ''; position: absolute; left: 0; right: 0; top: 0; height: 2px; background: linear-gradient(90deg, transparent 0%, rgba(232,162,32,0.45) 50%, transparent 100%); opacity: 0; pointer-events: none; z-index: 3; }
-    .blueprint-frame:hover::after { animation: scanline 0.65s ease-out forwards; }
-    @keyframes scanline { 0% { top: 0; opacity: 1; } 100% { top: 100%; opacity: 0; } }
-    .fade-up { opacity: 0; transform: translateY(20px); transition: opacity 0.55s ease, transform 0.55s ease; }
+.fade-up { opacity: 0; transform: translateY(20px); transition: opacity 0.55s ease, transform 0.55s ease; }
     .fade-up.visible { opacity: 1; transform: none; }
 
     /* SPECS SECTION */
@@ -241,20 +188,8 @@
     <div class="product-hero-inner">
 
       <div class="product-hero-photo">
-        <div class="blueprint-frame" style="aspect-ratio:4/3;">
-          <div class="blueprint-frame-inner"></div>
-          <div class="blueprint-frame-corner blueprint-frame-corner--tl"></div>
-          <div class="blueprint-frame-corner blueprint-frame-corner--tr"></div>
-          <div class="blueprint-frame-corner blueprint-frame-corner--bl"></div>
-          <div class="blueprint-frame-corner blueprint-frame-corner--br"></div>
+        <div class="blueprint-frame">
           <img src="images/rover-hero.jpg" alt="Hackmaschine ROVER — Byrud Tech" />
-          <div class="blueprint-frame-bar">
-            <span>Qualität</span>
-            <div class="blueprint-frame-bar-divider"></div>
-            <span>Präzision</span>
-            <div class="blueprint-frame-bar-divider"></div>
-            <span>Ertrag</span>
-          </div>
         </div>
       </div>
 
@@ -348,12 +283,7 @@
 
       <!-- ROVER-U -->
       <div class="gallery-block fade-up">
-        <div class="blueprint-frame" style="aspect-ratio:4/3;">
-          <div class="blueprint-frame-inner"></div>
-          <div class="blueprint-frame-corner blueprint-frame-corner--tl"></div>
-          <div class="blueprint-frame-corner blueprint-frame-corner--tr"></div>
-          <div class="blueprint-frame-corner blueprint-frame-corner--bl"></div>
-          <div class="blueprint-frame-corner blueprint-frame-corner--br"></div>
+        <div class="blueprint-frame">
           <img src="images/rover-u-group.jpg" alt="ROVER-U Arbeitsgruppe — 2 Federzinken" />
         </div>
         <div class="gallery-text">
@@ -370,12 +300,7 @@
 
       <!-- ROVER-S -->
       <div class="gallery-block reverse fade-up">
-        <div class="blueprint-frame" style="aspect-ratio:4/3;">
-          <div class="blueprint-frame-inner"></div>
-          <div class="blueprint-frame-corner blueprint-frame-corner--tl"></div>
-          <div class="blueprint-frame-corner blueprint-frame-corner--tr"></div>
-          <div class="blueprint-frame-corner blueprint-frame-corner--bl"></div>
-          <div class="blueprint-frame-corner blueprint-frame-corner--br"></div>
+        <div class="blueprint-frame">
           <img src="images/rover-s-group.jpg" alt="ROVER-S Arbeitsgruppe — 3 Federzinken" />
         </div>
         <div class="gallery-text">
@@ -392,12 +317,7 @@
 
       <!-- ROVER-R -->
       <div class="gallery-block fade-up">
-        <div class="blueprint-frame" style="aspect-ratio:4/3;">
-          <div class="blueprint-frame-inner"></div>
-          <div class="blueprint-frame-corner blueprint-frame-corner--tl"></div>
-          <div class="blueprint-frame-corner blueprint-frame-corner--tr"></div>
-          <div class="blueprint-frame-corner blueprint-frame-corner--bl"></div>
-          <div class="blueprint-frame-corner blueprint-frame-corner--br"></div>
+        <div class="blueprint-frame">
           <img src="images/rover-r-group.jpg" alt="ROVER-R Arbeitsgruppe — Lockerungssterne und Schar" />
         </div>
         <div class="gallery-text">
@@ -414,12 +334,7 @@
 
       <!-- ROVER-P -->
       <div class="gallery-block reverse fade-up">
-        <div class="blueprint-frame" style="aspect-ratio:4/3;">
-          <div class="blueprint-frame-inner"></div>
-          <div class="blueprint-frame-corner blueprint-frame-corner--tl"></div>
-          <div class="blueprint-frame-corner blueprint-frame-corner--tr"></div>
-          <div class="blueprint-frame-corner blueprint-frame-corner--bl"></div>
-          <div class="blueprint-frame-corner blueprint-frame-corner--br"></div>
+        <div class="blueprint-frame">
           <img src="images/rover-p-group.jpg" alt="ROVER-P Arbeitsgruppe — Federvibrationsstiele" />
         </div>
         <div class="gallery-text">
@@ -436,12 +351,7 @@
 
       <!-- ROVER-K -->
       <div class="gallery-block fade-up">
-        <div class="blueprint-frame" style="aspect-ratio:4/3;">
-          <div class="blueprint-frame-inner"></div>
-          <div class="blueprint-frame-corner blueprint-frame-corner--tl"></div>
-          <div class="blueprint-frame-corner blueprint-frame-corner--tr"></div>
-          <div class="blueprint-frame-corner blueprint-frame-corner--bl"></div>
-          <div class="blueprint-frame-corner blueprint-frame-corner--br"></div>
+        <div class="blueprint-frame">
           <img src="images/rover-k-group.jpg" alt="ROVER-K Arbeitsgruppe — S-Zinken und Vibrozähne" />
         </div>
         <div class="gallery-text">
@@ -471,12 +381,7 @@
 
       <!-- Lenkungssystem -->
       <div class="gallery-block fade-up">
-        <div class="blueprint-frame" style="aspect-ratio:4/3;">
-          <div class="blueprint-frame-inner"></div>
-          <div class="blueprint-frame-corner blueprint-frame-corner--tl"></div>
-          <div class="blueprint-frame-corner blueprint-frame-corner--tr"></div>
-          <div class="blueprint-frame-corner blueprint-frame-corner--bl"></div>
-          <div class="blueprint-frame-corner blueprint-frame-corner--br"></div>
+        <div class="blueprint-frame">
           <img src="images/rover-lenkung.jpg" alt="ROVER — Hydraulisches Lenkungssystem" />
         </div>
         <div class="gallery-text">
@@ -493,12 +398,7 @@
 
       <!-- Parallelogramme -->
       <div class="gallery-block reverse fade-up">
-        <div class="blueprint-frame" style="aspect-ratio:4/3;">
-          <div class="blueprint-frame-inner"></div>
-          <div class="blueprint-frame-corner blueprint-frame-corner--tl"></div>
-          <div class="blueprint-frame-corner blueprint-frame-corner--tr"></div>
-          <div class="blueprint-frame-corner blueprint-frame-corner--bl"></div>
-          <div class="blueprint-frame-corner blueprint-frame-corner--br"></div>
+        <div class="blueprint-frame">
           <img src="images/rover-parallelogramme.jpg" alt="ROVER — Parallelogramme für Bodenführung" />
         </div>
         <div class="gallery-text">
@@ -515,12 +415,7 @@
 
       <!-- Schutzscheiben -->
       <div class="gallery-block fade-up">
-        <div class="blueprint-frame" style="aspect-ratio:4/3;">
-          <div class="blueprint-frame-inner"></div>
-          <div class="blueprint-frame-corner blueprint-frame-corner--tl"></div>
-          <div class="blueprint-frame-corner blueprint-frame-corner--tr"></div>
-          <div class="blueprint-frame-corner blueprint-frame-corner--bl"></div>
-          <div class="blueprint-frame-corner blueprint-frame-corner--br"></div>
+        <div class="blueprint-frame">
           <img src="images/rover-schutzscheiben.jpg" alt="ROVER — Schutzscheiben an der Reihe" />
         </div>
         <div class="gallery-text">
@@ -537,12 +432,7 @@
 
       <!-- Dammstriegel -->
       <div class="gallery-block reverse fade-up">
-        <div class="blueprint-frame" style="aspect-ratio:4/3;">
-          <div class="blueprint-frame-inner"></div>
-          <div class="blueprint-frame-corner blueprint-frame-corner--tl"></div>
-          <div class="blueprint-frame-corner blueprint-frame-corner--tr"></div>
-          <div class="blueprint-frame-corner blueprint-frame-corner--bl"></div>
-          <div class="blueprint-frame-corner blueprint-frame-corner--br"></div>
+        <div class="blueprint-frame">
           <img src="images/rover-dammstriegel.jpg" alt="ROVER — Dammstriegel für Zwischenreihen" />
         </div>
         <div class="gallery-text">
@@ -559,12 +449,7 @@
 
       <!-- Schutzbleche -->
       <div class="gallery-block fade-up">
-        <div class="blueprint-frame" style="aspect-ratio:4/3;">
-          <div class="blueprint-frame-inner"></div>
-          <div class="blueprint-frame-corner blueprint-frame-corner--tl"></div>
-          <div class="blueprint-frame-corner blueprint-frame-corner--tr"></div>
-          <div class="blueprint-frame-corner blueprint-frame-corner--bl"></div>
-          <div class="blueprint-frame-corner blueprint-frame-corner--br"></div>
+        <div class="blueprint-frame">
           <img src="images/rover-schutzbleche.jpg" alt="ROVER — Schutzbleche für empfindliche Kulturen" />
         </div>
         <div class="gallery-text">
@@ -592,12 +477,7 @@
 
       <!-- EXACT -->
       <div class="gallery-block fade-up">
-        <div class="blueprint-frame" style="aspect-ratio:4/3;">
-          <div class="blueprint-frame-inner"></div>
-          <div class="blueprint-frame-corner blueprint-frame-corner--tl"></div>
-          <div class="blueprint-frame-corner blueprint-frame-corner--tr"></div>
-          <div class="blueprint-frame-corner blueprint-frame-corner--bl"></div>
-          <div class="blueprint-frame-corner blueprint-frame-corner--br"></div>
+        <div class="blueprint-frame">
           <img src="images/rover-exact.jpg" alt="EXACT — Kamerabasierte Reihenführung für ROVER" />
         </div>
         <div class="gallery-text">
@@ -616,12 +496,7 @@
 
       <!-- LIXA -->
       <div class="gallery-block reverse fade-up">
-        <div class="blueprint-frame" style="aspect-ratio:4/3;">
-          <div class="blueprint-frame-inner"></div>
-          <div class="blueprint-frame-corner blueprint-frame-corner--tl"></div>
-          <div class="blueprint-frame-corner blueprint-frame-corner--tr"></div>
-          <div class="blueprint-frame-corner blueprint-frame-corner--bl"></div>
-          <div class="blueprint-frame-corner blueprint-frame-corner--br"></div>
+        <div class="blueprint-frame">
           <img src="images/rover-lixa.jpg" alt="LIXA — Flüssigdüngung auf ROVER" />
         </div>
         <div class="gallery-text">
@@ -640,12 +515,7 @@
 
       <!-- LIXA-O -->
       <div class="gallery-block fade-up">
-        <div class="blueprint-frame" style="aspect-ratio:4/3;">
-          <div class="blueprint-frame-inner"></div>
-          <div class="blueprint-frame-corner blueprint-frame-corner--tl"></div>
-          <div class="blueprint-frame-corner blueprint-frame-corner--tr"></div>
-          <div class="blueprint-frame-corner blueprint-frame-corner--bl"></div>
-          <div class="blueprint-frame-corner blueprint-frame-corner--br"></div>
+        <div class="blueprint-frame">
           <img src="images/rover-lixa-o.jpg" alt="LIXA-O — Über-Reihen-Düsen auf ROVER" />
         </div>
         <div class="gallery-text">
@@ -664,12 +534,7 @@
 
       <!-- GRANO -->
       <div class="gallery-block reverse fade-up">
-        <div class="blueprint-frame" style="aspect-ratio:4/3;">
-          <div class="blueprint-frame-inner"></div>
-          <div class="blueprint-frame-corner blueprint-frame-corner--tl"></div>
-          <div class="blueprint-frame-corner blueprint-frame-corner--tr"></div>
-          <div class="blueprint-frame-corner blueprint-frame-corner--bl"></div>
-          <div class="blueprint-frame-corner blueprint-frame-corner--br"></div>
+        <div class="blueprint-frame">
           <img src="images/rover-grano.jpg" alt="GRANO — Granulatdüngung auf ROVER" />
         </div>
         <div class="gallery-text">
