@@ -99,6 +99,7 @@
     @media (max-width: 900px) {
       nav { padding: 0 1.5rem; }
       .nav-links { display: none; }
+      .nav-burger { display: flex; }
       .product-hero { padding: 5rem 1.5rem 3rem; }
       .product-hero-inner { grid-template-columns: 1fr; gap: 2.5rem; }
       .product-hero-photo { order: -1; }
@@ -120,6 +121,21 @@
       .models-table { font-size: 0.85rem; }
       .models-table th, .models-table td { padding: 0.75rem; }
     }
+
+    /* MOBILE MENU */
+    .nav-burger { display: none; flex-direction: column; justify-content: center; gap: 5px; width: 36px; height: 36px; background: none; border: none; cursor: pointer; padding: 4px; z-index: 101; }
+    .nav-burger span { display: block; width: 100%; height: 1.5px; background: var(--text); transition: transform 0.3s, opacity 0.3s; transform-origin: center; }
+    .nav-burger.open span:nth-child(1) { transform: translateY(6.5px) rotate(45deg); }
+    .nav-burger.open span:nth-child(2) { opacity: 0; }
+    .nav-burger.open span:nth-child(3) { transform: translateY(-6.5px) rotate(-45deg); }
+    .mobile-drawer { display: none; position: fixed; inset: 0; top: 64px; background: rgba(11,11,11,0.97); backdrop-filter: blur(16px); z-index: 99; flex-direction: column; padding: 3rem 2rem; border-top: 1px solid var(--border); }
+    .mobile-drawer.open { display: flex; }
+    .mobile-drawer ul { list-style: none; display: flex; flex-direction: column; gap: 0; flex: 1; }
+    .mobile-drawer ul li { border-bottom: 1px solid var(--border); }
+    .mobile-drawer ul li a { display: block; font-family: 'Barlow Condensed', sans-serif; font-weight: 700; font-size: 2rem; text-transform: uppercase; color: var(--text); text-decoration: none; padding: 1rem 0; letter-spacing: 0.02em; transition: color 0.2s; }
+    .mobile-drawer ul li a:hover { color: var(--amber); }
+    .mobile-drawer .mobile-cta { margin-top: 2.5rem; }
+    .mobile-drawer .mobile-cta a { display: block; text-align: center; }
   </style>
 </head>
 <body>
@@ -140,7 +156,24 @@
       <li><a href="about.html">Über uns</a></li>
       <li><a href="index.html#contact">Kontakt</a></li>
     </ul>
+    <button class="nav-burger" id="navBurger" aria-label="Menü öffnen" aria-expanded="false">
+      <span></span><span></span><span></span>
+    </button>
   </nav>
+
+  <div class="mobile-drawer" id="mobileDrawer">
+    <ul>
+      <li><a href="index.html" class="drawer-link">Home</a></li>
+      <li><a href="maschinen.html" class="drawer-link">Maschinen</a></li>
+      <li><a href="konzept.html" class="drawer-link">Konzept</a></li>
+      <li><a href="technologie.html" class="drawer-link">Technologie</a></li>
+      <li><a href="about.html" class="drawer-link">Über uns</a></li>
+      <li><a href="index.html#contact" class="drawer-link">Kontakt</a></li>
+    </ul>
+    <div class="mobile-cta">
+      <a href="index.html#contact" class="btn-primary drawer-link">Angebot anfragen →</a>
+    </div>
+  </div>
 
   <section class="product-hero">
     <div class="product-hero-inner">
@@ -312,5 +345,24 @@
     <span class="footer-copy">Hamburg · byrud-tech.com</span>
   </footer>
 
+  <script>
+    /* BURGER / DRAWER */
+    const burger = document.getElementById('navBurger');
+    const drawer = document.getElementById('mobileDrawer');
+    burger.addEventListener('click', () => {
+      const isOpen = drawer.classList.toggle('open');
+      burger.classList.toggle('open', isOpen);
+      burger.setAttribute('aria-expanded', isOpen);
+      document.body.style.overflow = isOpen ? 'hidden' : '';
+    });
+    document.querySelectorAll('.drawer-link').forEach(link => {
+      link.addEventListener('click', () => {
+        drawer.classList.remove('open');
+        burger.classList.remove('open');
+        burger.setAttribute('aria-expanded', 'false');
+        document.body.style.overflow = '';
+      });
+    });
+  </script>
 </body>
 </html>
