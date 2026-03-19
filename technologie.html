@@ -34,9 +34,9 @@
     .logo-corner--bl { bottom: 0; left: 0; border-bottom-width: 1px; border-left-width: 1px; }
     .logo-corner--br { bottom: 0; right: 0; border-bottom-width: 1px; border-right-width: 1px; }
     .logo span { color: var(--amber); }
-    .nav-back { font-family: 'IBM Plex Mono', monospace; font-size: 0.72rem; letter-spacing: 0.1em; text-transform: uppercase; color: var(--text-muted); text-decoration: none; transition: color 0.2s; display: flex; align-items: center; gap: 0.5rem; }
-    .nav-back:hover { color: var(--amber); }
-    .nav-back::before { content: '←'; }
+    .nav-links { display: flex; gap: 2.5rem; list-style: none; }
+    .nav-links a { font-family: 'IBM Plex Mono', monospace; font-size: 0.72rem; letter-spacing: 0.1em; text-transform: uppercase; color: var(--text-muted); text-decoration: none; transition: color 0.2s; }
+    .nav-links a:hover { color: var(--amber); }
     .nav-burger { display: none; flex-direction: column; justify-content: center; gap: 5px; width: 36px; height: 36px; background: none; border: none; cursor: pointer; padding: 4px; z-index: 101; }
     .nav-burger span { display: block; width: 100%; height: 1.5px; background: var(--text); }
 
@@ -163,7 +163,7 @@
     /* ─── MOBILE ─── */
     @media (max-width: 900px) {
       nav { padding: 0 1.5rem; }
-      .nav-burger { display: flex; }
+      .nav-links { display: none; }
       #tech-hero { padding: 7rem 1.5rem 4rem; min-height: auto; }
       .tech-hero-stats { grid-template-columns: repeat(2, 1fr); }
       #tech-ops, #tech-econ, #tech-cultures, #tech-prereq, #tech-products, .tech-cta-section { padding: 3rem 1.5rem; }
@@ -189,10 +189,14 @@
       <div class="logo-corner logo-corner--br"></div>
       Byrud<span>.</span>Tech
     </a>
-    <a href="index.html" class="nav-back">Zurück zur Übersicht</a>
-    <button class="nav-burger" id="navBurger" aria-label="Menü öffnen">
-      <span></span><span></span><span></span>
-    </button>
+    <ul class="nav-links">
+      <li><a href="index.html">Home</a></li>
+      <li><a href="maschinen.html">Maschinen</a></li>
+      <li><a href="konzept.html">Konzept</a></li>
+      <li><a href="technologie.html">Technologie</a></li>
+      <li><a href="index.html#about">Über uns</a></li>
+      <li><a href="index.html#contact">Kontakt</a></li>
+    </ul>
   </nav>
 
   <!-- ══ HERO ══ -->

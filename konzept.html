@@ -34,9 +34,9 @@
     .logo-corner--bl { bottom: 0; left: 0; border-bottom-width: 1px; border-left-width: 1px; }
     .logo-corner--br { bottom: 0; right: 0; border-bottom-width: 1px; border-right-width: 1px; }
     .logo span { color: var(--amber); }
-    .nav-back { font-family: 'IBM Plex Mono', monospace; font-size: 0.72rem; letter-spacing: 0.1em; text-transform: uppercase; color: var(--text-muted); text-decoration: none; transition: color 0.2s; display: flex; align-items: center; gap: 0.5rem; }
-    .nav-back:hover { color: var(--amber); }
-    .nav-back::before { content: '←'; }
+    .nav-links { display: flex; gap: 2.5rem; list-style: none; }
+    .nav-links a { font-family: 'IBM Plex Mono', monospace; font-size: 0.72rem; letter-spacing: 0.1em; text-transform: uppercase; color: var(--text-muted); text-decoration: none; transition: color 0.2s; }
+    .nav-links a:hover { color: var(--amber); }
 
     /* BUTTONS */
     .btn-primary { font-family: 'IBM Plex Mono', monospace; font-size: 0.78rem; letter-spacing: 0.1em; text-transform: uppercase; background: var(--amber); color: #0b0b0b; padding: 0.9rem 2rem; text-decoration: none; font-weight: 500; transition: opacity 0.2s; display: inline-block; border-radius: var(--r-sm); }
@@ -129,6 +129,7 @@
     /* MOBILE */
     @media (max-width: 900px) {
       nav { padding: 0 1.5rem; }
+      .nav-links { display: none; }
       .konzept-hero { padding: 5rem 1.5rem 3rem; }
       .konzept-hero-inner { grid-template-columns: 1fr; gap: 3rem; }
       .konzept-prinzip { padding: 3rem 1.5rem; }
@@ -162,7 +163,14 @@
       <div class="logo-corner logo-corner--br"></div>
       Byrud<span>.</span>Tech
     </a>
-    <a href="index.html" class="nav-back">Zurück</a>
+    <ul class="nav-links">
+      <li><a href="index.html">Home</a></li>
+      <li><a href="maschinen.html">Maschinen</a></li>
+      <li><a href="konzept.html">Konzept</a></li>
+      <li><a href="technologie.html">Technologie</a></li>
+      <li><a href="index.html#about">Über uns</a></li>
+      <li><a href="index.html#contact">Kontakt</a></li>
+    </ul>
   </nav>
 
   <!-- HERO -->
