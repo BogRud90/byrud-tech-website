@@ -1,0 +1,397 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Das Byrud Konzept — Ein Rahmen, endlose Möglichkeiten</title>
+  <meta name="description" content="Der universelle Byrud-Rahmen: bis zu 4 Feldoperationen in einem Durchgang. ROVER als Basis — Module nach Bedarf." />
+  <meta name="format-detection" content="telephone=no" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@400;600;700;800&family=IBM+Plex+Mono:wght@400;500&family=Barlow:wght@300;400;500&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    :root {
+      --bg: #0b0b0b; --bg2: #111111; --bg3: #161616;
+      --amber: #e8a220; --amber-dim: #b87e18; --amber-glow: rgba(232,162,32,0.12);
+      --text: #f0ede8; --text-muted: #888880; --text-dim: #555550;
+      --border: rgba(255,255,255,0.07); --border-amber: rgba(232,162,32,0.3);
+      --r: 6px; --r-sm: 4px;
+    }
+    html { scroll-behavior: smooth; }
+    body { background: var(--bg); color: var(--text); font-family: 'Barlow', sans-serif; font-weight: 300; line-height: 1.6; overflow-x: hidden; }
+    body::before { content: ''; position: fixed; inset: 0; background-image: linear-gradient(var(--border) 1px, transparent 1px), linear-gradient(90deg, var(--border) 1px, transparent 1px); background-size: 60px 60px; pointer-events: none; z-index: 0; opacity: 0.15; }
+    section, footer, nav { position: relative; z-index: 1; }
+    * { -webkit-tap-highlight-color: transparent; }
+    a[href^="tel"], a[href^="mailto"] { color: inherit; text-decoration: none; }
+
+    /* NAV */
+    nav { position: fixed; top: 0; left: 0; right: 0; z-index: 100; display: flex; align-items: center; justify-content: space-between; padding: 0 3rem; height: 64px; background: rgba(11,11,11,0.88); backdrop-filter: blur(12px); border-bottom: 1px solid var(--border); }
+    .logo { font-family: 'Barlow Condensed', sans-serif; font-weight: 800; font-size: 1.3rem; letter-spacing: 0.08em; text-transform: uppercase; color: var(--text); text-decoration: none; position: relative; padding: 5px 8px; }
+    .logo-corner { position: absolute; width: 7px; height: 7px; border-color: var(--amber); border-style: solid; border-width: 0; }
+    .logo-corner--tl { top: 0; left: 0; border-top-width: 1px; border-left-width: 1px; }
+    .logo-corner--tr { top: 0; right: 0; border-top-width: 1px; border-right-width: 1px; }
+    .logo-corner--bl { bottom: 0; left: 0; border-bottom-width: 1px; border-left-width: 1px; }
+    .logo-corner--br { bottom: 0; right: 0; border-bottom-width: 1px; border-right-width: 1px; }
+    .logo span { color: var(--amber); }
+    .nav-back { font-family: 'IBM Plex Mono', monospace; font-size: 0.72rem; letter-spacing: 0.1em; text-transform: uppercase; color: var(--text-muted); text-decoration: none; transition: color 0.2s; display: flex; align-items: center; gap: 0.5rem; }
+    .nav-back:hover { color: var(--amber); }
+    .nav-back::before { content: '←'; }
+
+    /* BUTTONS */
+    .btn-primary { font-family: 'IBM Plex Mono', monospace; font-size: 0.78rem; letter-spacing: 0.1em; text-transform: uppercase; background: var(--amber); color: #0b0b0b; padding: 0.9rem 2rem; text-decoration: none; font-weight: 500; transition: opacity 0.2s; display: inline-block; border-radius: var(--r-sm); }
+    .btn-primary:hover { opacity: 0.85; }
+    .section-tag { font-family: 'IBM Plex Mono', monospace; font-size: 0.68rem; letter-spacing: 0.2em; text-transform: uppercase; color: var(--amber); margin-bottom: 0.75rem; }
+
+    /* HERO */
+    .konzept-hero { padding: 7rem 3rem 5rem; }
+    .konzept-hero-inner { max-width: 1400px; margin: 0 auto; display: grid; grid-template-columns: 1fr 1fr; gap: 6rem; align-items: center; }
+    .konzept-hero-title { font-family: 'Barlow Condensed', sans-serif; font-weight: 800; font-size: clamp(3rem, 6vw, 5.5rem); line-height: 0.9; letter-spacing: -0.01em; text-transform: uppercase; margin-bottom: 1.5rem; }
+    .konzept-hero-title em { font-style: normal; color: var(--amber); display: block; }
+    .konzept-hero-sub { font-size: 1.05rem; color: var(--text-muted); line-height: 1.85; margin-bottom: 2.5rem; }
+    .konzept-stats { display: grid; grid-template-columns: repeat(2, 1fr); gap: 1px; background: var(--border); border-radius: var(--r-sm); overflow: hidden; }
+    .konzept-stat { background: var(--bg2); padding: 1.5rem; }
+    .konzept-stat-num { font-family: 'Barlow Condensed', sans-serif; font-weight: 800; font-size: 2.4rem; color: var(--amber); line-height: 1; margin-bottom: 0.3rem; }
+    .konzept-stat-label { font-family: 'IBM Plex Mono', monospace; font-size: 0.6rem; letter-spacing: 0.1em; text-transform: uppercase; color: var(--text-dim); }
+
+    /* DAS PRINZIP */
+    .konzept-prinzip { padding: 5rem 3rem; background: var(--bg2); border-top: 1px solid var(--border); border-bottom: 1px solid var(--border); }
+    .konzept-prinzip-inner { max-width: 1400px; margin: 0 auto; }
+    .konzept-section-header { margin-bottom: 3rem; }
+    .konzept-section-title { font-family: 'Barlow Condensed', sans-serif; font-weight: 800; font-size: clamp(1.8rem, 3vw, 2.8rem); text-transform: uppercase; line-height: 0.95; }
+    .konzept-steps { display: flex; flex-direction: column; gap: 1px; background: var(--border); border-radius: var(--r); overflow: hidden; }
+    .konzept-step { background: var(--bg); padding: 2.5rem 3rem; display: flex; gap: 3rem; align-items: flex-start; }
+    .konzept-step-num { font-family: 'Barlow Condensed', sans-serif; font-weight: 800; font-size: 3.5rem; color: var(--amber); line-height: 1; flex-shrink: 0; min-width: 3rem; opacity: 0.7; }
+    .konzept-step-content { flex: 1; }
+    .konzept-step-title { font-family: 'Barlow Condensed', sans-serif; font-weight: 700; font-size: 1.3rem; text-transform: uppercase; letter-spacing: 0.04em; color: var(--text); margin-bottom: 0.75rem; }
+    .konzept-step-desc { font-size: 1rem; color: var(--text-muted); line-height: 1.8; }
+
+    /* MODULE TILES */
+    .konzept-modules { padding: 5rem 3rem; }
+    .konzept-modules-inner { max-width: 1400px; margin: 0 auto; }
+    .konzept-tile-row { display: grid; gap: 1px; background: var(--border); }
+    .konzept-tile-row--4 { grid-template-columns: repeat(4, 1fr); }
+    .konzept-tile-row--3 { grid-template-columns: repeat(3, 1fr); }
+    .konzept-tile-row + .konzept-tile-row { margin-top: 1px; }
+    .konzept-tile { background: var(--bg2); padding: 2rem 1.5rem; display: block; text-decoration: none; color: inherit; position: relative; overflow: hidden; transition: background 0.3s; cursor: pointer; }
+    .konzept-tile:hover { background: var(--bg3); }
+    .konzept-tile::after { content: ''; position: absolute; left: 0; right: 0; top: 0; height: 2px; background: linear-gradient(90deg, transparent 0%, rgba(232,162,32,0.45) 50%, transparent 100%); opacity: 0; pointer-events: none; }
+    .konzept-tile:hover::after, .konzept-tile.scan::after { animation: scanline 0.65s ease-out forwards; }
+    @keyframes scanline { 0% { top: 0; opacity: 1; } 100% { top: 100%; opacity: 0; } }
+    .konzept-tile-tag { display: flex; align-items: center; gap: 0.5rem; margin-bottom: 0.75rem; }
+    .konzept-tile-dot { width: 6px; height: 6px; background: var(--amber); flex-shrink: 0; }
+    .konzept-tile-tagname { font-family: 'IBM Plex Mono', monospace; font-size: 0.65rem; letter-spacing: 0.08em; text-transform: uppercase; color: var(--text-dim); }
+    .konzept-tile-name { font-family: 'Barlow Condensed', sans-serif; font-weight: 700; font-size: 1.1rem; text-transform: uppercase; color: var(--text); margin-bottom: 0.4rem; }
+    .konzept-tile-desc { font-size: 0.82rem; color: var(--text-muted); line-height: 1.5; }
+    .konzept-tile-link { font-family: 'IBM Plex Mono', monospace; font-size: 0.62rem; letter-spacing: 0.08em; text-transform: uppercase; color: var(--amber); margin-top: 0.75rem; display: block; }
+    /* ROVER tile gets amber accent */
+    .konzept-tile--base { background: var(--bg); border: 1px solid var(--border-amber); }
+    .konzept-tile--base:hover { background: var(--bg3); }
+
+    /* WRAP (border-radius on the whole module grid) */
+    .konzept-tiles-wrap { border-radius: var(--r); overflow: hidden; margin-top: 2.5rem; }
+
+    /* WARUM EIN SYSTEM */
+    .konzept-why { padding: 5rem 3rem; background: var(--bg2); border-top: 1px solid var(--border); border-bottom: 1px solid var(--border); }
+    .konzept-why-inner { max-width: 1400px; margin: 0 auto; }
+    .konzept-why-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 1px; background: var(--border); border-radius: var(--r); overflow: hidden; margin-top: 2.5rem; }
+    .konzept-why-card { background: var(--bg); padding: 2.5rem 2rem; }
+    .konzept-why-icon { font-family: 'IBM Plex Mono', monospace; font-size: 0.65rem; letter-spacing: 0.15em; text-transform: uppercase; color: var(--amber); margin-bottom: 1rem; }
+    .konzept-why-title { font-family: 'Barlow Condensed', sans-serif; font-weight: 700; font-size: 1.25rem; text-transform: uppercase; letter-spacing: 0.02em; color: var(--text); margin-bottom: 0.75rem; }
+    .konzept-why-desc { font-size: 0.95rem; color: var(--text-muted); line-height: 1.8; }
+
+    /* CTA */
+    .konzept-cta { padding: 4rem 3rem; }
+    .konzept-cta-inner { max-width: 1400px; margin: 0 auto; }
+    .konzept-cta-card { background: var(--bg2); border: 1px solid var(--border-amber); border-radius: var(--r); padding: 3rem; display: flex; align-items: center; justify-content: space-between; gap: 3rem; flex-wrap: wrap; }
+    .konzept-cta-title { font-family: 'Barlow Condensed', sans-serif; font-weight: 800; font-size: clamp(1.4rem, 2.5vw, 2rem); text-transform: uppercase; line-height: 1; margin-bottom: 0.5rem; }
+    .konzept-cta-sub { color: var(--text-muted); font-size: 0.9rem; }
+
+    /* FOOTER */
+    footer { border-top: 1px solid var(--border); padding: 2rem 3rem; display: flex; align-items: center; justify-content: space-between; background: var(--bg); }
+    .footer-copy { font-family: 'IBM Plex Mono', monospace; font-size: 0.65rem; letter-spacing: 0.1em; color: var(--text-dim); }
+    .footer-links { display: flex; gap: 1.5rem; }
+    .footer-links a { font-family: 'IBM Plex Mono', monospace; font-size: 0.65rem; letter-spacing: 0.1em; text-transform: uppercase; color: var(--text-dim); text-decoration: none; transition: color 0.2s; }
+    .footer-links a:hover { color: var(--amber); }
+
+    /* HERO ENTRY ANIMATIONS */
+    @keyframes fadeUp { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
+    .konzept-hero .section-tag { animation: fadeUp 0.5s 0.05s ease both; }
+    .konzept-hero-title         { animation: fadeUp 0.5s 0.15s ease both; }
+    .konzept-hero-sub           { animation: fadeUp 0.5s 0.25s ease both; }
+    .konzept-stats              { animation: fadeUp 0.5s 0.30s ease both; }
+    .konzept-hero .btn-primary  { animation: fadeUp 0.5s 0.35s ease both; }
+
+    /* FADE-UP SCROLL */
+    .fade-up { opacity: 0; transform: translateY(20px); transition: opacity 0.55s ease, transform 0.55s ease; }
+    .fade-up.visible { opacity: 1; transform: none; }
+
+    /* MOBILE */
+    @media (max-width: 900px) {
+      nav { padding: 0 1.5rem; }
+      .konzept-hero { padding: 5rem 1.5rem 3rem; }
+      .konzept-hero-inner { grid-template-columns: 1fr; gap: 3rem; }
+      .konzept-prinzip { padding: 3rem 1.5rem; }
+      .konzept-step { flex-direction: column; gap: 1rem; padding: 2rem 1.5rem; }
+      .konzept-step-num { font-size: 2.5rem; }
+      .konzept-modules { padding: 3rem 1.5rem; }
+      .konzept-tile-row--4 { grid-template-columns: repeat(2, 1fr); }
+      .konzept-tile-row--3 { grid-template-columns: repeat(2, 1fr); }
+      .konzept-why { padding: 3rem 1.5rem; }
+      .konzept-why-grid { grid-template-columns: 1fr; }
+      .konzept-cta { padding: 3rem 1.5rem; }
+      .konzept-cta-card { flex-direction: column; align-items: flex-start; gap: 2rem; }
+      footer { flex-direction: column; gap: 1rem; text-align: center; padding: 2rem 1.5rem; }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      .fade-up, .fade-up.visible { opacity: 1; transform: none; transition: none; }
+      .konzept-tile::after, .konzept-tile.scan::after { animation: none !important; }
+      .konzept-hero .section-tag, .konzept-hero-title, .konzept-hero-sub,
+      .konzept-stats, .konzept-hero .btn-primary { animation: none; opacity: 1; }
+    }
+  </style>
+</head>
+<body>
+
+  <nav>
+    <a href="index.html" class="logo">
+      <div class="logo-corner logo-corner--tl"></div>
+      <div class="logo-corner logo-corner--tr"></div>
+      <div class="logo-corner logo-corner--bl"></div>
+      <div class="logo-corner logo-corner--br"></div>
+      Byrud<span>.</span>Tech
+    </a>
+    <a href="index.html" class="nav-back">Zurück</a>
+  </nav>
+
+  <!-- HERO -->
+  <section class="konzept-hero">
+    <div class="konzept-hero-inner">
+      <div>
+        <div class="section-tag">// Unser Konzept</div>
+        <h1 class="konzept-hero-title">Ein Rahmen.<br /><em>Endlose Möglichkeiten.</em></h1>
+        <p class="konzept-hero-sub">Byrud Tech hat einen universellen Trägerrahmen entwickelt, auf den verschiedene Anbaugeräte für Aussaat und Pflege montiert werden können. Das Ergebnis: bis zu 4 Feldoperationen in einem einzigen Durchgang — weniger Überfahrten, weniger Kraftstoff, mehr Ertrag.</p>
+        <a href="index.html#contact" class="btn-primary">Angebot anfragen →</a>
+      </div>
+      <div class="konzept-stats">
+        <div class="konzept-stat">
+          <div class="konzept-stat-num counter" data-target="4" data-suffix="×">4×</div>
+          <div class="konzept-stat-label">Operationen pro Durchgang</div>
+        </div>
+        <div class="konzept-stat">
+          <div class="konzept-stat-num counter" data-target="40" data-prefix="–" data-suffix="%">–40%</div>
+          <div class="konzept-stat-label">Weniger Überfahrten</div>
+        </div>
+        <div class="konzept-stat">
+          <div class="konzept-stat-num counter" data-target="18" data-suffix=" km/h">18 km/h</div>
+          <div class="konzept-stat-label">Arbeitsgeschwindigkeit</div>
+        </div>
+        <div class="konzept-stat">
+          <div class="konzept-stat-num">1–2</div>
+          <div class="konzept-stat-label">Saisons bis ROI</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- DAS PRINZIP -->
+  <section class="konzept-prinzip">
+    <div class="konzept-prinzip-inner">
+      <div class="konzept-section-header fade-up">
+        <div class="section-tag">// Wie es funktioniert</div>
+        <div class="konzept-section-title">Das Prinzip</div>
+      </div>
+      <div class="konzept-steps">
+
+        <div class="konzept-step fade-up">
+          <div class="konzept-step-num">01</div>
+          <div class="konzept-step-content">
+            <div class="konzept-step-title">Basis wählen</div>
+            <p class="konzept-step-desc">Die Hackmaschine ROVER ist die Basis des Systems. Wählen Sie das passende Modell für Ihre Reihenabstände und Kulturen: ROVER-U, S, R, P oder K. Arbeitsbreite 3–12 m.</p>
+          </div>
+        </div>
+
+        <div class="konzept-step fade-up">
+          <div class="konzept-step-num">02</div>
+          <div class="konzept-step-content">
+            <div class="konzept-step-title">Module ergänzen</div>
+            <p class="konzept-step-desc">Ergänzen Sie ROVER mit den Modulen, die Ihr Betrieb braucht: EXACT für Präzisionsführung, LIXA für Flüssigdüngung, GRANO für Granulat, VELES für Aussaat. Oder TOR, STERN, TURBO für Bodenbearbeitung.</p>
+          </div>
+        </div>
+
+        <div class="konzept-step fade-up">
+          <div class="konzept-step-num">03</div>
+          <div class="konzept-step-content">
+            <div class="konzept-step-title">1 Durchgang = 4 Operationen</div>
+            <p class="konzept-step-desc">Hacken, Düngen, Spritzen, Säen — alles in einer Überfahrt. Weniger Fahrten, weniger Diesel, weniger Bodenverdichtung. Mehr Ertrag, mehr Profit.</p>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ALLE MODULE -->
+  <section class="konzept-modules">
+    <div class="konzept-modules-inner">
+      <div class="konzept-section-header fade-up">
+        <div class="section-tag">// Das System</div>
+        <div class="konzept-section-title">Alle Module auf einen Blick</div>
+      </div>
+      <div class="konzept-tiles-wrap">
+        <div class="konzept-tile-row konzept-tile-row--4">
+          <a class="konzept-tile konzept-tile--base" href="rover.html">
+            <div class="konzept-tile-tag"><div class="konzept-tile-dot"></div><span class="konzept-tile-tagname">ROVER — Basis</span></div>
+            <div class="konzept-tile-name">Hacken &amp; Pflegen</div>
+            <div class="konzept-tile-desc">Mechanische Zwischenreihenbearbeitung mit 1 cm Genauigkeit</div>
+            <span class="konzept-tile-link">Mehr erfahren →</span>
+          </a>
+          <a class="konzept-tile" href="lixa.html">
+            <div class="konzept-tile-tag"><div class="konzept-tile-dot"></div><span class="konzept-tile-tagname">LIXA</span></div>
+            <div class="konzept-tile-name">Flüssigdüngung</div>
+            <div class="konzept-tile-desc">UAN, NFS und Pflanzenschutzmittel direkt in die Wurzelzone</div>
+            <span class="konzept-tile-link">Mehr erfahren →</span>
+          </a>
+          <a class="konzept-tile" href="grano.html">
+            <div class="konzept-tile-tag"><div class="konzept-tile-dot"></div><span class="konzept-tile-tagname">GRANO</span></div>
+            <div class="konzept-tile-name">Granulatdüngung</div>
+            <div class="konzept-tile-desc">Granulat 5–270 kg/ha, Bunker 800–2000 l</div>
+            <span class="konzept-tile-link">Mehr erfahren →</span>
+          </a>
+          <a class="konzept-tile" href="veles.html">
+            <div class="konzept-tile-tag"><div class="konzept-tile-dot"></div><span class="konzept-tile-tagname">VELES</span></div>
+            <div class="konzept-tile-name">Aussaat</div>
+            <div class="konzept-tile-desc">Zwischensaat und Untersaat für Getreide, Raps, Soja</div>
+            <span class="konzept-tile-link">Mehr erfahren →</span>
+          </a>
+        </div>
+        <div class="konzept-tile-row konzept-tile-row--3">
+          <a class="konzept-tile" href="tor.html">
+            <div class="konzept-tile-tag"><div class="konzept-tile-dot"></div><span class="konzept-tile-tagname">TOR</span></div>
+            <div class="konzept-tile-name">Saatbettbereitung</div>
+            <div class="konzept-tile-desc">Netzegge für Saatbett und Unkrautbekämpfung</div>
+            <span class="konzept-tile-link">Mehr erfahren →</span>
+          </a>
+          <a class="konzept-tile" href="stern.html">
+            <div class="konzept-tile-tag"><div class="konzept-tile-dot"></div><span class="konzept-tile-tagname">STERN</span></div>
+            <div class="konzept-tile-name">Striegeln &amp; Verfestigen</div>
+            <div class="konzept-tile-desc">Rotationsstriegel für Pflege und Rückverfestigung</div>
+            <span class="konzept-tile-link">Mehr erfahren →</span>
+          </a>
+          <a class="konzept-tile" href="turbo.html">
+            <div class="konzept-tile-tag"><div class="konzept-tile-dot"></div><span class="konzept-tile-tagname">TURBO</span></div>
+            <div class="konzept-tile-name">Zerkleinerung</div>
+            <div class="konzept-tile-desc">Erntegutzerkleinerung für schnelle Zersetzung</div>
+            <span class="konzept-tile-link">Mehr erfahren →</span>
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- WARUM EIN SYSTEM -->
+  <section class="konzept-why">
+    <div class="konzept-why-inner">
+      <div class="konzept-section-header fade-up">
+        <div class="section-tag">// Die Vorteile</div>
+        <div class="konzept-section-title">Warum ein System?</div>
+      </div>
+      <div class="konzept-why-grid">
+
+        <div class="konzept-why-card fade-up">
+          <div class="konzept-why-icon">01 — Effizienz</div>
+          <div class="konzept-why-title">Weniger Überfahrten</div>
+          <p class="konzept-why-desc">Bis zu 4 Operationen in einem Durchgang. Spart Diesel, Zeit und reduziert Bodenverdichtung — bei gleichzeitig höherer Flächenleistung.</p>
+        </div>
+
+        <div class="konzept-why-card fade-up">
+          <div class="konzept-why-icon">02 — Investition</div>
+          <div class="konzept-why-title">Niedrigere Investition</div>
+          <p class="konzept-why-desc">Ein Rahmen für alle Module. Sie kaufen nicht 4 Maschinen — Sie kaufen 1 System. Jedes Modul lässt sich jederzeit ergänzen oder austauschen.</p>
+        </div>
+
+        <div class="konzept-why-card fade-up">
+          <div class="konzept-why-icon">03 — Flexibilität</div>
+          <div class="konzept-why-title">Flexible Konfiguration</div>
+          <p class="konzept-why-desc">Heute Hacken + Düngen. Morgen Hacken + Spritzen. Module wechseln — nicht die Maschine. Anpassung an Kultur, Saison und Betriebsstrategie.</p>
+        </div>
+
+        <div class="konzept-why-card fade-up">
+          <div class="konzept-why-icon">04 — Rentabilität</div>
+          <div class="konzept-why-title">Schneller ROI</div>
+          <p class="konzept-why-desc">Weniger Chemie, weniger Diesel, weniger Personal. Amortisation in 1–2 Saisons oder ab 1.000 ha. Messbare Einsparungen vom ersten Einsatz an.</p>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA -->
+  <section class="konzept-cta">
+    <div class="konzept-cta-inner">
+      <div class="konzept-cta-card fade-up">
+        <div>
+          <div class="konzept-cta-title">Ihr System zusammenstellen</div>
+          <p class="konzept-cta-sub">Wir beraten Sie zur optimalen Konfiguration für Ihren Betrieb und Ihre Kulturen.</p>
+        </div>
+        <a href="index.html#contact" class="btn-primary">Angebot anfragen →</a>
+      </div>
+    </div>
+  </section>
+
+  <footer>
+    <span class="footer-copy">© 2025 Byrud Tech. Alle Rechte vorbehalten.</span>
+    <div class="footer-links"><a href="#">Impressum</a><a href="#">Datenschutz</a><a href="#">AGB</a></div>
+    <span class="footer-copy">Hamburg · byrud-tech.com</span>
+  </footer>
+
+  <script>
+    /* COUNTER */
+    function animateCounter(el) {
+      const target = +el.dataset.target;
+      const prefix = el.dataset.prefix || '';
+      const suffix = el.dataset.suffix || '';
+      const duration = 1200;
+      function ease(t) { return 1 - Math.pow(1 - t, 3); }
+      const startTime = performance.now();
+      function tick(now) {
+        const t = Math.min((now - startTime) / duration, 1);
+        el.textContent = prefix + Math.round(ease(t) * target) + suffix;
+        if (t < 1) requestAnimationFrame(tick);
+      }
+      requestAnimationFrame(tick);
+    }
+    const counterObserver = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) { animateCounter(entry.target); counterObserver.unobserve(entry.target); }
+      });
+    }, { threshold: 0.5 });
+    document.querySelectorAll('.counter').forEach(el => counterObserver.observe(el));
+
+    /* FADE-UP */
+    document.querySelectorAll('.konzept-step').forEach((el, i) => { el.style.transitionDelay = (i * 100) + 'ms'; });
+    document.querySelectorAll('.konzept-tile').forEach((el, i) => { el.classList.add('fade-up'); el.style.transitionDelay = (i * 60) + 'ms'; });
+    document.querySelectorAll('.konzept-why-card').forEach((el, i) => { el.style.transitionDelay = (i * 80) + 'ms'; });
+
+    const fadeObserver = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) { entry.target.classList.add('visible'); fadeObserver.unobserve(entry.target); }
+      });
+    }, { threshold: 0.12 });
+    document.querySelectorAll('.fade-up').forEach(el => fadeObserver.observe(el));
+
+    /* MOBILE SCANLINE */
+    const scanObserver = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting && window.matchMedia('(max-width: 900px)').matches) {
+          entry.target.classList.add('scan');
+          entry.target.addEventListener('animationend', () => entry.target.classList.remove('scan'), { once: true });
+        }
+      });
+    }, { threshold: 0.5 });
+    document.querySelectorAll('.konzept-tile').forEach(el => scanObserver.observe(el));
+  </script>
+
+</body>
+</html>
