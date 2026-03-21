@@ -1,0 +1,470 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Liquid Fertilization LIXA — Byrud Tech</title>
+  <meta name="description" content="LIXA — System for precise application of liquid fertilizer and PPP directly into the growth zone. Up to 3 components simultaneously, tank up to 3000 l." />
+  <meta name="format-detection" content="telephone=no" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@400;600;700;800&family=IBM+Plex+Mono:wght@400;500&family=Barlow:wght@300;400;500&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    :root {
+      --bg: #0b0b0b; --bg2: #111111; --bg3: #161616;
+      --amber: #e8a220; --amber-dim: #b87e18; --amber-glow: rgba(232,162,32,0.12);
+      --text: #f0ede8; --text-muted: #9a9a92; --text-dim: #6a6a64;
+      --border: rgba(255,255,255,0.07); --border-amber: rgba(232,162,32,0.3);
+      --r: 6px; --r-sm: 4px;
+    }
+    html { scroll-behavior: smooth; }
+    body { background: var(--bg); color: var(--text); font-family: 'Barlow', sans-serif; font-weight: 400; line-height: 1.6; overflow-x: hidden; }
+    body::before { content: ''; position: fixed; inset: 0; background-image: linear-gradient(var(--border) 1px, transparent 1px), linear-gradient(90deg, var(--border) 1px, transparent 1px); background-size: 60px 60px; pointer-events: none; z-index: 0; opacity: 0.15; }
+    section, footer, nav { position: relative; z-index: 1; }
+    * { -webkit-tap-highlight-color: transparent; }
+    a[href^="tel"], a[href^="mailto"] { color: inherit; text-decoration: none; }
+    nav { position: fixed; top: 0; left: 0; right: 0; z-index: 100; display: flex; align-items: center; justify-content: space-between; padding: 0 3rem; height: 64px; background: rgba(11,11,11,0.88); backdrop-filter: blur(12px); border-bottom: 1px solid var(--border); }
+    .logo { font-family: 'Barlow Condensed', sans-serif; font-weight: 800; font-size: 1.3rem; letter-spacing: 0.08em; text-transform: uppercase; color: var(--text); text-decoration: none; position: relative; padding: 5px 8px; }
+    .logo-corner { position: absolute; width: 7px; height: 7px; border-color: var(--amber); border-style: solid; border-width: 0; }
+    .logo-corner--tl { top: 0; left: 0; border-top-width: 1px; border-left-width: 1px; }
+    .logo-corner--tr { top: 0; right: 0; border-top-width: 1px; border-right-width: 1px; }
+    .logo-corner--bl { bottom: 0; left: 0; border-bottom-width: 1px; border-left-width: 1px; }
+    .logo-corner--br { bottom: 0; right: 0; border-bottom-width: 1px; border-right-width: 1px; }
+    .logo span { color: var(--amber); }
+    .nav-links { display: flex; gap: 2.5rem; list-style: none; }
+    .nav-links a { font-family: 'IBM Plex Mono', monospace; font-size: 0.72rem; letter-spacing: 0.1em; text-transform: uppercase; color: var(--text-muted); text-decoration: none; transition: color 0.2s; }
+    .nav-links a:hover { color: var(--amber); }
+    .lang-switcher { position: relative; flex-shrink: 0; margin-left: 1rem; }
+    .lang-btn { background: none; border: none; color: var(--text-muted); cursor: pointer; padding: 4px; display: flex; align-items: center; transition: color 0.3s; }
+    .lang-btn:hover { color: var(--amber); }
+    .lang-dropdown { display: none; position: absolute; top: 100%; right: 0; margin-top: 8px; background: rgba(11,11,11,0.95); backdrop-filter: blur(12px); border: 1px solid var(--border); flex-direction: column; min-width: 50px; z-index: 200; }
+    .lang-dropdown.open { display: flex; }
+    .lang-option { font-family: 'IBM Plex Mono', monospace; font-size: 0.72rem; letter-spacing: 0.1em; text-transform: uppercase; color: var(--text-muted); text-decoration: none; padding: 0.5rem 1rem; transition: color 0.2s, background 0.2s; text-align: center; }
+    .lang-option:hover { color: var(--text); background: var(--bg3); }
+    .lang-option.lang-active { color: var(--amber); }
+    .btn-primary { font-family: 'IBM Plex Mono', monospace; font-size: 0.78rem; letter-spacing: 0.1em; text-transform: uppercase; background: var(--amber); color: #0b0b0b; padding: 0.9rem 2rem; text-decoration: none; font-weight: 500; transition: opacity 0.2s; display: inline-block; border-radius: var(--r-sm); }
+    .btn-primary:hover { opacity: 0.85; }
+    .section-tag { font-family: 'IBM Plex Mono', monospace; font-size: 0.68rem; letter-spacing: 0.2em; text-transform: uppercase; color: var(--amber); margin-bottom: 0.75rem; }
+    .blueprint-frame { position: relative; background: var(--bg3); border: 0.5px solid rgba(255, 255, 255, 0.1); overflow: hidden; }
+    .blueprint-frame img { width: 100%; height: 100%; object-fit: contain; padding: 1.5rem; }
+    .product-hero { padding: 7rem 3rem 5rem; }
+    .product-hero-inner { display: grid; grid-template-columns: 55% 45%; gap: 5rem; align-items: center; max-width: 1400px; margin: 0 auto; }
+    .product-hero-text .section-tag { margin-bottom: 0.5rem; }
+    .product-hero-title { font-family: 'Barlow Condensed', sans-serif; font-weight: 800; font-size: clamp(3rem, 6vw, 5.5rem); line-height: 0.9; letter-spacing: -0.01em; text-transform: uppercase; margin-bottom: 1.25rem; }
+    .product-hero-sub { font-size: 1.05rem; color: var(--text-muted); line-height: 1.75; margin-bottom: 2.5rem; max-width: 420px; }
+    .product-stats { display: grid; grid-template-columns: repeat(4, 1fr); gap: 1px; background: var(--border); margin-bottom: 2.5rem; border-radius: var(--r-sm); overflow: hidden; }
+    .product-stat { background: var(--bg2); padding: 1.25rem 1rem; }
+    .product-stat-num { font-family: 'Barlow Condensed', sans-serif; font-weight: 800; font-size: 1.9rem; color: var(--amber); line-height: 1; margin-bottom: 0.3rem; }
+    .product-stat-label { font-family: 'IBM Plex Mono', monospace; font-size: 0.6rem; letter-spacing: 0.08em; text-transform: uppercase; color: var(--text-dim); }
+    .product-models { padding: 5rem 3rem; background: var(--bg2); border-top: 1px solid var(--border); border-bottom: 1px solid var(--border); }
+    .product-models-inner { max-width: 1400px; margin: 0 auto; }
+    .product-models-header { margin-bottom: 2.5rem; }
+    .product-models-title { font-family: 'Barlow Condensed', sans-serif; font-weight: 800; font-size: clamp(1.8rem, 3vw, 2.8rem); text-transform: uppercase; letter-spacing: -0.01em; line-height: 0.95; margin-bottom: 1rem; }
+    .product-models-desc { color: var(--text-muted); font-size: 1rem; line-height: 1.8; max-width: 680px; }
+    .models-table { width: 100%; border-collapse: collapse; margin-top: 2rem; border: 1px solid var(--border); border-radius: var(--r); overflow: hidden; }
+    .models-table th { font-family: 'IBM Plex Mono', monospace; font-size: 0.62rem; letter-spacing: 0.12em; text-transform: uppercase; color: var(--text-dim); text-align: left; padding: 1rem 1.25rem; background: var(--bg3); border-bottom: 1px solid var(--border); font-weight: 400; }
+    .models-table td { padding: 1.1rem 1.25rem; font-size: 0.92rem; color: var(--text-muted); border-bottom: 1px solid var(--border); vertical-align: top; }
+    .models-table tr:last-child td { border-bottom: none; }
+    .models-table tr:nth-child(even) td { background: var(--bg2); }
+    .models-table tr:nth-child(odd) td { background: var(--bg); }
+    .model-name-cell { font-family: 'Barlow Condensed', sans-serif; font-weight: 700; font-size: 1.05rem; text-transform: uppercase; color: var(--text); letter-spacing: 0.04em; }
+    .tank-section { display: flex; gap: 2rem; align-items: flex-start; margin-top: 3rem; }
+    .tank-photo { width: 45%; flex-shrink: 0; border: 0.5px solid rgba(255, 255, 255, 0.1); overflow: hidden; }
+    .tank-photo img { width: 100%; height: auto; object-fit: contain; }
+    .tank-table { flex: 1; }
+    .lixa-o-section { padding: 5rem 3rem; }
+    .lixa-o-inner { max-width: 1400px; margin: 0 auto; }
+    .lixa-o-photo { width: 100%; border: 0.5px solid rgba(255, 255, 255, 0.1); overflow: hidden; margin-bottom: 2rem; }
+    .lixa-o-photo img { width: 100%; height: auto; display: block; }
+    .lixa-o-table { width: 100%; border-collapse: collapse; border: 1px solid var(--border); border-radius: var(--r); overflow: hidden; }
+    .lixa-o-table th { font-family: 'IBM Plex Mono', monospace; font-size: 0.65rem; letter-spacing: 0.12em; text-transform: uppercase; color: var(--text-dim); text-align: left; padding: 1rem; background: var(--bg3); border-bottom: 1px solid var(--border); font-weight: 400; }
+    .lixa-o-table td { padding: 1rem; font-size: 0.92rem; color: var(--text-muted); border-bottom: 1px solid var(--border); }
+    .lixa-o-table tr:last-child td { border-bottom: none; }
+    .lixa-o-table tr:nth-child(even) td { background: var(--bg2); }
+    .lixa-o-table tr:nth-child(odd) td { background: var(--bg); }
+    .lixa-o-table .eff-key { font-weight: 700; color: var(--text); }
+    .lixa-o-table .eff-highlight { color: var(--amber); font-weight: 700; }
+    .table-wrap { width: 100%; overflow-x: auto; -webkit-overflow-scrolling: touch; }
+    .table-wrap table { width: 100%; min-width: 100%; }
+    .product-gallery { padding: 5rem 3rem; }
+    .product-gallery-inner { max-width: 1400px; margin: 0 auto; display: flex; flex-direction: column; gap: 6rem; }
+    .gallery-block { display: grid; grid-template-columns: 1fr 1fr; gap: 5rem; align-items: center; }
+    .gallery-block.reverse { direction: rtl; }
+    .gallery-block.reverse > * { direction: ltr; }
+    .gallery-text-tag { font-family: 'IBM Plex Mono', monospace; font-size: 0.65rem; letter-spacing: 0.15em; text-transform: uppercase; color: var(--amber); margin-bottom: 0.75rem; }
+    .gallery-text-title { font-family: 'Barlow Condensed', sans-serif; font-weight: 700; font-size: clamp(1.3rem, 2vw, 1.6rem); text-transform: uppercase; letter-spacing: 0.02em; margin-bottom: 1rem; color: var(--text); }
+    .gallery-text-body { color: var(--text-muted); font-size: 0.95rem; line-height: 1.8; }
+    .gallery-text-list { margin-top: 1.25rem; display: flex; flex-direction: column; gap: 0.5rem; list-style: none; }
+    .gallery-text-list li { font-family: 'IBM Plex Mono', monospace; font-size: 0.72rem; letter-spacing: 0.06em; color: var(--text-muted); display: flex; align-items: center; gap: 0.6rem; }
+    .gallery-text-list li::before { content: ''; width: 16px; height: 1px; background: var(--amber); flex-shrink: 0; }
+    .product-specs { padding: 5rem 3rem; background: var(--bg2); border-top: 1px solid var(--border); border-bottom: 1px solid var(--border); }
+    .product-specs-inner { max-width: 1400px; margin: 0 auto; }
+    .product-specs-header { margin-bottom: 2.5rem; }
+    .product-specs-title { font-family: 'Barlow Condensed', sans-serif; font-weight: 800; font-size: clamp(1.8rem, 3vw, 2.8rem); text-transform: uppercase; letter-spacing: -0.01em; line-height: 0.95; }
+    .specs-row { display: grid; grid-template-columns: 280px 1fr; border-bottom: 1px solid var(--border); }
+    .specs-row:first-child { border-top: 1px solid var(--border); }
+    .specs-key { font-family: 'IBM Plex Mono', monospace; font-size: 0.65rem; letter-spacing: 0.1em; text-transform: uppercase; color: var(--text-dim); padding: 1.1rem 0; }
+    .specs-val { color: var(--text-muted); font-size: 0.95rem; padding: 1.1rem 2rem 1.1rem 0; }
+    .product-cta-section { padding: 4rem 3rem; }
+    .product-cta-inner { max-width: 1400px; margin: 0 auto; }
+    .product-cta-card { background: var(--bg2); border: 1px solid var(--border-amber); border-radius: var(--r); padding: 3rem; display: flex; align-items: center; justify-content: space-between; gap: 3rem; flex-wrap: wrap; }
+    .product-cta-title { font-family: 'Barlow Condensed', sans-serif; font-weight: 800; font-size: clamp(1.4rem, 2.5vw, 2rem); text-transform: uppercase; line-height: 1; margin-bottom: 0.5rem; }
+    .product-cta-sub { color: var(--text-muted); font-size: 0.9rem; }
+    footer { border-top: 1px solid var(--border); padding: 2rem 3rem; display: flex; align-items: center; justify-content: space-between; background: var(--bg); }
+    .footer-copy { font-family: 'IBM Plex Mono', monospace; font-size: 0.65rem; letter-spacing: 0.1em; color: var(--text-dim); }
+    .footer-links { display: flex; gap: 1.5rem; }
+    .footer-links a { font-family: 'IBM Plex Mono', monospace; font-size: 0.65rem; letter-spacing: 0.1em; text-transform: uppercase; color: var(--text-dim); text-decoration: none; transition: color 0.2s; }
+    .footer-links a:hover { color: var(--amber); }
+    @keyframes fadeUp { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
+    .product-hero-text .section-tag { animation: fadeUp 0.5s 0.05s ease both; }
+    .product-hero-title { animation: fadeUp 0.5s 0.15s ease both; }
+    .product-hero-sub { animation: fadeUp 0.5s 0.25s ease both; }
+    .product-stats { animation: fadeUp 0.5s 0.3s ease both; }
+    .product-hero-text .btn-primary { animation: fadeUp 0.5s 0.35s ease both; }
+    @media (max-width: 900px) {
+      nav { padding: 0 1.5rem; }
+      .nav-links { display: none; }
+      .nav-burger { display: flex; }
+      .lang-switcher { margin-left: auto; margin-right: 0.5rem; }
+      .product-hero { padding: 5rem 1.5rem 3rem; }
+      .product-hero-inner { grid-template-columns: 1fr; gap: 2.5rem; }
+      .product-hero-photo { order: -1; }
+      .product-hero-sub { max-width: none; }
+      .product-stats { grid-template-columns: repeat(2, 1fr); }
+      .product-models { padding: 3rem 1.5rem; }
+      .product-gallery { padding: 3rem 1.5rem; }
+      .product-gallery-inner { gap: 3.5rem; }
+      .gallery-block { grid-template-columns: 1fr; gap: 2rem; }
+      .gallery-block.reverse { direction: ltr; }
+      .gallery-block .blueprint-frame { order: -1; }
+      .product-specs { padding: 3rem 1.5rem; }
+      .specs-row { grid-template-columns: 1fr; }
+      .specs-key { padding-bottom: 0.2rem; }
+      .specs-val { padding: 0 0 1rem; }
+      .product-cta-section { padding: 3rem 1.5rem; }
+      .product-cta-card { flex-direction: column; align-items: flex-start; gap: 2rem; }
+      footer { flex-direction: column; gap: 1rem; text-align: center; padding: 2rem 1.5rem; }
+      .models-table { font-size: 0.85rem; }
+      .models-table th, .models-table td { padding: 0.75rem; }
+      .tank-section { flex-direction: column; }
+      .tank-photo { width: 100%; }
+      .lixa-o-section { padding: 3rem 1.5rem; }
+      .table-wrap { margin-left: -1.5rem; margin-right: -1.5rem; padding-left: 1.5rem; padding-right: 1.5rem; width: calc(100% + 3rem); }
+      .table-wrap table { width: 100%; }
+      .table-wrap td, .table-wrap th { padding: 0.75rem 1rem; font-size: 0.85rem; }
+    }
+
+    /* MOBILE MENU */
+    .nav-burger { display: none; flex-direction: column; justify-content: center; gap: 5px; width: 36px; height: 36px; background: none; border: none; cursor: pointer; padding: 4px; z-index: 101; }
+    .nav-burger span { display: block; width: 100%; height: 1.5px; background: var(--text); transition: transform 0.3s, opacity 0.3s; transform-origin: center; }
+    .nav-burger.open span:nth-child(1) { transform: translateY(6.5px) rotate(45deg); }
+    .nav-burger.open span:nth-child(2) { opacity: 0; }
+    .nav-burger.open span:nth-child(3) { transform: translateY(-6.5px) rotate(-45deg); }
+    .mobile-drawer { display: none; position: fixed; inset: 0; top: 64px; background: rgba(11,11,11,0.97); backdrop-filter: blur(16px); z-index: 99; flex-direction: column; padding: 3rem 2rem; border-top: 1px solid var(--border); }
+    .mobile-drawer.open { display: flex; }
+    .mobile-drawer ul { list-style: none; display: flex; flex-direction: column; gap: 0; flex: 1; }
+    .mobile-drawer ul li { border-bottom: 1px solid var(--border); }
+    .mobile-drawer ul li a { display: block; font-family: 'Barlow Condensed', sans-serif; font-weight: 700; font-size: 2rem; text-transform: uppercase; color: var(--text); text-decoration: none; padding: 1rem 0; letter-spacing: 0.02em; transition: color 0.2s; }
+    .mobile-drawer ul li a:hover { color: var(--amber); }
+    .mobile-drawer .mobile-cta { margin-top: 2.5rem; }
+    .mobile-drawer .mobile-cta a { display: block; text-align: center; }
+    @media (max-width: 900px) { .nav-burger { display: flex; } }
+  </style>
+</head>
+<body>
+
+  <nav>
+    <a href="index.html" class="logo">
+      <div class="logo-corner logo-corner--tl"></div>
+      <div class="logo-corner logo-corner--tr"></div>
+      <div class="logo-corner logo-corner--bl"></div>
+      <div class="logo-corner logo-corner--br"></div>
+      Byrud<span>.</span>Tech
+    </a>
+    <ul class="nav-links">
+      <li><a href="index.html">Home</a></li>
+      <li><a href="maschinen.html">Machines</a></li>
+      <li><a href="konzept.html">Concept</a></li>
+      <li><a href="technologie.html">Technology</a></li>
+      <li><a href="about.html">About us</a></li>
+      <li><a href="index.html#contact">Contact</a></li>
+    </ul>
+    <div class="lang-switcher">
+      <button class="lang-btn" onclick="toggleLang()" aria-label="Select language">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M2 12h20"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg>
+      </button>
+      <div class="lang-dropdown" id="langDropdown">
+        <a href="lixa.html" class="lang-option">DE</a>
+        <a href="lixa-en.html" class="lang-option lang-active">EN</a>
+        <a href="lixa-ru.html" class="lang-option">RU</a>
+        <a href="lixa-uk.html" class="lang-option">UK</a>
+      </div>
+    </div>
+    <button class="nav-burger" id="navBurger" aria-label="Open menu" aria-expanded="false">
+      <span></span><span></span><span></span>
+    </button>
+  </nav>
+
+  <div class="mobile-drawer" id="mobileDrawer">
+    <ul>
+      <li><a href="index.html" class="drawer-link">Home</a></li>
+      <li><a href="maschinen.html" class="drawer-link">Machines</a></li>
+      <li><a href="konzept.html" class="drawer-link">Concept</a></li>
+      <li><a href="technologie.html" class="drawer-link">Technology</a></li>
+      <li><a href="about.html" class="drawer-link">About us</a></li>
+      <li><a href="index.html#contact" class="drawer-link">Contact</a></li>
+    </ul>
+    <div class="mobile-cta">
+      <a href="index.html#contact" class="btn-primary drawer-link">Request a quote →</a>
+    </div>
+  </div>
+
+  <section class="product-hero">
+    <div class="product-hero-inner">
+      <div class="product-hero-photo">
+        <div class="blueprint-frame">
+          <img src="images/lixa-hero.jpg" alt="Liquid Fertilization LIXA — Byrud Tech" />
+        </div>
+      </div>
+      <div class="product-hero-text">
+        <div class="section-tag">// Liquid fertilization &amp; crop protection</div>
+        <div class="product-hero-title">LIXA</div>
+        <p class="product-hero-sub">System for precise application of liquid fertilizer (UAN, NFS) and plant protection products directly into the growth zone — foliar, inter-row or in-row. Up to 3 liquid components simultaneously.</p>
+        <div class="product-stats">
+          <div class="product-stat"><div class="product-stat-num">3000 l</div><div class="product-stat-label">Max. tank volume</div></div>
+          <div class="product-stat"><div class="product-stat-num">3</div><div class="product-stat-label">Components simultaneously</div></div>
+          <div class="product-stat"><div class="product-stat-num">−40%</div><div class="product-stat-label">PSM savings</div></div>
+          <div class="product-stat"><div class="product-stat-num">CAN</div><div class="product-stat-label">Bus control</div></div>
+        </div>
+        <a href="index.html#contact" class="btn-primary">Request a quote →</a>
+      </div>
+    </div>
+  </section>
+
+  <section class="product-models">
+    <div class="product-models-inner">
+      <div class="product-models-header">
+        <div class="section-tag">// Tank options</div>
+        <div class="product-models-title">Flexible tank sizes</div>
+        <p class="product-models-desc">Tanks made of high-quality plastic. Mounted directly on the universal carrier frame — compact, stable, ready for immediate use.</p>
+        <p class="product-models-desc" style="margin-top: 1rem;">Liquid fertilization directly into the root zone saves up to 40% of plant protection products. The LIXA system delivers UAN, NFS and PPP precisely where they are needed. Control is provided by the Cruise 4 computer with CAN bus connection. Up to 3 liquid components can be applied simultaneously.</p>
+      </div>
+      <div class="tank-section">
+        <div class="tank-photo">
+          <img src="images/lixa-tank.jpg" alt="LIXA tank on carrier frame" />
+        </div>
+        <div class="tank-table table-wrap">
+          <table class="models-table">
+            <thead>
+              <tr>
+                <th>Model</th>
+                <th>Tank volume</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td><div class="model-name-cell">LIXA-600</div></td>
+                <td>600 l</td>
+              </tr>
+              <tr>
+                <td><div class="model-name-cell">LIXA-2×600</div></td>
+                <td>2×600 l</td>
+              </tr>
+              <tr>
+                <td><div class="model-name-cell">LIXA-1800</div></td>
+                <td>1800 l</td>
+              </tr>
+              <tr>
+                <td><div class="model-name-cell">LIXA-2000</div></td>
+                <td>2000 l</td>
+              </tr>
+              <tr>
+                <td><div class="model-name-cell">LIXA-3000</div></td>
+                <td>3000 l</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="product-models">
+    <div class="product-models-inner">
+      <div class="product-models-header">
+        <div class="section-tag">// Trailer tank</div>
+        <div class="product-models-title">Towed container 2,700–6,000 l</div>
+        <p class="product-models-desc">For large areas and maximum autonomy — the towed supply container extends the tank capacity up to 6,000 liters. Automatic refilling of the frame tank without interruption.</p>
+      </div>
+      <div class="tank-section">
+        <div class="tank-photo">
+          <img src="images/lixa-anhanger.jpg" alt="LIXA towed container 2700–6000 l" />
+        </div>
+        <div class="tank-table table-wrap">
+          <table class="models-table">
+            <thead>
+              <tr>
+                <th>Model</th>
+                <th>Volume</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td><div class="model-name-cell">Trailer 2700</div></td>
+                <td>2,700 l</td>
+              </tr>
+              <tr>
+                <td><div class="model-name-cell">Trailer 4000</div></td>
+                <td>4,000 l</td>
+              </tr>
+              <tr>
+                <td><div class="model-name-cell">Trailer 6000</div></td>
+                <td>6,000 l</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="product-gallery">
+    <div class="product-gallery-inner">
+      <div class="gallery-block reverse">
+        <div class="blueprint-frame">
+          <img src="images/lixa-duesen.jpg" alt="LIXA — Nozzle options" />
+        </div>
+        <div class="gallery-text">
+          <div class="gallery-text-tag">// Nozzle options</div>
+          <div class="gallery-text-title">Flexible for every application type</div>
+          <p class="gallery-text-body">Various nozzle types for foliar, inter-row and in-row application. Easy change without tools — conversion in just a few minutes directly in the field.</p>
+          <ul class="gallery-text-list">
+            <li>Foliar application — full coverage</li>
+            <li>Inter-row application — targeted, spray-gentle</li>
+            <li>In-row application — directly into the root zone</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="gallery-block reverse">
+        <div class="blueprint-frame">
+          <img src="images/lixa-o.jpg" alt="LIXA-O — Precision spraying" />
+        </div>
+        <div class="gallery-text">
+          <div class="gallery-text-tag">// Option LIXA-O</div>
+          <div class="gallery-text-title">Precision individual plant treatment</div>
+          <p class="gallery-text-body">Pinpoint application — up to 40% savings on plant protection products through targeted individual plant treatment. In combination with the EXACT camera system, LIXA-O detects weeds and treats only where necessary.</p>
+          <ul class="gallery-text-list">
+            <li>Savings up to −40% PPP</li>
+            <li>Combination with EXACT camera possible</li>
+            <li>Automatic activation per row</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="lixa-o-section">
+    <div class="lixa-o-inner">
+      <div class="section-tag">// Precision spraying</div>
+      <div class="product-models-title" style="margin-bottom: 1rem;">LIXA-O — Band Spraying</div>
+      <p class="product-models-desc" style="margin-bottom: 2rem;">Precision application of crop protection products only in the inter-row area. Up to 40% less PPP with the same effect.</p>
+      <div class="lixa-o-photo">
+        <img src="images/lixa-o-field.jpg" alt="LIXA-O precision spraying in the inter-row area" />
+      </div>
+      <div class="table-wrap">
+      <table class="lixa-o-table">
+        <thead>
+          <tr>
+            <th>Effect</th>
+            <th>Description</th>
+            <th>Result</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td class="eff-key">Thermoregulation</td>
+            <td>Reduction of soil temperature by 8–10 °C</td>
+            <td>Better conditions for root growth</td>
+          </tr>
+          <tr>
+            <td class="eff-key">Aeration</td>
+            <td>Destruction of the soil crust</td>
+            <td>Better oxygen access to the root zone</td>
+          </tr>
+          <tr>
+            <td class="eff-key">Weed control</td>
+            <td>Mechanical + chemical control</td>
+            <td>Maximum effectiveness</td>
+          </tr>
+          <tr>
+            <td class="eff-key">Savings</td>
+            <td>Targeted application of plant protection products</td>
+            <td class="eff-highlight">Up to −40% PPP consumption</td>
+          </tr>
+        </tbody>
+      </table>
+      </div>
+    </div>
+  </section>
+
+  <section class="product-specs">
+    <div class="product-specs-inner">
+      <div class="product-specs-header">
+        <div class="section-tag">// Technical data</div>
+        <div class="product-specs-title">Technical<br />Specifications</div>
+      </div>
+      <div class="specs-row"><div class="specs-key">Tank volume</div><div class="specs-val">600 / 2×600 / 1800 / 2000 / 3000 l</div></div>
+      <div class="specs-row"><div class="specs-key">Towed container</div><div class="specs-val">2,700 / 4,000 / 6,000 l</div></div>
+      <div class="specs-row"><div class="specs-key">Control</div><div class="specs-val">Computer Cruise 4 / CAN-Bus</div></div>
+      <div class="specs-row"><div class="specs-key">Drive</div><div class="specs-val">Electric pump, tractor hydraulics</div></div>
+      <div class="specs-row"><div class="specs-key">Application types</div><div class="specs-val">Foliar, inter-row, in-row, both sides</div></div>
+      <div class="specs-row"><div class="specs-key">Components simultaneously</div><div class="specs-val">Up to 3</div></div>
+      <div class="specs-row"><div class="specs-key">PPP savings</div><div class="specs-val">Up to −40% (with LIXA-O)</div></div>
+      <div class="specs-row"><div class="specs-key">Dosing</div><div class="specs-val">Precise, uniform distribution</div></div>
+    </div>
+  </section>
+
+  <section class="product-cta-section">
+    <div class="product-cta-inner">
+      <div class="product-cta-card">
+        <div>
+          <div class="product-cta-title">Configure LIXA<br />for your operation</div>
+          <p class="product-cta-sub">We provide individual consultation — tank size, nozzle selection, compatibility and pricing.</p>
+        </div>
+        <a href="index.html#contact" class="btn-primary">Request a quote →</a>
+      </div>
+    </div>
+  </section>
+
+  <footer>
+    <span class="footer-copy">© 2025 Byrud Tech. All rights reserved.</span>
+    <div class="footer-links"><a href="#">Imprint</a><a href="#">Privacy</a><a href="#">Terms</a></div>
+    <span class="footer-copy">Hamburg · byrud-tech.com</span>
+  </footer>
+
+  <script>
+    /* BURGER / DRAWER */
+    const burger = document.getElementById('navBurger');
+    const drawer = document.getElementById('mobileDrawer');
+    burger.addEventListener('click', () => {
+      const isOpen = drawer.classList.toggle('open');
+      burger.classList.toggle('open', isOpen);
+      burger.setAttribute('aria-expanded', isOpen);
+      document.body.style.overflow = isOpen ? 'hidden' : '';
+    });
+    document.querySelectorAll('.drawer-link').forEach(link => {
+      link.addEventListener('click', () => {
+        drawer.classList.remove('open');
+        burger.classList.remove('open');
+        burger.setAttribute('aria-expanded', 'false');
+        document.body.style.overflow = '';
+      });
+    });
+    /* LANG SWITCHER */
+    function toggleLang() { document.getElementById('langDropdown').classList.toggle('open'); }
+    document.addEventListener('click', function(e) { if (!e.target.closest('.lang-switcher')) document.getElementById('langDropdown').classList.remove('open'); });
+  </script>
+</body>
+</html>

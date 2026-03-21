@@ -1,0 +1,628 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Hoe Machine ROVER — Byrud Tech</title>
+  <meta name="description" content="ROVER — intelligent hoe machine for precise inter-row cultivation. Accuracy up to 1 cm, 18 km/h, up to 4 operations in one pass." />
+  <meta name="format-detection" content="telephone=no" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@400;600;700;800&family=IBM+Plex+Mono:wght@400;500&family=Barlow:wght@300;400;500&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    :root {
+      --bg: #0b0b0b; --bg2: #111111; --bg3: #161616;
+      --amber: #e8a220; --amber-dim: #b87e18; --amber-glow: rgba(232,162,32,0.12);
+      --text: #f0ede8; --text-muted: #9a9a92; --text-dim: #6a6a64;
+      --border: rgba(255,255,255,0.07); --border-amber: rgba(232,162,32,0.3);
+      --r: 6px; --r-sm: 4px;
+    }
+    html { scroll-behavior: smooth; }
+    body { background: var(--bg); color: var(--text); font-family: 'Barlow', sans-serif; font-weight: 400; line-height: 1.6; overflow-x: hidden; }
+    body::before { content: ''; position: fixed; inset: 0; background-image: linear-gradient(var(--border) 1px, transparent 1px), linear-gradient(90deg, var(--border) 1px, transparent 1px); background-size: 60px 60px; pointer-events: none; z-index: 0; opacity: 0.15; }
+    section, footer, nav { position: relative; z-index: 1; }
+    * { -webkit-tap-highlight-color: transparent; }
+    a[href^="tel"], a[href^="mailto"] { color: inherit; text-decoration: none; }
+
+    /* NAV */
+    nav { position: fixed; top: 0; left: 0; right: 0; z-index: 100; display: flex; align-items: center; justify-content: space-between; padding: 0 3rem; height: 64px; background: rgba(11,11,11,0.88); backdrop-filter: blur(12px); border-bottom: 1px solid var(--border); }
+    .logo { font-family: 'Barlow Condensed', sans-serif; font-weight: 800; font-size: 1.3rem; letter-spacing: 0.08em; text-transform: uppercase; color: var(--text); text-decoration: none; position: relative; padding: 5px 8px; }
+    .logo-corner { position: absolute; width: 7px; height: 7px; border-color: var(--amber); border-style: solid; border-width: 0; }
+    .logo-corner--tl { top: 0; left: 0; border-top-width: 1px; border-left-width: 1px; }
+    .logo-corner--tr { top: 0; right: 0; border-top-width: 1px; border-right-width: 1px; }
+    .logo-corner--bl { bottom: 0; left: 0; border-bottom-width: 1px; border-left-width: 1px; }
+    .logo-corner--br { bottom: 0; right: 0; border-bottom-width: 1px; border-right-width: 1px; }
+    .logo span { color: var(--amber); }
+    .nav-links { display: flex; gap: 2.5rem; list-style: none; }
+    .nav-links a { font-family: 'IBM Plex Mono', monospace; font-size: 0.72rem; letter-spacing: 0.1em; text-transform: uppercase; color: var(--text-muted); text-decoration: none; transition: color 0.2s; }
+    .nav-links a:hover { color: var(--amber); }
+    .lang-switcher { position: relative; flex-shrink: 0; margin-left: 1rem; }
+    .lang-btn { background: none; border: none; color: var(--text-muted); cursor: pointer; padding: 4px; display: flex; align-items: center; transition: color 0.3s; }
+    .lang-btn:hover { color: var(--amber); }
+    .lang-dropdown { display: none; position: absolute; top: 100%; right: 0; margin-top: 8px; background: rgba(11,11,11,0.95); backdrop-filter: blur(12px); border: 1px solid var(--border); flex-direction: column; min-width: 50px; z-index: 200; }
+    .lang-dropdown.open { display: flex; }
+    .lang-option { font-family: 'IBM Plex Mono', monospace; font-size: 0.72rem; letter-spacing: 0.1em; text-transform: uppercase; color: var(--text-muted); text-decoration: none; padding: 0.5rem 1rem; transition: color 0.2s, background 0.2s; text-align: center; }
+    .lang-option:hover { color: var(--text); background: var(--bg3); }
+    .lang-option.lang-active { color: var(--amber); }
+
+    /* BUTTONS */
+    .btn-primary { font-family: 'IBM Plex Mono', monospace; font-size: 0.78rem; letter-spacing: 0.1em; text-transform: uppercase; background: var(--amber); color: #0b0b0b; padding: 0.9rem 2rem; text-decoration: none; font-weight: 500; transition: opacity 0.2s; display: inline-block; border-radius: var(--r-sm); }
+    .btn-primary:hover { opacity: 0.85; }
+    .section-tag { font-family: 'IBM Plex Mono', monospace; font-size: 0.68rem; letter-spacing: 0.2em; text-transform: uppercase; color: var(--amber); margin-bottom: 0.75rem; }
+
+    /* BLUEPRINT FRAME */
+    .blueprint-frame { position: relative; background: var(--bg3); border: 0.5px solid rgba(255, 255, 255, 0.1); overflow: hidden; }
+    .blueprint-frame img { width: 100%; height: 100%; object-fit: contain; padding: 1.5rem; }
+
+    /* PRODUCT HERO */
+    .product-hero { padding: 7rem 3rem 5rem; }
+    .product-hero-inner { display: grid; grid-template-columns: 55% 45%; gap: 5rem; align-items: center; max-width: 1400px; margin: 0 auto; }
+    .product-hero-text .section-tag { margin-bottom: 0.5rem; }
+    .product-hero-title { font-family: 'Barlow Condensed', sans-serif; font-weight: 800; font-size: clamp(3rem, 6vw, 5.5rem); line-height: 0.9; letter-spacing: -0.01em; text-transform: uppercase; margin-bottom: 1.25rem; }
+    .product-hero-sub { font-size: 1.05rem; color: var(--text-muted); line-height: 1.75; margin-bottom: 2.5rem; max-width: 420px; }
+    .product-stats { display: grid; grid-template-columns: repeat(4, 1fr); gap: 1px; background: var(--border); margin-bottom: 2.5rem; border-radius: var(--r-sm); overflow: hidden; }
+    .product-stat { background: var(--bg2); padding: 1.25rem 1rem; }
+    .product-stat-num { font-family: 'Barlow Condensed', sans-serif; font-weight: 800; font-size: 1.9rem; color: var(--amber); line-height: 1; margin-bottom: 0.3rem; }
+    .product-stat-label { font-family: 'IBM Plex Mono', monospace; font-size: 0.6rem; letter-spacing: 0.08em; text-transform: uppercase; color: var(--text-dim); }
+
+    /* MODELS SECTION */
+    .product-models { padding: 5rem 3rem; background: var(--bg2); border-top: 1px solid var(--border); border-bottom: 1px solid var(--border); }
+    .product-models-inner { max-width: 1400px; margin: 0 auto; }
+    .product-models-header { margin-bottom: 2.5rem; }
+    .product-models-title { font-family: 'Barlow Condensed', sans-serif; font-weight: 800; font-size: clamp(1.8rem, 3vw, 2.8rem); text-transform: uppercase; letter-spacing: -0.01em; line-height: 0.95; margin-bottom: 1rem; }
+    .product-models-desc { color: var(--text-muted); font-size: 1rem; line-height: 1.8; max-width: 680px; }
+    .model-rows { display: flex; flex-direction: column; gap: 1px; background: var(--border); margin-top: 2rem; overflow: hidden; }
+    .model-row { background: var(--bg); padding: 1.5rem 2rem; display: flex; align-items: center; gap: 1.5rem; transition: background 0.3s; position: relative; overflow: hidden; }
+    .model-row:first-child { border-left: 2px solid var(--amber); }
+    .model-row:hover { background: var(--bg3); }
+    .model-photo { width: 220px; height: 150px; flex-shrink: 0; border: 0.5px solid rgba(255, 255, 255, 0.1); overflow: hidden; }
+    .model-photo img { width: 100%; height: 100%; object-fit: contain; padding: 0.5rem; background: var(--bg3); }
+    .model-body { flex: 1; min-width: 0; }
+    .model-name { font-family: 'Barlow Condensed', sans-serif; font-weight: 800; font-size: 1.2rem; text-transform: uppercase; color: var(--text); margin-bottom: 0.2rem; }
+    .model-row:first-child .model-name { color: var(--amber); }
+    .model-title { font-family: 'IBM Plex Mono', monospace; font-size: 0.7rem; letter-spacing: 0.08em; text-transform: uppercase; color: var(--text-dim); margin-bottom: 0.5rem; }
+    .model-desc { font-size: 0.92rem; color: var(--text-muted); line-height: 1.75; }
+    .model-tag { font-family: 'IBM Plex Mono', monospace; font-size: 0.65rem; letter-spacing: 0.08em; text-transform: uppercase; color: var(--text-dim); flex-shrink: 0; text-align: right; white-space: nowrap; }
+    .model-note { font-family: 'IBM Plex Mono', monospace; font-size: 0.75rem; letter-spacing: 0.06em; color: var(--text-dim); margin-top: 2rem; padding-top: 1.5rem; border-top: 1px solid var(--border); }
+    .model-row::after { content: ''; position: absolute; left: 0; right: 0; height: 1px; background: linear-gradient(90deg, transparent, var(--amber), transparent); opacity: 0; top: 0; pointer-events: none; }
+    @keyframes scanline { 0% { top: 0; opacity: 0.5; } 100% { top: 100%; opacity: 0; } }
+    @media (hover: hover) { .model-row:hover::after { animation: scanline 0.6s ease forwards; } }
+    .model-row.scanned::after { animation: scanline 0.6s ease forwards; }
+    .model-row.fade-up:nth-child(1) { transition-delay: 0ms; }
+    .model-row.fade-up:nth-child(2) { transition-delay: 100ms; }
+    .model-row.fade-up:nth-child(3) { transition-delay: 200ms; }
+    .model-row.fade-up:nth-child(4) { transition-delay: 300ms; }
+    .model-row.fade-up:nth-child(5) { transition-delay: 400ms; }
+
+    /* GALLERY ZIGZAG */
+    .product-gallery { padding: 5rem 3rem; }
+    .product-gallery-inner { max-width: 1400px; margin: 0 auto; display: flex; flex-direction: column; gap: 6rem; }
+    .gallery-block { display: grid; grid-template-columns: 1fr 1fr; gap: 5rem; align-items: center; }
+    .gallery-block.reverse { direction: rtl; }
+    .gallery-block.reverse > * { direction: ltr; }
+    .gallery-text-tag { font-family: 'IBM Plex Mono', monospace; font-size: 0.65rem; letter-spacing: 0.15em; text-transform: uppercase; color: var(--amber); margin-bottom: 0.75rem; }
+    .gallery-text-title { font-family: 'Barlow Condensed', sans-serif; font-weight: 700; font-size: clamp(1.3rem, 2vw, 1.6rem); text-transform: uppercase; letter-spacing: 0.02em; margin-bottom: 1rem; color: var(--text); }
+    .gallery-text-body { color: var(--text-muted); font-size: 0.95rem; line-height: 1.8; }
+    .gallery-text-list { margin-top: 1.25rem; display: flex; flex-direction: column; gap: 0.5rem; list-style: none; }
+    .gallery-text-list li { font-family: 'IBM Plex Mono', monospace; font-size: 0.72rem; letter-spacing: 0.06em; color: var(--text-muted); display: flex; align-items: center; gap: 0.6rem; }
+    .gallery-text-list li::before { content: ''; width: 16px; height: 1px; background: var(--amber); flex-shrink: 0; }
+    .gallery-section-header { margin-bottom: 3rem; }
+    .gallery-section-title { font-family: 'Barlow Condensed', sans-serif; font-weight: 800; font-size: clamp(1.8rem, 3vw, 2.8rem); text-transform: uppercase; letter-spacing: -0.01em; line-height: 0.95; margin-bottom: 1rem; }
+    .gallery-section-desc { color: var(--text-muted); font-size: 1rem; line-height: 1.8; max-width: 680px; }
+    .product-gallery-alt { padding: 5rem 3rem; background: var(--bg2); border-top: 1px solid var(--border); border-bottom: 1px solid var(--border); }
+    .gallery-text-sub { font-family: 'IBM Plex Mono', monospace; font-size: 0.75rem; letter-spacing: 0.08em; color: var(--text-muted); margin: 0.5rem 0 1rem; }
+    .product-link { font-family: 'IBM Plex Mono', monospace; font-size: 0.72rem; letter-spacing: 0.1em; text-transform: uppercase; color: var(--amber); text-decoration: none; display: inline-block; margin-top: 1.25rem; transition: opacity 0.2s; }
+    .product-link:hover { opacity: 0.75; }
+    .section-note { font-family: 'IBM Plex Mono', monospace; font-size: 0.75rem; letter-spacing: 0.06em; color: var(--text-dim); margin-top: 2rem; padding-top: 1.5rem; border-top: 1px solid var(--border); }
+.fade-up { opacity: 0; transform: translateY(20px); transition: opacity 0.55s ease, transform 0.55s ease; }
+    .fade-up.visible { opacity: 1; transform: none; }
+
+    /* SPECS SECTION */
+    .product-specs { padding: 5rem 3rem; background: var(--bg2); border-top: 1px solid var(--border); border-bottom: 1px solid var(--border); }
+    .product-specs-inner { max-width: 1400px; margin: 0 auto; }
+    .product-specs-header { margin-bottom: 2.5rem; }
+    .product-specs-title { font-family: 'Barlow Condensed', sans-serif; font-weight: 800; font-size: clamp(1.8rem, 3vw, 2.8rem); text-transform: uppercase; letter-spacing: -0.01em; line-height: 0.95; }
+    .specs-table { width: 100%; border-collapse: collapse; }
+    .specs-row { display: grid; grid-template-columns: 280px 1fr; border-bottom: 1px solid var(--border); }
+    .specs-row:first-child { border-top: 1px solid var(--border); }
+    .specs-key { font-family: 'IBM Plex Mono', monospace; font-size: 0.65rem; letter-spacing: 0.1em; text-transform: uppercase; color: var(--text-dim); padding: 1.1rem 0; }
+    .specs-val { color: var(--text-muted); font-size: 0.95rem; padding: 1.1rem 2rem 1.1rem 0; }
+
+    /* CTA SECTION */
+    .product-cta-section { padding: 4rem 3rem; }
+    .product-cta-inner { max-width: 1400px; margin: 0 auto; }
+    .product-cta-card { background: var(--bg2); border: 1px solid var(--border-amber); border-radius: var(--r); padding: 3rem; display: flex; align-items: center; justify-content: space-between; gap: 3rem; flex-wrap: wrap; }
+    .product-cta-title { font-family: 'Barlow Condensed', sans-serif; font-weight: 800; font-size: clamp(1.4rem, 2.5vw, 2rem); text-transform: uppercase; line-height: 1; margin-bottom: 0.5rem; }
+    .product-cta-sub { color: var(--text-muted); font-size: 0.9rem; }
+
+    /* FOOTER */
+    footer { border-top: 1px solid var(--border); padding: 2rem 3rem; display: flex; align-items: center; justify-content: space-between; background: var(--bg); }
+    .footer-copy { font-family: 'IBM Plex Mono', monospace; font-size: 0.65rem; letter-spacing: 0.1em; color: var(--text-dim); }
+    .footer-links { display: flex; gap: 1.5rem; }
+    .footer-links a { font-family: 'IBM Plex Mono', monospace; font-size: 0.65rem; letter-spacing: 0.1em; text-transform: uppercase; color: var(--text-dim); text-decoration: none; transition: color 0.2s; }
+    .footer-links a:hover { color: var(--amber); }
+
+    /* ANIMATIONS */
+    @keyframes fadeUp { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
+    .product-hero-text .section-tag { animation: fadeUp 0.5s 0.05s ease both; }
+    .product-hero-title               { animation: fadeUp 0.5s 0.15s ease both; }
+    .product-hero-sub                 { animation: fadeUp 0.5s 0.25s ease both; }
+    .product-stats                    { animation: fadeUp 0.5s 0.3s ease both; }
+    .product-hero-text .btn-primary   { animation: fadeUp 0.5s 0.35s ease both; }
+
+    /* MOBILE */
+    @media (max-width: 900px) {
+      nav { padding: 0 1.5rem; }
+      .nav-links { display: none; }
+      .nav-burger { display: flex; }
+      .lang-switcher { margin-left: auto; margin-right: 0.5rem; }
+      .product-hero { padding: 5rem 1.5rem 3rem; }
+      .product-hero-inner { grid-template-columns: 1fr; gap: 2.5rem; }
+      .product-hero-photo { order: -1; }
+      .product-hero-sub { max-width: none; }
+      .product-stats { grid-template-columns: repeat(2, 1fr); }
+      .product-models { padding: 3rem 1.5rem; }
+      .product-gallery { padding: 3rem 1.5rem; }
+      .product-gallery-alt { padding: 3rem 1.5rem; }
+      .product-gallery-inner { gap: 3.5rem; }
+      .gallery-block { grid-template-columns: 1fr; gap: 2rem; }
+      .gallery-block.reverse { direction: ltr; }
+      .gallery-block .blueprint-frame { order: -1; }
+      .product-specs { padding: 3rem 1.5rem; }
+      .specs-row { grid-template-columns: 1fr; }
+      .specs-key { padding-bottom: 0.2rem; }
+      .specs-val { padding: 0 0 1rem; }
+      .product-cta-section { padding: 3rem 1.5rem; }
+      .product-cta-card { flex-direction: column; align-items: flex-start; gap: 2rem; }
+      footer { flex-direction: column; gap: 1rem; text-align: center; padding: 2rem 1.5rem; }
+      .model-row { flex-direction: column; align-items: flex-start; padding: 1.5rem; gap: 0.75rem; }
+      .model-photo { width: 100%; height: auto; aspect-ratio: 16/10; }
+      .model-photo img { object-fit: contain; padding: 0.75rem; }
+      .model-tag { text-align: left; }
+    }
+    @media (prefers-reduced-motion: reduce) {
+      .fade-up, .fade-up.visible { opacity: 1; transform: none; transition: none; }
+    }
+
+    /* MOBILE MENU */
+    .nav-burger { display: none; flex-direction: column; justify-content: center; gap: 5px; width: 36px; height: 36px; background: none; border: none; cursor: pointer; padding: 4px; z-index: 101; }
+    .nav-burger span { display: block; width: 100%; height: 1.5px; background: var(--text); transition: transform 0.3s, opacity 0.3s; transform-origin: center; }
+    .nav-burger.open span:nth-child(1) { transform: translateY(6.5px) rotate(45deg); }
+    .nav-burger.open span:nth-child(2) { opacity: 0; }
+    .nav-burger.open span:nth-child(3) { transform: translateY(-6.5px) rotate(-45deg); }
+    .mobile-drawer { display: none; position: fixed; inset: 0; top: 64px; background: rgba(11,11,11,0.97); backdrop-filter: blur(16px); z-index: 99; flex-direction: column; padding: 3rem 2rem; border-top: 1px solid var(--border); }
+    .mobile-drawer.open { display: flex; }
+    .mobile-drawer ul { list-style: none; display: flex; flex-direction: column; gap: 0; flex: 1; }
+    .mobile-drawer ul li { border-bottom: 1px solid var(--border); }
+    .mobile-drawer ul li a { display: block; font-family: 'Barlow Condensed', sans-serif; font-weight: 700; font-size: 2rem; text-transform: uppercase; color: var(--text); text-decoration: none; padding: 1rem 0; letter-spacing: 0.02em; transition: color 0.2s; }
+    .mobile-drawer ul li a:hover { color: var(--amber); }
+    .mobile-drawer .mobile-cta { margin-top: 2.5rem; }
+    .mobile-drawer .mobile-cta a { display: block; text-align: center; }
+    @media (max-width: 900px) { .nav-burger { display: flex; } }
+  </style>
+</head>
+<body>
+
+  <nav>
+    <a href="index.html" class="logo">
+      <div class="logo-corner logo-corner--tl"></div>
+      <div class="logo-corner logo-corner--tr"></div>
+      <div class="logo-corner logo-corner--bl"></div>
+      <div class="logo-corner logo-corner--br"></div>
+      Byrud<span>.</span>Tech
+    </a>
+    <ul class="nav-links">
+      <li><a href="index.html">Home</a></li>
+      <li><a href="maschinen.html">Machines</a></li>
+      <li><a href="konzept.html">Concept</a></li>
+      <li><a href="technologie.html">Technology</a></li>
+      <li><a href="about.html">About us</a></li>
+      <li><a href="index.html#contact">Contact</a></li>
+    </ul>
+    <div class="lang-switcher">
+      <button class="lang-btn" onclick="toggleLang()" aria-label="Select language">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M2 12h20"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg>
+      </button>
+      <div class="lang-dropdown" id="langDropdown">
+        <a href="rover.html" class="lang-option">DE</a>
+        <a href="rover-en.html" class="lang-option lang-active">EN</a>
+        <a href="rover-ru.html" class="lang-option">RU</a>
+        <a href="rover-uk.html" class="lang-option">UK</a>
+      </div>
+    </div>
+    <button class="nav-burger" id="navBurger" aria-label="Open menu" aria-expanded="false">
+      <span></span><span></span><span></span>
+    </button>
+  </nav>
+
+  <div class="mobile-drawer" id="mobileDrawer">
+    <ul>
+      <li><a href="index.html" class="drawer-link">Home</a></li>
+      <li><a href="maschinen.html" class="drawer-link">Machines</a></li>
+      <li><a href="konzept.html" class="drawer-link">Concept</a></li>
+      <li><a href="technologie.html" class="drawer-link">Technology</a></li>
+      <li><a href="about.html" class="drawer-link">About us</a></li>
+      <li><a href="index.html#contact" class="drawer-link">Contact</a></li>
+    </ul>
+    <div class="mobile-cta">
+      <a href="index.html#contact" class="btn-primary drawer-link">Request a quote &rarr;</a>
+    </div>
+  </div>
+
+  <!-- HERO -->
+  <section class="product-hero">
+    <div class="product-hero-inner">
+
+      <div class="product-hero-photo">
+        <div class="blueprint-frame">
+          <img src="images/rover-hero.jpg" alt="Hoe Machine ROVER — Byrud Tech" />
+        </div>
+      </div>
+
+      <div class="product-hero-text">
+        <div class="section-tag">// Hoe machine</div>
+        <div class="product-hero-title">ROVER</div>
+        <p class="product-hero-sub">Intelligent hoe machine for precise inter-row cultivation of row crops. Up to 4 operations in one pass — hoeing, fertilizing, spraying, ridging. Modular design on the universal frame platform.</p>
+
+        <div class="product-stats">
+          <div class="product-stat">
+            <div class="product-stat-num">1 cm</div>
+            <div class="product-stat-label">Accuracy</div>
+          </div>
+          <div class="product-stat">
+            <div class="product-stat-num">18 km/h</div>
+            <div class="product-stat-label">Speed</div>
+          </div>
+          <div class="product-stat">
+            <div class="product-stat-num">4&times;</div>
+            <div class="product-stat-label">Operations</div>
+          </div>
+          <div class="product-stat">
+            <div class="product-stat-num">800 mm</div>
+            <div class="product-stat-label">Ground clearance</div>
+          </div>
+        </div>
+
+        <a href="index.html#contact" class="btn-primary">Request a quote &rarr;</a>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- MODELS & WORKING GROUPS -->
+  <section class="product-models">
+    <div class="product-models-inner">
+      <div class="product-models-header">
+        <div class="section-tag">// Models &amp; Working groups</div>
+        <div class="product-models-title">5 Models.<br />5 Working groups.</div>
+        <p class="product-models-desc">Each ROVER model is optimized for a specific soil type and crop. All groups are interchangeable and can be swapped in under 30 minutes.</p>
+      </div>
+
+      <div class="model-rows">
+        <div class="model-row fade-up">
+          <div class="model-photo">
+            <img src="images/rover-u-group.jpg" alt="ROVER-U Working group" />
+          </div>
+          <div class="model-body">
+            <div class="model-name">ROVER-U</div>
+            <div class="model-title">Standard cultivation</div>
+            <div class="model-desc">Two spring tines (vibro teeth) with flat shares. Designed for standard cultivation on light soils. Effective weed control with minimal soil disturbance.</div>
+          </div>
+          <div class="model-tag">Light soils</div>
+        </div>
+
+        <div class="model-row fade-up">
+          <div class="model-photo">
+            <img src="images/rover-s-group.jpg" alt="ROVER-S Working group" />
+          </div>
+          <div class="model-body">
+            <div class="model-name">ROVER-S</div>
+            <div class="model-title">Enhanced cultivation</div>
+            <div class="model-desc">Three spring tines (vibro teeth) with arrow shares 150 mm. For medium soils — enhanced cultivation with higher penetration force. Uniform loosening across the entire working width.</div>
+          </div>
+          <div class="model-tag">Medium soils</div>
+        </div>
+
+        <div class="model-row fade-up">
+          <div class="model-photo">
+            <img src="images/rover-r-group.jpg" alt="ROVER-R Working group" />
+          </div>
+          <div class="model-body">
+            <div class="model-name">ROVER-R</div>
+            <div class="model-title">Intensive loosening &amp; ridging</div>
+            <div class="model-desc">Module of 8 loosening stars with angle adjustment in two planes — for ridging or loosening. With arrow share 150 mm. Optional: mounting of two S-tines (32&times;12) with arrow shares 150 mm on each parallelogram.</div>
+          </div>
+          <div class="model-tag">Ridging</div>
+        </div>
+
+        <div class="model-row fade-up">
+          <div class="model-photo">
+            <img src="images/rover-p-group.jpg" alt="ROVER-P Working group" />
+          </div>
+          <div class="model-body">
+            <div class="model-name">ROVER-P</div>
+            <div class="model-title">Maximum loosening</div>
+            <div class="model-desc">Five spring vibration shanks with arrow shares 150 mm. For heavy soils — maximum loosening depth and penetration. Intensive cultivation even on compacted soil layers.</div>
+          </div>
+          <div class="model-tag">Heavy soils</div>
+        </div>
+
+        <div class="model-row fade-up">
+          <div class="model-photo">
+            <img src="images/rover-k-group.jpg" alt="ROVER-K Working group" />
+          </div>
+          <div class="model-body">
+            <div class="model-name">ROVER-K</div>
+            <div class="model-title">Combined cultivation</div>
+            <div class="model-desc">Two S-shaped spring vibration shanks and three spring tines (vibro teeth) with arrow shares 150 mm. Combined cultivation — loosening and fine tillage in one pass.</div>
+          </div>
+          <div class="model-tag">Combined</div>
+        </div>
+      </div>
+
+      <div class="model-note">Available for all models: goosefoot shares 200/250 mm and arrow shares 150 mm (standard).</div>
+    </div>
+  </section>
+
+  <!-- COMPONENTS & OPTIONS -->
+  <section class="product-gallery-alt">
+    <div class="product-gallery-inner">
+      <div class="gallery-section-header">
+        <div class="section-tag">// Components & Options</div>
+        <div class="gallery-section-title">Attachments &amp;<br />Protection systems</div>
+        <p class="gallery-section-desc">Protection discs, parallelograms, ridge harrows and deflector shields adapt the ROVER precisely to the crop and soil type. All parts can be retrofitted.</p>
+      </div>
+
+      <!-- Steering system -->
+      <div class="gallery-block fade-up">
+        <div class="blueprint-frame">
+          <img src="images/rover-lenkung.jpg" alt="ROVER — Hydraulic steering system" />
+        </div>
+        <div class="gallery-text">
+          <div class="gallery-text-tag">// Steering system</div>
+          <div class="gallery-text-title">Hydraulic lateral adjustment</div>
+          <p class="gallery-text-body">The hydraulic steering system shifts all working groups synchronously across the direction of travel — manually or automatically via EXACT. Lateral control range &plusmn;25 cm.</p>
+          <ul class="gallery-text-list">
+            <li>Control range &plusmn;25 cm</li>
+            <li>Manual or fully automatic</li>
+            <li>Response time under 10 ms (with EXACT)</li>
+          </ul>
+        </div>
+      </div>
+
+      <!-- Parallelograms -->
+      <div class="gallery-block reverse fade-up">
+        <div class="blueprint-frame">
+          <img src="images/rover-parallelogramm.jpg" alt="ROVER — Parallelograms for ground tracking" />
+        </div>
+        <div class="gallery-text">
+          <div class="gallery-text-tag">// Parallelograms</div>
+          <div class="gallery-text-title">Individual ground tracking for each row</div>
+          <p class="gallery-text-body">Each working group is mounted on a spring-loaded parallelogram that follows the ground profile — independently of adjacent rows. No diving on ground undulations.</p>
+          <ul class="gallery-text-list">
+            <li>Spring-loaded 4-point parallelogram</li>
+            <li>Compensation of &plusmn;6 cm ground unevenness</li>
+            <li>Individually adjustable spring pressure</li>
+          </ul>
+        </div>
+      </div>
+
+      <!-- Protection discs -->
+      <div class="gallery-block fade-up">
+        <div class="blueprint-frame">
+          <img src="images/rover-schutzscheiben.jpg" alt="ROVER — Protection discs at the row" />
+        </div>
+        <div class="gallery-text">
+          <div class="gallery-text-tag">// Protection discs</div>
+          <div class="gallery-text-title">Crop protection directly at the row</div>
+          <p class="gallery-text-body">Conical protection discs on the hoe tool protect the young plant from soil throw and mechanical damage. Adjustable distance and angle depending on crop stage.</p>
+          <ul class="gallery-text-list">
+            <li>Distance 5–30 mm to the plant row</li>
+            <li>For crops from BBCH 11</li>
+            <li>Conical hardened steel discs</li>
+          </ul>
+        </div>
+      </div>
+
+      <!-- Ridge harrow -->
+      <div class="gallery-block reverse fade-up">
+        <div class="blueprint-frame">
+          <img src="images/rover-dammstriegel.jpg" alt="ROVER — Ridge harrow for inter-rows" />
+        </div>
+        <div class="gallery-text">
+          <div class="gallery-text-tag">// Ridge harrow</div>
+          <div class="gallery-text-title">Weed control in the ridge zone</div>
+          <p class="gallery-text-body">Flexible finger weeders work the direct ridge zone between the rows — catching even tiny weed seedlings at the thread root stage that hoe shares cannot reach.</p>
+          <ul class="gallery-text-list">
+            <li>Wire tines &empty; 4 mm, spring steel</li>
+            <li>Working speed up to 12 km/h</li>
+            <li>For potato, beet, maize</li>
+          </ul>
+        </div>
+      </div>
+
+      <!-- Deflector shields -->
+      <div class="gallery-block fade-up">
+        <div class="blueprint-frame">
+          <img src="images/rover-schutzbleche.jpg" alt="ROVER — Deflector shields for sensitive crops" />
+        </div>
+        <div class="gallery-text">
+          <div class="gallery-text-tag">// Deflector shields</div>
+          <div class="gallery-text-title">Soil protection for sensitive crops</div>
+          <p class="gallery-text-body">Foldable deflector shields next to the hoe tool prevent soil throw onto the plant zone. Easy adjustment without tools — reachable from the tractor seat.</p>
+          <ul class="gallery-text-list">
+            <li>Foldable, tool-free adjustment</li>
+            <li>For lettuce, spinach, carrots</li>
+            <li>Stainless steel design</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- COMPATIBLE SYSTEMS -->
+  <section class="product-gallery">
+    <div class="product-gallery-inner">
+      <div class="gallery-section-header">
+        <div class="section-tag">// Extensions</div>
+        <div class="gallery-section-title">Compatible<br />Attachment systems</div>
+        <p class="gallery-section-desc">EXACT, LIXA, LIXA-O and GRANO can be mounted individually or in combination on any ROVER — for up to 4 operations in one pass.</p>
+      </div>
+
+      <!-- EXACT -->
+      <div class="gallery-block fade-up">
+        <div class="blueprint-frame">
+          <img src="images/exact-hero.jpg" alt="EXACT — Camera-based row guidance for ROVER" />
+        </div>
+        <div class="gallery-text">
+          <div class="gallery-text-tag">// Option EXACT</div>
+          <div class="gallery-text-title">Accuracy up to 1 cm — automatic</div>
+          <p class="gallery-text-sub">Camera-based row guidance</p>
+          <p class="gallery-text-body">The optical guidance system EXACT detects the rows in real time and corrects the lateral axis of the working groups without GPS. Response time under 10 ms, operation up to 18 km/h.</p>
+          <ul class="gallery-text-list">
+            <li>No GPS required</li>
+            <li>24/7 operation, day and night</li>
+            <li>Response time under 10 ms</li>
+          </ul>
+          <a href="exact.html" class="product-link">More about EXACT &rarr;</a>
+        </div>
+      </div>
+
+      <!-- LIXA -->
+      <div class="gallery-block reverse fade-up">
+        <div class="blueprint-frame">
+          <img src="images/lixa-hero.jpg" alt="LIXA — Liquid fertilization on ROVER" />
+        </div>
+        <div class="gallery-text">
+          <div class="gallery-text-tag">// Option LIXA</div>
+          <div class="gallery-text-title">Apply liquid components simultaneously</div>
+          <p class="gallery-text-sub">Liquid fertilization &amp; crop protection</p>
+          <p class="gallery-text-body">LIXA applies UAN, NFS or crop protection agents with row precision — simultaneously with hoeing. Up to 3 liquid components, tank 600–3000 l, CAN bus control.</p>
+          <ul class="gallery-text-list">
+            <li>Up to 3 components simultaneously</li>
+            <li>Tank 600–3000 l</li>
+            <li>Herbicide savings up to &minus;40%</li>
+          </ul>
+          <a href="lixa.html" class="product-link">More about LIXA &rarr;</a>
+        </div>
+      </div>
+
+      <!-- LIXA-O -->
+      <div class="gallery-block fade-up">
+        <div class="blueprint-frame">
+          <img src="images/lixa-o.jpg" alt="LIXA-O — Over-row nozzles on ROVER" />
+        </div>
+        <div class="gallery-text">
+          <div class="gallery-text-tag">// Option LIXA-O</div>
+          <div class="gallery-text-title">Foliar treatment above the plant row</div>
+          <p class="gallery-text-sub">Liquid application above the row</p>
+          <p class="gallery-text-body">LIXA-O extends the LIXA system with nozzles above the row — for foliar crop protection agents, micronutrients and growth regulators applied directly onto the plant.</p>
+          <ul class="gallery-text-list">
+            <li>Over-row nozzles, combinable with LIXA</li>
+            <li>For leafy crops and vegetables</li>
+            <li>Individual row shut-off via valve</li>
+          </ul>
+          <a href="lixa.html" class="product-link">More about LIXA &rarr;</a>
+        </div>
+      </div>
+
+      <!-- GRANO -->
+      <div class="gallery-block reverse fade-up">
+        <div class="blueprint-frame">
+          <img src="images/grano-hero.jpg" alt="GRANO — Granular fertilization on ROVER" />
+        </div>
+        <div class="gallery-text">
+          <div class="gallery-text-tag">// Option GRANO</div>
+          <div class="gallery-text-title">Granules precisely into the root zone</div>
+          <p class="gallery-text-sub">Granular fertilization in the root zone</p>
+          <p class="gallery-text-body">GRANO applies granules directly next to or beneath the row — during hoeing. Tank 800–2000 l, application rate 5–270 kg/ha infinitely adjustable via Accord drive.</p>
+          <ul class="gallery-text-list">
+            <li>Stainless steel housing, low maintenance</li>
+            <li>Accord drive — no electronics</li>
+            <li>Tank 800–2000 l</li>
+          </ul>
+          <a href="grano.html" class="product-link">More about GRANO &rarr;</a>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- TECHNICAL SPECS -->
+  <section class="product-specs">
+    <div class="product-specs-inner">
+      <div class="product-specs-header">
+        <div class="section-tag">// Technical data</div>
+        <div class="product-specs-title">Technical<br />Specifications</div>
+      </div>
+
+      <div class="specs-row"><div class="specs-key">Working width</div><div class="specs-val">3–12 m (depending on model)</div></div>
+      <div class="specs-row"><div class="specs-key">Working depth</div><div class="specs-val">6–15 cm</div></div>
+      <div class="specs-row"><div class="specs-key">Row spacing</div><div class="specs-val">15–90 cm</div></div>
+      <div class="specs-row"><div class="specs-key">Tractor power</div><div class="specs-val">75–150 hp</div></div>
+      <div class="specs-row"><div class="specs-key">Working speed</div><div class="specs-val">5–18 km/h</div></div>
+      <div class="specs-row"><div class="specs-key">Accuracy</div><div class="specs-val">Up to 1 cm (with option EXACT)</div></div>
+      <div class="specs-row"><div class="specs-key">Frame height (ground clearance)</div><div class="specs-val">800 mm — suitable for tall crops (maize, sunflowers)</div></div>
+      <div class="specs-row"><div class="specs-key">Hitch</div><div class="specs-val">3-point hitch, Cat. 2 / Cat. 3</div></div>
+      <div class="specs-row"><div class="specs-key">Operations per pass</div><div class="specs-val">Up to 4 simultaneously: hoeing, fertilizing, spraying, ridging</div></div>
+      <div class="specs-row"><div class="specs-key">Area output</div><div class="specs-val">Up to 180 ha/day (24/7 operation)</div></div>
+    </div>
+  </section>
+
+  <!-- CTA -->
+  <section class="product-cta-section">
+    <div class="product-cta-inner">
+      <div class="product-cta-card">
+        <div>
+          <div class="product-cta-title">Configure ROVER<br />for your farm</div>
+          <p class="product-cta-sub">We provide individual consultation — model selection, options, delivery time and pricing.</p>
+        </div>
+        <a href="index.html#contact" class="btn-primary">Request a quote &rarr;</a>
+      </div>
+    </div>
+  </section>
+
+  <footer>
+    <span class="footer-copy">&copy; 2025 Byrud Tech. All rights reserved.</span>
+    <div class="footer-links"><a href="#">Imprint</a><a href="#">Privacy</a><a href="#">Terms</a></div>
+    <span class="footer-copy">Hamburg &middot; byrud-tech.com</span>
+  </footer>
+
+  <script>
+    /* BURGER / DRAWER */
+    const burger = document.getElementById('navBurger');
+    const drawer = document.getElementById('mobileDrawer');
+    burger.addEventListener('click', () => {
+      const isOpen = drawer.classList.toggle('open');
+      burger.classList.toggle('open', isOpen);
+      burger.setAttribute('aria-expanded', isOpen);
+      document.body.style.overflow = isOpen ? 'hidden' : '';
+    });
+    document.querySelectorAll('.drawer-link').forEach(link => {
+      link.addEventListener('click', () => {
+        drawer.classList.remove('open');
+        burger.classList.remove('open');
+        burger.setAttribute('aria-expanded', 'false');
+        document.body.style.overflow = '';
+      });
+    });
+    const fups = document.querySelectorAll('.fade-up');
+    const obs = new IntersectionObserver(entries => {
+      entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('visible'); obs.unobserve(e.target); } });
+    }, { threshold: 0.1 });
+    fups.forEach(el => obs.observe(el));
+    /* Scanline on scroll (mobile/touch) */
+    if (!window.matchMedia('(hover: hover)').matches) {
+      const scanObs = new IntersectionObserver(entries => {
+        entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('scanned'); scanObs.unobserve(e.target); } });
+      }, { threshold: 0.3 });
+      document.querySelectorAll('.model-row').forEach(el => scanObs.observe(el));
+    }
+    /* LANG SWITCHER */
+    function toggleLang() { document.getElementById('langDropdown').classList.toggle('open'); }
+    document.addEventListener('click', function(e) { if (!e.target.closest('.lang-switcher')) document.getElementById('langDropdown').classList.remove('open'); });
+  </script>
+
+</body>
+</html>

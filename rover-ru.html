@@ -1,0 +1,628 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Культиватор ROVER — Byrud Tech</title>
+  <meta name="description" content="ROVER — интеллектуальная культиваторная машина для точной междурядной обработки. Точность до 1 см, 18 км/ч, до 4 операций за один проход." />
+  <meta name="format-detection" content="telephone=no" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@400;600;700;800&family=IBM+Plex+Mono:wght@400;500&family=Barlow:wght@300;400;500&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    :root {
+      --bg: #0b0b0b; --bg2: #111111; --bg3: #161616;
+      --amber: #e8a220; --amber-dim: #b87e18; --amber-glow: rgba(232,162,32,0.12);
+      --text: #f0ede8; --text-muted: #9a9a92; --text-dim: #6a6a64;
+      --border: rgba(255,255,255,0.07); --border-amber: rgba(232,162,32,0.3);
+      --r: 6px; --r-sm: 4px;
+    }
+    html { scroll-behavior: smooth; }
+    body { background: var(--bg); color: var(--text); font-family: 'Barlow', sans-serif; font-weight: 400; line-height: 1.6; overflow-x: hidden; }
+    body::before { content: ''; position: fixed; inset: 0; background-image: linear-gradient(var(--border) 1px, transparent 1px), linear-gradient(90deg, var(--border) 1px, transparent 1px); background-size: 60px 60px; pointer-events: none; z-index: 0; opacity: 0.15; }
+    section, footer, nav { position: relative; z-index: 1; }
+    * { -webkit-tap-highlight-color: transparent; }
+    a[href^="tel"], a[href^="mailto"] { color: inherit; text-decoration: none; }
+
+    /* NAV */
+    nav { position: fixed; top: 0; left: 0; right: 0; z-index: 100; display: flex; align-items: center; justify-content: space-between; padding: 0 3rem; height: 64px; background: rgba(11,11,11,0.88); backdrop-filter: blur(12px); border-bottom: 1px solid var(--border); }
+    .logo { font-family: 'Barlow Condensed', sans-serif; font-weight: 800; font-size: 1.3rem; letter-spacing: 0.08em; text-transform: uppercase; color: var(--text); text-decoration: none; position: relative; padding: 5px 8px; }
+    .logo-corner { position: absolute; width: 7px; height: 7px; border-color: var(--amber); border-style: solid; border-width: 0; }
+    .logo-corner--tl { top: 0; left: 0; border-top-width: 1px; border-left-width: 1px; }
+    .logo-corner--tr { top: 0; right: 0; border-top-width: 1px; border-right-width: 1px; }
+    .logo-corner--bl { bottom: 0; left: 0; border-bottom-width: 1px; border-left-width: 1px; }
+    .logo-corner--br { bottom: 0; right: 0; border-bottom-width: 1px; border-right-width: 1px; }
+    .logo span { color: var(--amber); }
+    .nav-links { display: flex; gap: 2.5rem; list-style: none; }
+    .nav-links a { font-family: 'IBM Plex Mono', monospace; font-size: 0.72rem; letter-spacing: 0.1em; text-transform: uppercase; color: var(--text-muted); text-decoration: none; transition: color 0.2s; }
+    .nav-links a:hover { color: var(--amber); }
+    .lang-switcher { position: relative; flex-shrink: 0; margin-left: 1rem; }
+    .lang-btn { background: none; border: none; color: var(--text-muted); cursor: pointer; padding: 4px; display: flex; align-items: center; transition: color 0.3s; }
+    .lang-btn:hover { color: var(--amber); }
+    .lang-dropdown { display: none; position: absolute; top: 100%; right: 0; margin-top: 8px; background: rgba(11,11,11,0.95); backdrop-filter: blur(12px); border: 1px solid var(--border); flex-direction: column; min-width: 50px; z-index: 200; }
+    .lang-dropdown.open { display: flex; }
+    .lang-option { font-family: 'IBM Plex Mono', monospace; font-size: 0.72rem; letter-spacing: 0.1em; text-transform: uppercase; color: var(--text-muted); text-decoration: none; padding: 0.5rem 1rem; transition: color 0.2s, background 0.2s; text-align: center; }
+    .lang-option:hover { color: var(--text); background: var(--bg3); }
+    .lang-option.lang-active { color: var(--amber); }
+
+    /* BUTTONS */
+    .btn-primary { font-family: 'IBM Plex Mono', monospace; font-size: 0.78rem; letter-spacing: 0.1em; text-transform: uppercase; background: var(--amber); color: #0b0b0b; padding: 0.9rem 2rem; text-decoration: none; font-weight: 500; transition: opacity 0.2s; display: inline-block; border-radius: var(--r-sm); }
+    .btn-primary:hover { opacity: 0.85; }
+    .section-tag { font-family: 'IBM Plex Mono', monospace; font-size: 0.68rem; letter-spacing: 0.2em; text-transform: uppercase; color: var(--amber); margin-bottom: 0.75rem; }
+
+    /* BLUEPRINT FRAME */
+    .blueprint-frame { position: relative; background: var(--bg3); border: 0.5px solid rgba(255, 255, 255, 0.1); overflow: hidden; }
+    .blueprint-frame img { width: 100%; height: 100%; object-fit: contain; padding: 1.5rem; }
+
+    /* PRODUCT HERO */
+    .product-hero { padding: 7rem 3rem 5rem; }
+    .product-hero-inner { display: grid; grid-template-columns: 55% 45%; gap: 5rem; align-items: center; max-width: 1400px; margin: 0 auto; }
+    .product-hero-text .section-tag { margin-bottom: 0.5rem; }
+    .product-hero-title { font-family: 'Barlow Condensed', sans-serif; font-weight: 800; font-size: clamp(3rem, 6vw, 5.5rem); line-height: 0.9; letter-spacing: -0.01em; text-transform: uppercase; margin-bottom: 1.25rem; }
+    .product-hero-sub { font-size: 1.05rem; color: var(--text-muted); line-height: 1.75; margin-bottom: 2.5rem; max-width: 420px; }
+    .product-stats { display: grid; grid-template-columns: repeat(4, 1fr); gap: 1px; background: var(--border); margin-bottom: 2.5rem; border-radius: var(--r-sm); overflow: hidden; }
+    .product-stat { background: var(--bg2); padding: 1.25rem 1rem; }
+    .product-stat-num { font-family: 'Barlow Condensed', sans-serif; font-weight: 800; font-size: 1.9rem; color: var(--amber); line-height: 1; margin-bottom: 0.3rem; }
+    .product-stat-label { font-family: 'IBM Plex Mono', monospace; font-size: 0.6rem; letter-spacing: 0.08em; text-transform: uppercase; color: var(--text-dim); }
+
+    /* MODELS SECTION */
+    .product-models { padding: 5rem 3rem; background: var(--bg2); border-top: 1px solid var(--border); border-bottom: 1px solid var(--border); }
+    .product-models-inner { max-width: 1400px; margin: 0 auto; }
+    .product-models-header { margin-bottom: 2.5rem; }
+    .product-models-title { font-family: 'Barlow Condensed', sans-serif; font-weight: 800; font-size: clamp(1.8rem, 3vw, 2.8rem); text-transform: uppercase; letter-spacing: -0.01em; line-height: 0.95; margin-bottom: 1rem; }
+    .product-models-desc { color: var(--text-muted); font-size: 1rem; line-height: 1.8; max-width: 680px; }
+    .model-rows { display: flex; flex-direction: column; gap: 1px; background: var(--border); margin-top: 2rem; overflow: hidden; }
+    .model-row { background: var(--bg); padding: 1.5rem 2rem; display: flex; align-items: center; gap: 1.5rem; transition: background 0.3s; position: relative; overflow: hidden; }
+    .model-row:first-child { border-left: 2px solid var(--amber); }
+    .model-row:hover { background: var(--bg3); }
+    .model-photo { width: 220px; height: 150px; flex-shrink: 0; border: 0.5px solid rgba(255, 255, 255, 0.1); overflow: hidden; }
+    .model-photo img { width: 100%; height: 100%; object-fit: contain; padding: 0.5rem; background: var(--bg3); }
+    .model-body { flex: 1; min-width: 0; }
+    .model-name { font-family: 'Barlow Condensed', sans-serif; font-weight: 800; font-size: 1.2rem; text-transform: uppercase; color: var(--text); margin-bottom: 0.2rem; }
+    .model-row:first-child .model-name { color: var(--amber); }
+    .model-title { font-family: 'IBM Plex Mono', monospace; font-size: 0.7rem; letter-spacing: 0.08em; text-transform: uppercase; color: var(--text-dim); margin-bottom: 0.5rem; }
+    .model-desc { font-size: 0.92rem; color: var(--text-muted); line-height: 1.75; }
+    .model-tag { font-family: 'IBM Plex Mono', monospace; font-size: 0.65rem; letter-spacing: 0.08em; text-transform: uppercase; color: var(--text-dim); flex-shrink: 0; text-align: right; white-space: nowrap; }
+    .model-note { font-family: 'IBM Plex Mono', monospace; font-size: 0.75rem; letter-spacing: 0.06em; color: var(--text-dim); margin-top: 2rem; padding-top: 1.5rem; border-top: 1px solid var(--border); }
+    .model-row::after { content: ''; position: absolute; left: 0; right: 0; height: 1px; background: linear-gradient(90deg, transparent, var(--amber), transparent); opacity: 0; top: 0; pointer-events: none; }
+    @keyframes scanline { 0% { top: 0; opacity: 0.5; } 100% { top: 100%; opacity: 0; } }
+    @media (hover: hover) { .model-row:hover::after { animation: scanline 0.6s ease forwards; } }
+    .model-row.scanned::after { animation: scanline 0.6s ease forwards; }
+    .model-row.fade-up:nth-child(1) { transition-delay: 0ms; }
+    .model-row.fade-up:nth-child(2) { transition-delay: 100ms; }
+    .model-row.fade-up:nth-child(3) { transition-delay: 200ms; }
+    .model-row.fade-up:nth-child(4) { transition-delay: 300ms; }
+    .model-row.fade-up:nth-child(5) { transition-delay: 400ms; }
+
+    /* GALLERY ZIGZAG */
+    .product-gallery { padding: 5rem 3rem; }
+    .product-gallery-inner { max-width: 1400px; margin: 0 auto; display: flex; flex-direction: column; gap: 6rem; }
+    .gallery-block { display: grid; grid-template-columns: 1fr 1fr; gap: 5rem; align-items: center; }
+    .gallery-block.reverse { direction: rtl; }
+    .gallery-block.reverse > * { direction: ltr; }
+    .gallery-text-tag { font-family: 'IBM Plex Mono', monospace; font-size: 0.65rem; letter-spacing: 0.15em; text-transform: uppercase; color: var(--amber); margin-bottom: 0.75rem; }
+    .gallery-text-title { font-family: 'Barlow Condensed', sans-serif; font-weight: 700; font-size: clamp(1.3rem, 2vw, 1.6rem); text-transform: uppercase; letter-spacing: 0.02em; margin-bottom: 1rem; color: var(--text); }
+    .gallery-text-body { color: var(--text-muted); font-size: 0.95rem; line-height: 1.8; }
+    .gallery-text-list { margin-top: 1.25rem; display: flex; flex-direction: column; gap: 0.5rem; list-style: none; }
+    .gallery-text-list li { font-family: 'IBM Plex Mono', monospace; font-size: 0.72rem; letter-spacing: 0.06em; color: var(--text-muted); display: flex; align-items: center; gap: 0.6rem; }
+    .gallery-text-list li::before { content: ''; width: 16px; height: 1px; background: var(--amber); flex-shrink: 0; }
+    .gallery-section-header { margin-bottom: 3rem; }
+    .gallery-section-title { font-family: 'Barlow Condensed', sans-serif; font-weight: 800; font-size: clamp(1.8rem, 3vw, 2.8rem); text-transform: uppercase; letter-spacing: -0.01em; line-height: 0.95; margin-bottom: 1rem; }
+    .gallery-section-desc { color: var(--text-muted); font-size: 1rem; line-height: 1.8; max-width: 680px; }
+    .product-gallery-alt { padding: 5rem 3rem; background: var(--bg2); border-top: 1px solid var(--border); border-bottom: 1px solid var(--border); }
+    .gallery-text-sub { font-family: 'IBM Plex Mono', monospace; font-size: 0.75rem; letter-spacing: 0.08em; color: var(--text-muted); margin: 0.5rem 0 1rem; }
+    .product-link { font-family: 'IBM Plex Mono', monospace; font-size: 0.72rem; letter-spacing: 0.1em; text-transform: uppercase; color: var(--amber); text-decoration: none; display: inline-block; margin-top: 1.25rem; transition: opacity 0.2s; }
+    .product-link:hover { opacity: 0.75; }
+    .section-note { font-family: 'IBM Plex Mono', monospace; font-size: 0.75rem; letter-spacing: 0.06em; color: var(--text-dim); margin-top: 2rem; padding-top: 1.5rem; border-top: 1px solid var(--border); }
+.fade-up { opacity: 0; transform: translateY(20px); transition: opacity 0.55s ease, transform 0.55s ease; }
+    .fade-up.visible { opacity: 1; transform: none; }
+
+    /* SPECS SECTION */
+    .product-specs { padding: 5rem 3rem; background: var(--bg2); border-top: 1px solid var(--border); border-bottom: 1px solid var(--border); }
+    .product-specs-inner { max-width: 1400px; margin: 0 auto; }
+    .product-specs-header { margin-bottom: 2.5rem; }
+    .product-specs-title { font-family: 'Barlow Condensed', sans-serif; font-weight: 800; font-size: clamp(1.8rem, 3vw, 2.8rem); text-transform: uppercase; letter-spacing: -0.01em; line-height: 0.95; }
+    .specs-table { width: 100%; border-collapse: collapse; }
+    .specs-row { display: grid; grid-template-columns: 280px 1fr; border-bottom: 1px solid var(--border); }
+    .specs-row:first-child { border-top: 1px solid var(--border); }
+    .specs-key { font-family: 'IBM Plex Mono', monospace; font-size: 0.65rem; letter-spacing: 0.1em; text-transform: uppercase; color: var(--text-dim); padding: 1.1rem 0; }
+    .specs-val { color: var(--text-muted); font-size: 0.95rem; padding: 1.1rem 2rem 1.1rem 0; }
+
+    /* CTA SECTION */
+    .product-cta-section { padding: 4rem 3rem; }
+    .product-cta-inner { max-width: 1400px; margin: 0 auto; }
+    .product-cta-card { background: var(--bg2); border: 1px solid var(--border-amber); border-radius: var(--r); padding: 3rem; display: flex; align-items: center; justify-content: space-between; gap: 3rem; flex-wrap: wrap; }
+    .product-cta-title { font-family: 'Barlow Condensed', sans-serif; font-weight: 800; font-size: clamp(1.4rem, 2.5vw, 2rem); text-transform: uppercase; line-height: 1; margin-bottom: 0.5rem; }
+    .product-cta-sub { color: var(--text-muted); font-size: 0.9rem; }
+
+    /* FOOTER */
+    footer { border-top: 1px solid var(--border); padding: 2rem 3rem; display: flex; align-items: center; justify-content: space-between; background: var(--bg); }
+    .footer-copy { font-family: 'IBM Plex Mono', monospace; font-size: 0.65rem; letter-spacing: 0.1em; color: var(--text-dim); }
+    .footer-links { display: flex; gap: 1.5rem; }
+    .footer-links a { font-family: 'IBM Plex Mono', monospace; font-size: 0.65rem; letter-spacing: 0.1em; text-transform: uppercase; color: var(--text-dim); text-decoration: none; transition: color 0.2s; }
+    .footer-links a:hover { color: var(--amber); }
+
+    /* ANIMATIONS */
+    @keyframes fadeUp { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
+    .product-hero-text .section-tag { animation: fadeUp 0.5s 0.05s ease both; }
+    .product-hero-title               { animation: fadeUp 0.5s 0.15s ease both; }
+    .product-hero-sub                 { animation: fadeUp 0.5s 0.25s ease both; }
+    .product-stats                    { animation: fadeUp 0.5s 0.3s ease both; }
+    .product-hero-text .btn-primary   { animation: fadeUp 0.5s 0.35s ease both; }
+
+    /* MOBILE */
+    @media (max-width: 900px) {
+      nav { padding: 0 1.5rem; }
+      .nav-links { display: none; }
+      .nav-burger { display: flex; }
+      .lang-switcher { margin-left: auto; margin-right: 0.5rem; }
+      .product-hero { padding: 5rem 1.5rem 3rem; }
+      .product-hero-inner { grid-template-columns: 1fr; gap: 2.5rem; }
+      .product-hero-photo { order: -1; }
+      .product-hero-sub { max-width: none; }
+      .product-stats { grid-template-columns: repeat(2, 1fr); }
+      .product-models { padding: 3rem 1.5rem; }
+      .product-gallery { padding: 3rem 1.5rem; }
+      .product-gallery-alt { padding: 3rem 1.5rem; }
+      .product-gallery-inner { gap: 3.5rem; }
+      .gallery-block { grid-template-columns: 1fr; gap: 2rem; }
+      .gallery-block.reverse { direction: ltr; }
+      .gallery-block .blueprint-frame { order: -1; }
+      .product-specs { padding: 3rem 1.5rem; }
+      .specs-row { grid-template-columns: 1fr; }
+      .specs-key { padding-bottom: 0.2rem; }
+      .specs-val { padding: 0 0 1rem; }
+      .product-cta-section { padding: 3rem 1.5rem; }
+      .product-cta-card { flex-direction: column; align-items: flex-start; gap: 2rem; }
+      footer { flex-direction: column; gap: 1rem; text-align: center; padding: 2rem 1.5rem; }
+      .model-row { flex-direction: column; align-items: flex-start; padding: 1.5rem; gap: 0.75rem; }
+      .model-photo { width: 100%; height: auto; aspect-ratio: 16/10; }
+      .model-photo img { object-fit: contain; padding: 0.75rem; }
+      .model-tag { text-align: left; }
+    }
+    @media (prefers-reduced-motion: reduce) {
+      .fade-up, .fade-up.visible { opacity: 1; transform: none; transition: none; }
+    }
+
+    /* MOBILE MENU */
+    .nav-burger { display: none; flex-direction: column; justify-content: center; gap: 5px; width: 36px; height: 36px; background: none; border: none; cursor: pointer; padding: 4px; z-index: 101; }
+    .nav-burger span { display: block; width: 100%; height: 1.5px; background: var(--text); transition: transform 0.3s, opacity 0.3s; transform-origin: center; }
+    .nav-burger.open span:nth-child(1) { transform: translateY(6.5px) rotate(45deg); }
+    .nav-burger.open span:nth-child(2) { opacity: 0; }
+    .nav-burger.open span:nth-child(3) { transform: translateY(-6.5px) rotate(-45deg); }
+    .mobile-drawer { display: none; position: fixed; inset: 0; top: 64px; background: rgba(11,11,11,0.97); backdrop-filter: blur(16px); z-index: 99; flex-direction: column; padding: 3rem 2rem; border-top: 1px solid var(--border); }
+    .mobile-drawer.open { display: flex; }
+    .mobile-drawer ul { list-style: none; display: flex; flex-direction: column; gap: 0; flex: 1; }
+    .mobile-drawer ul li { border-bottom: 1px solid var(--border); }
+    .mobile-drawer ul li a { display: block; font-family: 'Barlow Condensed', sans-serif; font-weight: 700; font-size: 2rem; text-transform: uppercase; color: var(--text); text-decoration: none; padding: 1rem 0; letter-spacing: 0.02em; transition: color 0.2s; }
+    .mobile-drawer ul li a:hover { color: var(--amber); }
+    .mobile-drawer .mobile-cta { margin-top: 2.5rem; }
+    .mobile-drawer .mobile-cta a { display: block; text-align: center; }
+    @media (max-width: 900px) { .nav-burger { display: flex; } }
+  </style>
+</head>
+<body>
+
+  <nav>
+    <a href="index.html" class="logo">
+      <div class="logo-corner logo-corner--tl"></div>
+      <div class="logo-corner logo-corner--tr"></div>
+      <div class="logo-corner logo-corner--bl"></div>
+      <div class="logo-corner logo-corner--br"></div>
+      Byrud<span>.</span>Tech
+    </a>
+    <ul class="nav-links">
+      <li><a href="index.html">Главная</a></li>
+      <li><a href="maschinen.html">Машины</a></li>
+      <li><a href="konzept.html">Концепция</a></li>
+      <li><a href="technologie.html">Технология</a></li>
+      <li><a href="about.html">О нас</a></li>
+      <li><a href="index.html#contact">Контакт</a></li>
+    </ul>
+    <div class="lang-switcher">
+      <button class="lang-btn" onclick="toggleLang()" aria-label="Выбрать язык">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M2 12h20"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg>
+      </button>
+      <div class="lang-dropdown" id="langDropdown">
+        <a href="rover.html" class="lang-option">DE</a>
+        <a href="rover-en.html" class="lang-option">EN</a>
+        <a href="rover-ru.html" class="lang-option lang-active">RU</a>
+        <a href="rover-uk.html" class="lang-option">UK</a>
+      </div>
+    </div>
+    <button class="nav-burger" id="navBurger" aria-label="Открыть меню" aria-expanded="false">
+      <span></span><span></span><span></span>
+    </button>
+  </nav>
+
+  <div class="mobile-drawer" id="mobileDrawer">
+    <ul>
+      <li><a href="index.html" class="drawer-link">Главная</a></li>
+      <li><a href="maschinen.html" class="drawer-link">Машины</a></li>
+      <li><a href="konzept.html" class="drawer-link">Концепция</a></li>
+      <li><a href="technologie.html" class="drawer-link">Технология</a></li>
+      <li><a href="about.html" class="drawer-link">О нас</a></li>
+      <li><a href="index.html#contact" class="drawer-link">Контакт</a></li>
+    </ul>
+    <div class="mobile-cta">
+      <a href="index.html#contact" class="btn-primary drawer-link">Запросить предложение →</a>
+    </div>
+  </div>
+
+  <!-- HERO -->
+  <section class="product-hero">
+    <div class="product-hero-inner">
+
+      <div class="product-hero-photo">
+        <div class="blueprint-frame">
+          <img src="images/rover-hero.jpg" alt="Культиватор ROVER — Byrud Tech" />
+        </div>
+      </div>
+
+      <div class="product-hero-text">
+        <div class="section-tag">// Культиватор</div>
+        <div class="product-hero-title">ROVER</div>
+        <p class="product-hero-sub">Интеллектуальная культиваторная машина для точной междурядной обработки пропашных культур. До 4 операций за один проход — рыхление, внесение удобрений, опрыскивание, окучивание. Модульная конструкция на универсальной раме.</p>
+
+        <div class="product-stats">
+          <div class="product-stat">
+            <div class="product-stat-num">3–12 m</div>
+            <div class="product-stat-label">Точность</div>
+          </div>
+          <div class="product-stat">
+            <div class="product-stat-num">18 km/h</div>
+            <div class="product-stat-label">Скорость</div>
+          </div>
+          <div class="product-stat">
+            <div class="product-stat-num">1 cm</div>
+            <div class="product-stat-label">Операции</div>
+          </div>
+          <div class="product-stat">
+            <div class="product-stat-num">4×</div>
+            <div class="product-stat-label">Клиренс</div>
+          </div>
+        </div>
+
+        <a href="index.html#contact" class="btn-primary">Запросить предложение →</a>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- МОДЕЛИ И РАБОЧИЕ ГРУППЫ -->
+  <section class="product-models">
+    <div class="product-models-inner">
+      <div class="product-models-header">
+        <div class="section-tag">// Модели &amp; рабочие группы</div>
+        <div class="product-models-title">5 моделей.<br />5 рабочих групп.</div>
+        <p class="product-models-desc">Каждая модель ROVER оптимизирована под определённый тип почвы и культуру. Все группы взаимозаменяемы и меняются менее чем за 30 минут.</p>
+      </div>
+
+      <div class="model-rows">
+        <div class="model-row fade-up">
+          <div class="model-photo">
+            <img src="images/rover-u-group.jpg" alt="ROVER-U — рабочая группа" />
+          </div>
+          <div class="model-body">
+            <div class="model-name">ROVER-U</div>
+            <div class="model-title">Стандартная обработка</div>
+            <div class="model-desc">Два пружинных зубца (виброзубья) с плоскими лапами. Предназначена для стандартной обработки на лёгких почвах. Эффективная борьба с сорняками при минимальном нарушении почвы.</div>
+          </div>
+          <div class="model-tag">Лёгкие почвы</div>
+        </div>
+
+        <div class="model-row fade-up">
+          <div class="model-photo">
+            <img src="images/rover-s-group.jpg" alt="ROVER-S — рабочая группа" />
+          </div>
+          <div class="model-body">
+            <div class="model-name">ROVER-S</div>
+            <div class="model-title">Усиленная обработка</div>
+            <div class="model-desc">Три пружинных зубца (виброзубья) с лапами стрельчатыми 150 мм. Для средних почв — усиленная обработка с повышенной проникающей способностью. Равномерное рыхление по всей рабочей ширине.</div>
+          </div>
+          <div class="model-tag">Средние почвы</div>
+        </div>
+
+        <div class="model-row fade-up">
+          <div class="model-photo">
+            <img src="images/rover-r-group.jpg" alt="ROVER-R — рабочая группа" />
+          </div>
+          <div class="model-body">
+            <div class="model-name">ROVER-R</div>
+            <div class="model-title">Интенсивное рыхление и окучивание</div>
+            <div class="model-desc">Модуль из 8 рыхлительных звёзд с угловой регулировкой в двух плоскостях — для окучивания или рыхления. С лапой стрельчатой 150 мм. Опционально: установка двух S-образных стоек (32×12) с лапами стрельчатыми 150 мм на каждый параллелограмм.</div>
+          </div>
+          <div class="model-tag">Окучивание</div>
+        </div>
+
+        <div class="model-row fade-up">
+          <div class="model-photo">
+            <img src="images/rover-p-group.jpg" alt="ROVER-P — рабочая группа" />
+          </div>
+          <div class="model-body">
+            <div class="model-name">ROVER-P</div>
+            <div class="model-title">Максимальное рыхление</div>
+            <div class="model-desc">Пять пружинных вибростоек с лапами стрельчатыми 150 мм. Для тяжёлых почв — максимальная глубина рыхления и проникновения. Интенсивная обработка даже на уплотнённых слоях почвы.</div>
+          </div>
+          <div class="model-tag">Тяжёлые почвы</div>
+        </div>
+
+        <div class="model-row fade-up">
+          <div class="model-photo">
+            <img src="images/rover-k-group.jpg" alt="ROVER-K — рабочая группа" />
+          </div>
+          <div class="model-body">
+            <div class="model-name">ROVER-K</div>
+            <div class="model-title">Комбинированная обработка</div>
+            <div class="model-desc">Две S-образные пружинные вибростойки и три пружинных зубца (виброзубья) с лапами стрельчатыми 150 мм. Комбинированная обработка — рыхление и финишная обработка за один проход.</div>
+          </div>
+          <div class="model-tag">Комбинированная</div>
+        </div>
+      </div>
+
+      <div class="model-note">Для всех моделей доступны: лапы стрельчатые 200/250 мм и лапы 150 мм (стандарт).</div>
+    </div>
+  </section>
+
+  <!-- КОМПОНЕНТЫ И ОПЦИИ -->
+  <section class="product-gallery-alt">
+    <div class="product-gallery-inner">
+      <div class="gallery-section-header">
+        <div class="section-tag">// Компоненты и опции</div>
+        <div class="gallery-section-title">Навесное оборудование &amp;<br />системы защиты</div>
+        <p class="gallery-section-desc">Защитные диски, параллелограммы, гребневые бороны и защитные кожухи адаптируют ROVER точно под культуру и тип почвы. Все детали можно установить дополнительно.</p>
+      </div>
+
+      <!-- Система рулевого управления -->
+      <div class="gallery-block fade-up">
+        <div class="blueprint-frame">
+          <img src="images/rover-lenkung.jpg" alt="ROVER — Гидравлическая система рулевого управления" />
+        </div>
+        <div class="gallery-text">
+          <div class="gallery-text-tag">// Система рулевого управления</div>
+          <div class="gallery-text-title">Гидравлическая поперечная коррекция</div>
+          <p class="gallery-text-body">Гидравлическая система рулевого управления смещает все рабочие группы синхронно поперёк направления движения — вручную или автоматически через EXACT. Диапазон поперечной регулировки ±25 см.</p>
+          <ul class="gallery-text-list">
+            <li>Диапазон регулировки ±25 см</li>
+            <li>Ручной или полностью автоматический режим</li>
+            <li>Время реакции менее 10 мс (с EXACT)</li>
+          </ul>
+        </div>
+      </div>
+
+      <!-- Параллелограммы -->
+      <div class="gallery-block reverse fade-up">
+        <div class="blueprint-frame">
+          <img src="images/rover-parallelogramm.jpg" alt="ROVER — Параллелограммы для копирования рельефа" />
+        </div>
+        <div class="gallery-text">
+          <div class="gallery-text-tag">// Параллелограммы</div>
+          <div class="gallery-text-title">Индивидуальное копирование рельефа для каждого ряда</div>
+          <p class="gallery-text-body">Каждая рабочая группа подвешена на подпружиненном параллелограмме, который следует за профилем почвы — независимо от соседних рядов. Исключает заглубление на неровностях рельефа.</p>
+          <ul class="gallery-text-list">
+            <li>Подпружиненный 4-точечный параллелограмм</li>
+            <li>Компенсация ±6 см неровностей рельефа</li>
+            <li>Индивидуальная регулировка давления пружины</li>
+          </ul>
+        </div>
+      </div>
+
+      <!-- Защитные диски -->
+      <div class="gallery-block fade-up">
+        <div class="blueprint-frame">
+          <img src="images/rover-schutzscheiben.jpg" alt="ROVER — Защитные диски на рядке" />
+        </div>
+        <div class="gallery-text">
+          <div class="gallery-text-tag">// Защитные диски</div>
+          <div class="gallery-text-title">Защита растений непосредственно на рядке</div>
+          <p class="gallery-text-body">Конические защитные диски на рабочем органе защищают молодое растение от засыпания землёй и механического повреждения. Регулируемое расстояние и угол в зависимости от стадии развития культуры.</p>
+          <ul class="gallery-text-list">
+            <li>Расстояние 5–30 мм до рядка</li>
+            <li>Для культур от фазы BBCH 11</li>
+            <li>Конические диски из закалённой стали</li>
+          </ul>
+        </div>
+      </div>
+
+      <!-- Гребневые бороны -->
+      <div class="gallery-block reverse fade-up">
+        <div class="blueprint-frame">
+          <img src="images/rover-dammstriegel.jpg" alt="ROVER — Гребневые бороны для междурядий" />
+        </div>
+        <div class="gallery-text">
+          <div class="gallery-text-tag">// Гребневые бороны</div>
+          <div class="gallery-text-title">Борьба с сорняками в гребневой зоне</div>
+          <p class="gallery-text-body">Гибкие пружинные бороны обрабатывают зону гребня между рядами — захватывают даже мельчайшие всходы сорняков в стадии нитевидного корня, которые не достают лапы культиватора.</p>
+          <ul class="gallery-text-list">
+            <li>Проволочная борона ∅ 4 мм, пружинная сталь</li>
+            <li>Скорость движения до 12 км/ч</li>
+            <li>Для картофеля, свёклы, кукурузы</li>
+          </ul>
+        </div>
+      </div>
+
+      <!-- Защитные кожухи -->
+      <div class="gallery-block fade-up">
+        <div class="blueprint-frame">
+          <img src="images/rover-schutzbleche.jpg" alt="ROVER — Защитные кожухи для чувствительных культур" />
+        </div>
+        <div class="gallery-text">
+          <div class="gallery-text-tag">// Защитные кожухи</div>
+          <div class="gallery-text-title">Защита от засыпания для чувствительных культур</div>
+          <p class="gallery-text-body">Откидные защитные кожухи рядом с рабочим органом предотвращают засыпание зоны растений землёй. Простая регулировка без инструмента — доступна с сиденья трактора.</p>
+          <ul class="gallery-text-list">
+            <li>Откидные, регулируются без инструмента</li>
+            <li>Для салата, шпината, моркови</li>
+            <li>Исполнение из нержавеющей стали</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- СОВМЕСТИМЫЕ СИСТЕМЫ -->
+  <section class="product-gallery">
+    <div class="product-gallery-inner">
+      <div class="gallery-section-header">
+        <div class="section-tag">// Расширения</div>
+        <div class="gallery-section-title">Совместимые<br />навесные системы</div>
+        <p class="gallery-section-desc">EXACT, LIXA, LIXA-O и GRANO можно устанавливать на любой ROVER по отдельности или в комбинации — для выполнения до 4 операций за один проход.</p>
+      </div>
+
+      <!-- EXACT -->
+      <div class="gallery-block fade-up">
+        <div class="blueprint-frame">
+          <img src="images/exact-hero.jpg" alt="EXACT — Камерная система рядковедения для ROVER" />
+        </div>
+        <div class="gallery-text">
+          <div class="gallery-text-tag">// Опция EXACT</div>
+          <div class="gallery-text-title">Точность до 1 см — автоматически</div>
+          <p class="gallery-text-sub">Камерная система рядковедения</p>
+          <p class="gallery-text-body">Оптическая система наведения EXACT распознаёт ряды в реальном времени и корректирует поперечную ось рабочих групп без GPS. Время реакции менее 10 мс, работа на скорости до 18 км/ч.</p>
+          <ul class="gallery-text-list">
+            <li>GPS не требуется</li>
+            <li>Работа 24/7, днём и ночью</li>
+            <li>Время реакции менее 10 мс</li>
+          </ul>
+          <a href="exact.html" class="product-link">Подробнее о EXACT →</a>
+        </div>
+      </div>
+
+      <!-- LIXA -->
+      <div class="gallery-block reverse fade-up">
+        <div class="blueprint-frame">
+          <img src="images/lixa-hero.jpg" alt="LIXA — Внесение жидких удобрений на ROVER" />
+        </div>
+        <div class="gallery-text">
+          <div class="gallery-text-tag">// Опция LIXA</div>
+          <div class="gallery-text-title">Одновременное внесение жидких компонентов</div>
+          <p class="gallery-text-sub">Внесение жидких удобрений &amp; средств защиты</p>
+          <p class="gallery-text-body">LIXA вносит КАС, ЖКУ или средства защиты растений точно по рядам — одновременно с культивацией. До 3 жидких компонентов, бак 600–3000 л, управление по CAN-Bus.</p>
+          <ul class="gallery-text-list">
+            <li>До 3 компонентов одновременно</li>
+            <li>Бак 600–3000 л</li>
+            <li>Экономия гербицидов до −40%</li>
+          </ul>
+          <a href="lixa.html" class="product-link">Подробнее о LIXA →</a>
+        </div>
+      </div>
+
+      <!-- LIXA-O -->
+      <div class="gallery-block fade-up">
+        <div class="blueprint-frame">
+          <img src="images/lixa-o.jpg" alt="LIXA-O — Форсунки над рядом на ROVER" />
+        </div>
+        <div class="gallery-text">
+          <div class="gallery-text-tag">// Опция LIXA-O</div>
+          <div class="gallery-text-title">Листовая обработка над рядом растений</div>
+          <p class="gallery-text-sub">Внесение жидкости над рядом</p>
+          <p class="gallery-text-body">LIXA-O дополняет систему LIXA форсунками над рядом — для листовых средств защиты растений, микроэлементов и регуляторов роста непосредственно на растение.</p>
+          <ul class="gallery-text-list">
+            <li>Форсунки над рядом, комбинируются с LIXA</li>
+            <li>Для листовых культур и овощей</li>
+            <li>Индивидуальное отключение по рядам через клапан</li>
+          </ul>
+          <a href="lixa.html" class="product-link">Подробнее о LIXA →</a>
+        </div>
+      </div>
+
+      <!-- GRANO -->
+      <div class="gallery-block reverse fade-up">
+        <div class="blueprint-frame">
+          <img src="images/grano-hero.jpg" alt="GRANO — Внесение гранулированных удобрений на ROVER" />
+        </div>
+        <div class="gallery-text">
+          <div class="gallery-text-tag">// Опция GRANO</div>
+          <div class="gallery-text-title">Точное внесение гранул в прикорневую зону</div>
+          <p class="gallery-text-sub">Внесение гранулированных удобрений в прикорневую зону</p>
+          <p class="gallery-text-body">GRANO вносит гранулированные удобрения непосредственно рядом или под ряд — во время культивации. Бак 800–2000 л, норма внесения 5–270 кг/га с бесступенчатой регулировкой через привод Accord.</p>
+          <ul class="gallery-text-list">
+            <li>Корпус из нержавеющей стали, минимальное обслуживание</li>
+            <li>Привод Accord — без электроники</li>
+            <li>Бак 800–2000 л</li>
+          </ul>
+          <a href="grano.html" class="product-link">Подробнее о GRANO →</a>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ТЕХНИЧЕСКИЕ ХАРАКТЕРИСТИКИ -->
+  <section class="product-specs">
+    <div class="product-specs-inner">
+      <div class="product-specs-header">
+        <div class="section-tag">// Технические данные</div>
+        <div class="product-specs-title">Технические<br />характеристики</div>
+      </div>
+
+      <div class="specs-row"><div class="specs-key">Рабочая ширина</div><div class="specs-val">3–12 m (в зависимости от модели)</div></div>
+      <div class="specs-row"><div class="specs-key">Рабочая глубина</div><div class="specs-val">6–15 cm</div></div>
+      <div class="specs-row"><div class="specs-key">Междурядье</div><div class="specs-val">15–90 cm</div></div>
+      <div class="specs-row"><div class="specs-key">Мощность трактора</div><div class="specs-val">75–150 hp</div></div>
+      <div class="specs-row"><div class="specs-key">Рабочая скорость</div><div class="specs-val">5–18 km/h</div></div>
+      <div class="specs-row"><div class="specs-key">Точность</div><div class="specs-val">До 1 cm (с опцией EXACT)</div></div>
+      <div class="specs-row"><div class="specs-key">Высота рамы (клиренс)</div><div class="specs-val">800 mm — подходит для высокорослых культур (кукуруза, подсолнечник)</div></div>
+      <div class="specs-row"><div class="specs-key">Навеска</div><div class="specs-val">3-точечная навеска, кат. 2 / кат. 3</div></div>
+      <div class="specs-row"><div class="specs-key">Операций за проход</div><div class="specs-val">До 4 одновременно: рыхление, внесение удобрений, опрыскивание, окучивание</div></div>
+      <div class="specs-row"><div class="specs-key">Производительность</div><div class="specs-val">До 180 га/день (режим 24/7)</div></div>
+    </div>
+  </section>
+
+  <!-- CTA -->
+  <section class="product-cta-section">
+    <div class="product-cta-inner">
+      <div class="product-cta-card">
+        <div>
+          <div class="product-cta-title">Сконфигурируйте ROVER<br />для вашего хозяйства</div>
+          <p class="product-cta-sub">Мы проконсультируем вас индивидуально — выбор модели, опции, сроки поставки и цена.</p>
+        </div>
+        <a href="index.html#contact" class="btn-primary">Запросить предложение →</a>
+      </div>
+    </div>
+  </section>
+
+  <footer>
+    <span class="footer-copy">© 2025 Byrud Tech. Все права защищены.</span>
+    <div class="footer-links"><a href="#">Импрессум</a><a href="#">Конфиденциальность</a><a href="#">Условия</a></div>
+    <span class="footer-copy">Hamburg · byrud-tech.com</span>
+  </footer>
+
+  <script>
+    /* BURGER / DRAWER */
+    const burger = document.getElementById('navBurger');
+    const drawer = document.getElementById('mobileDrawer');
+    burger.addEventListener('click', () => {
+      const isOpen = drawer.classList.toggle('open');
+      burger.classList.toggle('open', isOpen);
+      burger.setAttribute('aria-expanded', isOpen);
+      document.body.style.overflow = isOpen ? 'hidden' : '';
+    });
+    document.querySelectorAll('.drawer-link').forEach(link => {
+      link.addEventListener('click', () => {
+        drawer.classList.remove('open');
+        burger.classList.remove('open');
+        burger.setAttribute('aria-expanded', 'false');
+        document.body.style.overflow = '';
+      });
+    });
+    const fups = document.querySelectorAll('.fade-up');
+    const obs = new IntersectionObserver(entries => {
+      entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('visible'); obs.unobserve(e.target); } });
+    }, { threshold: 0.1 });
+    fups.forEach(el => obs.observe(el));
+    /* Scanline on scroll (mobile/touch) */
+    if (!window.matchMedia('(hover: hover)').matches) {
+      const scanObs = new IntersectionObserver(entries => {
+        entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('scanned'); scanObs.unobserve(e.target); } });
+      }, { threshold: 0.3 });
+      document.querySelectorAll('.model-row').forEach(el => scanObs.observe(el));
+    }
+    /* LANG SWITCHER */
+    function toggleLang() { document.getElementById('langDropdown').classList.toggle('open'); }
+    document.addEventListener('click', function(e) { if (!e.target.closest('.lang-switcher')) document.getElementById('langDropdown').classList.remove('open'); });
+  </script>
+
+</body>
+</html>
