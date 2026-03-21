@@ -60,16 +60,16 @@
     .product-stat-num { font-family: 'Barlow Condensed', sans-serif; font-weight: 800; font-size: 1.9rem; color: var(--amber); line-height: 1; margin-bottom: 0.3rem; }
     .product-stat-label { font-family: 'IBM Plex Mono', monospace; font-size: 0.6rem; letter-spacing: 0.08em; text-transform: uppercase; color: var(--text-dim); }
 
-    /* ADVANTAGES (3-col) */
-    .exact-advantages { padding: 5rem 3rem; background: var(--bg2); border-top: 1px solid var(--border); border-bottom: 1px solid var(--border); }
-    .exact-advantages-inner { max-width: 1400px; margin: 0 auto; }
-    .exact-advantages-header { margin-bottom: 3rem; }
-    .exact-advantages-title { font-family: 'Barlow Condensed', sans-serif; font-weight: 800; font-size: clamp(1.8rem, 3vw, 2.8rem); text-transform: uppercase; line-height: 0.95; }
-    .exact-adv-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1px; background: var(--border); border-radius: var(--r); overflow: hidden; }
-    .exact-adv-card { background: var(--bg); padding: 2.5rem 2rem; }
-    .exact-adv-num { font-family: 'Barlow Condensed', sans-serif; font-weight: 800; font-size: 1rem; color: var(--amber); letter-spacing: 0.1em; margin-bottom: 1.25rem; }
-    .exact-adv-title { font-family: 'Barlow Condensed', sans-serif; font-weight: 700; font-size: 1.2rem; text-transform: uppercase; letter-spacing: 0.04em; color: var(--text); margin-bottom: 0.75rem; }
-    .exact-adv-desc { font-size: 0.92rem; color: var(--text-muted); line-height: 1.75; }
+    /* ALGORITHM STEPS */
+    .exact-algo { padding: 5rem 3rem; background: var(--bg2); border-top: 1px solid var(--border); border-bottom: 1px solid var(--border); }
+    .exact-algo-inner { max-width: 1400px; margin: 0 auto; }
+    .exact-algo-header { margin-bottom: 2.5rem; }
+    .exact-algo-title { font-family: 'Barlow Condensed', sans-serif; font-weight: 800; font-size: clamp(1.8rem, 3vw, 2.8rem); text-transform: uppercase; line-height: 0.95; }
+    .algo-steps { display: flex; flex-direction: column; gap: 1px; background: var(--border); border-radius: var(--r); overflow: hidden; }
+    .algo-step { background: var(--bg); padding: 1.5rem 2rem; display: flex; align-items: flex-start; gap: 1.5rem; }
+    .algo-num { font-family: 'Barlow Condensed', sans-serif; font-weight: 800; font-size: 2rem; color: var(--amber); line-height: 1; flex-shrink: 0; min-width: 3rem; }
+    .algo-title { font-family: 'Barlow Condensed', sans-serif; font-weight: 700; font-size: 1.1rem; text-transform: uppercase; color: var(--text); margin-bottom: 0.4rem; }
+    .algo-desc { font-size: 0.92rem; color: var(--text-muted); line-height: 1.75; }
 
     /* SCENARIOS */
     .exact-scenarios { padding: 5rem 3rem; }
@@ -106,17 +106,6 @@
     .exact-econ-col--with .exact-econ-val { color: var(--text); }
     .exact-econ-note { font-size: 0.95rem; color: var(--text-muted); line-height: 1.75; padding-top: 1.25rem; border-top: 1px solid var(--border); }
     .exact-econ-note strong { color: var(--amber); font-weight: 500; }
-
-    /* COMPAT */
-    .exact-compat { padding: 5rem 3rem; }
-    .exact-compat-inner { max-width: 1400px; margin: 0 auto; }
-    .exact-compat-header { margin-bottom: 2rem; }
-    .exact-compat-title { font-family: 'Barlow Condensed', sans-serif; font-weight: 800; font-size: clamp(1.8rem, 3vw, 2.8rem); text-transform: uppercase; line-height: 0.95; margin-bottom: 1rem; }
-    .exact-compat-desc { color: var(--text-muted); font-size: 1rem; line-height: 1.8; max-width: 680px; }
-    .exact-compat-tiles { display: grid; grid-template-columns: repeat(5, 1fr); gap: 1px; background: var(--border); border-radius: var(--r); overflow: hidden; margin-top: 2rem; }
-    .exact-compat-tile { background: var(--bg2); padding: 1.5rem 1rem; display: flex; flex-direction: column; align-items: center; gap: 0.4rem; text-align: center; }
-    .exact-compat-tile-name { font-family: 'Barlow Condensed', sans-serif; font-weight: 700; font-size: 1rem; text-transform: uppercase; letter-spacing: 0.04em; color: var(--text); }
-    .exact-compat-tile-check { font-family: 'IBM Plex Mono', monospace; font-size: 0.65rem; letter-spacing: 0.08em; text-transform: uppercase; color: var(--amber); }
 
     /* SPECS */
     .product-specs { padding: 5rem 3rem; background: var(--bg2); border-top: 1px solid var(--border); border-bottom: 1px solid var(--border); }
@@ -165,15 +154,14 @@
       .product-hero-photo { order: -1; }
       .product-hero-sub { max-width: none; }
       .product-stats { grid-template-columns: repeat(2, 1fr); }
-      .exact-advantages { padding: 3rem 1.5rem; }
-      .exact-adv-grid { grid-template-columns: 1fr; }
+      .exact-algo { padding: 3rem 1.5rem; }
+      .algo-step { padding: 1.2rem 1.5rem; }
+      .algo-num { font-size: 1.5rem; }
       .exact-scenarios { padding: 3rem 1.5rem; }
       .exact-scenario { flex-direction: column; align-items: flex-start; gap: 0.5rem; padding: 1.5rem; }
       .exact-scenario-accent { min-width: 0; font-size: 1.3rem; }
       .exact-econ { padding: 3rem 1.5rem; }
       .exact-econ-grid { grid-template-columns: 1fr; }
-      .exact-compat { padding: 3rem 1.5rem; }
-      .exact-compat-tiles { grid-template-columns: repeat(3, 1fr); }
       .product-specs { padding: 3rem 1.5rem; }
       .specs-row { grid-template-columns: 1fr; }
       .specs-key { padding-bottom: 0.2rem; }
@@ -285,28 +273,41 @@
     </div>
   </section>
 
-  <!-- WARUM EXACT -->
-  <section class="exact-advantages">
-    <div class="exact-advantages-inner">
-      <div class="exact-advantages-header fade-up">
-        <div class="section-tag">// Vorteile</div>
-        <div class="exact-advantages-title">Präzision, die den<br />Unterschied macht</div>
+  <!-- WIE EXACT ARBEITET -->
+  <section class="exact-algo">
+    <div class="exact-algo-inner">
+      <div class="exact-algo-header fade-up">
+        <div class="section-tag">// Funktionsprinzip</div>
+        <div class="exact-algo-title">Wie EXACT arbeitet</div>
       </div>
-      <div class="exact-adv-grid">
-        <div class="exact-adv-card fade-up">
-          <div class="exact-adv-num">01</div>
-          <div class="exact-adv-title">1 cm Genauigkeit</div>
-          <p class="exact-adv-desc">Die CMOS-Kamera erkennt die Pflanzenreihen in Echtzeit und steuert die Hackgruppen mit bis zu 1 cm Präzision. Kein Verschnitt, keine Pflanzenschäden.</p>
+      <div class="algo-steps">
+        <div class="algo-step fade-up">
+          <div class="algo-num">01</div>
+          <div class="algo-body">
+            <div class="algo-title">Reihen erfassen</div>
+            <p class="algo-desc">Die CMOS-Kamera erfasst die Pflanzenreihen in Echtzeit und identifiziert deren Position im Bild.</p>
+          </div>
         </div>
-        <div class="exact-adv-card fade-up">
-          <div class="exact-adv-num">02</div>
-          <div class="exact-adv-title">24/7 Einsatz</div>
-          <p class="exact-adv-desc">Arbeiten Sie rund um die Uhr — die Kamera funktioniert bei Tageslicht und in völliger Dunkelheit. Nutzen Sie jede Stunde im engen Zeitfenster.</p>
+        <div class="algo-step fade-up">
+          <div class="algo-num">02</div>
+          <div class="algo-body">
+            <div class="algo-title">Pflanzen erkennen</div>
+            <p class="algo-desc">Das System erkennt Kulturpflanzen anhand der Pigmentkonzentration und unterscheidet sie von Unkraut und Boden.</p>
+          </div>
         </div>
-        <div class="exact-adv-card fade-up">
-          <div class="exact-adv-num">03</div>
-          <div class="exact-adv-title">9" Farbdisplay</div>
-          <p class="exact-adv-desc">Übersichtliche Darstellung auf dem 9-Zoll-Farbbildschirm direkt in der Traktorkabine. Intuitive Bedienung, schnelle Einstellung, sofort einsatzbereit.</p>
+        <div class="algo-step fade-up">
+          <div class="algo-num">03</div>
+          <div class="algo-body">
+            <div class="algo-title">Soll-Ist-Abgleich</div>
+            <p class="algo-desc">Die erkannten Reihenpositionen werden mit dem vorgegebenen Zwischenreihenraster abgeglichen — Abweichungen werden sofort berechnet.</p>
+          </div>
+        </div>
+        <div class="algo-step fade-up">
+          <div class="algo-num">04</div>
+          <div class="algo-body">
+            <div class="algo-title">Automatische Korrektur</div>
+            <p class="algo-desc">Der hydraulische Seitenverschiebungsblock korrigiert die Position des Kultivators. Die Arbeitsorgane richten sich automatisch exakt in der Mitte der Zwischenreihe aus.</p>
+          </div>
         </div>
       </div>
     </div>
@@ -386,39 +387,6 @@
     </div>
   </section>
 
-  <!-- KOMPATIBILITÄT -->
-  <section class="exact-compat">
-    <div class="exact-compat-inner">
-      <div class="exact-compat-header fade-up">
-        <div class="section-tag">// Kompatibilität</div>
-        <div class="exact-compat-title">Passt auf jeden ROVER</div>
-        <p class="exact-compat-desc">EXACT ist kompatibel mit allen ROVER-Modellen: ROVER-U, ROVER-S, ROVER-R, ROVER-P und ROVER-K. Die Nachrüstung ist jederzeit möglich — einfache Montage, sofort einsatzbereit.</p>
-      </div>
-      <div class="exact-compat-tiles fade-up">
-        <div class="exact-compat-tile">
-          <div class="exact-compat-tile-name">ROVER-U</div>
-          <div class="exact-compat-tile-check">✓ Kompatibel</div>
-        </div>
-        <div class="exact-compat-tile">
-          <div class="exact-compat-tile-name">ROVER-S</div>
-          <div class="exact-compat-tile-check">✓ Kompatibel</div>
-        </div>
-        <div class="exact-compat-tile">
-          <div class="exact-compat-tile-name">ROVER-R</div>
-          <div class="exact-compat-tile-check">✓ Kompatibel</div>
-        </div>
-        <div class="exact-compat-tile">
-          <div class="exact-compat-tile-name">ROVER-P</div>
-          <div class="exact-compat-tile-check">✓ Kompatibel</div>
-        </div>
-        <div class="exact-compat-tile">
-          <div class="exact-compat-tile-name">ROVER-K</div>
-          <div class="exact-compat-tile-check">✓ Kompatibel</div>
-        </div>
-      </div>
-    </div>
-  </section>
-
   <!-- TECHNISCHE DATEN -->
   <section class="product-specs">
     <div class="product-specs-inner">
@@ -432,7 +400,6 @@
       <div class="specs-row fade-up"><div class="specs-key">Nachtbetrieb</div><div class="specs-val">Ja — integrierte Beleuchtung</div></div>
       <div class="specs-row fade-up"><div class="specs-key">Max. Geschwindigkeit</div><div class="specs-val">18 km/h</div></div>
       <div class="specs-row fade-up"><div class="specs-key">Montage</div><div class="specs-val">Auf ROVER-Rahmen, nachrüstbar</div></div>
-      <div class="specs-row fade-up"><div class="specs-key">Kompatibilität</div><div class="specs-val">Alle ROVER-Modelle (U / S / R / P / K)</div></div>
     </div>
   </section>
 
@@ -499,7 +466,7 @@
     document.querySelectorAll('.counter').forEach(el => counterObserver.observe(el));
 
     /* FADE-UP SCROLL */
-    document.querySelectorAll('.exact-adv-card').forEach((el, i) => { el.style.transitionDelay = (i * 100) + 'ms'; });
+    document.querySelectorAll('.algo-step').forEach((el, i) => { el.style.transitionDelay = (i * 100) + 'ms'; });
     document.querySelectorAll('.exact-scenario').forEach((el, i) => { el.style.transitionDelay = (i * 80) + 'ms'; });
     document.querySelectorAll('.specs-row').forEach((el, i) => { el.style.transitionDelay = (i * 50) + 'ms'; });
 
