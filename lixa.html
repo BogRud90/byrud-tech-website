@@ -73,6 +73,18 @@
     .tank-photo { width: 45%; flex-shrink: 0; border: 0.5px solid rgba(255, 255, 255, 0.1); overflow: hidden; }
     .tank-photo img { width: 100%; height: auto; object-fit: contain; }
     .tank-table { flex: 1; }
+    .lixa-o-section { padding: 5rem 3rem; }
+    .lixa-o-inner { max-width: 1400px; margin: 0 auto; }
+    .lixa-o-photo { width: 100%; border: 0.5px solid rgba(255, 255, 255, 0.1); overflow: hidden; margin-bottom: 2rem; }
+    .lixa-o-photo img { width: 100%; height: auto; display: block; }
+    .lixa-o-table { width: 100%; border-collapse: collapse; border: 1px solid var(--border); border-radius: var(--r); overflow: hidden; }
+    .lixa-o-table th { font-family: 'IBM Plex Mono', monospace; font-size: 0.65rem; letter-spacing: 0.12em; text-transform: uppercase; color: var(--text-dim); text-align: left; padding: 1rem; background: var(--bg3); border-bottom: 1px solid var(--border); font-weight: 400; }
+    .lixa-o-table td { padding: 1rem; font-size: 0.92rem; color: var(--text-muted); border-bottom: 1px solid var(--border); }
+    .lixa-o-table tr:last-child td { border-bottom: none; }
+    .lixa-o-table tr:nth-child(even) td { background: var(--bg2); }
+    .lixa-o-table tr:nth-child(odd) td { background: var(--bg); }
+    .lixa-o-table .eff-key { font-weight: 700; color: var(--text); }
+    .lixa-o-table .eff-highlight { color: var(--amber); font-weight: 700; }
     .product-gallery { padding: 5rem 3rem; }
     .product-gallery-inner { max-width: 1400px; margin: 0 auto; display: flex; flex-direction: column; gap: 6rem; }
     .gallery-block { display: grid; grid-template-columns: 1fr 1fr; gap: 5rem; align-items: center; }
@@ -135,6 +147,7 @@
       .models-table th, .models-table td { padding: 0.75rem; }
       .tank-section { flex-direction: column; }
       .tank-photo { width: 100%; }
+      .lixa-o-section { padding: 3rem 1.5rem; }
     }
 
     /* MOBILE MENU */
@@ -305,6 +318,48 @@
           </ul>
         </div>
       </div>
+    </div>
+  </section>
+
+  <section class="lixa-o-section">
+    <div class="lixa-o-inner">
+      <div class="section-tag">// Präzisionsspritzung</div>
+      <div class="product-models-title" style="margin-bottom: 1rem;">LIXA-O — Band Spraying</div>
+      <p class="product-models-desc" style="margin-bottom: 2rem;">Punkt-genaue Applikation von Pflanzenschutzmitteln nur in der Zwischenreihe. Bis zu 40% weniger PSM bei gleicher Wirkung.</p>
+      <div class="lixa-o-photo">
+        <img src="images/lixa-o-field.jpg" alt="LIXA-O Präzisionsspritzung im Zwischenreihenbereich" />
+      </div>
+      <table class="lixa-o-table">
+        <thead>
+          <tr>
+            <th>Effekt</th>
+            <th>Beschreibung</th>
+            <th>Ergebnis</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td class="eff-key">Thermoregulation</td>
+            <td>Senkung der Bodentemperatur um 8–10 °C</td>
+            <td>Bessere Bedingungen für Wurzelwachstum</td>
+          </tr>
+          <tr>
+            <td class="eff-key">Belüftung</td>
+            <td>Zerstörung der Bodenkruste</td>
+            <td>Besserer Sauerstoffzugang zur Wurzelzone</td>
+          </tr>
+          <tr>
+            <td class="eff-key">Unkrautbekämpfung</td>
+            <td>Mechanisch + chemische Bekämpfung</td>
+            <td>Maximale Wirksamkeit</td>
+          </tr>
+          <tr>
+            <td class="eff-key">Einsparung</td>
+            <td>Gezielte Applikation der Pflanzenschutzmittel</td>
+            <td class="eff-highlight">Bis –40% PSM-Verbrauch</td>
+          </tr>
+        </tbody>
+      </table>
     </div>
   </section>
 
