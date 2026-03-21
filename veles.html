@@ -144,17 +144,23 @@
     .mobile-drawer .mobile-cta a { display: block; text-align: center; }
     @media (max-width: 900px) { .nav-burger { display: flex; } }
 
-    /* DETAIL SECTION */
-    .veles-detail-photo { width: 100%; border: 0.5px solid rgba(255, 255, 255, 0.1); overflow: hidden; margin-bottom: 2rem; }
-    .veles-detail-photo img { width: 100%; height: auto; display: block; }
-    .detail-list { display: flex; flex-direction: column; gap: 1px; background: var(--border); }
-    .detail-item { background: var(--bg); padding: 1rem 2rem; display: flex; align-items: flex-start; gap: 1.5rem; opacity: 0; transform: translateY(20px); transition: opacity 0.5s ease, transform 0.5s ease; }
-    .detail-item.visible { opacity: 1; transform: translateY(0); }
-    .detail-num { font-family: 'Barlow Condensed', sans-serif; font-weight: 800; font-size: 1.3rem; color: var(--amber); line-height: 1; flex-shrink: 0; min-width: 2.5rem; }
-    .detail-text { font-size: 0.92rem; color: var(--text-muted); line-height: 1.75; }
+    /* INOKULUM SECTION */
+    .inokulum-photos { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 1px; background: var(--border); margin-bottom: 2rem; }
+    .inokulum-photo { background: var(--bg); border: 0.5px solid rgba(255, 255, 255, 0.1); overflow: hidden; }
+    .inokulum-photo img { width: 100%; height: auto; display: block; object-fit: contain; padding: 0.5rem; }
+    .inokulum-text { max-width: 800px; font-size: 0.92rem; color: var(--text-muted); line-height: 1.85; }
+    .inokulum-text p { margin-bottom: 1rem; }
+    .inokulum-text ul { list-style: none; padding: 0; margin-bottom: 1rem; }
+    .inokulum-text li { padding: 0.4rem 0; padding-left: 1.5rem; position: relative; }
+    .inokulum-text li::before { content: ''; position: absolute; left: 0; top: 0.75rem; width: 6px; height: 6px; background: var(--amber); }
+    .inokulum-text strong { color: var(--text); }
+    .product-link { font-family: 'IBM Plex Mono', monospace; font-size: 0.78rem; letter-spacing: 0.06em; color: var(--amber); text-decoration: none; transition: opacity 0.2s; display: inline-block; margin-top: 1rem; }
+    .product-link:hover { opacity: 0.7; }
+    /* FADE-UP */
+    .fade-up { opacity: 0; transform: translateY(30px); transition: opacity 0.6s ease, transform 0.6s ease; }
+    .fade-up.visible { opacity: 1; transform: translateY(0); }
     @media (max-width: 900px) {
-      .detail-item { padding: 0.75rem 1.5rem; gap: 1rem; }
-      .detail-num { font-size: 1rem; min-width: 2rem; }
+      .inokulum-photos { grid-template-columns: 1fr; }
     }
   </style>
 </head>
@@ -248,79 +254,144 @@
     </div>
   </section>
 
+  <!-- ZIGZAG GALLERY: VELES im Detail -->
   <section class="product-gallery">
-    <div class="product-gallery-inner">
-      <div class="gallery-block">
-        <div class="blueprint-frame">
-          <img src="images/veles-schar.jpg" alt="VELES — Doppelreihen-Schar" />
-        </div>
-        <div class="gallery-text">
-          <div class="gallery-text-tag">// Doppelreihen-Schar</div>
-          <div class="gallery-text-title">Präzise Saatablage auf 1 cm genau</div>
-          <p class="gallery-text-body">Zweizeilige Säschare mit 10 cm Abstand. Federdruck bis 140 kg für exakte Tiefenführung auch in schwierigen Böden — gleichmäßige Saatablage und optimaler Bodenschluss.</p>
-          <ul class="gallery-text-list">
-            <li>Federdruck bis 140 kg pro Schar</li>
-            <li>10 cm Reihenabstand für optimale Nährstoffversorgung</li>
-            <li>Gleichmäßige Tiefenführung in jedem Boden</li>
-          </ul>
-        </div>
-      </div>
-
-      <div class="gallery-block reverse">
-        <div class="blueprint-frame">
-          <img src="images/veles-tank.jpg" alt="VELES — Tanksystem" />
-        </div>
-        <div class="gallery-text">
-          <div class="gallery-text-tag">// Tanksystem</div>
-          <div class="gallery-text-title">600 bis 6000 l — für jede Flächengröße</div>
-          <p class="gallery-text-body">600–2000 l direkt auf dem Rahmen, 2700–6000 l als Anhänger — maximale Autonomie für Großbetriebe. Weniger Stopps, mehr Feld.</p>
-          <ul class="gallery-text-list">
-            <li>Rahmentank 600–2000 l</li>
-            <li>Anhängertank 2700–6000 l</li>
-            <li>Kombination mit GRANO und LIXA möglich</li>
-          </ul>
-        </div>
-      </div>
-
-      <div class="gallery-block">
-        <div class="blueprint-frame">
-          <img src="images/veles-inokulum.jpg" alt="VELES — Inokulum-Option" />
-        </div>
-        <div class="gallery-text">
-          <div class="gallery-text-tag">// Option Inokulum</div>
-          <div class="gallery-text-title">Startdünger und Inokulum in einem Durchgang</div>
-          <p class="gallery-text-body">Das LIXA-I System bringt Inokulum und Startdünger gleichzeitig mit der Aussaat aus — direkt zur Saat, kein zusätzlicher Arbeitsgang. Ideal für Soja und Hülsenfrüchte.</p>
-          <ul class="gallery-text-list">
-            <li>Inokulum direkt zur Saat</li>
-            <li>LIXA-Flüssigdüngung für Startdünger</li>
-            <li>GRANO-Option für Granulatdüngung</li>
-          </ul>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <section class="product-gallery" style="padding-top: 0;">
     <div class="product-gallery-inner">
       <div class="product-models-header">
         <div class="section-tag">// Aufbau & Komponenten</div>
         <div class="product-models-title">VELES im Detail</div>
       </div>
-      <div class="veles-detail-photo">
-        <img src="images/veles-detail.jpg" alt="VELES Sämaschine — Komponenten im Detail" />
+
+      <div class="gallery-block fade-up">
+        <div class="blueprint-frame">
+          <img src="images/veles-parallelogramm.jpg" alt="VELES — Parallelogramm" />
+        </div>
+        <div class="gallery-text">
+          <div class="gallery-text-tag">// Parallelogramm</div>
+          <div class="gallery-text-title">Parallelogramm</div>
+          <p class="gallery-text-body">Parallelogramm mit Zusatzfeder für verstärkten Schardruck auf den Boden — bis 140 kg. Tiefenführungsrad zur exakten Einstellung der Saatablagetiefe. Umstellung des Reihenabstands mit nur einer Schraube.</p>
+        </div>
       </div>
-      <div class="detail-list">
-        <div class="detail-item"><div class="detail-num">01</div><div class="detail-text">Umstellung des Reihenabstands mit nur einer Schraube.</div></div>
-        <div class="detail-item"><div class="detail-num">02</div><div class="detail-text">Parallelogramm mit Zusatzfeder für verstärkten Schardruck auf den Boden (bis 140 kg).</div></div>
-        <div class="detail-item"><div class="detail-num">03</div><div class="detail-text">Tiefenführungsrad am Parallelogramm zur Einstellung der Saatablagetiefe.</div></div>
-        <div class="detail-item"><div class="detail-num">04</div><div class="detail-text">Metallschutz der Scheibe gegen Eindringen von Erde in den Zwischenscheibenraum.</div></div>
-        <div class="detail-item"><div class="detail-num">05</div><div class="detail-text">Säscheibe aus speziellem hochfestem Stahl. Zweireihiges Lager — wartungsfrei, keine Schmierung erforderlich.</div></div>
-        <div class="detail-item"><div class="detail-num">06</div><div class="detail-text">Innenliegender Scheibenreiniger.</div></div>
-        <div class="detail-item"><div class="detail-num">07</div><div class="detail-text">Reiniger zur Verhinderung von Erdanhaftung an den Andruckrollen.</div></div>
-        <div class="detail-item"><div class="detail-num">08</div><div class="detail-text">Andruckrollen mit Spezialbeschichtung gegen Erdanhaftung.</div></div>
-        <div class="detail-item"><div class="detail-num">09</div><div class="detail-text">System zur gleichzeitigen Ausbringung von Inokulum und/oder Flüssigdünger direkt ins Saatbett.</div></div>
-        <div class="detail-item"><div class="detail-num">10</div><div class="detail-text">Saatgutrohr. Bei Einhaltung der Aussaatnorm pro Hektar werden die Samen über zwei Säscheiben an einem Parallelogramm verteilt. Ergebnis: Doppelreihige Aussaat mit 10 cm Reihenabstand.</div></div>
-        <div class="detail-item"><div class="detail-num">11</div><div class="detail-text">Armiertes Saatgutrohr mit erhöhter Festigkeit.</div></div>
+
+      <div class="gallery-block reverse fade-up">
+        <div class="blueprint-frame">
+          <img src="images/veles-1-schar.jpg" alt="VELES-1 — Einzelreihen-Schar" />
+        </div>
+        <div class="gallery-text">
+          <div class="gallery-text-tag">// Einzelreihen-Schar</div>
+          <div class="gallery-text-title">Einzelreihen-Schar — VELES-1</div>
+          <p class="gallery-text-body">Säscheibe aus speziellem hochfestem Stahl. Zweireihiges Lager — wartungsfrei. Metallschutz gegen Eindringen von Erde in den Zwischenscheibenraum. Innenliegender Scheibenreiniger. Armiertes Saatgutrohr mit erhöhter Festigkeit.</p>
+        </div>
+      </div>
+
+      <div class="gallery-block fade-up">
+        <div class="blueprint-frame">
+          <img src="images/veles-2-schar.jpg" alt="VELES-2 — Doppelreihen-Schar" />
+        </div>
+        <div class="gallery-text">
+          <div class="gallery-text-tag">// Doppelreihen-Schar</div>
+          <div class="gallery-text-title">Doppelreihen-Schar — VELES-2</div>
+          <p class="gallery-text-body">Zwei Säscheiben an einem Parallelogramm. Doppelreihige Aussaat mit 10 cm Reihenabstand. Andruckrollen mit Spezialbeschichtung gegen Erdanhaftung. Reiniger zur Verhinderung von Erdanhaftung an den Andruckrollen.</p>
+        </div>
+      </div>
+
+      <div class="gallery-block reverse fade-up">
+        <div class="blueprint-frame">
+          <img src="images/veles-inokulum.jpg" alt="VELES — Option Inokulum" />
+        </div>
+        <div class="gallery-text">
+          <div class="gallery-text-tag">// Inokulum</div>
+          <div class="gallery-text-title">Option Inokulum — LIXA-I</div>
+          <p class="gallery-text-body">System zur gleichzeitigen Ausbringung von Inokulum und/oder Flüssigdünger direkt ins Saatbett. Präzise Dosierung über Düse mit 0,6–1,0 mm Öffnung unter Druck — ohne Licht und andere für Bakterien schädliche Faktoren.</p>
+        </div>
+      </div>
+
+      <div class="gallery-block fade-up">
+        <div class="blueprint-frame">
+          <img src="images/veles-tank-rahmen.jpg" alt="VELES — Tanksystem Rahmenmontage" />
+        </div>
+        <div class="gallery-text">
+          <div class="gallery-text-tag">// Tanksystem</div>
+          <div class="gallery-text-title">Tanksystem — Rahmenmontage</div>
+          <p class="gallery-text-body">600–2.000 l Tank direkt auf dem Universalrahmen. Kompakt und stabil. Für kleinere und mittlere Flächen.</p>
+        </div>
+      </div>
+
+      <div class="gallery-block reverse fade-up">
+        <div class="blueprint-frame">
+          <img src="images/veles-tank-anhanger.jpg" alt="VELES — Schleppbehälter" />
+        </div>
+        <div class="gallery-text">
+          <div class="gallery-text-tag">// Schleppbehälter</div>
+          <div class="gallery-text-title">Tanksystem — Schleppbehälter</div>
+          <p class="gallery-text-body">Gezogener Vorratsbehälter 2.700–6.000 l. Für große Flächen und maximale Autonomie. Automatische Nachfüllung des Rahmentanks ohne Unterbrechung.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- LIXA-I INOKULUM SECTION -->
+  <section class="product-gallery" style="background: var(--bg2); border-top: 1px solid var(--border); border-bottom: 1px solid var(--border);">
+    <div class="product-gallery-inner">
+      <div class="product-models-header">
+        <div class="section-tag">// Inokulum-Technologie</div>
+        <div class="product-models-title">LIXA-I — Inokulum direkt ins Saatbett</div>
+      </div>
+
+      <div class="inokulum-photos">
+        <div class="inokulum-photo"><img src="images/veles-inokulum-1.jpg" alt="LIXA-I Düse" /></div>
+        <div class="inokulum-photo"><img src="images/veles-inokulum-2.jpg" alt="LIXA-I Saatbett" /></div>
+        <div class="inokulum-photo"><img src="images/veles-inokulum-3.jpg" alt="LIXA-I Ergebnis" /></div>
+      </div>
+
+      <div class="inokulum-text">
+        <p>Das LIXA-I System leitet Inokulum direkt ins Saatbett zu den Samen — über eine Präzisionsdüse mit 0,6–1,0 mm Öffnung unter Druck, ohne Licht und andere für Bakterien schädliche Faktoren. Diese Methode verhindert das Verkleben der Samen in den Säorganen und minimiert die Wahrscheinlichkeit von Fehlstellen oder Doppelbelegungen.</p>
+        <p>Hauptsächlich eingesetzt bei der Sojaaussaat. Die Samen gelangen mit Startdünger und flüssigem Inokulum ins Saatbett. Diese Methode ermöglicht:</p>
+        <ul>
+          <li>Sofortige Auflösung des Startdüngers</li>
+          <li>Zusätzliche Feuchtigkeitsversorgung der Samen — beschleunigt die Keimung um 2–3 Tage</li>
+          <li>Minimierung der Bakteriensterblichkeit im Vergleich zur traditionellen Inokulation (Beizung)</li>
+        </ul>
+        <p><strong>Die inokulierte Kultur:</strong></p>
+        <ul>
+          <li>Ist widerstandsfähiger in der Anfangsphase der Entwicklung</li>
+          <li>Bindet über 50% des benötigten Stickstoffs aus der Luft (ca. 60 kg/ha) und hinterlässt ihn im Boden</li>
+          <li>Bildet Knöllchen am 10.–12. Tag nach dem Auflaufen</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <!-- KOMPATIBLE ANBAUSYSTEME -->
+  <section class="product-gallery">
+    <div class="product-gallery-inner">
+      <div class="product-models-header">
+        <div class="section-tag">// Erweiterungen</div>
+        <div class="product-models-title">Kompatible Anbausysteme</div>
+      </div>
+
+      <div class="gallery-block fade-up">
+        <div class="blueprint-frame">
+          <img src="images/lixa-hero.jpg" alt="LIXA — Flüssigdüngung" />
+        </div>
+        <div class="gallery-text">
+          <div class="gallery-text-tag">// Flüssigdüngung</div>
+          <div class="gallery-text-title">Flüssigdüngung LIXA</div>
+          <p class="gallery-text-body">KAS, NPK und Inokulum direkt ins Saatbett. Gleichzeitige Ausbringung mit der Aussaat für optimale Nährstoffversorgung vom ersten Tag.</p>
+          <a href="lixa.html" class="product-link">Mehr erfahren &rarr;</a>
+        </div>
+      </div>
+
+      <div class="gallery-block reverse fade-up">
+        <div class="blueprint-frame">
+          <img src="images/grano-hero.jpg" alt="GRANO — Granulatdüngung" />
+        </div>
+        <div class="gallery-text">
+          <div class="gallery-text-tag">// Granulatdüngung</div>
+          <div class="gallery-text-title">Granulatdüngung GRANO</div>
+          <p class="gallery-text-body">Accord-Dosiersystem, Edelstahl-Bunker 800–2.000 l. Gleichzeitige Granulat-Ausbringung während der Aussaat.</p>
+          <a href="grano.html" class="product-link">Mehr erfahren &rarr;</a>
+        </div>
       </div>
     </div>
   </section>
@@ -384,20 +455,16 @@
     function toggleLang() { document.getElementById('langDropdown').classList.toggle('open'); }
     document.addEventListener('click', function(e) { if (!e.target.closest('.lang-switcher')) document.getElementById('langDropdown').classList.remove('open'); });
 
-    /* DETAIL ITEMS STAGGERED FADE-UP */
-    const detailObs = new IntersectionObserver((entries) => {
+    /* FADE-UP ON SCROLL */
+    const fadeObs = new IntersectionObserver((entries) => {
       entries.forEach(entry => {
         if (entry.isIntersecting) {
-          const items = entry.target.querySelectorAll('.detail-item');
-          items.forEach((item, i) => {
-            setTimeout(() => item.classList.add('visible'), i * 50);
-          });
-          detailObs.unobserve(entry.target);
+          entry.target.classList.add('visible');
+          fadeObs.unobserve(entry.target);
         }
       });
-    }, { threshold: 0.1 });
-    const detailList = document.querySelector('.detail-list');
-    if (detailList) detailObs.observe(detailList);
+    }, { threshold: 0.15 });
+    document.querySelectorAll('.fade-up').forEach(el => fadeObs.observe(el));
   </script>
 </body>
 </html>
