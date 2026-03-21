@@ -69,6 +69,10 @@
     .models-table tr:nth-child(even) td { background: var(--bg2); }
     .models-table tr:nth-child(odd) td { background: var(--bg); }
     .model-name-cell { font-family: 'Barlow Condensed', sans-serif; font-weight: 700; font-size: 1.05rem; text-transform: uppercase; color: var(--text); letter-spacing: 0.04em; }
+    .tank-section { display: flex; gap: 2rem; align-items: flex-start; margin-top: 3rem; }
+    .tank-photo { width: 45%; flex-shrink: 0; border: 0.5px solid rgba(255, 255, 255, 0.1); overflow: hidden; }
+    .tank-photo img { width: 100%; height: auto; object-fit: contain; }
+    .tank-table { flex: 1; }
     .product-gallery { padding: 5rem 3rem; }
     .product-gallery-inner { max-width: 1400px; margin: 0 auto; display: flex; flex-direction: column; gap: 6rem; }
     .gallery-block { display: grid; grid-template-columns: 1fr 1fr; gap: 5rem; align-items: center; }
@@ -129,6 +133,8 @@
       footer { flex-direction: column; gap: 1rem; text-align: center; padding: 2rem 1.5rem; }
       .models-table { font-size: 0.85rem; }
       .models-table th, .models-table td { padding: 0.75rem; }
+      .tank-section { flex-direction: column; }
+      .tank-photo { width: 100%; }
     }
 
     /* MOBILE MENU */
@@ -222,66 +228,52 @@
     <div class="product-models-inner">
       <div class="product-models-header">
         <div class="section-tag">// Tankoptionen</div>
-        <div class="product-models-title">Flexible<br />Tankgrößen</div>
-        <p class="product-models-desc">Flüssigdüngung direkt in die Wurzelzone spart bis zu 40% Pflanzenschutzmittel. Das LIXA-System bringt UAN, NFS und PSM exakt dorthin, wo sie gebraucht werden. Die Steuerung erfolgt über den Computer Cruise 4 mit CAN-Bus-Anbindung. Bis zu 3 flüssige Komponenten können gleichzeitig ausgebracht werden.</p>
+        <div class="product-models-title">Flexible Tankgrößen</div>
+        <p class="product-models-desc">Tanks aus hochwertigem Kunststoff. Montage direkt auf dem universellen Trägerrahmen — kompakt, stabil, sofort einsatzbereit.</p>
+        <p class="product-models-desc" style="margin-top: 1rem;">Flüssigdüngung direkt in die Wurzelzone spart bis zu 40% Pflanzenschutzmittel. Das LIXA-System bringt UAN, NFS und PSM exakt dorthin, wo sie gebraucht werden. Die Steuerung erfolgt über den Computer Cruise 4 mit CAN-Bus-Anbindung. Bis zu 3 flüssige Komponenten können gleichzeitig ausgebracht werden.</p>
       </div>
-      <table class="models-table">
-        <thead>
-          <tr>
-            <th>Modell</th>
-            <th>Tankvolumen</th>
-            <th>Besonderheit</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr>
-            <td><div class="model-name-cell">LIXA-600</div></td>
-            <td>600 l</td>
-            <td>Kompakt, für kleine Flächen</td>
-          </tr>
-          <tr>
-            <td><div class="model-name-cell">LIXA-2×600</div></td>
-            <td>2×600 l</td>
-            <td>Zwei getrennte Tanks, 2 Komponenten gleichzeitig</td>
-          </tr>
-          <tr>
-            <td><div class="model-name-cell">LIXA-1800</div></td>
-            <td>1800 l</td>
-            <td>Mittlere Flächen</td>
-          </tr>
-          <tr>
-            <td><div class="model-name-cell">LIXA-2000</div></td>
-            <td>2000 l</td>
-            <td>Großflächen</td>
-          </tr>
-          <tr>
-            <td><div class="model-name-cell">LIXA-3000</div></td>
-            <td>3000 l</td>
-            <td>Maximale Kapazität für Großbetriebe</td>
-          </tr>
-        </tbody>
-      </table>
+      <div class="tank-section">
+        <div class="tank-photo">
+          <img src="images/lixa-tank.jpg" alt="LIXA Tank auf Trägerrahmen" />
+        </div>
+        <div class="tank-table">
+          <table class="models-table">
+            <thead>
+              <tr>
+                <th>Modell</th>
+                <th>Tankvolumen</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td><div class="model-name-cell">LIXA-600</div></td>
+                <td>600 l</td>
+              </tr>
+              <tr>
+                <td><div class="model-name-cell">LIXA-2×600</div></td>
+                <td>2×600 l</td>
+              </tr>
+              <tr>
+                <td><div class="model-name-cell">LIXA-1800</div></td>
+                <td>1800 l</td>
+              </tr>
+              <tr>
+                <td><div class="model-name-cell">LIXA-2000</div></td>
+                <td>2000 l</td>
+              </tr>
+              <tr>
+                <td><div class="model-name-cell">LIXA-3000</div></td>
+                <td>3000 l</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
     </div>
   </section>
 
   <section class="product-gallery">
     <div class="product-gallery-inner">
-      <div class="gallery-block">
-        <div class="blueprint-frame">
-          <img src="images/lixa-dosier.jpg" alt="LIXA — Dosiersystem" />
-        </div>
-        <div class="gallery-text">
-          <div class="gallery-text-tag">// Dosiersystem</div>
-          <div class="gallery-text-title">Elektrische Pumpe mit präziser Dosierung</div>
-          <p class="gallery-text-body">Elektrische Pumpe mit präziser Dosierung. Gleichmäßige Verteilung über die gesamte Arbeitsbreite — unabhängig von Fahrgeschwindigkeit und Geländeform.</p>
-          <ul class="gallery-text-list">
-            <li>Elektromotorischer Antrieb, kein Hydraulikanschluss nötig</li>
-            <li>Gleichmäßige Ausbringung bei 3–18 km/h</li>
-            <li>Automatische Mengenregelung per CAN-Bus</li>
-          </ul>
-        </div>
-      </div>
-
       <div class="gallery-block reverse">
         <div class="blueprint-frame">
           <img src="images/lixa-duesen.jpg" alt="LIXA — Düsenoptionen" />
@@ -294,22 +286,6 @@
             <li>Blattapplikation — flächendeckend</li>
             <li>Zwischenreihenapplikation — gezielt, spritz-schonend</li>
             <li>Reihenapplikation — direkt in die Wurzelzone</li>
-          </ul>
-        </div>
-      </div>
-
-      <div class="gallery-block">
-        <div class="blueprint-frame">
-          <img src="images/lixa-tank.jpg" alt="LIXA — Tank und Rahmenmontage" />
-        </div>
-        <div class="gallery-text">
-          <div class="gallery-text-tag">// Tank &amp; Rahmen</div>
-          <div class="gallery-text-title">Direkt auf dem Trägerrahmen</div>
-          <p class="gallery-text-body">Tanks aus hochwertigem Kunststoff, resistent gegen UAN, NFS und gängige Pflanzenschutzmittel. Montage direkt auf dem universellen Trägerrahmen — keine zusätzliche Trägereinheit notwendig.</p>
-          <ul class="gallery-text-list">
-            <li>Kompatibel mit allen ROVER-Modellen</li>
-            <li>Schnellkupplung für einfaches An- und Abbauen</li>
-            <li>Füllstandsanzeige im Führerhaus</li>
           </ul>
         </div>
       </div>
@@ -344,7 +320,7 @@
       <div class="specs-row"><div class="specs-key">Ausbringarten</div><div class="specs-val">Blatt, Zwischenreihe, Reihe, beidseitig</div></div>
       <div class="specs-row"><div class="specs-key">Komponenten gleichzeitig</div><div class="specs-val">Bis zu 3</div></div>
       <div class="specs-row"><div class="specs-key">Einsparung PSM</div><div class="specs-val">Bis −40% (mit LIXA-O)</div></div>
-      <div class="specs-row"><div class="specs-key">Kompatibilität</div><div class="specs-val">Alle ROVER-Modelle</div></div>
+      <div class="specs-row"><div class="specs-key">Dosierung</div><div class="specs-val">Präzise, gleichmäßige Verteilung</div></div>
     </div>
   </section>
 
