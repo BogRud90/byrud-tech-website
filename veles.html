@@ -156,6 +156,9 @@
     .inokulum-text strong { color: var(--text); }
     .product-link { font-family: 'IBM Plex Mono', monospace; font-size: 0.78rem; letter-spacing: 0.06em; color: var(--amber); text-decoration: none; transition: opacity 0.2s; display: inline-block; margin-top: 1rem; }
     .product-link:hover { opacity: 0.7; }
+    /* DETAIL LINES */
+    .detail-line { display: flex; align-items: flex-start; gap: 0.5rem; padding: 0.3rem 0; font-size: 0.85rem; color: var(--text-muted); line-height: 1.6; }
+    .detail-line-num { font-family: 'Barlow Condensed', sans-serif; font-weight: 700; color: var(--amber); flex-shrink: 0; min-width: 1.5rem; font-size: 0.85rem; }
     /* FADE-UP */
     .fade-up { opacity: 0; transform: translateY(30px); transition: opacity 0.6s ease, transform 0.6s ease; }
     .fade-up.visible { opacity: 1; transform: translateY(0); }
@@ -296,6 +299,29 @@
       </div>
 
       <div class="gallery-block reverse fade-up">
+        <div class="blueprint-frame" style="min-height: 400px;">
+          <img src="images/veles-detail.jpg" alt="VELES — Alle Komponenten im Überblick" />
+        </div>
+        <div class="gallery-text">
+          <div class="gallery-text-tag">// Übersicht</div>
+          <div class="gallery-text-title">Alle Komponenten im Überblick</div>
+          <div>
+            <div class="detail-line"><span class="detail-line-num">01</span> — Umstellung des Reihenabstands mit nur einer Schraube.</div>
+            <div class="detail-line"><span class="detail-line-num">02</span> — Parallelogramm mit Zusatzfeder für verstärkten Schardruck auf den Boden (bis 140 kg).</div>
+            <div class="detail-line"><span class="detail-line-num">03</span> — Tiefenführungsrad am Parallelogramm zur Einstellung der Saatablagetiefe.</div>
+            <div class="detail-line"><span class="detail-line-num">04</span> — Metallschutz der Scheibe gegen Eindringen von Erde in den Zwischenscheibenraum.</div>
+            <div class="detail-line"><span class="detail-line-num">05</span> — Säscheibe aus speziellem hochfestem Stahl. Zweireihiges Lager — wartungsfrei.</div>
+            <div class="detail-line"><span class="detail-line-num">06</span> — Innenliegender Scheibenreiniger.</div>
+            <div class="detail-line"><span class="detail-line-num">07</span> — Reiniger zur Verhinderung von Erdanhaftung an den Andruckrollen.</div>
+            <div class="detail-line"><span class="detail-line-num">08</span> — Andruckrollen mit Spezialbeschichtung gegen Erdanhaftung.</div>
+            <div class="detail-line"><span class="detail-line-num">09</span> — System zur gleichzeitigen Ausbringung von Inokulum und/oder Flüssigdünger direkt ins Saatbett.</div>
+            <div class="detail-line"><span class="detail-line-num">10</span> — Saatgutrohr. Zwei Säscheiben an einem Parallelogramm. Ergebnis: Doppelreihige Aussaat mit 10 cm Abstand.</div>
+            <div class="detail-line"><span class="detail-line-num">11</span> — Armiertes Saatgutrohr mit erhöhter Festigkeit.</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="gallery-block fade-up">
         <div class="blueprint-frame">
           <img src="images/veles-inokulum.jpg" alt="VELES — Option Inokulum" />
         </div>
@@ -306,7 +332,7 @@
         </div>
       </div>
 
-      <div class="gallery-block fade-up">
+      <div class="gallery-block reverse fade-up">
         <div class="blueprint-frame">
           <img src="images/veles-tank-rahmen.jpg" alt="VELES — Tanksystem Rahmenmontage" />
         </div>
@@ -317,7 +343,7 @@
         </div>
       </div>
 
-      <div class="gallery-block reverse fade-up">
+      <div class="gallery-block fade-up">
         <div class="blueprint-frame">
           <img src="images/veles-tank-anhanger.jpg" alt="VELES — Schleppbehälter" />
         </div>
@@ -403,7 +429,6 @@
         <div class="product-specs-title">Technische<br />Spezifikationen</div>
       </div>
       <div class="specs-row"><div class="specs-key">Arbeitsbreite</div><div class="specs-val">3–12 m</div></div>
-      <div class="specs-row"><div class="specs-key">Arbeitstiefe</div><div class="specs-val">6–15 cm</div></div>
       <div class="specs-row"><div class="specs-key">Reihenabstand</div><div class="specs-val">15–45 cm</div></div>
       <div class="specs-row"><div class="specs-key">Traktorleistung</div><div class="specs-val">75–150 hp</div></div>
       <div class="specs-row"><div class="specs-key">Arbeitsgeschwindigkeit</div><div class="specs-val">5–18 km/h</div></div>
