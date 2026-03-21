@@ -64,15 +64,28 @@
     .product-models-header { margin-bottom: 2.5rem; }
     .product-models-title { font-family: 'Barlow Condensed', sans-serif; font-weight: 800; font-size: clamp(1.8rem, 3vw, 2.8rem); text-transform: uppercase; letter-spacing: -0.01em; line-height: 0.95; margin-bottom: 1rem; }
     .product-models-desc { color: var(--text-muted); font-size: 1rem; line-height: 1.8; max-width: 680px; }
-    .models-table { width: 100%; border-collapse: collapse; margin-top: 2rem; border: 1px solid var(--border); border-radius: var(--r); overflow: hidden; }
-    .models-table th { font-family: 'IBM Plex Mono', monospace; font-size: 0.62rem; letter-spacing: 0.12em; text-transform: uppercase; color: var(--text-dim); text-align: left; padding: 1rem 1.25rem; background: var(--bg3); border-bottom: 1px solid var(--border); font-weight: 400; }
-    .models-table td { padding: 1.1rem 1.25rem; font-size: 0.92rem; color: var(--text-muted); border-bottom: 1px solid var(--border); vertical-align: top; }
-    .models-table tr:last-child td { border-bottom: none; }
-    .models-table tr:nth-child(even) td { background: var(--bg2); }
-    .models-table tr:nth-child(odd) td { background: var(--bg); }
-    .model-name-cell { font-family: 'Barlow Condensed', sans-serif; font-weight: 700; font-size: 1.05rem; text-transform: uppercase; color: var(--text); letter-spacing: 0.04em; }
-    .model-badge { display: inline-block; font-family: 'IBM Plex Mono', monospace; font-size: 0.58rem; letter-spacing: 0.08em; text-transform: uppercase; border: 1px solid var(--border-amber); color: var(--amber); padding: 0.2rem 0.5rem; border-radius: 3px; margin-top: 0.3rem; }
-    .table-note { font-family: 'IBM Plex Mono', monospace; font-size: 0.75rem; letter-spacing: 0.06em; color: var(--text-dim); margin-top: 1.5rem; padding-top: 1rem; border-top: 1px solid var(--border); }
+    .model-rows { display: flex; flex-direction: column; gap: 1px; background: var(--border); margin-top: 2rem; overflow: hidden; }
+    .model-row { background: var(--bg); padding: 1.5rem 2rem; display: flex; align-items: center; gap: 1.5rem; transition: background 0.3s; position: relative; overflow: hidden; }
+    .model-row:first-child { border-left: 2px solid var(--amber); }
+    .model-row:hover { background: var(--bg3); }
+    .model-photo { width: 120px; height: 80px; flex-shrink: 0; border: 0.5px solid rgba(255, 255, 255, 0.1); overflow: hidden; }
+    .model-photo img { width: 100%; height: 100%; object-fit: cover; }
+    .model-body { flex: 1; min-width: 0; }
+    .model-name { font-family: 'Barlow Condensed', sans-serif; font-weight: 800; font-size: 1.2rem; text-transform: uppercase; color: var(--text); margin-bottom: 0.2rem; }
+    .model-row:first-child .model-name { color: var(--amber); }
+    .model-title { font-family: 'IBM Plex Mono', monospace; font-size: 0.7rem; letter-spacing: 0.08em; text-transform: uppercase; color: var(--text-dim); margin-bottom: 0.5rem; }
+    .model-desc { font-size: 0.92rem; color: var(--text-muted); line-height: 1.75; }
+    .model-tag { font-family: 'IBM Plex Mono', monospace; font-size: 0.65rem; letter-spacing: 0.08em; text-transform: uppercase; color: var(--text-dim); flex-shrink: 0; text-align: right; white-space: nowrap; }
+    .model-note { font-family: 'IBM Plex Mono', monospace; font-size: 0.75rem; letter-spacing: 0.06em; color: var(--text-dim); margin-top: 2rem; padding-top: 1.5rem; border-top: 1px solid var(--border); }
+    .model-row::after { content: ''; position: absolute; left: 0; right: 0; height: 1px; background: linear-gradient(90deg, transparent, var(--amber), transparent); opacity: 0; top: 0; pointer-events: none; }
+    @keyframes scanline { 0% { top: 0; opacity: 0.5; } 100% { top: 100%; opacity: 0; } }
+    @media (hover: hover) { .model-row:hover::after { animation: scanline 0.6s ease forwards; } }
+    .model-row.scanned::after { animation: scanline 0.6s ease forwards; }
+    .model-row.fade-up:nth-child(1) { transition-delay: 0ms; }
+    .model-row.fade-up:nth-child(2) { transition-delay: 100ms; }
+    .model-row.fade-up:nth-child(3) { transition-delay: 200ms; }
+    .model-row.fade-up:nth-child(4) { transition-delay: 300ms; }
+    .model-row.fade-up:nth-child(5) { transition-delay: 400ms; }
 
     /* GALLERY ZIGZAG */
     .product-gallery { padding: 5rem 3rem; }
@@ -154,8 +167,9 @@
       .product-cta-section { padding: 3rem 1.5rem; }
       .product-cta-card { flex-direction: column; align-items: flex-start; gap: 2rem; }
       footer { flex-direction: column; gap: 1rem; text-align: center; padding: 2rem 1.5rem; }
-      .models-table { font-size: 0.85rem; }
-      .models-table th, .models-table td { padding: 0.75rem; }
+      .model-row { flex-direction: column; align-items: flex-start; padding: 1.5rem; gap: 0.75rem; }
+      .model-photo { width: 100%; height: 160px; }
+      .model-tag { text-align: left; }
     }
     @media (prefers-reduced-motion: reduce) {
       .fade-up, .fade-up.visible { opacity: 1; transform: none; transition: none; }
@@ -255,150 +269,78 @@
     </div>
   </section>
 
-  <!-- MODELS -->
+  <!-- MODELLE & ARBEITSGRUPPEN -->
   <section class="product-models">
     <div class="product-models-inner">
       <div class="product-models-header">
-        <div class="section-tag">// Modelle</div>
-        <div class="product-models-title">5 Modelle für<br />jede Aufgabe</div>
-        <p class="product-models-desc">Alle ROVER-Modelle basieren auf der universellen Rahmenplattform und sind kompatibel mit den Anbausystemen LIXA, GRANO und VELES. Die Modellwahl richtet sich nach Reihenabstand, Kultur und Betriebsgröße.</p>
+        <div class="section-tag">// Modelle &amp; Arbeitsgruppen</div>
+        <div class="product-models-title">5 Modelle.<br />5 Arbeitsgruppen.</div>
+        <p class="product-models-desc">Jedes ROVER-Modell ist für eine spezifische Bodenart und Kultur optimiert. Alle Gruppen sind untereinander kompatibel und lassen sich in unter 30 Minuten wechseln.</p>
       </div>
 
-      <table class="models-table">
-        <thead>
-          <tr>
-            <th>Modell</th>
-            <th>Arbeitsgruppe</th>
-            <th>Besonderheit</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr>
-            <td><div class="model-name-cell">ROVER-U</div></td>
-            <td>2 Federzinken (Vibrozähne)</td>
-            <td>Standardbearbeitung, leichte Böden</td>
-          </tr>
-          <tr>
-            <td><div class="model-name-cell">ROVER-S</div></td>
-            <td>3 Federzinken (Vibrozähne)</td>
-            <td>Verstärkte Bearbeitung, mittlere Böden</td>
-          </tr>
-          <tr>
-            <td><div class="model-name-cell">ROVER-R</div></td>
-            <td>8 Lockerungssterne + Schar</td>
-            <td>Intensive Lockerung, Häufeln</td>
-          </tr>
-          <tr>
-            <td><div class="model-name-cell">ROVER-P</div></td>
-            <td>5 Federvibrationsstiele</td>
-            <td>Maximale Lockerung, schwere Böden</td>
-          </tr>
-          <tr>
-            <td><div class="model-name-cell">ROVER-K</div></td>
-            <td>2 S-Zinken + 3 Vibrozähne</td>
-            <td>Kombinierte Bearbeitung</td>
-          </tr>
-        </tbody>
-      </table>
-      <p class="table-note">Für alle Modelle verfügbar: Gänsefußschare 200/250 mm und Pfeilschare 150 mm (Standard).</p>
-    </div>
-  </section>
-
-  <!-- ARBEITSGRUPPEN -->
-  <section class="product-gallery">
-    <div class="product-gallery-inner">
-      <div class="gallery-section-header">
-        <div class="section-tag">// Arbeitsgruppen</div>
-        <div class="gallery-section-title">5 Arbeitsgruppen<br />für jede Bodenart</div>
-        <p class="gallery-section-desc">Jedes ROVER-Modell ist für eine spezifische Bodenart und Kultur optimiert. Alle Gruppen sind untereinander kompatibel und lassen sich in unter 30 Minuten wechseln.</p>
-      </div>
-
-      <!-- ROVER-U -->
-      <div class="gallery-block fade-up">
-        <div class="blueprint-frame">
-          <img src="images/rover-u-group.jpg" alt="ROVER-U Arbeitsgruppe — 2 Federzinken" />
+      <div class="model-rows">
+        <div class="model-row fade-up">
+          <div class="model-photo">
+            <img src="images/rover-u-group.jpg" alt="ROVER-U Arbeitsgruppe" />
+          </div>
+          <div class="model-body">
+            <div class="model-name">ROVER-U</div>
+            <div class="model-title">Standardbearbeitung</div>
+            <div class="model-desc">Zwei Federzinken (Vibrozähne) mit Flachscharen. Konzipiert für die Standardbearbeitung auf leichten Böden. Effektive Unkrautbekämpfung bei minimaler Bodenstörung.</div>
+          </div>
+          <div class="model-tag">Leichte Böden</div>
         </div>
-        <div class="gallery-text">
-          <div class="gallery-text-tag">// ROVER-U</div>
-          <div class="gallery-text-title">Standardbearbeitung mit Federzinken</div>
-          <p class="gallery-text-body">Zwei Federzinken (Vibrozähne) pro Reihe arbeiten präzise im Zwischenreihenabstand. Ideal für leichte bis mittlere Böden mit geringem Unkrautdruck — die robuste Basisausrüstung.</p>
-          <ul class="gallery-text-list">
-            <li>Reihenabstand 25–75 cm einstellbar</li>
-            <li>Arbeitstiefe 4–10 cm</li>
-            <li>Standard für Getreide und Gemüse</li>
-          </ul>
+
+        <div class="model-row fade-up">
+          <div class="model-photo">
+            <img src="images/rover-s-group.jpg" alt="ROVER-S Arbeitsgruppe" />
+          </div>
+          <div class="model-body">
+            <div class="model-name">ROVER-S</div>
+            <div class="model-title">Verstärkte Bearbeitung</div>
+            <div class="model-desc">Drei Federzinken (Vibrozähne) mit Pfeilscharen 150 mm. Für mittlere Böden — verstärkte Bearbeitung mit höherer Eindringkraft. Gleichmäßige Lockerung über die gesamte Arbeitsbreite.</div>
+          </div>
+          <div class="model-tag">Mittlere Böden</div>
+        </div>
+
+        <div class="model-row fade-up">
+          <div class="model-photo">
+            <img src="images/rover-r-group.jpg" alt="ROVER-R Arbeitsgruppe" />
+          </div>
+          <div class="model-body">
+            <div class="model-name">ROVER-R</div>
+            <div class="model-title">Intensive Lockerung &amp; Häufeln</div>
+            <div class="model-desc">Modul aus 8 Lockerungssternen mit Winkelverstellung in zwei Ebenen — für Häufeln oder Lockern. Mit Pfeilschar 150 mm. Optional: Montage von zwei S-Zinken (32×12) mit Pfeilscharen 150 mm auf jedem Parallelogramm.</div>
+          </div>
+          <div class="model-tag">Häufelarbeit</div>
+        </div>
+
+        <div class="model-row fade-up">
+          <div class="model-photo">
+            <img src="images/rover-p-group.jpg" alt="ROVER-P Arbeitsgruppe" />
+          </div>
+          <div class="model-body">
+            <div class="model-name">ROVER-P</div>
+            <div class="model-title">Maximale Lockerung</div>
+            <div class="model-desc">Fünf Federvibrationsstiele mit Pfeilscharen 150 mm. Für schwere Böden — maximale Lockerungstiefe und Durchdringung. Intensive Bearbeitung auch bei verdichteten Bodenschichten.</div>
+          </div>
+          <div class="model-tag">Schwere Böden</div>
+        </div>
+
+        <div class="model-row fade-up">
+          <div class="model-photo">
+            <img src="images/rover-k-group.jpg" alt="ROVER-K Arbeitsgruppe" />
+          </div>
+          <div class="model-body">
+            <div class="model-name">ROVER-K</div>
+            <div class="model-title">Kombinierte Bearbeitung</div>
+            <div class="model-desc">Zwei S-förmige Federvibrationsstiele und drei Federzinken (Vibrozähne) mit Pfeilscharen 150 mm. Kombinierte Bearbeitung — Lockerung und Feinbearbeitung in einem Durchgang.</div>
+          </div>
+          <div class="model-tag">Kombiniert</div>
         </div>
       </div>
 
-      <!-- ROVER-S -->
-      <div class="gallery-block reverse fade-up">
-        <div class="blueprint-frame">
-          <img src="images/rover-s-group.jpg" alt="ROVER-S Arbeitsgruppe — 3 Federzinken" />
-        </div>
-        <div class="gallery-text">
-          <div class="gallery-text-tag">// ROVER-S</div>
-          <div class="gallery-text-title">Verstärkte Bearbeitung für mittlere Böden</div>
-          <p class="gallery-text-body">Drei Federzinken pro Reihe für intensivere Unkrautbekämpfung auf mittleren und leicht schwereren Böden. Mehr Eindringwiderstand durch den zusätzlichen dritten Zinken.</p>
-          <ul class="gallery-text-list">
-            <li>3 Zinken pro Reihe</li>
-            <li>Für Rüben, Mais, Sonnenblumen</li>
-            <li>Arbeitstiefe bis 12 cm</li>
-          </ul>
-        </div>
-      </div>
-
-      <!-- ROVER-R -->
-      <div class="gallery-block fade-up">
-        <div class="blueprint-frame">
-          <img src="images/rover-r-group.jpg" alt="ROVER-R Arbeitsgruppe — Lockerungssterne und Schar" />
-        </div>
-        <div class="gallery-text">
-          <div class="gallery-text-tag">// ROVER-R</div>
-          <div class="gallery-text-title">Intensive Lockerung und Häufeln</div>
-          <p class="gallery-text-body">Acht Lockerungssterne kombiniert mit einem Schar erlauben intensive Bodenlockerung und gleichzeitiges Häufeln. Besonders geeignet für Kartoffeln und Mais auf mittleren bis schweren Böden.</p>
-          <ul class="gallery-text-list">
-            <li>8 Lockerungssterne + Häufelkörper</li>
-            <li>Häufeln und Hacken in einem Durchgang</li>
-            <li>Arbeitsbreite pro Reihe 30–90 cm</li>
-          </ul>
-        </div>
-      </div>
-
-      <!-- ROVER-P -->
-      <div class="gallery-block reverse fade-up">
-        <div class="blueprint-frame">
-          <img src="images/rover-p-group.jpg" alt="ROVER-P Arbeitsgruppe — Federvibrationsstiele" />
-        </div>
-        <div class="gallery-text">
-          <div class="gallery-text-tag">// ROVER-P</div>
-          <div class="gallery-text-title">Maximale Lockerung auf schweren Böden</div>
-          <p class="gallery-text-body">Fünf Federvibrationsstiele pro Reihe erzeugen eine intensive vibrierende Bodenbearbeitung — ideal für schwere Lehm- und Tonböden mit starkem Unkrautbesatz.</p>
-          <ul class="gallery-text-list">
-            <li>5 Vibrationsstiele mit Federdrucksteuerung</li>
-            <li>Für Mais, Soja, Zuckerrüben</li>
-            <li>Tiefenlockerung bis 15 cm</li>
-          </ul>
-        </div>
-      </div>
-
-      <!-- ROVER-K -->
-      <div class="gallery-block fade-up">
-        <div class="blueprint-frame">
-          <img src="images/rover-k-group.jpg" alt="ROVER-K Arbeitsgruppe — S-Zinken und Vibrozähne" />
-        </div>
-        <div class="gallery-text">
-          <div class="gallery-text-tag">// ROVER-K</div>
-          <div class="gallery-text-title">Kombinierte Bearbeitung in einem Durchgang</div>
-          <p class="gallery-text-body">Zwei S-Zinken und drei Vibrozähne pro Reihe kombinieren Tiefenlockerung mit flacher Krümelbearbeitung — ideal für universelle Anforderungen auf wechselnden Böden.</p>
-          <ul class="gallery-text-list">
-            <li>2 S-Zinken + 3 Vibrozähne</li>
-            <li>Universell einsetzbar — alle Kulturen</li>
-            <li>Geeignet für alle Bodenarten</li>
-          </ul>
-        </div>
-      </div>
-
-      <div class="section-note">Alle Arbeitsgruppen sind untereinander kompatibel und lassen sich innerhalb von 20–30 Minuten tauschen. Werkzeuge und Montageanleitung werden mitgeliefert.</div>
+      <div class="model-note">Für alle Modelle verfügbar: Gänsefußschare 200/250 mm und Pfeilschare 150 mm (Standard).</div>
     </div>
   </section>
 
@@ -655,6 +597,13 @@
       entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('visible'); obs.unobserve(e.target); } });
     }, { threshold: 0.1 });
     fups.forEach(el => obs.observe(el));
+    /* Scanline on scroll (mobile/touch) */
+    if (!window.matchMedia('(hover: hover)').matches) {
+      const scanObs = new IntersectionObserver(entries => {
+        entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('scanned'); scanObs.unobserve(e.target); } });
+      }, { threshold: 0.3 });
+      document.querySelectorAll('.model-row').forEach(el => scanObs.observe(el));
+    }
   </script>
 
 </body>
