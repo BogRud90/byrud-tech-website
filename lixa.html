@@ -85,6 +85,8 @@
     .lixa-o-table tr:nth-child(odd) td { background: var(--bg); }
     .lixa-o-table .eff-key { font-weight: 700; color: var(--text); }
     .lixa-o-table .eff-highlight { color: var(--amber); font-weight: 700; }
+    .table-wrap { width: 100%; overflow-x: auto; -webkit-overflow-scrolling: touch; }
+    .table-wrap table { width: 100%; min-width: 100%; }
     .product-gallery { padding: 5rem 3rem; }
     .product-gallery-inner { max-width: 1400px; margin: 0 auto; display: flex; flex-direction: column; gap: 6rem; }
     .gallery-block { display: grid; grid-template-columns: 1fr 1fr; gap: 5rem; align-items: center; }
@@ -148,9 +150,9 @@
       .tank-section { flex-direction: column; }
       .tank-photo { width: 100%; }
       .lixa-o-section { padding: 3rem 1.5rem; }
-      .models-table, .lixa-o-table { display: block; overflow-x: auto; }
-      .models-table td, .models-table th, .lixa-o-table td, .lixa-o-table th { white-space: nowrap; }
-      .tank-table { margin-left: -1.5rem; margin-right: -1.5rem; width: calc(100% + 3rem); }
+      .table-wrap { margin-left: -1.5rem; margin-right: -1.5rem; padding-left: 1.5rem; padding-right: 1.5rem; width: calc(100% + 3rem); }
+      .table-wrap table { width: 100%; }
+      .table-wrap td, .table-wrap th { padding: 0.75rem 1rem; font-size: 0.85rem; }
     }
 
     /* MOBILE MENU */
@@ -252,7 +254,7 @@
         <div class="tank-photo">
           <img src="images/lixa-tank.jpg" alt="LIXA Tank auf Trägerrahmen" />
         </div>
-        <div class="tank-table">
+        <div class="tank-table table-wrap">
           <table class="models-table">
             <thead>
               <tr>
@@ -299,7 +301,7 @@
         <div class="tank-photo">
           <img src="images/lixa-anhanger.jpg" alt="LIXA Schleppbehälter 2700–6000 l" />
         </div>
-        <div class="tank-table">
+        <div class="tank-table table-wrap">
           <table class="models-table">
             <thead>
               <tr>
@@ -331,7 +333,7 @@
     <div class="product-gallery-inner">
       <div class="gallery-block reverse">
         <div class="blueprint-frame">
-          <img src="images/lixa-duesen.jpg" alt="LIXA — Düsenoptionen" style="transform: rotate(90deg); max-width: 100%;" />
+          <img src="images/lixa-duesen.jpg" alt="LIXA — Düsenoptionen" />
         </div>
         <div class="gallery-text">
           <div class="gallery-text-tag">// Düsenoptionen</div>
@@ -371,6 +373,7 @@
       <div class="lixa-o-photo">
         <img src="images/lixa-o-field.jpg" alt="LIXA-O Präzisionsspritzung im Zwischenreihenbereich" />
       </div>
+      <div class="table-wrap">
       <table class="lixa-o-table">
         <thead>
           <tr>
@@ -402,6 +405,7 @@
           </tr>
         </tbody>
       </table>
+      </div>
     </div>
   </section>
 
@@ -412,6 +416,7 @@
         <div class="product-specs-title">Technische<br />Spezifikationen</div>
       </div>
       <div class="specs-row"><div class="specs-key">Tankvolumen</div><div class="specs-val">600 / 2×600 / 1800 / 2000 / 3000 l</div></div>
+      <div class="specs-row"><div class="specs-key">Schleppbehälter</div><div class="specs-val">2.700 / 4.000 / 6.000 l</div></div>
       <div class="specs-row"><div class="specs-key">Steuerung</div><div class="specs-val">Computer Cruise 4 / CAN-Bus</div></div>
       <div class="specs-row"><div class="specs-key">Antrieb</div><div class="specs-val">Elektrische Pumpe, Traktorhydraulik</div></div>
       <div class="specs-row"><div class="specs-key">Ausbringarten</div><div class="specs-val">Blatt, Zwischenreihe, Reihe, beidseitig</div></div>
