@@ -326,8 +326,12 @@
       .results-cta-stats { gap: 1.5rem; flex-wrap: wrap; }
       .results-cards { grid-template-columns: 1fr; }
       .markets-grid { grid-template-columns: repeat(2, 1fr); }
-      .haendler-cta { flex-direction: column; align-items: flex-start; padding: 2rem 1.5rem; gap: 1.5rem; }
-      .haendler-cta-facts { width: 100%; justify-content: space-between; }
+      .haendler-cta { flex-direction: column; align-items: flex-start; padding: 1.5rem 1rem; gap: 1.5rem; overflow: hidden; }
+      .haendler-cta-title { font-size: clamp(1.3rem, 5vw, 1.8rem); word-break: break-word; }
+      .haendler-cta-desc { font-size: 0.85rem; word-break: break-word; }
+      .haendler-cta-facts { width: 100%; flex-direction: column; gap: 0.75rem; align-items: flex-start; }
+      .haendler-fact { width: 100%; display: flex; justify-content: space-between; align-items: center; padding-bottom: 0.5rem; border-bottom: 1px solid var(--border); text-align: left; }
+      .haendler-fact-divider { display: none; }
       footer { flex-direction: column; gap: 1rem; text-align: center; }
       .hero-bg-image { width: 100%; opacity: 0.7; }
       .hero-bg-image img { opacity: 0.2; }
