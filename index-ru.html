@@ -260,6 +260,10 @@
     .section-spacer { height: 4rem; }
 
     @media (max-width: 900px) {
+      h1 { font-size: clamp(2.5rem, 9vw, 4rem); word-break: break-word; }
+      .market-item { min-height: 100px; display: flex; flex-direction: column; justify-content: center; padding: 1rem; }
+      .market-name { font-size: 0.85rem; word-break: break-word; }
+      .market-desc { font-size: 0.7rem; }
       .section-spacer { height: 2rem; }
       nav { padding: 0 1.5rem; }
       .nav-links { display: none; }
