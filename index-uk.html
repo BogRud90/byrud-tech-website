@@ -143,7 +143,6 @@
     .platform-stat-num { font-family: 'Barlow Condensed', sans-serif; font-size: 2.5rem; font-weight: 800; color: var(--amber); line-height: 1; margin-bottom: 0.4rem; }
     .platform-stat-label { font-family: 'IBM Plex Mono', monospace; font-size: 0.65rem; letter-spacing: 0.1em; text-transform: uppercase; color: var(--text-dim); }
     .platform-tiles-4 { display: grid; grid-template-columns: repeat(4, 1fr); gap: 1px; background: var(--border); }
-    .platform-tiles-3 { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1px; background: var(--border); }
     .platform-tile { background: var(--bg); padding: 2rem 1.5rem; }
     .platform-tile-tag { display: flex; align-items: center; gap: 0.5rem; margin-bottom: 0.75rem; }
     .platform-tile-dot { width: 6px; height: 6px; background: var(--amber); flex-shrink: 0; }
@@ -277,8 +276,24 @@
       .about-grid, .contact-inner { grid-template-columns: 1fr; gap: 3rem; }
       .platform-header { flex-direction: column; }
       .platform-stats { min-width: 0; width: 100%; }
-      .platform-tiles-4, .platform-tiles-3 { grid-template-columns: repeat(2, 1fr); }
-      .platform-tiles-3 .platform-tile:last-child { grid-column: span 2; }
+      .platform-tiles-4 {
+        display: flex;
+        flex-direction: column;
+        gap: 1px;
+        background: var(--border);
+      }
+      .platform-tile {
+        display: flex;
+        align-items: center;
+        gap: 0.75rem;
+        padding: 0.75rem 1rem;
+        background: var(--bg);
+        min-height: auto;
+      }
+      .platform-tile-tag { min-width: 55px; margin-bottom: 0; }
+      .platform-tile-tagname { font-size: 0.6rem; }
+      .platform-tile-name { font-size: 0.85rem; margin-bottom: 0; white-space: nowrap; }
+      .platform-tile-desc { font-size: 0.7rem; margin-top: 0.15rem; }
       #platform { overflow-x: hidden; }
       .results-bg-image { width: 200px; height: 200px; right: 1rem; top: 1rem; }
       .results-bg-image img { opacity: 0.2; }
@@ -659,16 +674,21 @@
           <div class="platform-tile-desc">Гранулят 5–270 кг/га, бункер 800–2000 л</div>
         </div>
         <div class="platform-tile">
+          <div class="platform-tile-tag"><div class="platform-tile-dot"></div><span class="platform-tile-tagname">PLANUM</span></div>
+          <div class="platform-tile-name">Передпосівна комбінація</div>
+          <div class="platform-tile-desc">5 рядів лап, пружинна гребінка, 100% перекриття</div>
+        </div>
+      </div>
+
+      <div class="platform-tiles-4">
+        <div class="platform-tile">
           <div class="platform-tile-tag"><div class="platform-tile-dot"></div><span class="platform-tile-tagname">VELES</span></div>
           <div class="platform-tile-name">Посів</div>
           <div class="platform-tile-desc">Міжрядний та підпокривний посів зернових, ріпаку, сої</div>
         </div>
-      </div>
-
-      <div class="platform-tiles-3">
         <div class="platform-tile">
           <div class="platform-tile-tag"><div class="platform-tile-dot"></div><span class="platform-tile-tagname">TOR</span></div>
-          <div class="platform-tile-name">Підготовка посівного ложа</div>
+          <div class="platform-tile-name">Сітчаста борона</div>
           <div class="platform-tile-desc">Сітчаста борона для підготовки посівного ложа та боротьби з бур'янами</div>
         </div>
         <div class="platform-tile">
