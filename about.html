@@ -37,6 +37,7 @@
     .nav-links { display: flex; gap: 2.5rem; list-style: none; }
     .nav-links a { font-family: 'IBM Plex Mono', monospace; font-size: 0.72rem; letter-spacing: 0.1em; text-transform: uppercase; color: var(--text-muted); text-decoration: none; transition: color 0.2s; }
     .nav-links a:hover { color: var(--amber); }
+    .nav-links a.nav-active { color: var(--amber); }
     .lang-switcher { position: relative; flex-shrink: 0; margin-left: 1rem; }
     .lang-btn { background: none; border: none; color: var(--text-muted); cursor: pointer; padding: 4px; display: flex; align-items: center; transition: color 0.3s; }
     .lang-btn:hover { color: var(--amber); }
@@ -114,6 +115,7 @@
     .mobile-drawer ul li { border-bottom: 1px solid var(--border); }
     .mobile-drawer ul li a { display: block; font-family: 'Barlow Condensed', sans-serif; font-weight: 700; font-size: 2rem; text-transform: uppercase; color: var(--text); text-decoration: none; padding: 1rem 0; letter-spacing: 0.02em; transition: color 0.2s; }
     .mobile-drawer ul li a:hover { color: var(--amber); }
+    .mobile-drawer ul li a.nav-active { color: var(--amber); }
     .mobile-drawer .mobile-cta { margin-top: 2.5rem; }
     .mobile-drawer .mobile-cta a { display: block; text-align: center; }
     @media (max-width: 900px) { .nav-burger { display: flex; } }
@@ -134,7 +136,7 @@
       <li><a href="maschinen.html">Maschinen</a></li>
       <li><a href="konzept.html">Konzept</a></li>
       <li><a href="technologie.html">Technologie</a></li>
-      <li><a href="about.html">Über uns</a></li>
+      <li><a href="about.html" class="nav-active">Über uns</a></li>
       <li><a href="index.html#contact">Kontakt</a></li>
     </ul>
     <div class="lang-switcher">
@@ -159,7 +161,7 @@
       <li><a href="maschinen.html" class="drawer-link">Maschinen</a></li>
       <li><a href="konzept.html" class="drawer-link">Konzept</a></li>
       <li><a href="technologie.html" class="drawer-link">Technologie</a></li>
-      <li><a href="about.html" class="drawer-link">Über uns</a></li>
+      <li><a href="about.html" class="drawer-link nav-active">Über uns</a></li>
       <li><a href="index.html#contact" class="drawer-link">Kontakt</a></li>
     </ul>
     <div class="mobile-cta">

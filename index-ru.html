@@ -35,6 +35,7 @@
     .nav-links { display: flex; gap: 2.5rem; list-style: none; }
     .nav-links a { font-family: 'IBM Plex Mono', monospace; font-size: 0.72rem; letter-spacing: 0.1em; text-transform: uppercase; color: var(--text-muted); text-decoration: none; transition: color 0.2s; position: relative; }
     .nav-links a:hover { color: var(--amber); }
+    .nav-links a.nav-active { color: var(--amber); }
     .nav-cta { display: none; }
     .lang-switcher { position: relative; flex-shrink: 0; margin-left: 1rem; }
     .lang-btn { background: none; border: none; color: var(--text-muted); cursor: pointer; padding: 4px; display: flex; align-items: center; transition: color 0.3s; }
@@ -251,6 +252,7 @@
     .mobile-drawer ul li { border-bottom: 1px solid var(--border); }
     .mobile-drawer ul li a { display: block; font-family: 'Barlow Condensed', sans-serif; font-weight: 700; font-size: 2rem; text-transform: uppercase; color: var(--text); text-decoration: none; padding: 1rem 0; letter-spacing: 0.02em; transition: color 0.2s; }
     .mobile-drawer ul li a:hover { color: var(--amber); }
+    .mobile-drawer ul li a.nav-active { color: var(--amber); }
     .mobile-drawer .mobile-cta { margin-top: 2.5rem; }
     .mobile-drawer .mobile-cta a { display: block; text-align: center; }
 
@@ -331,9 +333,9 @@
       Byrud<span>.</span>Tech
     </a>
     <ul class="nav-links">
-      <li><a href="index-ru.html">Главная</a></li>
+      <li><a href="index-ru.html" class="nav-active">Главная</a></li>
       <li><a href="maschinen-ru.html">Машины</a></li>
-      <li><a href="konzept.html">Концепция</a></li>
+      <li><a href="konzept-ru.html">Концепция</a></li>
       <li><a href="technologie-ru.html">Технология</a></li>
       <li><a href="about-ru.html">О нас</a></li>
       <li><a href="index-ru.html#contact">Контакт</a></li>
@@ -357,9 +359,9 @@
 
   <div class="mobile-drawer" id="mobileDrawer">
     <ul>
-      <li><a href="index-ru.html" class="drawer-link">Главная</a></li>
+      <li><a href="index-ru.html" class="drawer-link nav-active">Главная</a></li>
       <li><a href="maschinen-ru.html" class="drawer-link">Машины</a></li>
-      <li><a href="konzept.html" class="drawer-link">Концепция</a></li>
+      <li><a href="konzept-ru.html" class="drawer-link">Концепция</a></li>
       <li><a href="technologie-ru.html" class="drawer-link">Технология</a></li>
       <li><a href="about-ru.html" class="drawer-link">О нас</a></li>
       <li><a href="index-ru.html#contact" class="drawer-link">Контакт</a></li>
@@ -614,7 +616,7 @@
         <div class="platform-header-left">
           <div class="section-tag">// Наша концепция</div>
           <h2>Одна рама. Безграничные <em style="font-style:normal;color:var(--amber);">возможности.</em></h2>
-          <p class="platform-header-body">Byrud Tech разработала универсальную несущую раму, на которую можно устанавливать различные навесные орудия для посева и ухода. Результат: до 4 полевых операций за один проход — меньше проходов, меньше топлива, больше урожая.</p>
+          <p class="platform-header-body">Универсальная рама разработана специально для установки различных навесных агрегатов для посева и обработки. Результат: до 4 полевых операций за один проход — меньше проходов, меньше топлива, больше урожая.</p>
         </div>
         <div class="platform-stats">
           <div class="platform-stat"><div class="platform-stat-num counter" data-target="4" data-suffix="×">4×</div><div class="platform-stat-label">Операции за проход</div></div>
@@ -667,7 +669,7 @@
 
     </div>
     <div style="padding: 2rem 2.5rem; background: var(--bg2);">
-      <a href="konzept.html" class="btn-secondary">Подробнее о концепции</a>
+      <a href="konzept-ru.html" class="btn-secondary">Подробнее о концепции</a>
     </div>
   </section>
 
