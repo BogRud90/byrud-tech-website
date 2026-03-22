@@ -63,6 +63,16 @@
     .gallery-text-list { margin-top: 1.25rem; display: flex; flex-direction: column; gap: 0.5rem; list-style: none; }
     .gallery-text-list li { font-family: 'IBM Plex Mono', monospace; font-size: 0.72rem; letter-spacing: 0.06em; color: var(--text-muted); display: flex; align-items: center; gap: 0.6rem; }
     .gallery-text-list li::before { content: ''; width: 16px; height: 1px; background: var(--amber); flex-shrink: 0; }
+    .year-round { padding: 5rem 3rem; background: var(--bg2); border-top: 1px solid var(--border); border-bottom: 1px solid var(--border); }
+    .year-round-inner { max-width: 1400px; margin: 0 auto; }
+    .year-round-header { margin-bottom: 2.5rem; }
+    .year-round-title { font-family: 'Barlow Condensed', sans-serif; font-weight: 800; font-size: clamp(1.8rem, 3vw, 2.8rem); text-transform: uppercase; letter-spacing: -0.01em; line-height: 0.95; }
+    .year-round-text { max-width: 700px; font-size: 0.95rem; color: var(--text-muted); line-height: 1.85; }
+    .year-round-text p { margin-bottom: 1rem; }
+    .year-round-text ul { list-style: none; padding: 0; }
+    .year-round-text li { padding: 0.5rem 0; padding-left: 1.5rem; position: relative; border-bottom: 1px solid var(--border); }
+    .year-round-text li:last-child { border-bottom: none; }
+    .year-round-text li::before { content: ''; position: absolute; left: 0; top: 0.85rem; width: 6px; height: 6px; background: var(--amber); }
     .product-specs { padding: 5rem 3rem; background: var(--bg2); border-top: 1px solid var(--border); border-bottom: 1px solid var(--border); }
     .product-specs-inner { max-width: 1400px; margin: 0 auto; }
     .product-specs-header { margin-bottom: 2.5rem; }
@@ -97,7 +107,7 @@
       .product-hero-photo { order: -1; }
       .product-hero-sub { max-width: none; }
       .product-stats { grid-template-columns: repeat(2, 1fr); }
-      .product-gallery, .product-specs, .product-cta-section { padding-left: 1.5rem; padding-right: 1.5rem; }
+      .product-gallery, .year-round, .product-specs, .product-cta-section { padding-left: 1.5rem; padding-right: 1.5rem; }
       .product-gallery-inner { gap: 3.5rem; }
       .gallery-block { grid-template-columns: 1fr; gap: 2rem; }
       .gallery-block.reverse { direction: ltr; }
@@ -204,33 +214,12 @@
         </div>
         <div class="gallery-text">
           <div class="gallery-text-tag">// Sternräder</div>
-          <div class="gallery-text-title">Gegossene Sternräder mit 50 kg Federandruck</div>
-          <p class="gallery-text-body">Der STERN Rotationsstriegel arbeitet ganzjährig — vor der Aussaat zur Saatbettvorbereitung, nach der Aussaat zur Rückverfestigung und Unkrautbekämpfung. Gegossene Sternräder mit 50 kg Federandruck pro Reihe sorgen für gleichmäßige Bearbeitung.</p>
-          <ul class="gallery-text-list">
-            <li>50 kg Federandruck pro Reihe</li>
-            <li>Gegossen — wartungsarm und langlebig</li>
-            <li>Gleichmäßige Bodenbearbeitung bei allen Geschwindigkeiten</li>
-          </ul>
+          <div class="gallery-text-title">Sternräder — 50 kg Federandruck, 1 Bolzen pro Reihe</div>
+          <p class="gallery-text-body">Gegossene Sternräder mit 50 kg Federandruck pro Reihe — gleichmäßige Bearbeitung über die gesamte Breite. Einstellung mit nur einem Bolzen pro Reihe — schnelle und einfache Anpassung an verschiedene Bearbeitungstiefen. Robuste Konstruktion, wartungsarm.</p>
         </div>
       </div>
 
       <div class="gallery-block reverse">
-        <div class="blueprint-frame">
-          <img src="images/stern-verstell.jpg" alt="STERN — Einreihenverstellung" />
-        </div>
-        <div class="gallery-text">
-          <div class="gallery-text-tag">// Einreihenverstellung</div>
-          <div class="gallery-text-title">Ein Bolzen pro Reihe — einfach und schnell</div>
-          <p class="gallery-text-body">Einfachste Einstellung: 1 Bolzen pro Reihe. Schnelle Anpassung an verschiedene Bearbeitungstiefen und Kulturen — direkt am Feld, ohne Werkzeug.</p>
-          <ul class="gallery-text-list">
-            <li>1 Bolzen pro Reihe — kein Werkzeug nötig</li>
-            <li>Stufenlose Tiefeneinstellung</li>
-            <li>Umbau in wenigen Minuten</li>
-          </ul>
-        </div>
-      </div>
-
-      <div class="gallery-block">
         <div class="blueprint-frame">
           <img src="images/stern-bunker.jpg" alt="STERN — Dünger- und Saatbunker Option" />
         </div>
@@ -248,6 +237,24 @@
     </div>
   </section>
 
+  <section class="year-round">
+    <div class="year-round-inner">
+      <div class="year-round-header">
+        <div class="section-tag">// Ganzjähriger Einsatz</div>
+        <div class="year-round-title">365 Tage im Jahr einsatzbereit</div>
+      </div>
+      <div class="year-round-text">
+        <p>Der STERN Rotationsstriegel ist für den ganzjährigen Einsatz konzipiert:</p>
+        <ul>
+          <li>Bodenvorbereitung vor der Aussaat</li>
+          <li>Lockerung und Rückverfestigung nach der Aussaat</li>
+          <li>Verhinderung verspäteter Kornkeimung</li>
+          <li>Verbesserung der Porosität und Bodenstruktur</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
   <section class="product-specs">
     <div class="product-specs-inner">
       <div class="product-specs-header">
@@ -256,7 +263,6 @@
       </div>
       <div class="specs-row"><div class="specs-key">Arbeitsbreite</div><div class="specs-val">3–12 m</div></div>
       <div class="specs-row"><div class="specs-key">Arbeitstiefe</div><div class="specs-val">3–7 cm</div></div>
-      <div class="specs-row"><div class="specs-key">Reihenabstand</div><div class="specs-val">5–75 cm</div></div>
       <div class="specs-row"><div class="specs-key">Traktorleistung</div><div class="specs-val">75–150 hp</div></div>
       <div class="specs-row"><div class="specs-key">Arbeitsgeschwindigkeit</div><div class="specs-val">5–18 km/h</div></div>
       <div class="specs-row"><div class="specs-key">Anbau</div><div class="specs-val">3-Punkt-Anbau</div></div>
