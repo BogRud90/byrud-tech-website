@@ -830,25 +830,31 @@
           <a href="#" class="contact-link"><div><span class="contact-link-label">Standort</span>Hamburg, Deutschland</div></a>
         </div>
       </div>
-      <form class="contact-form" onsubmit="handleSubmit(event)">
-        <div class="form-group"><label class="form-label">Name / Betrieb</label><input type="text" class="form-input" placeholder="Ihr Name oder Betriebsname" required /></div>
-        <div class="form-group"><label class="form-label">E-Mail</label><input type="email" class="form-input" placeholder="ihre@email.de" required /></div>
+      <form class="contact-form" action="https://formspree.io/f/xyknaagy" method="POST">
+        <input type="text" name="_gotcha" style="display:none" />
+        <input type="hidden" name="_next" value="https://byrud-tech.com/danke.html" />
+        <input type="hidden" name="_subject" value="Neue Anfrage von byrud-tech.com" />
+        <div class="form-group"><label class="form-label">Name / Betrieb</label><input type="text" name="name" class="form-input" placeholder="Ihr Name oder Betriebsname" required /></div>
+        <div class="form-group"><label class="form-label">E-Mail</label><input type="email" name="email" class="form-input" placeholder="ihre@email.de" required /></div>
         <div class="form-group">
           <label class="form-label">Ich interessiere mich für</label>
-          <select class="form-select">
-            <option value="">Bitte wählen…</option>
-            <option>Hackmaschine ROVER</option>
-            <option>Flüssigdüngung LIXA</option>
-            <option>Granulatdüngung GRANO</option>
-            <option>Sämaschine VELES</option>
-            <option>Netzenegge TOR</option>
-            <option>Rotationsstriegel STERN</option>
-            <option>Zerhacker TURBO</option>
-            <option>Händlerpartnerschaft</option>
-            <option>Allgemeine Anfrage</option>
+          <select name="interest" class="form-select">
+            <option value="" disabled selected>Bitte wählen…</option>
+            <option value="ROVER">ROVER — Hackmaschine</option>
+            <option value="EXACT">EXACT — Kameraführung</option>
+            <option value="LIXA">LIXA — Flüssigdüngung</option>
+            <option value="GRANO">GRANO — Granulatdüngung</option>
+            <option value="PLANUM">PLANUM — Saatbettkombination</option>
+            <option value="VELES">VELES — Sämaschine</option>
+            <option value="TOR">TOR — Netzegge</option>
+            <option value="STERN">STERN — Rotationsstriegel</option>
+            <option value="TURBO">TURBO — Erntegutzerhacker</option>
+            <option value="Ersatzteile">Ersatzteile</option>
+            <option value="Händler">Händler werden</option>
+            <option value="Sonstiges">Sonstiges</option>
           </select>
         </div>
-        <div class="form-group"><label class="form-label">Nachricht</label><textarea class="form-textarea" placeholder="Beschreiben Sie Ihren Bedarf, Flächengröße, Traktorleistung…" required></textarea></div>
+        <div class="form-group"><label class="form-label">Nachricht</label><textarea name="message" class="form-textarea" placeholder="Beschreiben Sie Ihren Bedarf, Flächengröße, Traktorleistung…" required></textarea></div>
         <button type="submit" class="btn-primary" style="cursor:pointer;border:none;width:fit-content;">Anfrage absenden →</button>
       </form>
     </div>
@@ -1032,15 +1038,7 @@
       });
     });
 
-    /* FORM */
-    function handleSubmit(e) {
-      e.preventDefault();
-      const btn = e.target.querySelector('button');
-      btn.textContent = 'Anfrage gesendet ✓';
-      btn.style.background = '#1a6641';
-      btn.style.color = '#fff';
-      e.target.reset();
-    }
+
 
     /* COUNTER ANIMATION */
     function animateCounter(el) {

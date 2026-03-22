@@ -816,26 +816,32 @@
           <a href="#" class="contact-link"><div><span class="contact-link-label">Location</span>Hamburg, Germany</div></a>
         </div>
       </div>
-      <form class="contact-form" onsubmit="handleSubmit(event)">
-        <div class="form-group"><label class="form-label">Name / Company</label><input type="text" class="form-input" placeholder="Your name or company name" required /></div>
-        <div class="form-group"><label class="form-label">Email</label><input type="email" class="form-input" placeholder="your@email.com" required /></div>
+      <form class="contact-form" action="https://formspree.io/f/xyknaagy" method="POST">
+        <input type="text" name="_gotcha" style="display:none" />
+        <input type="hidden" name="_next" value="https://byrud-tech.com/danke-en.html" />
+        <input type="hidden" name="_subject" value="New inquiry from byrud-tech.com" />
+        <div class="form-group"><label class="form-label">Name / Company</label><input type="text" name="name" class="form-input" placeholder="Your name or company name" required /></div>
+        <div class="form-group"><label class="form-label">Email</label><input type="email" name="email" class="form-input" placeholder="your@email.com" required /></div>
         <div class="form-group">
           <label class="form-label">I'm interested in</label>
-          <select class="form-select">
-            <option value="">Please choose&hellip;</option>
-            <option>Hackmaschine ROVER</option>
-            <option>Fl&uuml;ssigd&uuml;ngung LIXA</option>
-            <option>Granulatd&uuml;ngung GRANO</option>
-            <option>S&auml;maschine VELES</option>
-            <option>Netzenegge TOR</option>
-            <option>Rotationsstriegel STERN</option>
-            <option>Zerhacker TURBO</option>
-            <option>Dealer partnership</option>
-            <option>General inquiry</option>
+          <select name="interest" class="form-select">
+            <option value="" disabled selected>Please choose…</option>
+            <option value="ROVER">ROVER — Hoe machine</option>
+            <option value="EXACT">EXACT — Camera guidance</option>
+            <option value="LIXA">LIXA — Liquid fertilization</option>
+            <option value="GRANO">GRANO — Granular fertilization</option>
+            <option value="PLANUM">PLANUM — Seedbed combination</option>
+            <option value="VELES">VELES — Seed drill</option>
+            <option value="TOR">TOR — Mesh harrow</option>
+            <option value="STERN">STERN — Rotary harrow</option>
+            <option value="TURBO">TURBO — Residue chopper</option>
+            <option value="Spare parts">Spare parts</option>
+            <option value="Dealer">Become dealer</option>
+            <option value="Other">Other</option>
           </select>
         </div>
-        <div class="form-group"><label class="form-label">Message</label><textarea class="form-textarea" placeholder="Describe your needs, field size, tractor power…" required></textarea></div>
-        <button type="submit" class="btn-primary" style="cursor:pointer;border:none;width:fit-content;">Submit inquiry &rarr;</button>
+        <div class="form-group"><label class="form-label">Message</label><textarea name="message" class="form-textarea" placeholder="Describe your needs, field size, tractor power…" required></textarea></div>
+        <button type="submit" class="btn-primary" style="cursor:pointer;border:none;width:fit-content;">Submit inquiry →</button>
       </form>
     </div>
   </section>
@@ -1018,15 +1024,7 @@
       });
     });
 
-    /* FORM */
-    function handleSubmit(e) {
-      e.preventDefault();
-      const btn = e.target.querySelector('button');
-      btn.textContent = 'Inquiry sent \u2713';
-      btn.style.background = '#1a6641';
-      btn.style.color = '#fff';
-      e.target.reset();
-    }
+
 
     /* COUNTER ANIMATION */
     function animateCounter(el) {

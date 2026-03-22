@@ -816,25 +816,31 @@
           <a href="#" class="contact-link"><div><span class="contact-link-label">Местоположение</span>Гамбург, Германия</div></a>
         </div>
       </div>
-      <form class="contact-form" onsubmit="handleSubmit(event)">
-        <div class="form-group"><label class="form-label">Имя / Компания</label><input type="text" class="form-input" placeholder="Ваше имя или название компании" required /></div>
-        <div class="form-group"><label class="form-label">E-Mail</label><input type="email" class="form-input" placeholder="ваш@email.de" required /></div>
+      <form class="contact-form" action="https://formspree.io/f/xyknaagy" method="POST">
+        <input type="text" name="_gotcha" style="display:none" />
+        <input type="hidden" name="_next" value="https://byrud-tech.com/danke-ru.html" />
+        <input type="hidden" name="_subject" value="Новый запрос с byrud-tech.com" />
+        <div class="form-group"><label class="form-label">Имя / Компания</label><input type="text" name="name" class="form-input" placeholder="Ваше имя или название компании" required /></div>
+        <div class="form-group"><label class="form-label">E-Mail</label><input type="email" name="email" class="form-input" placeholder="ваш@email.de" required /></div>
         <div class="form-group">
           <label class="form-label">Меня интересует</label>
-          <select class="form-select">
-            <option value="">Выберите…</option>
-            <option>Hackmaschine ROVER</option>
-            <option>Flüssigdüngung LIXA</option>
-            <option>Granulatdüngung GRANO</option>
-            <option>Sämaschine VELES</option>
-            <option>Netzenegge TOR</option>
-            <option>Rotationsstriegel STERN</option>
-            <option>Zerhacker TURBO</option>
-            <option>Дилерское партнёрство</option>
-            <option>Общий запрос</option>
+          <select name="interest" class="form-select">
+            <option value="" disabled selected>Выберите…</option>
+            <option value="ROVER">ROVER — Культиватор</option>
+            <option value="EXACT">EXACT — Камера</option>
+            <option value="LIXA">LIXA — Жидкие удобрения</option>
+            <option value="GRANO">GRANO — Гранулированные удобрения</option>
+            <option value="PLANUM">PLANUM — Предпосевная комбинация</option>
+            <option value="VELES">VELES — Сеялка</option>
+            <option value="TOR">TOR — Сетчатая борона</option>
+            <option value="STERN">STERN — Ротационная борона</option>
+            <option value="TURBO">TURBO — Измельчитель</option>
+            <option value="Запчасти">Запчасти</option>
+            <option value="Дилер">Стать дилером</option>
+            <option value="Другое">Другое</option>
           </select>
         </div>
-        <div class="form-group"><label class="form-label">Сообщение</label><textarea class="form-textarea" placeholder="Опишите ваши потребности, размер площадей, мощность трактора…" required></textarea></div>
+        <div class="form-group"><label class="form-label">Сообщение</label><textarea name="message" class="form-textarea" placeholder="Опишите ваши потребности, размер площадей, мощность трактора…" required></textarea></div>
         <button type="submit" class="btn-primary" style="cursor:pointer;border:none;width:fit-content;">Отправить запрос →</button>
       </form>
     </div>
@@ -1018,15 +1024,7 @@
       });
     });
 
-    /* FORM */
-    function handleSubmit(e) {
-      e.preventDefault();
-      const btn = e.target.querySelector('button');
-      btn.textContent = 'Запрос отправлен ✓';
-      btn.style.background = '#1a6641';
-      btn.style.color = '#fff';
-      e.target.reset();
-    }
+
 
     /* COUNTER ANIMATION */
     function animateCounter(el) {
