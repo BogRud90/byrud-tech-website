@@ -1,0 +1,418 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Vorkultivierer PLANUM — Byrud Tech</title>
+  <meta name="description" content="PLANUM — Vorkultivierer mit 5 Reihen parallelogrammgeführter Schare. Maximale Ebenheit, Unkrautbekämpfung und Feinplanierung in einem Durchgang." />
+  <meta name="format-detection" content="telephone=no" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@400;600;700;800&family=IBM+Plex+Mono:wght@400;500&family=Barlow:wght@300;400;500&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    :root {
+      --bg: #0b0b0b; --bg2: #111111; --bg3: #161616;
+      --amber: #e8a220; --amber-dim: #b87e18; --amber-glow: rgba(232,162,32,0.12);
+      --text: #f0ede8; --text-muted: #9a9a92; --text-dim: #6a6a64;
+      --border: rgba(255,255,255,0.07); --border-amber: rgba(232,162,32,0.3);
+      --r: 6px; --r-sm: 4px;
+    }
+    html { scroll-behavior: smooth; }
+    body { background: var(--bg); color: var(--text); font-family: 'Barlow', sans-serif; font-weight: 400; line-height: 1.6; overflow-x: hidden; }
+    body::before { content: ''; position: fixed; inset: 0; background-image: linear-gradient(var(--border) 1px, transparent 1px), linear-gradient(90deg, var(--border) 1px, transparent 1px); background-size: 60px 60px; pointer-events: none; z-index: 0; opacity: 0.15; }
+    section, footer, nav { position: relative; z-index: 1; }
+    * { -webkit-tap-highlight-color: transparent; }
+    a[href^="tel"], a[href^="mailto"] { color: inherit; text-decoration: none; }
+
+    /* NAV */
+    nav { position: fixed; top: 0; left: 0; right: 0; z-index: 100; display: flex; align-items: center; justify-content: space-between; padding: 0 3rem; height: 64px; background: rgba(11,11,11,0.88); backdrop-filter: blur(12px); border-bottom: 1px solid var(--border); }
+    .logo { font-family: 'Barlow Condensed', sans-serif; font-weight: 800; font-size: 1.3rem; letter-spacing: 0.08em; text-transform: uppercase; color: var(--text); text-decoration: none; position: relative; padding: 5px 8px; }
+    .logo-corner { position: absolute; width: 7px; height: 7px; border-color: var(--amber); border-style: solid; border-width: 0; }
+    .logo-corner--tl { top: 0; left: 0; border-top-width: 1px; border-left-width: 1px; }
+    .logo-corner--tr { top: 0; right: 0; border-top-width: 1px; border-right-width: 1px; }
+    .logo-corner--bl { bottom: 0; left: 0; border-bottom-width: 1px; border-left-width: 1px; }
+    .logo-corner--br { bottom: 0; right: 0; border-bottom-width: 1px; border-right-width: 1px; }
+    .logo span { color: var(--amber); }
+    .nav-links { display: flex; gap: 2.5rem; list-style: none; }
+    .nav-links a { font-family: 'IBM Plex Mono', monospace; font-size: 0.72rem; letter-spacing: 0.1em; text-transform: uppercase; color: var(--text-muted); text-decoration: none; transition: color 0.2s; }
+    .nav-links a:hover { color: var(--amber); }
+    .nav-links a.nav-active { color: var(--amber); }
+    .lang-switcher { position: relative; flex-shrink: 0; margin-left: 1rem; }
+    .lang-btn { background: none; border: none; color: var(--text-muted); cursor: pointer; padding: 4px; display: flex; align-items: center; transition: color 0.3s; }
+    .lang-btn:hover { color: var(--amber); }
+    .lang-dropdown { display: none; position: absolute; top: 100%; right: 0; margin-top: 8px; background: rgba(11,11,11,0.95); backdrop-filter: blur(12px); border: 1px solid var(--border); flex-direction: column; min-width: 50px; z-index: 200; }
+    .lang-dropdown.open { display: flex; }
+    .lang-option { font-family: 'IBM Plex Mono', monospace; font-size: 0.72rem; letter-spacing: 0.1em; text-transform: uppercase; color: var(--text-muted); text-decoration: none; padding: 0.5rem 1rem; transition: color 0.2s, background 0.2s; text-align: center; }
+    .lang-option:hover { color: var(--text); background: var(--bg3); }
+    .lang-option.lang-active { color: var(--amber); }
+
+    /* BUTTONS */
+    .btn-primary { font-family: 'IBM Plex Mono', monospace; font-size: 0.78rem; letter-spacing: 0.1em; text-transform: uppercase; background: var(--amber); color: #0b0b0b; padding: 0.9rem 2rem; text-decoration: none; font-weight: 500; transition: opacity 0.2s; display: inline-block; border-radius: var(--r-sm); }
+    .btn-primary:hover { opacity: 0.85; }
+    .section-tag { font-family: 'IBM Plex Mono', monospace; font-size: 0.68rem; letter-spacing: 0.2em; text-transform: uppercase; color: var(--amber); margin-bottom: 0.75rem; }
+
+    /* BLUEPRINT FRAME */
+    .blueprint-frame { position: relative; background: var(--bg3); border: 0.5px solid rgba(255, 255, 255, 0.1); overflow: hidden; }
+    .blueprint-frame img { width: 100%; height: 100%; object-fit: contain; padding: 1.5rem; }
+
+    /* PRODUCT HERO */
+    .product-hero { padding: 7rem 3rem 5rem; }
+    .product-hero-inner { display: grid; grid-template-columns: 55% 45%; gap: 5rem; align-items: center; max-width: 1400px; margin: 0 auto; }
+    .product-hero-text .section-tag { margin-bottom: 0.5rem; }
+    .product-hero-title { font-family: 'Barlow Condensed', sans-serif; font-weight: 800; font-size: clamp(4rem, 9vw, 8.5rem); line-height: 0.9; letter-spacing: -0.01em; text-transform: uppercase; margin-bottom: 1.25rem; }
+    .product-hero-sub { font-size: 1.05rem; color: var(--text-muted); line-height: 1.75; margin-bottom: 2.5rem; max-width: 420px; }
+    .product-stats { display: grid; grid-template-columns: repeat(4, 1fr); gap: 1px; background: var(--border); margin-bottom: 2.5rem; border-radius: var(--r-sm); overflow: hidden; }
+    .product-stat { background: var(--bg2); padding: 1.25rem 1rem; }
+    .product-stat-num { font-family: 'Barlow Condensed', sans-serif; font-weight: 800; font-size: 1.9rem; color: var(--amber); line-height: 1; margin-bottom: 0.3rem; }
+    .product-stat-label { font-family: 'IBM Plex Mono', monospace; font-size: 0.6rem; letter-spacing: 0.08em; text-transform: uppercase; color: var(--text-dim); }
+
+    /* GALLERY ZIGZAG */
+    .product-gallery { padding: 5rem 3rem; }
+    .product-gallery-inner { max-width: 1400px; margin: 0 auto; display: flex; flex-direction: column; gap: 6rem; }
+    .product-gallery-header { margin-bottom: 0; }
+    .product-gallery-title { font-family: 'Barlow Condensed', sans-serif; font-weight: 800; font-size: clamp(1.8rem, 3vw, 2.8rem); text-transform: uppercase; letter-spacing: -0.01em; line-height: 0.95; }
+    .gallery-block { display: grid; grid-template-columns: 1fr 1fr; gap: 5rem; align-items: center; }
+    .gallery-block.reverse { direction: rtl; }
+    .gallery-block.reverse > * { direction: ltr; }
+    .gallery-text-tag { font-family: 'IBM Plex Mono', monospace; font-size: 0.65rem; letter-spacing: 0.15em; text-transform: uppercase; color: var(--amber); margin-bottom: 0.75rem; }
+    .gallery-text-title { font-family: 'Barlow Condensed', sans-serif; font-weight: 700; font-size: clamp(1.3rem, 2vw, 1.6rem); text-transform: uppercase; letter-spacing: 0.02em; margin-bottom: 1rem; color: var(--text); }
+    .gallery-text-body { color: var(--text-muted); font-size: 0.95rem; line-height: 1.8; }
+    .fade-up { opacity: 0; transform: translateY(20px); transition: opacity 0.55s ease, transform 0.55s ease; }
+    .fade-up.visible { opacity: 1; transform: none; }
+
+    /* FUNCTIONS SECTION (like year-round on stern.html) */
+    .functions-section { padding: 5rem 3rem; background: var(--bg2); border-top: 1px solid var(--border); border-bottom: 1px solid var(--border); }
+    .functions-inner { max-width: 1400px; margin: 0 auto; }
+    .functions-header { margin-bottom: 2.5rem; }
+    .functions-title { font-family: 'Barlow Condensed', sans-serif; font-weight: 800; font-size: clamp(1.8rem, 3vw, 2.8rem); text-transform: uppercase; letter-spacing: -0.01em; line-height: 0.95; }
+    .functions-text { max-width: 700px; font-size: 0.95rem; color: var(--text-muted); line-height: 1.85; }
+    .functions-text p { margin-bottom: 1rem; }
+    .functions-text ul { list-style: none; padding: 0; }
+    .functions-text li { padding: 0.5rem 0; padding-left: 1.5rem; position: relative; border-bottom: 1px solid var(--border); }
+    .functions-text li:last-child { border-bottom: none; }
+    .functions-text li::before { content: ''; position: absolute; left: 0; top: 0.85rem; width: 6px; height: 6px; background: var(--amber); }
+
+    /* SPECS SECTION */
+    .product-specs { padding: 5rem 3rem; background: var(--bg2); border-top: 1px solid var(--border); border-bottom: 1px solid var(--border); }
+    .product-specs-inner { max-width: 1400px; margin: 0 auto; }
+    .product-specs-header { margin-bottom: 2.5rem; }
+    .product-specs-title { font-family: 'Barlow Condensed', sans-serif; font-weight: 800; font-size: clamp(1.8rem, 3vw, 2.8rem); text-transform: uppercase; letter-spacing: -0.01em; line-height: 0.95; }
+    .specs-row { display: grid; grid-template-columns: 280px 1fr; border-bottom: 1px solid var(--border); }
+    .specs-row:first-child { border-top: 1px solid var(--border); }
+    .specs-key { font-family: 'IBM Plex Mono', monospace; font-size: 0.65rem; letter-spacing: 0.1em; text-transform: uppercase; color: var(--text-dim); padding: 1.1rem 0; }
+    .specs-val { color: var(--text-muted); font-size: 0.95rem; padding: 1.1rem 2rem 1.1rem 0; }
+
+    /* CTA SECTION */
+    .product-cta-section { padding: 4rem 3rem; }
+    .product-cta-inner { max-width: 1400px; margin: 0 auto; }
+    .product-cta-card { background: var(--bg2); border: 1px solid var(--border-amber); border-radius: var(--r); padding: 3rem; display: flex; align-items: center; justify-content: space-between; gap: 3rem; flex-wrap: wrap; }
+    .product-cta-title { font-family: 'Barlow Condensed', sans-serif; font-weight: 800; font-size: clamp(1.4rem, 2.5vw, 2rem); text-transform: uppercase; line-height: 1; margin-bottom: 0.5rem; }
+    .product-cta-sub { color: var(--text-muted); font-size: 0.9rem; }
+
+    /* FOOTER */
+    footer { border-top: 1px solid var(--border); padding: 2rem 3rem; display: flex; align-items: center; justify-content: space-between; background: var(--bg); }
+    .footer-copy { font-family: 'IBM Plex Mono', monospace; font-size: 0.65rem; letter-spacing: 0.1em; color: var(--text-dim); }
+    .footer-links { display: flex; gap: 1.5rem; }
+    .footer-links a { font-family: 'IBM Plex Mono', monospace; font-size: 0.65rem; letter-spacing: 0.1em; text-transform: uppercase; color: var(--text-dim); text-decoration: none; transition: color 0.2s; }
+    .footer-links a:hover { color: var(--amber); }
+
+    /* ANIMATIONS */
+    @keyframes fadeUp { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
+    .product-hero-text .section-tag { animation: fadeUp 0.5s 0.05s ease both; }
+    .product-hero-title               { animation: fadeUp 0.5s 0.15s ease both; }
+    .product-hero-sub                 { animation: fadeUp 0.5s 0.25s ease both; }
+    .product-stats                    { animation: fadeUp 0.5s 0.3s ease both; }
+    .product-hero-text .btn-primary   { animation: fadeUp 0.5s 0.35s ease both; }
+    @keyframes scanline { 0% { top: 0; opacity: 0.5; } 100% { top: 100%; opacity: 0; } }
+    .gallery-block::after { content: ''; position: absolute; left: 0; right: 0; height: 1px; background: linear-gradient(90deg, transparent, var(--amber), transparent); opacity: 0; top: 0; pointer-events: none; }
+
+    /* MOBILE */
+    @media (max-width: 900px) {
+      nav { padding: 0 1.5rem; }
+      .nav-links { display: none; }
+      .nav-burger { display: flex; }
+      .lang-switcher { margin-left: auto; margin-right: 0.5rem; }
+      .product-hero { padding: 5rem 1.5rem 3rem; }
+      .product-hero-inner { grid-template-columns: 1fr; gap: 2.5rem; }
+      .product-hero-photo { order: -1; }
+      .product-hero-sub { max-width: none; }
+      .product-stats { grid-template-columns: repeat(2, 1fr); }
+      .product-gallery { padding: 3rem 1.5rem; }
+      .product-gallery-inner { gap: 3.5rem; }
+      .gallery-block { grid-template-columns: 1fr; gap: 2rem; }
+      .gallery-block.reverse { direction: ltr; }
+      .gallery-block .blueprint-frame { order: -1; }
+      .functions-section { padding: 3rem 1.5rem; }
+      .product-specs { padding: 3rem 1.5rem; }
+      .specs-row { grid-template-columns: 1fr; }
+      .specs-key { padding-bottom: 0.2rem; }
+      .specs-val { padding: 0 0 1rem; }
+      .product-cta-section { padding: 3rem 1.5rem; }
+      .product-cta-card { flex-direction: column; align-items: flex-start; gap: 2rem; }
+      footer { flex-direction: column; gap: 1rem; text-align: center; padding: 2rem 1.5rem; }
+    }
+    @media (prefers-reduced-motion: reduce) {
+      .fade-up, .fade-up.visible { opacity: 1; transform: none; transition: none; }
+    }
+
+    /* MOBILE MENU */
+    .nav-burger { display: none; flex-direction: column; justify-content: center; gap: 5px; width: 36px; height: 36px; background: none; border: none; cursor: pointer; padding: 4px; z-index: 101; }
+    .nav-burger span { display: block; width: 100%; height: 1.5px; background: var(--text); transition: transform 0.3s, opacity 0.3s; transform-origin: center; }
+    .nav-burger.open span:nth-child(1) { transform: translateY(6.5px) rotate(45deg); }
+    .nav-burger.open span:nth-child(2) { opacity: 0; }
+    .nav-burger.open span:nth-child(3) { transform: translateY(-6.5px) rotate(-45deg); }
+    .mobile-drawer { display: none; position: fixed; inset: 0; top: 64px; background: rgba(11,11,11,0.97); backdrop-filter: blur(16px); z-index: 99; flex-direction: column; padding: 3rem 2rem; border-top: 1px solid var(--border); }
+    .mobile-drawer.open { display: flex; }
+    .mobile-drawer ul { list-style: none; display: flex; flex-direction: column; gap: 0; flex: 1; }
+    .mobile-drawer ul li { border-bottom: 1px solid var(--border); }
+    .mobile-drawer ul li a { display: block; font-family: 'Barlow Condensed', sans-serif; font-weight: 700; font-size: 2rem; text-transform: uppercase; color: var(--text); text-decoration: none; padding: 1rem 0; letter-spacing: 0.02em; transition: color 0.2s; }
+    .mobile-drawer ul li a:hover { color: var(--amber); }
+    .mobile-drawer ul li a.nav-active { color: var(--amber); }
+    .mobile-drawer .mobile-cta { margin-top: 2.5rem; }
+    .mobile-drawer .mobile-cta a { display: block; text-align: center; }
+    @media (max-width: 900px) { .nav-burger { display: flex; } }
+  </style>
+</head>
+<body>
+
+  <nav>
+    <a href="index.html" class="logo">
+      <div class="logo-corner logo-corner--tl"></div>
+      <div class="logo-corner logo-corner--tr"></div>
+      <div class="logo-corner logo-corner--bl"></div>
+      <div class="logo-corner logo-corner--br"></div>
+      Byrud<span>.</span>Tech
+    </a>
+    <ul class="nav-links">
+      <li><a href="index.html">Home</a></li>
+      <li><a href="maschinen.html" class="nav-active">Maschinen</a></li>
+      <li><a href="konzept.html">Konzept</a></li>
+      <li><a href="technologie.html">Technologie</a></li>
+      <li><a href="about.html">Über uns</a></li>
+      <li><a href="index.html#contact">Kontakt</a></li>
+    </ul>
+    <div class="lang-switcher">
+      <button class="lang-btn" onclick="toggleLang()" aria-label="Sprache wählen">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M2 12h20"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg>
+      </button>
+      <div class="lang-dropdown" id="langDropdown">
+        <a href="planum.html" class="lang-option lang-active">DE</a>
+      </div>
+    </div>
+    <button class="nav-burger" id="navBurger" aria-label="Menü öffnen" aria-expanded="false">
+      <span></span><span></span><span></span>
+    </button>
+  </nav>
+
+  <div class="mobile-drawer" id="mobileDrawer">
+    <ul>
+      <li><a href="index.html" class="drawer-link">Home</a></li>
+      <li><a href="maschinen.html" class="drawer-link nav-active">Maschinen</a></li>
+      <li><a href="konzept.html" class="drawer-link">Konzept</a></li>
+      <li><a href="technologie.html" class="drawer-link">Technologie</a></li>
+      <li><a href="about.html" class="drawer-link">Über uns</a></li>
+      <li><a href="index.html#contact" class="drawer-link">Kontakt</a></li>
+    </ul>
+    <div class="mobile-cta">
+      <a href="index.html#contact" class="btn-primary drawer-link">Angebot anfragen →</a>
+    </div>
+  </div>
+
+  <!-- HERO -->
+  <section class="product-hero">
+    <div class="product-hero-inner">
+
+      <div class="product-hero-photo">
+        <div class="blueprint-frame">
+          <img src="images/planum-hero.jpg" alt="Vorkultivierer PLANUM — Byrud Tech" />
+        </div>
+      </div>
+
+      <div class="product-hero-text">
+        <div class="section-tag">// Vorkultivierer</div>
+        <div class="product-hero-title">PLANUM</div>
+        <p class="product-hero-sub">Vorkultivierer mit 5 Reihen parallelogrammgeführter Schare für maximale Ebenheit und Unkrautbekämpfung. Hinterer Federrechen für Feinplanierung, Rückverfestigung und Unkrautauskämmen — optimale Saatbettbereitung in einem Durchgang.</p>
+
+        <div class="product-stats">
+          <div class="product-stat">
+            <div class="product-stat-num">5</div>
+            <div class="product-stat-label">Scharreihen</div>
+          </div>
+          <div class="product-stat">
+            <div class="product-stat-num">100%</div>
+            <div class="product-stat-label">Überdeckung</div>
+          </div>
+          <div class="product-stat">
+            <div class="product-stat-num">3</div>
+            <div class="product-stat-label">Funktionen</div>
+          </div>
+          <div class="product-stat">
+            <div class="product-stat-num">3–12 m</div>
+            <div class="product-stat-label">Arbeitsbreite</div>
+          </div>
+        </div>
+
+        <a href="index.html#contact" class="btn-primary">Angebot anfragen →</a>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- PLANUM IM DETAIL -->
+  <section class="product-gallery">
+    <div class="product-gallery-inner">
+      <div class="product-gallery-header">
+        <div class="section-tag">// Aufbau &amp; Komponenten</div>
+        <div class="product-gallery-title">PLANUM im Detail</div>
+      </div>
+
+      <!-- Block 1 — 5 Reihen Parallelogrammschare -->
+      <div class="gallery-block fade-up">
+        <div class="blueprint-frame">
+          <img src="images/planum-schare.jpg" alt="PLANUM — 5 Reihen Parallelogrammschare" />
+        </div>
+        <div class="gallery-text">
+          <div class="gallery-text-tag">// Parallelogrammschare</div>
+          <div class="gallery-text-title">5 Reihen Parallelogrammschare</div>
+          <p class="gallery-text-body">Fünf Reihen von Scharen — jede auf eigenem Parallelogramm aufgehängt. Vollständige Überdeckung aller Arbeitszonen ohne Lücken. Exakte Tiefenführung und Konturanpassung über die gesamte Arbeitsbreite — auch bei unebenem Gelände. Im Vergleich zu Standard-Modellen mit 3–4 Reihen: keine Streifen, kein übergangenes Unkraut.</p>
+        </div>
+      </div>
+
+      <!-- Block 2 — Parallelogrammführung -->
+      <div class="gallery-block reverse fade-up">
+        <div class="blueprint-frame">
+          <img src="images/planum-parallelogramm.jpg" alt="PLANUM — Parallelogrammführung" />
+        </div>
+        <div class="gallery-text">
+          <div class="gallery-text-tag">// Parallelogrammführung</div>
+          <div class="gallery-text-title">Parallelogrammführung</div>
+          <p class="gallery-text-body">Individuelle Aufhängung jeder Schar auf einem eigenen Parallelogramm. Präzise Bodenanpassung trotz verbundener Sektionen. Exakte Kopierung der Feldkontur — gleichmäßige Bearbeitungstiefe von der ersten bis zur letzten Reihe.</p>
+        </div>
+      </div>
+
+      <!-- Block 3 — Hinterer Federrechen -->
+      <div class="gallery-block fade-up">
+        <div class="blueprint-frame">
+          <img src="images/planum-rechen.jpg" alt="PLANUM — Hinterer Federrechen" />
+        </div>
+        <div class="gallery-text">
+          <div class="gallery-text-tag">// Federrechen</div>
+          <div class="gallery-text-title">Hinterer Federrechen</div>
+          <p class="gallery-text-body">Federgezinkter Nachlaufrechen — der entscheidende Unterschied. Drei Funktionen in einem Bauteil: Feinplanierung der Oberfläche, zusätzliche Lockerung der oberen Bodenschicht und vollständiges Auskämmen von Unkrautresten. Schafft optimale Bedingungen für die nachfolgende Aussaat.</p>
+        </div>
+      </div>
+
+      <!-- Block 4 — Maximale Ebenheit -->
+      <div class="gallery-block reverse fade-up">
+        <div class="blueprint-frame">
+          <img src="images/planum-ebenheit.jpg" alt="PLANUM — Maximale Ebenheit" />
+        </div>
+        <div class="gallery-text">
+          <div class="gallery-text-tag">// Planierung &amp; Ebenheit</div>
+          <div class="gallery-text-title">Maximale Ebenheit</div>
+          <p class="gallery-text-body">Die Kombination aus 5-Reihen-Überdeckung und Federrechen erzeugt eine perfekt ebene Oberfläche. Gleichmäßige Saatablagetiefe über das gesamte Feld — Voraussetzung für homogenen Feldaufgang und maximalen Ertrag.</p>
+        </div>
+      </div>
+
+      <!-- Block 5 — Mechanische Unkrautbekämpfung -->
+      <div class="gallery-block fade-up">
+        <div class="blueprint-frame">
+          <img src="images/planum-unkraut.jpg" alt="PLANUM — Mechanische Unkrautbekämpfung" />
+        </div>
+        <div class="gallery-text">
+          <div class="gallery-text-tag">// Unkrautbekämpfung</div>
+          <div class="gallery-text-title">Mechanische Unkrautbekämpfung</div>
+          <p class="gallery-text-body">Vollständiges Auskämmen durch 5 Scharreihen — kein Unkraut bleibt stehen. Der Federrechen kämmt zusätzlich Wurzelreste aus. Zwei Stufen der Unkrautbekämpfung in einem Durchgang — ohne Chemie.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- DREI FUNKTIONEN -->
+  <section class="functions-section">
+    <div class="functions-inner">
+      <div class="functions-header">
+        <div class="section-tag">// Drei Funktionen</div>
+        <div class="functions-title">Ein Aggregat. Drei Aufgaben.</div>
+      </div>
+      <div class="functions-text">
+        <p>PLANUM löst drei Aufgaben in einem einzigen Durchgang:</p>
+        <ul>
+          <li><strong>Planierung</strong> — perfekte Ebenheit der Oberfläche für gleichmäßige Saatablage</li>
+          <li><strong>Lockerung</strong> — Krümelstruktur in der Saatzone, optimale Bedingungen für Keimung</li>
+          <li><strong>Unkrautauskämmen</strong> — vollständige Entfernung durch 5-Reihen-Überdeckung und Federrechen</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <!-- TECHNICAL SPECS -->
+  <section class="product-specs">
+    <div class="product-specs-inner">
+      <div class="product-specs-header">
+        <div class="section-tag">// Technische Daten</div>
+        <div class="product-specs-title">Technische<br />Spezifikationen</div>
+      </div>
+
+      <div class="specs-row"><div class="specs-key">Arbeitsbreite</div><div class="specs-val">3–12 m</div></div>
+      <div class="specs-row"><div class="specs-key">Scharreihen</div><div class="specs-val">5</div></div>
+      <div class="specs-row"><div class="specs-key">Scharaufhängung</div><div class="specs-val">Parallelogramm, einzeln gefedert</div></div>
+      <div class="specs-row"><div class="specs-key">Nachlauf</div><div class="specs-val">Federrechen (gefedert)</div></div>
+      <div class="specs-row"><div class="specs-key">Arbeitstiefe</div><div class="specs-val">3–12 cm</div></div>
+      <div class="specs-row"><div class="specs-key">Überdeckung</div><div class="specs-val">100%</div></div>
+      <div class="specs-row"><div class="specs-key">Arbeitsgeschwindigkeit</div><div class="specs-val">5–12 km/h</div></div>
+      <div class="specs-row"><div class="specs-key">Traktorleistung</div><div class="specs-val">75–150 hp</div></div>
+    </div>
+  </section>
+
+  <!-- CTA -->
+  <section class="product-cta-section">
+    <div class="product-cta-inner">
+      <div class="product-cta-card">
+        <div>
+          <div class="product-cta-title">PLANUM für Ihren Betrieb<br />konfigurieren</div>
+          <p class="product-cta-sub">Lassen Sie sich beraten — wir finden die optimale Konfiguration für Ihren Betrieb.</p>
+        </div>
+        <a href="index.html#contact" class="btn-primary">Angebot anfragen →</a>
+      </div>
+    </div>
+  </section>
+
+  <footer>
+    <span class="footer-copy">© 2025 Byrud Tech. Alle Rechte vorbehalten.</span>
+    <div class="footer-links"><a href="#">Impressum</a><a href="#">Datenschutz</a><a href="#">AGB</a></div>
+    <span class="footer-copy">Hamburg · byrud-tech.com</span>
+  </footer>
+
+  <script>
+    /* BURGER / DRAWER */
+    const burger = document.getElementById('navBurger');
+    const drawer = document.getElementById('mobileDrawer');
+    burger.addEventListener('click', () => {
+      const isOpen = drawer.classList.toggle('open');
+      burger.classList.toggle('open', isOpen);
+      burger.setAttribute('aria-expanded', isOpen);
+      document.body.style.overflow = isOpen ? 'hidden' : '';
+    });
+    document.querySelectorAll('.drawer-link').forEach(link => {
+      link.addEventListener('click', () => {
+        drawer.classList.remove('open');
+        burger.classList.remove('open');
+        burger.setAttribute('aria-expanded', 'false');
+        document.body.style.overflow = '';
+      });
+    });
+    /* FADE-UP ON SCROLL */
+    const fups = document.querySelectorAll('.fade-up');
+    const obs = new IntersectionObserver(entries => {
+      entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('visible'); obs.unobserve(e.target); } });
+    }, { threshold: 0.1 });
+    fups.forEach(el => obs.observe(el));
+    /* LANG SWITCHER */
+    function toggleLang() { document.getElementById('langDropdown').classList.toggle('open'); }
+    document.addEventListener('click', function(e) { if (!e.target.closest('.lang-switcher')) document.getElementById('langDropdown').classList.remove('open'); });
+  </script>
+
+</body>
+</html>
