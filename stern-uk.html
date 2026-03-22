@@ -54,6 +54,8 @@
     .product-stat-label { font-family: 'IBM Plex Mono', monospace; font-size: 0.6rem; letter-spacing: 0.08em; text-transform: uppercase; color: var(--text-dim); }
     .product-gallery { padding: 5rem 3rem; }
     .product-gallery-inner { max-width: 1400px; margin: 0 auto; display: flex; flex-direction: column; gap: 6rem; }
+    .product-gallery-header { margin-bottom: 0; }
+    .product-gallery-title { font-family: 'Barlow Condensed', sans-serif; font-weight: 800; font-size: clamp(1.8rem, 3vw, 2.8rem); text-transform: uppercase; letter-spacing: -0.01em; line-height: 0.95; }
     .gallery-block { display: grid; grid-template-columns: 1fr 1fr; gap: 5rem; align-items: center; }
     .gallery-block.reverse { direction: rtl; }
     .gallery-block.reverse > * { direction: ltr; }
@@ -226,6 +228,10 @@
 
   <section class="product-gallery">
     <div class="product-gallery-inner">
+      <div class="product-gallery-header">
+        <div class="section-tag">// Конструкція та компоненти</div>
+        <div class="product-gallery-title">STERN — детально</div>
+      </div>
       <div class="gallery-block">
         <div class="blueprint-frame">
           <img src="images/stern-raeder.jpg" alt="STERN — Sternräder" />
