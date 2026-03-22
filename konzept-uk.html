@@ -154,16 +154,26 @@
         background: var(--border);
       }
       .konzept-tile {
-        display: flex;
+        display: grid;
+        grid-template-columns: 1fr 1fr;
         align-items: center;
-        gap: 0.75rem;
-        padding: 0.75rem 1rem;
+        padding: 0;
         min-height: auto;
       }
-      .konzept-tile-tag { min-width: 55px; margin-bottom: 0; }
+      .konzept-tile-left {
+        padding: 0.75rem 1rem;
+        display: flex;
+        flex-direction: column;
+        gap: 0.25rem;
+      }
+      .konzept-tile-right {
+        padding: 0.75rem 1rem;
+        border-left: 1px solid var(--border);
+      }
+      .konzept-tile-tag { margin-bottom: 0; }
       .konzept-tile-tagname { font-size: 0.6rem; }
-      .konzept-tile-name { font-size: 0.85rem; margin-bottom: 0; white-space: nowrap; }
-      .konzept-tile-desc { font-size: 0.7rem; margin-top: 0.15rem; }
+      .konzept-tile-name { font-size: 0.8rem; margin-bottom: 0; }
+      .konzept-tile-desc { font-size: 0.72rem; line-height: 1.5; }
       .konzept-tile-link { display: none; }
       .konzept-why { padding: 3rem 1.5rem; }
       .konzept-why-grid { grid-template-columns: 1fr; }
@@ -323,54 +333,86 @@
       <div class="konzept-tiles-wrap">
         <div class="konzept-tile-row konzept-tile-row--4">
           <a class="konzept-tile konzept-tile--base" href="rover-uk.html">
-            <div class="konzept-tile-tag"><div class="konzept-tile-dot"></div><span class="konzept-tile-tagname">ROVER — Основа</span></div>
-            <div class="konzept-tile-name">Прополювання та догляд</div>
-            <div class="konzept-tile-desc">Механічний міжрядний обробіток з точністю 1 см</div>
-            <span class="konzept-tile-link">Дізнатись більше →</span>
+            <div class="konzept-tile-left">
+              <div class="konzept-tile-tag"><div class="konzept-tile-dot"></div><span class="konzept-tile-tagname">ROVER — Основа</span></div>
+              <div class="konzept-tile-name">Прополювання та догляд</div>
+            </div>
+            <div class="konzept-tile-right">
+              <div class="konzept-tile-desc">Механічний міжрядний обробіток з точністю 1 см</div>
+              <span class="konzept-tile-link">Дізнатись більше →</span>
+            </div>
           </a>
           <a class="konzept-tile" href="lixa-uk.html">
-            <div class="konzept-tile-tag"><div class="konzept-tile-dot"></div><span class="konzept-tile-tagname">LIXA</span></div>
-            <div class="konzept-tile-name">Рідке підживлення</div>
-            <div class="konzept-tile-desc">КАС, РКД та засоби захисту рослин безпосередньо в кореневу зону</div>
-            <span class="konzept-tile-link">Дізнатись більше →</span>
+            <div class="konzept-tile-left">
+              <div class="konzept-tile-tag"><div class="konzept-tile-dot"></div><span class="konzept-tile-tagname">LIXA</span></div>
+              <div class="konzept-tile-name">Рідке підживлення</div>
+            </div>
+            <div class="konzept-tile-right">
+              <div class="konzept-tile-desc">КАС, РКД та засоби захисту рослин безпосередньо в кореневу зону</div>
+              <span class="konzept-tile-link">Дізнатись більше →</span>
+            </div>
           </a>
           <a class="konzept-tile" href="grano-uk.html">
-            <div class="konzept-tile-tag"><div class="konzept-tile-dot"></div><span class="konzept-tile-tagname">GRANO</span></div>
-            <div class="konzept-tile-name">Гранульоване добриво</div>
-            <div class="konzept-tile-desc">Гранулят 5–270 кг/га, бункер 800–2000 л</div>
-            <span class="konzept-tile-link">Дізнатись більше →</span>
+            <div class="konzept-tile-left">
+              <div class="konzept-tile-tag"><div class="konzept-tile-dot"></div><span class="konzept-tile-tagname">GRANO</span></div>
+              <div class="konzept-tile-name">Гранульоване добриво</div>
+            </div>
+            <div class="konzept-tile-right">
+              <div class="konzept-tile-desc">Гранулят 5–270 кг/га, бункер 800–2000 л</div>
+              <span class="konzept-tile-link">Дізнатись більше →</span>
+            </div>
           </a>
           <a class="konzept-tile" href="planum-uk.html">
-            <div class="konzept-tile-tag"><div class="konzept-tile-dot"></div><span class="konzept-tile-tagname">PLANUM</span></div>
-            <div class="konzept-tile-name">Передпосівна комбінація</div>
-            <div class="konzept-tile-desc">5 рядів лап, пружинна гребінка, 100% перекриття</div>
-            <span class="konzept-tile-link">Дізнатись більше →</span>
+            <div class="konzept-tile-left">
+              <div class="konzept-tile-tag"><div class="konzept-tile-dot"></div><span class="konzept-tile-tagname">PLANUM</span></div>
+              <div class="konzept-tile-name">Передпосівна комбінація</div>
+            </div>
+            <div class="konzept-tile-right">
+              <div class="konzept-tile-desc">5 рядів лап, пружинна гребінка, 100% перекриття</div>
+              <span class="konzept-tile-link">Дізнатись більше →</span>
+            </div>
           </a>
         </div>
         <div class="konzept-tile-row konzept-tile-row--4">
           <a class="konzept-tile" href="veles-uk.html">
-            <div class="konzept-tile-tag"><div class="konzept-tile-dot"></div><span class="konzept-tile-tagname">VELES</span></div>
-            <div class="konzept-tile-name">Посів</div>
-            <div class="konzept-tile-desc">Підсів та проміжний посів для зернових, ріпаку, сої</div>
-            <span class="konzept-tile-link">Дізнатись більше →</span>
+            <div class="konzept-tile-left">
+              <div class="konzept-tile-tag"><div class="konzept-tile-dot"></div><span class="konzept-tile-tagname">VELES</span></div>
+              <div class="konzept-tile-name">Посів</div>
+            </div>
+            <div class="konzept-tile-right">
+              <div class="konzept-tile-desc">Підсів та проміжний посів для зернових, ріпаку, сої</div>
+              <span class="konzept-tile-link">Дізнатись більше →</span>
+            </div>
           </a>
           <a class="konzept-tile" href="tor-uk.html">
-            <div class="konzept-tile-tag"><div class="konzept-tile-dot"></div><span class="konzept-tile-tagname">TOR</span></div>
-            <div class="konzept-tile-name">Сітчаста борона</div>
-            <div class="konzept-tile-desc">Сітчаста борона для насіннєвого ложа та боротьби з бур'янами</div>
-            <span class="konzept-tile-link">Дізнатись більше →</span>
+            <div class="konzept-tile-left">
+              <div class="konzept-tile-tag"><div class="konzept-tile-dot"></div><span class="konzept-tile-tagname">TOR</span></div>
+              <div class="konzept-tile-name">Сітчаста борона</div>
+            </div>
+            <div class="konzept-tile-right">
+              <div class="konzept-tile-desc">Сітчаста борона для насіннєвого ложа та боротьби з бур'янами</div>
+              <span class="konzept-tile-link">Дізнатись більше →</span>
+            </div>
           </a>
           <a class="konzept-tile" href="stern-uk.html">
-            <div class="konzept-tile-tag"><div class="konzept-tile-dot"></div><span class="konzept-tile-tagname">STERN</span></div>
-            <div class="konzept-tile-name">Боронування та ущільнення</div>
-            <div class="konzept-tile-desc">Ротаційна борона для догляду та зворотного ущільнення</div>
-            <span class="konzept-tile-link">Дізнатись більше →</span>
+            <div class="konzept-tile-left">
+              <div class="konzept-tile-tag"><div class="konzept-tile-dot"></div><span class="konzept-tile-tagname">STERN</span></div>
+              <div class="konzept-tile-name">Боронування та ущільнення</div>
+            </div>
+            <div class="konzept-tile-right">
+              <div class="konzept-tile-desc">Ротаційна борона для догляду та зворотного ущільнення</div>
+              <span class="konzept-tile-link">Дізнатись більше →</span>
+            </div>
           </a>
           <a class="konzept-tile" href="turbo-uk.html">
-            <div class="konzept-tile-tag"><div class="konzept-tile-dot"></div><span class="konzept-tile-tagname">TURBO</span></div>
-            <div class="konzept-tile-name">Подрібнення</div>
-            <div class="konzept-tile-desc">Подрібнення пожнивних решток для швидкого розкладання</div>
-            <span class="konzept-tile-link">Дізнатись більше →</span>
+            <div class="konzept-tile-left">
+              <div class="konzept-tile-tag"><div class="konzept-tile-dot"></div><span class="konzept-tile-tagname">TURBO</span></div>
+              <div class="konzept-tile-name">Подрібнення</div>
+            </div>
+            <div class="konzept-tile-right">
+              <div class="konzept-tile-desc">Подрібнення пожнивних решток для швидкого розкладання</div>
+              <span class="konzept-tile-link">Дізнатись більше →</span>
+            </div>
           </a>
         </div>
       </div>

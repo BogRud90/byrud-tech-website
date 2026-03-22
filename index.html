@@ -296,17 +296,27 @@
         background: var(--border);
       }
       .platform-tile {
-        display: flex;
+        display: grid;
+        grid-template-columns: 1fr 1fr;
         align-items: center;
-        gap: 0.75rem;
-        padding: 0.75rem 1rem;
         background: var(--bg);
+        padding: 0;
         min-height: auto;
       }
-      .platform-tile-tag { min-width: 55px; margin-bottom: 0; }
+      .platform-tile-left {
+        padding: 0.75rem 1rem;
+        display: flex;
+        flex-direction: column;
+        gap: 0.25rem;
+      }
+      .platform-tile-right {
+        padding: 0.75rem 1rem;
+        border-left: 1px solid var(--border);
+      }
+      .platform-tile-tag { margin-bottom: 0; }
       .platform-tile-tagname { font-size: 0.6rem; }
-      .platform-tile-name { font-size: 0.85rem; margin-bottom: 0; white-space: nowrap; }
-      .platform-tile-desc { font-size: 0.7rem; margin-top: 0.15rem; }
+      .platform-tile-name { font-size: 0.8rem; margin-bottom: 0; }
+      .platform-tile-desc { font-size: 0.72rem; line-height: 1.5; }
       #platform { overflow-x: hidden; }
       .results-bg-image { width: 200px; height: 200px; right: 1rem; top: 1rem; }
       .results-bg-image img { opacity: 0.2; }
@@ -673,47 +683,79 @@
 
       <div class="platform-tiles-4">
         <div class="platform-tile">
-          <div class="platform-tile-tag"><div class="platform-tile-dot"></div><span class="platform-tile-tagname">ROVER</span></div>
-          <div class="platform-tile-name">Hacken & Pflegen</div>
-          <div class="platform-tile-desc">Mechanische Zwischenreihenbearbeitung mit 1 cm Genauigkeit</div>
+          <div class="platform-tile-left">
+            <div class="platform-tile-tag"><div class="platform-tile-dot"></div><span class="platform-tile-tagname">ROVER</span></div>
+            <div class="platform-tile-name">Hacken & Pflegen</div>
+          </div>
+          <div class="platform-tile-right">
+            <div class="platform-tile-desc">Mechanische Zwischenreihenbearbeitung mit 1 cm Genauigkeit</div>
+          </div>
         </div>
         <div class="platform-tile">
-          <div class="platform-tile-tag"><div class="platform-tile-dot"></div><span class="platform-tile-tagname">LIXA</span></div>
-          <div class="platform-tile-name">Flüssigdüngung</div>
-          <div class="platform-tile-desc">UAN, NFS und Pflanzenschutzmittel direkt in die Wurzelzone</div>
+          <div class="platform-tile-left">
+            <div class="platform-tile-tag"><div class="platform-tile-dot"></div><span class="platform-tile-tagname">LIXA</span></div>
+            <div class="platform-tile-name">Flüssigdüngung</div>
+          </div>
+          <div class="platform-tile-right">
+            <div class="platform-tile-desc">UAN, NFS und Pflanzenschutzmittel direkt in die Wurzelzone</div>
+          </div>
         </div>
         <div class="platform-tile">
-          <div class="platform-tile-tag"><div class="platform-tile-dot"></div><span class="platform-tile-tagname">GRANO</span></div>
-          <div class="platform-tile-name">Granulatdüngung</div>
-          <div class="platform-tile-desc">Granulat 5–270 kg/ha, Bunker 800–2000 l</div>
+          <div class="platform-tile-left">
+            <div class="platform-tile-tag"><div class="platform-tile-dot"></div><span class="platform-tile-tagname">GRANO</span></div>
+            <div class="platform-tile-name">Granulatdüngung</div>
+          </div>
+          <div class="platform-tile-right">
+            <div class="platform-tile-desc">Granulat 5–270 kg/ha, Bunker 800–2000 l</div>
+          </div>
         </div>
         <div class="platform-tile">
-          <div class="platform-tile-tag"><div class="platform-tile-dot"></div><span class="platform-tile-tagname">PLANUM</span></div>
-          <div class="platform-tile-name">Saatbettbereitung</div>
-          <div class="platform-tile-desc">5 Reihen Parallelogrammschare, Federrechen, 100% Überdeckung</div>
+          <div class="platform-tile-left">
+            <div class="platform-tile-tag"><div class="platform-tile-dot"></div><span class="platform-tile-tagname">PLANUM</span></div>
+            <div class="platform-tile-name">Saatbettbereitung</div>
+          </div>
+          <div class="platform-tile-right">
+            <div class="platform-tile-desc">5 Reihen Parallelogrammschare, Federrechen, 100% Überdeckung</div>
+          </div>
         </div>
       </div>
 
       <div class="platform-tiles-4">
         <div class="platform-tile">
-          <div class="platform-tile-tag"><div class="platform-tile-dot"></div><span class="platform-tile-tagname">VELES</span></div>
-          <div class="platform-tile-name">Aussaat</div>
-          <div class="platform-tile-desc">Zwischensaat und Untersaat für Getreide, Raps, Soja</div>
+          <div class="platform-tile-left">
+            <div class="platform-tile-tag"><div class="platform-tile-dot"></div><span class="platform-tile-tagname">VELES</span></div>
+            <div class="platform-tile-name">Aussaat</div>
+          </div>
+          <div class="platform-tile-right">
+            <div class="platform-tile-desc">Zwischensaat und Untersaat für Getreide, Raps, Soja</div>
+          </div>
         </div>
         <div class="platform-tile">
-          <div class="platform-tile-tag"><div class="platform-tile-dot"></div><span class="platform-tile-tagname">TOR</span></div>
-          <div class="platform-tile-name">Netzegge</div>
-          <div class="platform-tile-desc">Netzegge für Saatbett und Unkrautbekämpfung</div>
+          <div class="platform-tile-left">
+            <div class="platform-tile-tag"><div class="platform-tile-dot"></div><span class="platform-tile-tagname">TOR</span></div>
+            <div class="platform-tile-name">Netzegge</div>
+          </div>
+          <div class="platform-tile-right">
+            <div class="platform-tile-desc">Netzegge für Saatbett und Unkrautbekämpfung</div>
+          </div>
         </div>
         <div class="platform-tile">
-          <div class="platform-tile-tag"><div class="platform-tile-dot"></div><span class="platform-tile-tagname">STERN</span></div>
-          <div class="platform-tile-name">Striegeln & Verfestigen</div>
-          <div class="platform-tile-desc">Rotationsstriegel für Pflege und Rückverfestigung</div>
+          <div class="platform-tile-left">
+            <div class="platform-tile-tag"><div class="platform-tile-dot"></div><span class="platform-tile-tagname">STERN</span></div>
+            <div class="platform-tile-name">Striegeln & Verfestigen</div>
+          </div>
+          <div class="platform-tile-right">
+            <div class="platform-tile-desc">Rotationsstriegel für Pflege und Rückverfestigung</div>
+          </div>
         </div>
         <div class="platform-tile">
-          <div class="platform-tile-tag"><div class="platform-tile-dot"></div><span class="platform-tile-tagname">TURBO</span></div>
-          <div class="platform-tile-name">Zerkleinerung</div>
-          <div class="platform-tile-desc">Erntegutzerkleinerung für schnelle Zersetzung</div>
+          <div class="platform-tile-left">
+            <div class="platform-tile-tag"><div class="platform-tile-dot"></div><span class="platform-tile-tagname">TURBO</span></div>
+            <div class="platform-tile-name">Zerkleinerung</div>
+          </div>
+          <div class="platform-tile-right">
+            <div class="platform-tile-desc">Erntegutzerkleinerung für schnelle Zersetzung</div>
+          </div>
         </div>
       </div>
 

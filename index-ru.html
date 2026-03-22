@@ -283,17 +283,27 @@
         background: var(--border);
       }
       .platform-tile {
-        display: flex;
+        display: grid;
+        grid-template-columns: 1fr 1fr;
         align-items: center;
-        gap: 0.75rem;
-        padding: 0.75rem 1rem;
         background: var(--bg);
+        padding: 0;
         min-height: auto;
       }
-      .platform-tile-tag { min-width: 55px; margin-bottom: 0; }
+      .platform-tile-left {
+        padding: 0.75rem 1rem;
+        display: flex;
+        flex-direction: column;
+        gap: 0.25rem;
+      }
+      .platform-tile-right {
+        padding: 0.75rem 1rem;
+        border-left: 1px solid var(--border);
+      }
+      .platform-tile-tag { margin-bottom: 0; }
       .platform-tile-tagname { font-size: 0.6rem; }
-      .platform-tile-name { font-size: 0.85rem; margin-bottom: 0; white-space: nowrap; }
-      .platform-tile-desc { font-size: 0.7rem; margin-top: 0.15rem; }
+      .platform-tile-name { font-size: 0.8rem; margin-bottom: 0; }
+      .platform-tile-desc { font-size: 0.72rem; line-height: 1.5; }
       #platform { overflow-x: hidden; }
       .results-bg-image { width: 200px; height: 200px; right: 1rem; top: 1rem; }
       .results-bg-image img { opacity: 0.2; }
@@ -659,47 +669,79 @@
 
       <div class="platform-tiles-4">
         <div class="platform-tile">
-          <div class="platform-tile-tag"><div class="platform-tile-dot"></div><span class="platform-tile-tagname">ROVER</span></div>
-          <div class="platform-tile-name">Обработка и уход</div>
-          <div class="platform-tile-desc">Механическая междурядная обработка с точностью 1 см</div>
+          <div class="platform-tile-left">
+            <div class="platform-tile-tag"><div class="platform-tile-dot"></div><span class="platform-tile-tagname">ROVER</span></div>
+            <div class="platform-tile-name">Обработка и уход</div>
+          </div>
+          <div class="platform-tile-right">
+            <div class="platform-tile-desc">Механическая междурядная обработка с точностью 1 см</div>
+          </div>
         </div>
         <div class="platform-tile">
-          <div class="platform-tile-tag"><div class="platform-tile-dot"></div><span class="platform-tile-tagname">LIXA</span></div>
-          <div class="platform-tile-name">Жидкие удобрения</div>
-          <div class="platform-tile-desc">КАС, NFS и средства защиты растений прямо в корневую зону</div>
+          <div class="platform-tile-left">
+            <div class="platform-tile-tag"><div class="platform-tile-dot"></div><span class="platform-tile-tagname">LIXA</span></div>
+            <div class="platform-tile-name">Жидкие удобрения</div>
+          </div>
+          <div class="platform-tile-right">
+            <div class="platform-tile-desc">КАС, NFS и средства защиты растений прямо в корневую зону</div>
+          </div>
         </div>
         <div class="platform-tile">
-          <div class="platform-tile-tag"><div class="platform-tile-dot"></div><span class="platform-tile-tagname">GRANO</span></div>
-          <div class="platform-tile-name">Гранулированные удобрения</div>
-          <div class="platform-tile-desc">Гранулят 5–270 кг/га, бункер 800–2000 л</div>
+          <div class="platform-tile-left">
+            <div class="platform-tile-tag"><div class="platform-tile-dot"></div><span class="platform-tile-tagname">GRANO</span></div>
+            <div class="platform-tile-name">Гранулированные удобрения</div>
+          </div>
+          <div class="platform-tile-right">
+            <div class="platform-tile-desc">Гранулят 5–270 кг/га, бункер 800–2000 л</div>
+          </div>
         </div>
         <div class="platform-tile">
-          <div class="platform-tile-tag"><div class="platform-tile-dot"></div><span class="platform-tile-tagname">PLANUM</span></div>
-          <div class="platform-tile-name">Предпосевная комбинация</div>
-          <div class="platform-tile-desc">5 рядов лап, пружинная гребёнка, 100% перекрытие</div>
+          <div class="platform-tile-left">
+            <div class="platform-tile-tag"><div class="platform-tile-dot"></div><span class="platform-tile-tagname">PLANUM</span></div>
+            <div class="platform-tile-name">Предпосевная комбинация</div>
+          </div>
+          <div class="platform-tile-right">
+            <div class="platform-tile-desc">5 рядов лап, пружинная гребёнка, 100% перекрытие</div>
+          </div>
         </div>
       </div>
 
       <div class="platform-tiles-4">
         <div class="platform-tile">
-          <div class="platform-tile-tag"><div class="platform-tile-dot"></div><span class="platform-tile-tagname">VELES</span></div>
-          <div class="platform-tile-name">Посев</div>
-          <div class="platform-tile-desc">Подсев и междурядный посев зерновых, рапса, сои</div>
+          <div class="platform-tile-left">
+            <div class="platform-tile-tag"><div class="platform-tile-dot"></div><span class="platform-tile-tagname">VELES</span></div>
+            <div class="platform-tile-name">Посев</div>
+          </div>
+          <div class="platform-tile-right">
+            <div class="platform-tile-desc">Подсев и междурядный посев зерновых, рапса, сои</div>
+          </div>
         </div>
         <div class="platform-tile">
-          <div class="platform-tile-tag"><div class="platform-tile-dot"></div><span class="platform-tile-tagname">TOR</span></div>
-          <div class="platform-tile-name">Сетчатая борона</div>
-          <div class="platform-tile-desc">Сетчатая борона для подготовки посевного ложа и борьбы с сорняками</div>
+          <div class="platform-tile-left">
+            <div class="platform-tile-tag"><div class="platform-tile-dot"></div><span class="platform-tile-tagname">TOR</span></div>
+            <div class="platform-tile-name">Сетчатая борона</div>
+          </div>
+          <div class="platform-tile-right">
+            <div class="platform-tile-desc">Сетчатая борона для подготовки посевного ложа и борьбы с сорняками</div>
+          </div>
         </div>
         <div class="platform-tile">
-          <div class="platform-tile-tag"><div class="platform-tile-dot"></div><span class="platform-tile-tagname">STERN</span></div>
-          <div class="platform-tile-name">Боронование и уплотнение</div>
-          <div class="platform-tile-desc">Ротационная борона для ухода и уплотнения</div>
+          <div class="platform-tile-left">
+            <div class="platform-tile-tag"><div class="platform-tile-dot"></div><span class="platform-tile-tagname">STERN</span></div>
+            <div class="platform-tile-name">Боронование и уплотнение</div>
+          </div>
+          <div class="platform-tile-right">
+            <div class="platform-tile-desc">Ротационная борона для ухода и уплотнения</div>
+          </div>
         </div>
         <div class="platform-tile">
-          <div class="platform-tile-tag"><div class="platform-tile-dot"></div><span class="platform-tile-tagname">TURBO</span></div>
-          <div class="platform-tile-name">Измельчение</div>
-          <div class="platform-tile-desc">Измельчение растительных остатков для быстрого разложения</div>
+          <div class="platform-tile-left">
+            <div class="platform-tile-tag"><div class="platform-tile-dot"></div><span class="platform-tile-tagname">TURBO</span></div>
+            <div class="platform-tile-name">Измельчение</div>
+          </div>
+          <div class="platform-tile-right">
+            <div class="platform-tile-desc">Измельчение растительных остатков для быстрого разложения</div>
+          </div>
         </div>
       </div>
 
