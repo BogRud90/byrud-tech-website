@@ -336,8 +336,9 @@
       .platform-tile-name { font-size: 0.8rem; margin-bottom: 0; }
       .platform-tile-desc { font-size: 0.72rem; line-height: 1.5; }
       #platform { overflow-x: hidden; }
-      .results-bg-image { width: 200px; height: 200px; right: 1rem; top: 1rem; }
-      .results-bg-image img { opacity: 0.2; }
+      .results-bg-image { position: relative; top: auto; right: auto; width: 100%; height: auto; margin-bottom: 1.5rem; display: flex; justify-content: center; }
+      .results-bg-image img { width: 200px; height: 200px; opacity: 0.3; }
+      .results-bg-image-fade { display: none; }
       .results-cta { flex-direction: column; align-items: flex-start; gap: 1.5rem; padding: 2rem; }
       .results-cta-divider { display: none; }
       .results-cta-stats { gap: 1.5rem; flex-wrap: wrap; }
