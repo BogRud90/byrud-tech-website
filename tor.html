@@ -241,7 +241,7 @@
     <div class="product-hero-inner">
       <div class="product-hero-photo">
         <div class="blueprint-frame">
-          <img src="images/tor-hero.jpg" alt="Netzenegge TOR — Byrud Tech" />
+          <img src="images/tor-hero.jpg" data-src-dark="images/tor-hero.jpg" data-src-light="images/light/tor-hero.jpg" alt="Netzenegge TOR — Byrud Tech" />
         </div>
       </div>
       <div class="product-hero-text">
@@ -268,7 +268,7 @@
 
       <div class="gallery-block">
         <div class="blueprint-frame">
-          <img src="images/tor-zaehne.jpg" alt="TOR — Zahnstärke" />
+          <img src="images/tor-zaehne.jpg" data-src-dark="images/tor-zaehne.jpg" data-src-light="images/light/tor-zaehne.jpg" alt="TOR — Zahnstärke" />
         </div>
         <div class="gallery-text">
           <div class="gallery-text-tag">// Zahnstärke</div>
@@ -279,7 +279,7 @@
 
       <div class="gallery-block reverse">
         <div class="blueprint-frame">
-          <img src="images/tor-feld.jpg" alt="TOR — Winkelstellungen" />
+          <img src="images/tor-feld.jpg" data-src-dark="images/tor-feld.jpg" data-src-light="images/light/tor-feld.jpg" alt="TOR — Winkelstellungen" />
         </div>
         <div class="gallery-text">
           <div class="gallery-text-tag">// Winkelstellungen</div>
@@ -351,10 +351,22 @@
       document.body.classList.toggle('light-theme');
       var isLight = document.body.classList.contains('light-theme');
       localStorage.setItem('theme', isLight ? 'light' : 'dark');
+      updateThemePhotos(isLight);
+    }
+    function updateThemePhotos(isLight) {
+      document.querySelectorAll('[data-src-dark]').forEach(function(img) {
+        if (isLight && img.dataset.srcLight) {
+          img.src = img.dataset.srcLight;
+        } else if (img.dataset.srcDark) {
+          img.src = img.dataset.srcDark;
+        }
+      });
     }
     (function() {
-      if (localStorage.getItem('theme') === 'light') {
+      var isLight = localStorage.getItem('theme') === 'light';
+      if (isLight) {
         document.body.classList.add('light-theme');
+        updateThemePhotos(true);
       }
     })();
   </script>

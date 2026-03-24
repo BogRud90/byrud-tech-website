@@ -258,7 +258,7 @@
 
       <div class="product-hero-photo">
         <div class="blueprint-frame">
-          <img src="images/planum-hero.jpg" alt="Предпосевная комбинация PLANUM — Byrud Tech" />
+          <img src="images/planum-hero.jpg" data-src-dark="images/planum-hero.jpg" data-src-light="images/light/planum-hero.jpg" alt="Предпосевная комбинация PLANUM — Byrud Tech" />
         </div>
       </div>
 
@@ -321,7 +321,7 @@
       <!-- Block 1 — 5 рядов лап -->
       <div class="gallery-block fade-up">
         <div class="blueprint-frame">
-          <img src="images/planum-schare.jpg" alt="PLANUM — 5 рядов лап" />
+          <img src="images/planum-schare.jpg" data-src-dark="images/planum-schare.jpg" data-src-light="images/light/planum-schare.jpg" alt="PLANUM — 5 рядов лап" />
         </div>
         <div class="gallery-text">
           <div class="gallery-text-tag">// Ряды лап</div>
@@ -333,7 +333,7 @@
       <!-- Block 2 — 100% Перекрытие -->
       <div class="gallery-block reverse fade-up">
         <div class="blueprint-frame">
-          <img src="images/planum-ueberdeckung.jpg" alt="PLANUM — 100% перекрытие" />
+          <img src="images/planum-ueberdeckung.jpg" data-src-dark="images/planum-ueberdeckung.jpg" data-src-light="images/light/planum-ueberdeckung.jpg" alt="PLANUM — 100% перекрытие" />
         </div>
         <div class="gallery-text">
           <div class="gallery-text-tag">// Перекрытие</div>
@@ -345,7 +345,7 @@
       <!-- Block 3 — Пружинная гребёнка -->
       <div class="gallery-block fade-up">
         <div class="blueprint-frame">
-          <img src="images/planum-rechen.jpg" alt="PLANUM — Задняя пружинная гребёнка" />
+          <img src="images/planum-rechen.jpg" data-src-dark="images/planum-rechen.jpg" data-src-light="images/light/planum-rechen.jpg" alt="PLANUM — Задняя пружинная гребёнка" />
         </div>
         <div class="gallery-text">
           <div class="gallery-text-tag">// Пружинная гребёнка</div>
@@ -386,7 +386,7 @@
       <!-- LIXA -->
       <div class="gallery-block fade-up">
         <div class="blueprint-frame">
-          <img src="images/lixa-hero.jpg" alt="LIXA — жидкие удобрения на PLANUM" />
+          <img src="images/lixa-hero.jpg" data-src-dark="images/lixa-hero.jpg" data-src-light="images/light/lixa-hero.jpg" alt="LIXA — жидкие удобрения на PLANUM" />
         </div>
         <div class="gallery-text">
           <div class="gallery-text-tag">// Опция LIXA</div>
@@ -400,7 +400,7 @@
       <!-- GRANO -->
       <div class="gallery-block reverse fade-up">
         <div class="blueprint-frame">
-          <img src="images/grano-hero.jpg" alt="GRANO — гранулированные удобрения на PLANUM" />
+          <img src="images/grano-hero.jpg" data-src-dark="images/grano-hero.jpg" data-src-light="images/light/grano-hero.jpg" alt="GRANO — гранулированные удобрения на PLANUM" />
         </div>
         <div class="gallery-text">
           <div class="gallery-text-tag">// Опция GRANO</div>
@@ -465,10 +465,22 @@
       document.body.classList.toggle('light-theme');
       var isLight = document.body.classList.contains('light-theme');
       localStorage.setItem('theme', isLight ? 'light' : 'dark');
+      updateThemePhotos(isLight);
+    }
+    function updateThemePhotos(isLight) {
+      document.querySelectorAll('[data-src-dark]').forEach(function(img) {
+        if (isLight && img.dataset.srcLight) {
+          img.src = img.dataset.srcLight;
+        } else if (img.dataset.srcDark) {
+          img.src = img.dataset.srcDark;
+        }
+      });
     }
     (function() {
-      if (localStorage.getItem('theme') === 'light') {
+      var isLight = localStorage.getItem('theme') === 'light';
+      if (isLight) {
         document.body.classList.add('light-theme');
+        updateThemePhotos(true);
       }
     })();
   </script>

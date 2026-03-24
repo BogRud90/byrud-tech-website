@@ -206,7 +206,7 @@
     <div class="product-hero-inner">
       <div class="product-hero-photo">
         <div class="blueprint-frame">
-          <img src="images/turbo-hero.jpg" alt="Подрібнювач TURBO — Byrud Tech" />
+          <img src="images/turbo-hero.jpg" data-src-dark="images/turbo-hero.jpg" data-src-light="images/light/turbo-hero.jpg" alt="Подрібнювач TURBO — Byrud Tech" />
         </div>
       </div>
       <div class="product-hero-text">
@@ -233,7 +233,7 @@
 
       <div class="gallery-block">
         <div class="blueprint-frame">
-          <img src="images/turbo-scheibe.jpg" alt="TURBO — Турбо-диск" />
+          <img src="images/turbo-scheibe.jpg" data-src-dark="images/turbo-scheibe.jpg" data-src-light="images/light/turbo-scheibe.jpg" alt="TURBO — Турбо-диск" />
         </div>
         <div class="gallery-text">
           <div class="gallery-text-tag">// Турбо-диски</div>
@@ -244,7 +244,7 @@
 
       <div class="gallery-block reverse">
         <div class="blueprint-frame">
-          <img src="images/turbo-bunker.jpg" alt="TURBO — Бункер для добрив та насіння" />
+          <img src="images/turbo-bunker.jpg" data-src-dark="images/turbo-bunker.jpg" data-src-light="images/light/turbo-bunker.jpg" alt="TURBO — Бункер для добрив та насіння" />
         </div>
         <div class="gallery-text">
           <div class="gallery-text-tag">// Опція добрива та посів</div>
@@ -321,10 +321,22 @@
       document.body.classList.toggle('light-theme');
       var isLight = document.body.classList.contains('light-theme');
       localStorage.setItem('theme', isLight ? 'light' : 'dark');
+      updateThemePhotos(isLight);
+    }
+    function updateThemePhotos(isLight) {
+      document.querySelectorAll('[data-src-dark]').forEach(function(img) {
+        if (isLight && img.dataset.srcLight) {
+          img.src = img.dataset.srcLight;
+        } else if (img.dataset.srcDark) {
+          img.src = img.dataset.srcDark;
+        }
+      });
     }
     (function() {
-      if (localStorage.getItem('theme') === 'light') {
+      var isLight = localStorage.getItem('theme') === 'light';
+      if (isLight) {
         document.body.classList.add('light-theme');
+        updateThemePhotos(true);
       }
     })();
   </script>

@@ -228,7 +228,7 @@
     <div class="product-hero-inner">
       <div class="product-hero-photo">
         <div class="blueprint-frame">
-          <img src="images/grano-hero.jpg" alt="Гранулированные удобрения GRANO — Byrud Tech" />
+          <img src="images/grano-hero.jpg" data-src-dark="images/grano-hero.jpg" data-src-light="images/light/grano-hero.jpg" alt="Гранулированные удобрения GRANO — Byrud Tech" />
         </div>
       </div>
       <div class="product-hero-text">
@@ -278,7 +278,7 @@
       </div>
       <div class="gallery-block">
         <div class="blueprint-frame">
-          <img src="images/grano-dosier.jpg" alt="GRANO — дозатор Accord" />
+          <img src="images/grano-dosier.jpg" data-src-dark="images/grano-dosier.jpg" data-src-light="images/light/grano-dosier.jpg" alt="GRANO — дозатор Accord" />
         </div>
         <div class="gallery-text">
           <div class="gallery-text-tag">// Дозатор Accord</div>
@@ -294,7 +294,7 @@
 
       <div class="gallery-block">
         <div class="blueprint-frame">
-          <img src="images/grano-ausbring.jpg" alt="GRANO — варианты внесения" />
+          <img src="images/grano-ausbring.jpg" data-src-dark="images/grano-ausbring.jpg" data-src-light="images/light/grano-ausbring.jpg" alt="GRANO — варианты внесения" />
         </div>
         <div class="gallery-text">
           <div class="gallery-text-tag">// Варианты внесения</div>
@@ -372,10 +372,22 @@
       document.body.classList.toggle('light-theme');
       var isLight = document.body.classList.contains('light-theme');
       localStorage.setItem('theme', isLight ? 'light' : 'dark');
+      updateThemePhotos(isLight);
+    }
+    function updateThemePhotos(isLight) {
+      document.querySelectorAll('[data-src-dark]').forEach(function(img) {
+        if (isLight && img.dataset.srcLight) {
+          img.src = img.dataset.srcLight;
+        } else if (img.dataset.srcDark) {
+          img.src = img.dataset.srcDark;
+        }
+      });
     }
     (function() {
-      if (localStorage.getItem('theme') === 'light') {
+      var isLight = localStorage.getItem('theme') === 'light';
+      if (isLight) {
         document.body.classList.add('light-theme');
+        updateThemePhotos(true);
       }
     })();
   </script>

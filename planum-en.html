@@ -258,7 +258,7 @@
 
       <div class="product-hero-photo">
         <div class="blueprint-frame">
-          <img src="images/planum-hero.jpg" alt="Seedbed combination PLANUM — Byrud Tech" />
+          <img src="images/planum-hero.jpg" data-src-dark="images/planum-hero.jpg" data-src-light="images/light/planum-hero.jpg" alt="Seedbed combination PLANUM — Byrud Tech" />
         </div>
       </div>
 
@@ -321,7 +321,7 @@
       <!-- Block 1 — 5 Share rows -->
       <div class="gallery-block fade-up">
         <div class="blueprint-frame">
-          <img src="images/planum-schare.jpg" alt="PLANUM — 5 Share rows" />
+          <img src="images/planum-schare.jpg" data-src-dark="images/planum-schare.jpg" data-src-light="images/light/planum-schare.jpg" alt="PLANUM — 5 Share rows" />
         </div>
         <div class="gallery-text">
           <div class="gallery-text-tag">// Share rows</div>
@@ -333,7 +333,7 @@
       <!-- Block 2 — 100% Coverage -->
       <div class="gallery-block reverse fade-up">
         <div class="blueprint-frame">
-          <img src="images/planum-ueberdeckung.jpg" alt="PLANUM — 100% Coverage" />
+          <img src="images/planum-ueberdeckung.jpg" data-src-dark="images/planum-ueberdeckung.jpg" data-src-light="images/light/planum-ueberdeckung.jpg" alt="PLANUM — 100% Coverage" />
         </div>
         <div class="gallery-text">
           <div class="gallery-text-tag">// Coverage</div>
@@ -345,7 +345,7 @@
       <!-- Block 3 — Rear spring rake -->
       <div class="gallery-block fade-up">
         <div class="blueprint-frame">
-          <img src="images/planum-rechen.jpg" alt="PLANUM — Rear spring rake" />
+          <img src="images/planum-rechen.jpg" data-src-dark="images/planum-rechen.jpg" data-src-light="images/light/planum-rechen.jpg" alt="PLANUM — Rear spring rake" />
         </div>
         <div class="gallery-text">
           <div class="gallery-text-tag">// Spring rake</div>
@@ -386,7 +386,7 @@
       <!-- LIXA -->
       <div class="gallery-block fade-up">
         <div class="blueprint-frame">
-          <img src="images/lixa-hero.jpg" alt="LIXA — Liquid fertilization on PLANUM" />
+          <img src="images/lixa-hero.jpg" data-src-dark="images/lixa-hero.jpg" data-src-light="images/light/lixa-hero.jpg" alt="LIXA — Liquid fertilization on PLANUM" />
         </div>
         <div class="gallery-text">
           <div class="gallery-text-tag">// Option LIXA</div>
@@ -400,7 +400,7 @@
       <!-- GRANO -->
       <div class="gallery-block reverse fade-up">
         <div class="blueprint-frame">
-          <img src="images/grano-hero.jpg" alt="GRANO — Granular fertilization on PLANUM" />
+          <img src="images/grano-hero.jpg" data-src-dark="images/grano-hero.jpg" data-src-light="images/light/grano-hero.jpg" alt="GRANO — Granular fertilization on PLANUM" />
         </div>
         <div class="gallery-text">
           <div class="gallery-text-tag">// Option GRANO</div>
@@ -465,10 +465,22 @@
       document.body.classList.toggle('light-theme');
       var isLight = document.body.classList.contains('light-theme');
       localStorage.setItem('theme', isLight ? 'light' : 'dark');
+      updateThemePhotos(isLight);
+    }
+    function updateThemePhotos(isLight) {
+      document.querySelectorAll('[data-src-dark]').forEach(function(img) {
+        if (isLight && img.dataset.srcLight) {
+          img.src = img.dataset.srcLight;
+        } else if (img.dataset.srcDark) {
+          img.src = img.dataset.srcDark;
+        }
+      });
     }
     (function() {
-      if (localStorage.getItem('theme') === 'light') {
+      var isLight = localStorage.getItem('theme') === 'light';
+      if (isLight) {
         document.body.classList.add('light-theme');
+        updateThemePhotos(true);
       }
     })();
   </script>

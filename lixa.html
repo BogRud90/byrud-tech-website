@@ -264,7 +264,7 @@
     <div class="product-hero-inner">
       <div class="product-hero-photo">
         <div class="blueprint-frame">
-          <img src="images/lixa-hero.jpg" alt="Flüssigdüngung LIXA — Byrud Tech" />
+          <img src="images/lixa-hero.jpg" data-src-dark="images/lixa-hero.jpg" data-src-light="images/light/lixa-hero.jpg" alt="Flüssigdüngung LIXA — Byrud Tech" />
         </div>
       </div>
       <div class="product-hero-text">
@@ -292,7 +292,7 @@
       </div>
       <div class="tank-section">
         <div class="tank-photo">
-          <img src="images/lixa-tank.jpg" alt="LIXA Tank auf Trägerrahmen" />
+          <img src="images/lixa-tank.jpg" data-src-dark="images/lixa-tank.jpg" data-src-light="images/light/lixa-tank.jpg" alt="LIXA Tank auf Trägerrahmen" />
         </div>
         <div class="tank-table table-wrap">
           <table class="models-table">
@@ -339,7 +339,7 @@
       </div>
       <div class="tank-section">
         <div class="tank-photo">
-          <img src="images/lixa-anhanger.jpg" alt="LIXA Schleppbehälter 2700–6000 l" />
+          <img src="images/lixa-anhanger.jpg" data-src-dark="images/lixa-anhanger.jpg" data-src-light="images/light/lixa-anhanger.jpg" alt="LIXA Schleppbehälter 2700–6000 l" />
         </div>
         <div class="tank-table table-wrap">
           <table class="models-table">
@@ -373,7 +373,7 @@
     <div class="product-gallery-inner">
       <div class="gallery-block reverse">
         <div class="blueprint-frame">
-          <img src="images/lixa-duesen.jpg" alt="LIXA — Düsenoptionen" />
+          <img src="images/lixa-duesen.jpg" data-src-dark="images/lixa-duesen.jpg" data-src-light="images/light/lixa-duesen.jpg" alt="LIXA — Düsenoptionen" />
         </div>
         <div class="gallery-text">
           <div class="gallery-text-tag">// Düsenoptionen</div>
@@ -389,7 +389,7 @@
 
       <div class="gallery-block reverse">
         <div class="blueprint-frame">
-          <img src="images/lixa-o.jpg" alt="LIXA-O — Präzisionsspritzung" />
+          <img src="images/lixa-o.jpg" data-src-dark="images/lixa-o.jpg" data-src-light="images/light/lixa-o.jpg" alt="LIXA-O — Präzisionsspritzung" />
         </div>
         <div class="gallery-text">
           <div class="gallery-text-tag">// Option LIXA-O</div>
@@ -411,7 +411,7 @@
       <div class="product-models-title" style="margin-bottom: 1rem;">LIXA-O — Band Spraying</div>
       <p class="product-models-desc" style="margin-bottom: 2rem;">Punkt-genaue Applikation von Pflanzenschutzmitteln nur in der Zwischenreihe. Bis zu 40% weniger PSM bei gleicher Wirkung.</p>
       <div class="lixa-o-photo">
-        <img src="images/lixa-o-field.jpg" alt="LIXA-O Präzisionsspritzung im Zwischenreihenbereich" />
+        <img src="images/lixa-o-field.jpg" data-src-dark="images/lixa-o-field.jpg" data-src-light="images/light/lixa-o-field.jpg" alt="LIXA-O Präzisionsspritzung im Zwischenreihenbereich" />
       </div>
       <div class="table-wrap">
       <table class="lixa-o-table">
@@ -511,10 +511,22 @@
       document.body.classList.toggle('light-theme');
       var isLight = document.body.classList.contains('light-theme');
       localStorage.setItem('theme', isLight ? 'light' : 'dark');
+      updateThemePhotos(isLight);
+    }
+    function updateThemePhotos(isLight) {
+      document.querySelectorAll('[data-src-dark]').forEach(function(img) {
+        if (isLight && img.dataset.srcLight) {
+          img.src = img.dataset.srcLight;
+        } else if (img.dataset.srcDark) {
+          img.src = img.dataset.srcDark;
+        }
+      });
     }
     (function() {
-      if (localStorage.getItem('theme') === 'light') {
+      var isLight = localStorage.getItem('theme') === 'light';
+      if (isLight) {
         document.body.classList.add('light-theme');
+        updateThemePhotos(true);
       }
     })();
   </script>

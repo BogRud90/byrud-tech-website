@@ -440,7 +440,7 @@
     </div>
     <div class="hero-bg-image">
       <div class="hero-bg-image-fade"></div>
-      <img src="images/rover-blueprint.jpg" alt="" />
+      <img src="images/rover-blueprint.jpg" data-src-dark="images/rover-blueprint.jpg" data-src-light="images/light/rover-blueprint.jpg" alt="" />
     </div>
   </section>
 
@@ -448,7 +448,7 @@
   <section id="results">
     <div class="results-bg-image">
       <div class="results-bg-image-fade"></div>
-      <img src="images/plant-results.jpg" alt="" />
+      <img src="images/plant-results.jpg" data-src-dark="images/plant-results.jpg" data-src-light="images/light/plant-results.jpg" alt="" />
     </div>
     <div class="section-header">
       <div>
@@ -1116,10 +1116,22 @@
       document.body.classList.toggle('light-theme');
       var isLight = document.body.classList.contains('light-theme');
       localStorage.setItem('theme', isLight ? 'light' : 'dark');
+      updateThemePhotos(isLight);
+    }
+    function updateThemePhotos(isLight) {
+      document.querySelectorAll('[data-src-dark]').forEach(function(img) {
+        if (isLight && img.dataset.srcLight) {
+          img.src = img.dataset.srcLight;
+        } else if (img.dataset.srcDark) {
+          img.src = img.dataset.srcDark;
+        }
+      });
     }
     (function() {
-      if (localStorage.getItem('theme') === 'light') {
+      var isLight = localStorage.getItem('theme') === 'light';
+      if (isLight) {
         document.body.classList.add('light-theme');
+        updateThemePhotos(true);
       }
     })();
   </script>

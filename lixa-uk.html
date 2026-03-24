@@ -248,7 +248,7 @@
     <div class="product-hero-inner">
       <div class="product-hero-photo">
         <div class="blueprint-frame">
-          <img src="images/lixa-hero.jpg" alt="Рідкі добрива LIXA — Byrud Tech" />
+          <img src="images/lixa-hero.jpg" data-src-dark="images/lixa-hero.jpg" data-src-light="images/light/lixa-hero.jpg" alt="Рідкі добрива LIXA — Byrud Tech" />
         </div>
       </div>
       <div class="product-hero-text">
@@ -277,7 +277,7 @@
       </div>
       <div class="tank-section">
         <div class="tank-photo">
-          <img src="images/lixa-tank.jpg" alt="Бак LIXA на несучій рамі" />
+          <img src="images/lixa-tank.jpg" data-src-dark="images/lixa-tank.jpg" data-src-light="images/light/lixa-tank.jpg" alt="Бак LIXA на несучій рамі" />
         </div>
         <div class="tank-table table-wrap">
           <table class="models-table">
@@ -324,7 +324,7 @@
       </div>
       <div class="tank-section">
         <div class="tank-photo">
-          <img src="images/lixa-anhanger.jpg" alt="Причіпна ємність LIXA 2700–6000 л" />
+          <img src="images/lixa-anhanger.jpg" data-src-dark="images/lixa-anhanger.jpg" data-src-light="images/light/lixa-anhanger.jpg" alt="Причіпна ємність LIXA 2700–6000 л" />
         </div>
         <div class="tank-table table-wrap">
           <table class="models-table">
@@ -358,7 +358,7 @@
     <div class="product-gallery-inner">
       <div class="gallery-block reverse">
         <div class="blueprint-frame">
-          <img src="images/lixa-duesen.jpg" alt="LIXA — варіанти форсунок" />
+          <img src="images/lixa-duesen.jpg" data-src-dark="images/lixa-duesen.jpg" data-src-light="images/light/lixa-duesen.jpg" alt="LIXA — варіанти форсунок" />
         </div>
         <div class="gallery-text">
           <div class="gallery-text-tag">// Варіанти форсунок</div>
@@ -374,7 +374,7 @@
 
       <div class="gallery-block reverse">
         <div class="blueprint-frame">
-          <img src="images/lixa-o.jpg" alt="LIXA-O — точкове обприскування" />
+          <img src="images/lixa-o.jpg" data-src-dark="images/lixa-o.jpg" data-src-light="images/light/lixa-o.jpg" alt="LIXA-O — точкове обприскування" />
         </div>
         <div class="gallery-text">
           <div class="gallery-text-tag">// Опція LIXA-O</div>
@@ -396,7 +396,7 @@
       <div class="product-models-title" style="margin-bottom: 1rem;">LIXA-O — Стрічкове обприскування</div>
       <p class="product-models-desc" style="margin-bottom: 2rem;">Точкове внесення ЗЗР тільки в міжряддя. До 40% економії препаратів при тому ж результаті.</p>
       <div class="lixa-o-photo">
-        <img src="images/lixa-o-field.jpg" alt="LIXA-O — точкове обприскування в міжрядді" />
+        <img src="images/lixa-o-field.jpg" data-src-dark="images/lixa-o-field.jpg" data-src-light="images/light/lixa-o-field.jpg" alt="LIXA-O — точкове обприскування в міжрядді" />
       </div>
       <div class="table-wrap">
       <table class="lixa-o-table">
@@ -496,10 +496,22 @@
       document.body.classList.toggle('light-theme');
       var isLight = document.body.classList.contains('light-theme');
       localStorage.setItem('theme', isLight ? 'light' : 'dark');
+      updateThemePhotos(isLight);
+    }
+    function updateThemePhotos(isLight) {
+      document.querySelectorAll('[data-src-dark]').forEach(function(img) {
+        if (isLight && img.dataset.srcLight) {
+          img.src = img.dataset.srcLight;
+        } else if (img.dataset.srcDark) {
+          img.src = img.dataset.srcDark;
+        }
+      });
     }
     (function() {
-      if (localStorage.getItem('theme') === 'light') {
+      var isLight = localStorage.getItem('theme') === 'light';
+      if (isLight) {
         document.body.classList.add('light-theme');
+        updateThemePhotos(true);
       }
     })();
   </script>
